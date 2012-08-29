@@ -1,2 +1,0 @@
-serviceClass: ca.cgta.input.val.client.rpc.ValidatorService
-path: 9206A75CE2446483058627E764147E53.gwt.rpc

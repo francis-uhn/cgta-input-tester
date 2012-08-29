@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <!-- Inherit our applications main module.                      -->
+  <inherits name='ca.cgta.input.val.ViewsUploader' />
+
+  <!-- Specify the path to any remote services.                   -->
+  <servlet path="/ViewsUploader/greet" class="ca.cgta.input.val.server.GreetingServiceImpl" />
+
+</module>

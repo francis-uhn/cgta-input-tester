@@ -1,2 +1,0 @@
-# Module ca.cgta.input.val.ViewsUploaderJUnit
-# RPC service class, partial path of RPC policy file

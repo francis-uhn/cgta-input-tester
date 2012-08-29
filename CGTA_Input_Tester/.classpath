@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="ConverterLibrary/src/main/java"/>
+	<classpathentry kind="src" path="ConverterLibrary/src/main/resources"/>
+	<classpathentry kind="src" path="ConverterLibrary/src/test/java"/>
+	<classpathentry kind="src" path="ViewsUploader/src/main/java"/>
+	<classpathentry kind="src" path="ViewsUploader/src/main/resources"/>
+	<classpathentry kind="src" path="TestDataUploader/src/test/java"/>
+	<classpathentry kind="src" path="TestDataUploader/src/test/resources"/>
+	<classpathentry kind="var" path="M2_REPO/javax/activation/activation/1.1/activation-1.1.jar" sourcepath="M2_REPO/javax/activation/activation/1.1/activation-1.1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/javax/xml/bind/jaxb-api/2.0/jaxb-api-2.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/javax/xml/bind/jsr173_api/1.0/jsr173_api-1.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar" sourcepath="M2_REPO/javax/servlet/servlet-api/2.5/servlet-api-2.5-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/javax/transaction/transaction-api/1.1/transaction-api-1.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/commons-cli/commons-cli/1.2/commons-cli-1.2.jar"/>
+	<classpathentry kind="var" path="M2_REPO/commons-codec/commons-codec/1.4/commons-codec-1.4.jar"/>
+	<classpathentry kind="var" path="M2_REPO/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1.jar" sourcepath="M2_REPO/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/commons-io/commons-io/2.0.1/commons-io-2.0.1.jar" sourcepath="M2_REPO/commons-io/commons-io/2.0.1/commons-io-2.0.1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/commons-lang/commons-lang/2.6/commons-lang-2.6.jar"/>
+	<classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar" sourcepath="M2_REPO/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/eclipse/maven2/repository/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/ca/uhn/se/commons/commons-se/3.2.11/commons-se-3.2.11.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/google/code/gson/gson/2.1/gson-2.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/google/guava/guava/r07/guava-r07.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/ca/uhn/hapi/hapi-base/2.0-beta1/hapi-base-2.0-beta1.jar" sourcepath="M2_REPO/ca/uhn/hapi/hapi-base/2.0-beta1/hapi-base-2.0-beta1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/ca/uhn/hapi/hapi-structures-v25/2.0-beta1/hapi-structures-v25-2.0-beta1.jar" sourcepath="M2_REPO/ca/uhn/hapi/hapi-structures-v25/2.0-beta1/hapi-structures-v25-2.0-beta1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/ca/uhn/hapi/hapi-structures-v251/2.0-beta1/hapi-structures-v251-2.0-beta1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/httpcomponents/httpclient/4.1.1/httpclient-4.1.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/httpcomponents/httpclient-cache/4.1.1/httpclient-cache-4.1.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/codehaus/jackson/jackson-core-asl/1.8.6/jackson-core-asl-1.8.6.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/codehaus/jackson/jackson-mapper-asl/1.8.6/jackson-mapper-asl-1.8.6.jar"/>
+	<classpathentry kind="var" path="M2_REPO/sun-jaxb/jaxb-impl/2.1.9/jaxb-impl-2.1.9.jar"/>
+	<classpathentry kind="var" path="M2_REPO/open-esb/jbi/1.1/jbi-1.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/jdom/jdom/1.1/jdom-1.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/ca/uhn/json-client-commons/1.11/json-client-commons-1.11.jar"/>
+	<classpathentry kind="var" path="M2_REPO/junit/junit/4.10/junit-4.10.jar"/>
+	<classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.8/log4j-1.2.8.jar" sourcepath="M2_REPO/log4j/log4j/1.2.8/log4j-1.2.8-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/ektorp/org.ektorp/1.2.2/org.ektorp-1.2.2.jar" sourcepath="/M2_REPO/org/ektorp/org.ektorp/1.2.2/org.ektorp-1.2.2-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/open-jbi-components/pojo-api/2.7/pojo-api-2.7.jar"/>
+	<classpathentry kind="var" path="M2_REPO/ca/uhn/sail/services/ServicesClient_JAR/1.5.15/ServicesClient_JAR-1.5.15.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.jar" sourcepath="M2_REPO/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-jdk14/1.6.4/slf4j-jdk14-1.6.4.jar"/>
+	<classpathentry kind="var" path="M2_REPO/uhn/uhn-ehr-model/2.0/uhn-ehr-model-2.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/ws/security/wss4j/1.5.8/wss4j-1.5.8.jar"/>
+	<classpathentry kind="var" path="M2_REPO/xalan/xalan/2.7.0/xalan-2.7.0.jar" sourcepath="M2_REPO/xalan/xalan/2.7.0/xalan-2.7.0-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/xerces/xercesImpl/2.4.0/xercesImpl-2.4.0.jar" sourcepath="M2_REPO/xerces/xercesImpl/2.4.0/xercesImpl-2.4.0-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/santuario/xmlsec/1.4.3/xmlsec-1.4.3.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
+	<classpathentry kind="var" path="M2_REPO/ca/uhn/sail/integration/SAIL_Integration_Base/2.0/SAIL_Integration_Base-2.0-jar-runtime.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

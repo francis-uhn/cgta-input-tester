@@ -1,0 +1,2 @@
+serviceClass: ca.cgta.input.val.client.rpc.DocumentLibraryService
+path: 7C5FFDB9745E2877E8CAB8F7DB64ED2D.gwt.rpc

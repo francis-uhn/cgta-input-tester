@@ -28,18 +28,6 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sail.wsdl.infrastructure.systemregistry.InvalidInputException;
-import sail.wsdl.infrastructure.systemregistry.SystemRegistryWebService;
-import sail.wsdl.infrastructure.systemregistry.UnexpectedErrorException;
-import xsd.sail.infrastructure.services.systemregistry.AddOrUpdateInterfaceRequest;
-import xsd.sail.infrastructure.services.systemregistry.AddOrUpdateOrgRequest;
-import xsd.sail.infrastructure.services.systemregistry.AddOrUpdateSystemRequest;
-import xsd.sail.infrastructure.services.systemregistry.InterfaceInstance;
-import xsd.sail.infrastructure.services.systemregistry.InterfaceSystem;
-import xsd.sail.infrastructure.services.systemregistry.Org;
-import ca.cgta.input.listener.Listener;
-import ca.uhn.sail.integration.SailInfrastructureServicesFactory;
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {})
 @XmlRootElement(name = "contributor_config")
@@ -174,64 +162,6 @@ public class ContributorConfig {
 	}
 
 
-	private void uploadToDev() throws UnexpectedErrorException, InvalidInputException {
-
-		SystemRegistryWebService sr = SailInfrastructureServicesFactory.getInstance().getSystemRegistryService();
-
-		for (Contributor nextContributor : myContributors) {
-
-			String orgId = nextContributor.getManagementConsoleOrgId();
-			// LookupAllInterfaceInformationRequest allInterfaceReq = new
-			// LookupAllInterfaceInformationRequest();
-			// allInterfaceReq.getInterestedInOrg().add(orgId);
-			// LookupAllInterfaceInformationResponse allInterface =
-			// sr.getAllInterfaceInformation(allInterfaceReq);
-
-			// Add Org if needed
-			if (orgId != null) {
-				ourLog.info("Adding/Updating org: " + orgId);
-				AddOrUpdateOrgRequest aor = new AddOrUpdateOrgRequest();
-				Org org = new Org();
-				org.setId(orgId);
-				org.setName(nextContributor.getName());
-				aor.setOrg(org);
-				sr.addOrUpdateOrg(aor);
-			}
-
-			// Loop through systems
-			for (SendingSystem nextSendingSystem : nextContributor.getSendingSystem()) {
-
-				if (StringUtils.isNotBlank(nextSendingSystem.getManagementConsoleOrgId())) {
-					orgId = nextSendingSystem.getManagementConsoleOrgId();
-				}
-
-				String systemId = nextSendingSystem.getManagementConsoleSystemId();
-
-				AddOrUpdateSystemRequest addOrUpdateSystemRequest = new AddOrUpdateSystemRequest();
-				InterfaceSystem system = new InterfaceSystem();
-				system.setOrgId(orgId);
-				system.setSystemId(systemId);
-				system.setContact("?");
-				system.setActive(true);
-				system.setDescription(nextSendingSystem.getDescription());
-				addOrUpdateSystemRequest.setSystem(system);
-				sr.addOrUpdateSystem(addOrUpdateSystemRequest);
-
-				AddOrUpdateInterfaceRequest addOrUpdateInterfaceRequest = new AddOrUpdateInterfaceRequest();
-				InterfaceInstance iface = new InterfaceInstance();
-				iface.setActive(true);
-				iface.setDescription("Messages to cGTA CDR");
-				iface.setInterfaceDirection("I");
-				iface.setInterfaceId(Listener.INTERFACE_ID);
-				iface.setJournalToDatabase(true);
-				iface.setJournalToDisk(true);
-				iface.setOrgId(orgId);
-				iface.setSystemId(systemId);
-				addOrUpdateInterfaceRequest.setInterface(iface);
-				sr.addOrUpdateInterface(addOrUpdateInterfaceRequest);
-			}
-		}
-	}
 
 
 	public void validate() throws ValidationException {
@@ -362,7 +292,7 @@ public class ContributorConfig {
 	 * When modifications have been made, run the main method to validate and
 	 * store the changes.
 	 */
-	public static void main(String[] args) throws JAXBException, ValidationException, FileNotFoundException, IOException, UnexpectedErrorException, InvalidInputException {
+	public static void main(String[] args) throws JAXBException, ValidationException, FileNotFoundException, IOException {
 
 		ContributorConfig cfg = new ContributorConfig();
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.1", "ConnectingGTA HIAL (System)"));
@@ -1457,7 +1387,6 @@ public class ContributorConfig {
 		System.out.flush();
 
 		cfg.validate();
-		cfg.uploadToDev();
 
 		File cfgFile = new File("ConverterLibrary/src/main/resources/ca/cgta/input/sending_systems.xml");
 		if (!cfgFile.exists()) {

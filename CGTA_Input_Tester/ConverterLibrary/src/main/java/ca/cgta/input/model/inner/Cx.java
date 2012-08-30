@@ -1,10 +1,9 @@
 package ca.cgta.input.model.inner;
 
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.codehaus.jackson.annotate.JsonIgnore;
-
-import ca.uhn.se.commons.util.ObjectUtil;
 
 
 public class Cx {
@@ -31,11 +30,11 @@ public class Cx {
 		
 		Cx o = (Cx) theObj;
 		
-		boolean retVal = ObjectUtil.equals(myIdNumber, o.myIdNumber);
-		retVal &= ObjectUtil.equals(myIdTypeCode, o.myIdTypeCode);
-		retVal &= ObjectUtil.equals(myAssigningAuthorityHspId, o.myAssigningAuthorityHspId);
-		retVal &= ObjectUtil.equals(myAssigningAuthoritySystemId, o.myAssigningAuthoritySystemId);
-		retVal &= ObjectUtil.equals(myAssigningJurisdictionId, o.myAssigningJurisdictionId);
+		boolean retVal = ObjectUtils.equals(myIdNumber, o.myIdNumber);
+		retVal &= ObjectUtils.equals(myIdTypeCode, o.myIdTypeCode);
+		retVal &= ObjectUtils.equals(myAssigningAuthorityHspId, o.myAssigningAuthorityHspId);
+		retVal &= ObjectUtils.equals(myAssigningAuthoritySystemId, o.myAssigningAuthoritySystemId);
+		retVal &= ObjectUtils.equals(myAssigningJurisdictionId, o.myAssigningJurisdictionId);
 		return retVal;
 	}
 

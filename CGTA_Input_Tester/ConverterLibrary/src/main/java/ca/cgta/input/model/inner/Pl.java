@@ -1,10 +1,7 @@
 package ca.cgta.input.model.inner;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.codehaus.jackson.annotate.JsonIgnore;
-
-import ca.uhn.se.commons.util.ObjectUtil;
 
 public class Pl {
 
@@ -32,11 +29,11 @@ public class Pl {
         
         Pl o = (Pl) theObj;
         
-        boolean retVal = ObjectUtil.equals(myPointOfCare, o.myPointOfCare);
-        retVal &= ObjectUtil.equals(myRoom, o.myRoom);
-        retVal &= ObjectUtil.equals(myBed, o.myBed);
-        retVal &= ObjectUtil.equals(myFacilityId, o.myFacilityId);
-        retVal &= ObjectUtil.equals(myHspId, o.myHspId);
+        boolean retVal = ObjectUtils.equals(myPointOfCare, o.myPointOfCare);
+        retVal &= ObjectUtils.equals(myRoom, o.myRoom);
+        retVal &= ObjectUtils.equals(myBed, o.myBed);
+        retVal &= ObjectUtils.equals(myFacilityId, o.myFacilityId);
+        retVal &= ObjectUtils.equals(myHspId, o.myHspId);
         return retVal;
     }
 

@@ -16,11 +16,44 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
+	<repositories>
+		<repository>
+			<id>se2</id>
+			<name>SysEng Maven2 Repository</name>
+			<url>http://cvs/maven/m2</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+
+	<distributionManagement>
+		<repository>
+			<id>se-ftp</id>
+			<url>ftp://cvs/var/www/maven/m2</url>
+		</repository>
+		<snapshotRepository>
+			<id>se-ftp</id>
+			<url>ftp://cvs/var/www/maven/m2</url>
+		</snapshotRepository>
+	</distributionManagement>
+	
 	<dependencies>
 		<dependency>
 			<groupId>ca.cgta.input</groupId>
 			<artifactId>ConverterLibrary</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ca.uhn.sail.integration</groupId>
+			<artifactId>SAIL_Integration_Base</artifactId>
+			<version>2.0.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-api</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 

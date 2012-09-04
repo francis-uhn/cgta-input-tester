@@ -690,9 +690,12 @@ public class ContributorConfig {
 			soarian.setDescription("Soarian Clinicals");
 			soarian.setManagementConsoleSystemId("Soarian");
 			// Should be the value from table 9007 with ".102.x" at the end
-			soarian.getAllergenCodeSystemIam3().add("2.16.840.1.113883.3.239.23.5.102.9");
 			soarian.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.5.102.1");
 			soarian.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.5.102.2");
+			soarian.getAllergenCodeSystemIam3().add("2.16.840.1.113883.3.239.23.5.102.9");
+			soarian.getDrugAdministrationCodeSystemRxa5().add("2.16.840.1.113883.3.239.23.5.102.17");
+			soarian.getDrugComponentCodeSystemRxc2().add("2.16.840.1.113883.3.239.23.5.102.18");
+			soarian.getDrugGiveCodeSystemRxe2().add("2.16.840.1.113883.3.239.23.5.102.19");
 			contributor.getSendingSystem().add(soarian);
 
 			// Sovera
@@ -754,12 +757,25 @@ public class ContributorConfig {
 			SendingSystem xcelera = new SendingSystem();
 			// Should be the value from table 9008 with ".101.x" at the end
 			xcelera.setCode("2.16.840.1.113883.3.239.23.5.101.7");
-			xcelera.setDescription("MUSE");
-			xcelera.setManagementConsoleSystemId("MUSE");
+			xcelera.setDescription("XCelera");
+			xcelera.setManagementConsoleSystemId("XCelera");
 			// Should be the value from table 9007 with ".102.x" at the end
 			xcelera.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.5.102.15");
 			xcelera.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.5.102.16");
 			contributor.getSendingSystem().add(xcelera);
+
+			// Pharmacy
+			SendingSystem pharmacy = new SendingSystem();
+			// Should be the value from table 9008 with ".101.x" at the end
+			pharmacy.setCode("2.16.840.1.113883.3.239.23.5.101.8");
+			pharmacy.setDescription("Pharmacy");
+			pharmacy.setManagementConsoleSystemId("Pharmacy");
+			// Should be the value from table 9007 with ".102.x" at the end
+			pharmacy.getAllergenCodeSystemIam3().add("2.16.840.1.113883.3.239.23.5.102.20");
+			pharmacy.getDrugAdministrationCodeSystemRxa5().add("2.16.840.1.113883.3.239.23.5.102.21");
+			pharmacy.getDrugComponentCodeSystemRxc2().add("2.16.840.1.113883.3.239.23.5.102.22");
+			pharmacy.getDrugGiveCodeSystemRxe2().add("2.16.840.1.113883.3.239.23.5.102.23");
+			contributor.getSendingSystem().add(pharmacy);
 
 		}
 		// *******************************************************

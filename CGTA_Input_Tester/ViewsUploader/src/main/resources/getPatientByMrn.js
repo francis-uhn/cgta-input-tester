@@ -36,12 +36,19 @@ function (doc)
 		var dob = myPatient.myDateOfBirth;
 		if(!dob)
 			dob = "";
-				
+		
+		function capitaliseFirstLetter(string)
+		{
+		    return string.charAt(0).toUpperCase() + string.slice(1);
+		}
+		
 		patient = {mrn:mrnKey,
-				firstName:legalName.myFirstName,
-				lastName:legalName.myLastName,
+				firstName: capitaliseFirstLetter(legalName.myFirstName.toLowerCase()),
+				lastName: capitaliseFirstLetter(legalName.myLastName.toLowerCase()),
 				gender: myPatient.myAdministrativeSex,
-				dateOfBirth: dob.replace("T"," ").slice(0,16),
+				// Sites sending us different daylight saving time
+				// this was causing duplicate patients in patient search. now it is hardcoded
+				dateOfBirth: ""+dob.replace("T"," ").slice(0,10)+" 05:00", 
 				site: siteId};
 		
 		var complexKey = [patient.mrn, patient.site, patient.firstName, patient.lastName, patient.gender,patient.dateOfBirth];

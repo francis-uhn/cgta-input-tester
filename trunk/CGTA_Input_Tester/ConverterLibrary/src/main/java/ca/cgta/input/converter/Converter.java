@@ -52,9 +52,6 @@ import ca.cgta.input.model.outer.ClinicalDocumentGroup;
 import ca.cgta.input.model.outer.MedicationOrderWithAdmins;
 import ca.cgta.input.model.outer.PatientWithVisits;
 import ca.uhn.hl7v2.HL7Exception;
-import ca.uhn.hl7v2.conf.check.DefaultValidator;
-import ca.uhn.hl7v2.conf.parser.ProfileParser;
-import ca.uhn.hl7v2.conf.spec.RuntimeProfile;
 import ca.uhn.hl7v2.model.DataTypeException;
 import ca.uhn.hl7v2.model.GenericSegment;
 import ca.uhn.hl7v2.model.Primitive;
@@ -193,9 +190,9 @@ public class Converter {
         			theAdt.addNonstandardSegment("IAM");
         		}
         		
-        		RuntimeProfile pp = new ProfileParser(false).parseClasspath("profile_adt_a01.xml");
-        		HL7Exception[] validationResults = new DefaultValidator().validate(theAdt, pp.getMessage());
-        		processProfileValidationResults(validationResults);
+//        		RuntimeProfile pp = new ProfileParser(false).parseClasspath("profile_adt_a01.xml");
+//        		HL7Exception[] validationResults = new DefaultValidator().validate(theAdt, pp.getMessage());
+//        		processProfileValidationResults(validationResults);
         	} catch (Exception e) {
         		throw new HL7Exception(e);
         	}

@@ -30,12 +30,12 @@ function(doc) {
 	// Patient with visits (each PRO row will be one visit)
 	if (doc.document.myType == "PATIENT_WITH_VISITS") {
 		
-		// skip visit without myVisits or with out mergeVisits
-		if (!(doc.document.myVisits)) {
-			if(!(doc.document.myMergedInPatientsWithVisits)) {
-				return;
-			}
-		}
+//		// skip visit without myVisits or with out mergeVisits
+//		if (!(doc.document.myVisits)) {
+//			if(!(doc.document.myMergedInPatientsWithVisits)) {
+//				return;
+//			}
+//		}
 		
 		function iterateVisits(myVisits)
 		{

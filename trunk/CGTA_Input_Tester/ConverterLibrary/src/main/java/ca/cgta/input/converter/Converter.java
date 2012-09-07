@@ -1112,12 +1112,16 @@ public class Converter {
     private void convertRxe(String theTerserPath, MedicationOrder nextOrder, RXE rxe) throws DataTypeException, HL7Exception {
         
         // RXE-1 (Quantity/Timing)
-        if (isBlank(rxe.getRxe1_QuantityTiming().getTq1_Quantity().getCq1_Quantity().getValue())) {
+    	/*if (isBlank(rxe.getRxe1_QuantityTiming().getTq1_Quantity().getCq1_Quantity().getValue())) {
             addFailure(theTerserPath + "/RXE-1-1-1", FailureCode.F124, null);
         }
         else {
             nextOrder.myEncodedOrderQuantityNumber = toNumber(theTerserPath + "/RXE-1-1-1", rxe.getRxe1_QuantityTiming().getTq1_Quantity().getCq1_Quantity().getValue());
-        }
+        }*/	
+    	
+    	if (isNotBlank(rxe.getRxe1_QuantityTiming().getTq1_Quantity().getCq1_Quantity().getValue())) {
+            nextOrder.myEncodedOrderQuantityNumber = toNumber(theTerserPath + "/RXE-1-1-1", rxe.getRxe1_QuantityTiming().getTq1_Quantity().getCq1_Quantity().getValue());
+       	}
        
         nextOrder.myEncodedOrderQuantityRepeatPattern = rxe.getRxe1_QuantityTiming().getTq2_Interval().getRi1_RepeatPattern().getValue();
         if (isBlank(nextOrder.myEncodedOrderQuantityRepeatPattern)) {

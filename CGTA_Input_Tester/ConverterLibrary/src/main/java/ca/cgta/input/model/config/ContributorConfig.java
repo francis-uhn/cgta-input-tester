@@ -1085,6 +1085,7 @@ public class ContributorConfig {
 			cfg.getContributors().add(contributor);
 
 			contributor.getDevListenPort().add(14016);
+			contributor.getDevListenPort().add(14036);
 
 			contributor.setName("Trillium Health Centre");
 			contributor.setDevSecurityToken("2387527832459kkk");

@@ -133,8 +133,6 @@
 				<module>ConverterLibrary</module>
 				<module>ViewsUploader</module>
 				<module>TestDataUploader</module>
-				<module>ValidatorWar</module>
-				<module>ListenerWar</module>
 			</modules>
 		</profile>
 		<profile>
@@ -148,6 +146,13 @@
 			<modules>
 				<module>ConverterLibrary</module>
 				<module>ListenerWar</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>VALIDATOR</id>
+			<modules>
+				<module>ConverterLibrary</module>
+				<module>ValidatorWar</module>
 			</modules>
 		</profile>
 	</profiles>

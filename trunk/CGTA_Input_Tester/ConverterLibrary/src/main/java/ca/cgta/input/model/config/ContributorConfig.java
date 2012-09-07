@@ -39,6 +39,9 @@ public class ContributorConfig {
 	private List<Contributor> myContributors;
 
 	@XmlTransient
+	private HashMap<String, Contributor> myHospitalFacilityNumberToContributor;
+
+	@XmlTransient
 	private Map<String, Contributor> myHspIdToContributor = new HashMap<String, Contributor>();
 
 	@XmlTransient
@@ -51,10 +54,10 @@ public class ContributorConfig {
 	private List<Code> myProviderId9001;
 
 	@XmlTransient
-	private Map<String, Contributor> myProviderPoolIdToContributor;
+	private Map<String, Code> myProviderId9001ToProvider;
 
 	@XmlTransient
-	private Map<String, Code> myProviderId9001ToProvider;
+	private Map<String, Contributor> myProviderPoolIdToContributor;
 
 
 	/**
@@ -65,6 +68,22 @@ public class ContributorConfig {
 			myContributors = new ArrayList<Contributor>();
 		}
 		return myContributors;
+	}
+
+
+	/**
+	 * @return the hospitalFacilityNumberToContributor
+	 */
+	public HashMap<String, Contributor> getHospitalFacilityNumberToContributor() {
+		if (myHospitalFacilityNumberToContributor == null) {
+			myHospitalFacilityNumberToContributor = new HashMap<String, Contributor>();
+			for (Contributor next : myContributors) {
+				if (StringUtils.isNotBlank(next.getHospitalFacilityNumber())) {
+					myHospitalFacilityNumberToContributor.put(next.getHospitalFacilityNumber(), next);
+				}
+			}
+		}
+		return myHospitalFacilityNumberToContributor;
 	}
 
 
@@ -85,8 +104,8 @@ public class ContributorConfig {
 		if (myMrnPoolIdToContributor == null) {
 			myMrnPoolIdToContributor = new HashMap<String, Contributor>();
 			for (Contributor next : myContributors) {
-				if (next.getMrnPoolOid() != null) {
-					myMrnPoolIdToContributor.put(next.getMrnPoolOid(), next);
+				for (Code nextCode : next.getMrnPoolOid()) {
+					myMrnPoolIdToContributor.put(nextCode.getCode(), next);
 				}
 			}
 		}
@@ -133,6 +152,7 @@ public class ContributorConfig {
 		return myProviderId9001;
 	}
 
+
 	/**
 	 * @return the providerId9001
 	 */
@@ -145,6 +165,7 @@ public class ContributorConfig {
 		}
 		return myProviderId9001ToProvider;
 	}
+
 
 	/**
 	 * @return the providerPoolIdToContributor
@@ -162,8 +183,6 @@ public class ContributorConfig {
 	}
 
 
-
-
 	public void validate() throws ValidationException {
 		Set<String> codeSystems = new HashSet<String>();
 		Set<String> contributorIds = new HashSet<String>();
@@ -171,7 +190,14 @@ public class ContributorConfig {
 		Set<String> sendingSystemIds = new HashSet<String>();
 		Set<String> hospitalFacilityIds = new HashSet<String>();
 		Set<String> mrnIds = new HashSet<String>();
+		Set<String> visitIds = new HashSet<String>();
+		Set<String> otherIds = new HashSet<String>();
+		// Note: if you add another map, add it to the global check at the
+		// bottom of this method!!
+
 		Set<Integer> listenPorts = new HashSet<Integer>();
+
+		checkForDuplicate(otherIds, getOtherOids());
 
 		for (Contributor nextContributor : myContributors) {
 			checkForDuplicate(contributorIds, nextContributor.getHspId9004());
@@ -180,9 +206,8 @@ public class ContributorConfig {
 				checkForDuplicate(hospitalFacilityIds, nextContributor.getHospitalFacilityNumber());
 			}
 
-			if (StringUtils.isNotBlank(nextContributor.getMrnPoolOid())) {
-				checkForDuplicate(mrnIds, nextContributor.getMrnPoolOid());
-			}
+			checkForDuplicate(mrnIds, nextContributor.getMrnPoolOid());
+			checkForDuplicate(visitIds, nextContributor.getVisitNumberPoolOids());
 
 			for (Integer next : nextContributor.getDevListenPort()) {
 				if (listenPorts.contains(next)) {
@@ -255,11 +280,35 @@ public class ContributorConfig {
 
 		} // contributor
 
+		Set<String> allOids = new HashSet<String>();
+		checkForDuplicate(allOids, codeSystems);
+		checkForDuplicate(allOids, contributorIds);
+		checkForDuplicate(allOids, facilityIds);
+		checkForDuplicate(allOids, sendingSystemIds);
+		checkForDuplicate(allOids, hospitalFacilityIds);
+		checkForDuplicate(allOids, mrnIds);
+		checkForDuplicate(allOids, visitIds);
+		checkForDuplicate(allOids, otherIds);
+
 	}
 
 
 	private static void addProviderType(ContributorConfig theCfg, String theCode, String theDescription) {
 		theCfg.getProviderId9001().add(new Code(theCode, theDescription));
+	}
+
+
+	private static void checkForDuplicate(Set<String> theExistingIds, List<Code> theCodes) throws ValidationException {
+		for (Code code : theCodes) {
+			checkForDuplicate(theExistingIds, code.getCode());
+		}
+	}
+
+
+	private static void checkForDuplicate(Set<String> theAllOids, Set<String> theNextSubOidSet) throws ValidationException {
+		for (String next : theNextSubOidSet) {
+			checkForDuplicate(theAllOids, next);
+		}
 	}
 
 
@@ -297,7 +346,8 @@ public class ContributorConfig {
 		ContributorConfig cfg = new ContributorConfig();
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.1", "ConnectingGTA HIAL (System)"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.2", "ConnectingGTA CDR (System)"));
-		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.3", "UHN eMPI ECID (Client ID Namespace)"));
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.3", "UHN eMPI eCID (Client ID Namespace)"));
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.4", "UHN Provider Registry ePID (Provider ID Namespace)"));
 
 		addProviderType(cfg, "1.3.6.1.4.1.12201.1.2.1.5", "Site Specific Provider ID (Deprocated)");
 		addProviderType(cfg, "2.16.840.1.113883.3.239.13.6", "College of Audiologist and Speech-Language Pathologists of Ontario Licence Number");
@@ -329,6 +379,7 @@ public class ContributorConfig {
 		addProviderType(cfg, "2.16.840.1.113883.3.239.13.56", "Unregulated - Transitional Council of the College of Psychotherapists Licence Number");
 
 		// .1 - Provider ID pool
+		// .2 - Visit/Encounter number pool
 		// .100.x - Facilities
 		// .101.x - Systems
 		// .102.x - Code Systems
@@ -342,11 +393,11 @@ public class ContributorConfig {
 
 			contributor.setName("Testing Organization");
 			contributor.setDevSecurityToken("383525aaa");
-			contributor.setHspId9004("1.3.6.1.4.1.12201.999");
+			contributor.setHspId9004AndSubIds("1.3.6.1.4.1.12201.999");
 			contributor.getDevListenPort().add(13999);
 
 			contributor.getHspFacility().add(new Code("1.3.6.1.4.1.12201.999.100.1", "Testing Hospital - North Campus"));
-			contributor.getHspFacility().add(new Code("1.3.6.1.4.1.12201.999.100.2", "Testing Hospital - North Campus"));
+			contributor.getHspFacility().add(new Code("1.3.6.1.4.1.12201.999.100.2", "Testing Hospital - South Campus"));
 
 			SendingSystem epr = new SendingSystem();
 			epr.setCode("1.3.6.1.4.1.12201.999.101.1");
@@ -372,9 +423,9 @@ public class ContributorConfig {
 
 			contributor.setName("University Health Network");
 			contributor.setDevSecurityToken("2954864636aaa");
-			contributor.setHspId9004("1.3.6.1.4.1.12201");
+			contributor.setHspId9004AndSubIds("1.3.6.1.4.1.12201");
 			contributor.setHospitalFacilityNumber("0947");
-			contributor.setMrnPoolOid("2.16.840.1.113883.3.239.18.148");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.148", contributor.getName() + " MRNs"));
 			contributor.getDevListenPort().add(14018);
 
 			contributor.getHspFacility().add(new Code("1.3.6.1.4.1.12201.100.1", "Toronto General Hospital"));
@@ -405,8 +456,8 @@ public class ContributorConfig {
 
 			contributor.setName("North York General Hospital");
 			contributor.setDevSecurityToken("38272347521144bbb");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.8");
-			contributor.setMrnPoolOid("2.16.840.1.113883.3.239.18.115");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.8");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.115", contributor.getName() + " MRNs"));
 			contributor.setHospitalFacilityNumber("0632");
 			contributor.getDevListenPort().add(14010);
 			contributor.setManagementConsoleOrgId("NYGH");
@@ -460,7 +511,7 @@ public class ContributorConfig {
 
 			contributor.setName("Ontario Association of Community Care Access Centres (OACCAC)");
 			contributor.setDevSecurityToken("3498749864ccc");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.1");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1");
 			contributor.setManagementConsoleOrgId("OACCAC");
 
 			// Should be the value from table 9005 with ".100.x" at the end
@@ -518,9 +569,13 @@ public class ContributorConfig {
 
 			contributor.setName("Lakeridge Health");
 			contributor.setDevSecurityToken("3498742963125ddd");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.2");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.2");
 			contributor.setHospitalFacilityNumber("0952");
-			contributor.setMrnPoolOid("2.16.840.1.113883.3.239.18.93"); // multiple?
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.90", "Lakeridge Port Perry MRNs"));
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.91", "Lakeridge Whitby MRNs"));
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.92", "Lakeridge Bowmanville MRNs"));
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.93", "Lakeridge Oshawa MRNs"));
+
 			contributor.setManagementConsoleOrgId("LHC");
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.2.100.1", "Lakeridge Health Oshawa"));
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.2.100.2", "Lakeridge Health Bowmanville"));
@@ -564,8 +619,8 @@ public class ContributorConfig {
 
 			contributor.setName("The Scarborough Hospital");
 			contributor.setDevSecurityToken("38731785345ddd");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.3");
-			contributor.setMrnPoolOid("2.16.840.1.113883.3.239.18.135");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.3");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.135", contributor.getName() + " MRNs"));
 			contributor.setHospitalFacilityNumber("0960");
 			contributor.setManagementConsoleOrgId("TSH");
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.3.100.1", "The Scarborough Hospital - Birchmount Campus"));
@@ -630,8 +685,10 @@ public class ContributorConfig {
 
 			contributor.setName("The Rouge Valley Health System");
 			contributor.setDevSecurityToken("32986342953eee");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.4");
-			contributor.setMrnPoolOid("2.16.840.1.113883.3.239.18.131"); // multiple?
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.4");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.131", "Rouge Valley Ajax MRNs"));
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.132", "Rouge Valley Centenary MRNs"));
+
 			contributor.setHospitalFacilityNumber("0954");
 			contributor.setManagementConsoleOrgId("RVHS");
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.4.100.1", "Rouge Valley Health System - Ajax and Pickering"));
@@ -675,8 +732,8 @@ public class ContributorConfig {
 
 			contributor.setName("Saint Michael's Hospital");
 			contributor.setDevSecurityToken("1238973875fff");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.5");
-			contributor.setMrnPoolOid("2.16.840.1.113883.3.239.18.142");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.5");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.142", contributor.getName() + " MRNs"));
 			contributor.setHospitalFacilityNumber("0852");
 			contributor.setManagementConsoleOrgId("SMH");
 
@@ -789,8 +846,8 @@ public class ContributorConfig {
 
 			contributor.setName("Mount Sinai Hospital Joseph and Wolf Lebovic Health Complex");
 			contributor.setDevSecurityToken("35364554ggg");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.6");
-			contributor.setMrnPoolOid("2.16.840.1.113883.3.239.18.97");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.6");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.97", contributor.getName() + " MRNs"));
 			contributor.setHospitalFacilityNumber("0842");
 			contributor.setManagementConsoleOrgId("MSH");
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.6.100.1", "Mount Sinai Hospital Joseph and Wolf Lebovic Health Complex"));
@@ -859,9 +916,9 @@ public class ContributorConfig {
 			contributor.setName("Sunnybrook Health Sciences Centre");
 			contributor.setManagementConsoleOrgId("SHSC");
 			contributor.setDevSecurityToken("23498643698hhh");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.7");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.7");
 			contributor.setHospitalFacilityNumber("0857");
-			contributor.setMrnPoolOid("2.16.840.1.113883.3.239.18.144");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.144", contributor.getName() + " MRNs"));
 
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.7.100.1", "Sunnybrook Health Sciences Centre"));
 
@@ -998,10 +1055,10 @@ public class ContributorConfig {
 
 			contributor.setName("Credit Valley Hospital");
 			contributor.setDevSecurityToken("340975709474jjj");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.9");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.9");
 			contributor.setHospitalFacilityNumber("0731");
 			contributor.setManagementConsoleOrgId("CVH");
-			contributor.setMrnPoolOid("2.16.840.1.113883.3.239.18.26");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.26", contributor.getName() + " MRNs"));
 
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.9.100.1", "Credit Valley Hospital and Trillium Health Centre -- Credit Valley Site"));
 
@@ -1089,10 +1146,11 @@ public class ContributorConfig {
 
 			contributor.setName("Trillium Health Centre");
 			contributor.setDevSecurityToken("2387527832459kkk");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.10");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.10");
 			contributor.setManagementConsoleOrgId("THC");
 			contributor.setHospitalFacilityNumber("0975");
-			contributor.setMrnPoolOid("2.16.840.1.113883.3.239.18.146"); // duplicate?
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.146", "Trillium Mississauga MRNs"));
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.147", "Trillium Queensway MRNs"));
 
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.10.100.1", "Credit Valley Hospital and Trillium Health Centre -- Mississauga Site"));
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.10.100.2", "Credit Valley Hospital and Trillium Health Centre -- West Toronto Site"));
@@ -1159,9 +1217,9 @@ public class ContributorConfig {
 			contributor.setName("William Osler Health Centre");
 			contributor.setManagementConsoleOrgId("WOHC");
 			contributor.setDevSecurityToken("3240956904lll");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.11");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.11");
 			contributor.setHospitalFacilityNumber("0951");
-			contributor.setMrnPoolOid("2.16.840.1.113883.3.239.18.150");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.150", contributor.getName() + " MRNs"));
 
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.11.100.1", "Etobicoke General Hospital"));
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.11.100.2", "Peel Memorial Centre"));
@@ -1207,6 +1265,20 @@ public class ContributorConfig {
 
 		}
 		// *******************************************************
+		// South Lake (Southlake)
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			// contributor.getDevListenPort().add(14014);
+
+			contributor.setName("South Lake Regional Hospital");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.59");
+			contributor.setHospitalFacilityNumber("0736");
+		}
+		// *******************************************************
 		// Baycrest Centre for Geriatric Care
 		// *******************************************************
 		{
@@ -1217,7 +1289,7 @@ public class ContributorConfig {
 
 			contributor.setName("Baycrest Centre for Geriatric Care");
 			contributor.setDevSecurityToken("");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.13");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.13");
 		}
 		// *******************************************************
 		// Campbellford Memorial Hospital
@@ -1230,7 +1302,7 @@ public class ContributorConfig {
 
 			contributor.setName("Campbellford Memorial Hospital");
 			contributor.setDevSecurityToken("");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.14");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.14");
 		}
 		// *******************************************************
 		// Centre for Addiction and Mental Health
@@ -1243,7 +1315,7 @@ public class ContributorConfig {
 
 			contributor.setName("Centre for Addiction and Mental Health");
 			contributor.setDevSecurityToken("");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.15");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.15");
 			contributor.setHospitalFacilityNumber("0948");
 		}
 		// *******************************************************
@@ -1257,7 +1329,7 @@ public class ContributorConfig {
 
 			contributor.setName("Halton Healthcare Services Corporation");
 			contributor.setDevSecurityToken("");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.16");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.16");
 		}
 		// *******************************************************
 		// Headwaters Health Care Centre
@@ -1270,7 +1342,7 @@ public class ContributorConfig {
 
 			contributor.setName("Headwaters Health Care Centre");
 			contributor.setDevSecurityToken("");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.17");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.17");
 		}
 		// *******************************************************
 		// Hospital for Sick Children
@@ -1283,7 +1355,7 @@ public class ContributorConfig {
 
 			contributor.setName("Hospital for Sick Children");
 			contributor.setDevSecurityToken("");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.18");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.18");
 		}
 		// *******************************************************
 		// Humber River Regional Hospital
@@ -1296,7 +1368,7 @@ public class ContributorConfig {
 
 			contributor.setName("Humber River Regional Hospital");
 			contributor.setDevSecurityToken("");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.19");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.19");
 		}
 		// *******************************************************
 		// Northumberland Hills Hospital
@@ -1309,7 +1381,7 @@ public class ContributorConfig {
 
 			contributor.setName("Northumberland Hills Hospital");
 			contributor.setDevSecurityToken("");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.20");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.20");
 		}
 		// *******************************************************
 		// Peterborough Regional Health Centre
@@ -1322,7 +1394,7 @@ public class ContributorConfig {
 
 			contributor.setName("Peterborough Regional Health Centre");
 			contributor.setDevSecurityToken("");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.21");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.21");
 		}
 		// *******************************************************
 		// Ross Memorial Hospital
@@ -1335,7 +1407,7 @@ public class ContributorConfig {
 
 			contributor.setName("Ross Memorial Hospital");
 			contributor.setDevSecurityToken("");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.22");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.22");
 		}
 		// *******************************************************
 		// St Joseph's Health Centre (Toronto)
@@ -1348,9 +1420,9 @@ public class ContributorConfig {
 
 			contributor.setName("St Joseph's Health Centre (Toronto)");
 			contributor.setDevSecurityToken("");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.23");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.23");
 			contributor.setHospitalFacilityNumber("0898");
-			contributor.setMrnPoolOid("2.16.840.1.113883.3.239.18.140");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.140", contributor.getName() + " MRNs"));
 		}
 		// *******************************************************
 		// The Stevenson Memorial Hospital
@@ -1363,7 +1435,7 @@ public class ContributorConfig {
 
 			contributor.setName("The Stevenson Memorial Hospital");
 			contributor.setDevSecurityToken("");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.24");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.24");
 		}
 		// *******************************************************
 		// The Toronto East General Hospital
@@ -1376,8 +1448,8 @@ public class ContributorConfig {
 
 			contributor.setName("The Toronto East General Hospital");
 			contributor.setDevSecurityToken("");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.25");
-			contributor.setMrnPoolOid("2.16.840.1.113883.3.239.18.145");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.25");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.145", contributor.getName() + " MRNs"));
 			contributor.setHospitalFacilityNumber("0858");
 		}
 		// *******************************************************
@@ -1391,7 +1463,7 @@ public class ContributorConfig {
 
 			contributor.setName("York Central Hospital");
 			contributor.setDevSecurityToken("");
-			contributor.setHspId9004("2.16.840.1.113883.3.239.23.26");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.26");
 			contributor.setHospitalFacilityNumber("0701");
 		}
 
@@ -1422,5 +1494,4 @@ public class ContributorConfig {
 		cfg.getProviderPoolIdToContributor();
 
 	}
-
 }

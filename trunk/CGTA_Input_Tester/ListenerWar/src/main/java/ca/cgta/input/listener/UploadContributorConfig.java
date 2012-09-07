@@ -2,25 +2,31 @@ package ca.cgta.input.listener;
 
 import org.apache.commons.lang.StringUtils;
 
-import ca.cgta.input.model.config.AddOrUpdateInterfaceRequest;
-import ca.cgta.input.model.config.AddOrUpdateOrgRequest;
-import ca.cgta.input.model.config.AddOrUpdateSystemRequest;
+import sail.wsdl.infrastructure.systemregistry.SystemRegistryWebService;
+import xsd.sail.infrastructure.services.systemregistry.AddOrUpdateInterfaceRequest;
+import xsd.sail.infrastructure.services.systemregistry.AddOrUpdateOrgRequest;
+import xsd.sail.infrastructure.services.systemregistry.AddOrUpdateSystemRequest;
+import xsd.sail.infrastructure.services.systemregistry.InterfaceInstance;
+import xsd.sail.infrastructure.services.systemregistry.InterfaceSystem;
+import xsd.sail.infrastructure.services.systemregistry.Org;
 import ca.cgta.input.model.config.Contributor;
-import ca.cgta.input.model.config.InterfaceInstance;
-import ca.cgta.input.model.config.InterfaceSystem;
-import ca.cgta.input.model.config.InvalidInputException;
-import ca.cgta.input.model.config.Org;
+import ca.cgta.input.model.config.ContributorConfigFactory;
 import ca.cgta.input.model.config.SendingSystem;
-import ca.cgta.input.model.config.SystemRegistryWebService;
-import ca.cgta.input.model.config.UnexpectedErrorException;
+import ca.uhn.sail.integration.SailInfrastructureServicesFactory;
 
 public class UploadContributorConfig {
 
-	private void uploadToDev() throws UnexpectedErrorException, InvalidInputException {
+	private static final org.slf4j.Logger ourLog = org.slf4j.LoggerFactory.getLogger(UploadContributorConfig.class);
+
+
+	/**
+	 * Creates entries in SAIL DB for all of the sending systems
+	 */
+	public static void uploadContributorConfig() throws Exception {
 
 		SystemRegistryWebService sr = SailInfrastructureServicesFactory.getInstance().getSystemRegistryService();
 
-		for (Contributor nextContributor : myContributors) {
+		for (Contributor nextContributor : ContributorConfigFactory.getInstance().getContributorConfig().getContributors()) {
 
 			String orgId = nextContributor.getManagementConsoleOrgId();
 			// LookupAllInterfaceInformationRequest allInterfaceReq = new
@@ -73,15 +79,6 @@ public class UploadContributorConfig {
 				sr.addOrUpdateInterface(addOrUpdateInterfaceRequest);
 			}
 		}
-	}
-
-	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

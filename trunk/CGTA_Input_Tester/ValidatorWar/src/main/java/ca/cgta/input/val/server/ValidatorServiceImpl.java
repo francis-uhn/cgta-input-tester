@@ -289,50 +289,69 @@ public class ValidatorServiceImpl extends RemoteServiceServlet implements Valida
 
 
 	public OidLibrary loadOidLibrary(String theHspId) throws Exception {
-		
+
 		ContributorConfig cfg = ContributorConfigFactory.getInstance().getContributorConfig();
-		
+
 		OidLibrary retVal = new OidLibrary();
 		retVal.setHspIdentifier9004(new ArrayList<Code>());
 		retVal.setFacilityIdentifiers9005(new ArrayList<Code>());
 		retVal.setCodeSystems9007(new ArrayList<Code>());
 		retVal.setSendingSystems9008(new ArrayList<Code>());
-		
+
 		retVal.setOtherOids(toCodes(cfg.getOtherOids()));
 		retVal.setProvider9001Oids(toCodes(cfg.getProviderId9001()));
-		
+
 		for (Contributor nextContributor : cfg.getContributors()) {
 			String hspId9004 = nextContributor.getHspId9004();
 			Code hspCode = new Code(hspId9004, nextContributor.getName());
 			retVal.getHspIdentifier9004().add(hspCode);
-			
+
 			hspCode.getMetadata().put(OidBrowserPanel.HSP_METADATA_HOSPITAL_FAC, nextContributor.getHospitalFacilityNumber());
-			hspCode.getMetadata().put(OidBrowserPanel.HSP_METADATA_MRNOID, nextContributor.getMrnPoolOid());
+			hspCode.getMetadata().put(OidBrowserPanel.HSP_METADATA_MRNOID, toMetadataValue(nextContributor.getMrnPoolOid()));
+			hspCode.getMetadata().put(OidBrowserPanel.HSP_METADATA_VISITOID, toMetadataValue(nextContributor.getVisitNumberPoolOids()));
 			hspCode.getMetadata().put(OidBrowserPanel.HSP_METADATA_PROVIDEROID, nextContributor.getProviderPoolOid());
-			
+
 			if (theHspId != null && !theHspId.equals(hspId9004)) {
 				continue;
-			} 
-			
+			}
+
 			for (ca.cgta.input.model.config.Code nextFacility : nextContributor.getHspFacility()) {
 				retVal.getFacilityIdentifiers9005().add(new Code(nextFacility.getCode(), nextFacility.getDescription(), hspId9004));
 			}
-			
+
 			for (SendingSystem nextSystem : nextContributor.getSendingSystem()) {
 				retVal.getSendingSystems9008().add(new Code(nextSystem.getCode(), nextSystem.getDescription(), hspId9004));
-				
-				addCodeSystems(retVal.getCodeSystems9007(), nextSystem.getRequestCodeSystemSystemObr4(), hspId9004, "Request Code (OBR-4) for system: " + nextSystem.getDescription());				
-				addCodeSystems(retVal.getCodeSystems9007(), nextSystem.getResultCodeSystemSystemObx3(), hspId9004, "Result Code (OBX-3) for system: " + nextSystem.getDescription());				
-				addCodeSystems(retVal.getCodeSystems9007(), nextSystem.getAllergenCodeSystemIam3(), hspId9004, "Allergen Code (IAM-3) for system: " + nextSystem.getDescription());				
-				addCodeSystems(retVal.getCodeSystems9007(), nextSystem.getDrugAdministrationCodeSystemRxa5(), hspId9004, "Drug Administration Code (RXA-5) for system: " + nextSystem.getDescription());				
-				addCodeSystems(retVal.getCodeSystems9007(), nextSystem.getDrugComponentCodeSystemRxc2(), hspId9004, "Drug Component Code (RXC-2) for system: " + nextSystem.getDescription());				
-				addCodeSystems(retVal.getCodeSystems9007(), nextSystem.getDrugGiveCodeSystemRxe2(), hspId9004, "Drug Give Code (RXE-2) for system: " + nextSystem.getDescription());				
+
+				addCodeSystems(retVal.getCodeSystems9007(), nextSystem.getRequestCodeSystemSystemObr4(), hspId9004, "Request Code (OBR-4) for system: " + nextSystem.getDescription());
+				addCodeSystems(retVal.getCodeSystems9007(), nextSystem.getResultCodeSystemSystemObx3(), hspId9004, "Result Code (OBX-3) for system: " + nextSystem.getDescription());
+				addCodeSystems(retVal.getCodeSystems9007(), nextSystem.getAllergenCodeSystemIam3(), hspId9004, "Allergen Code (IAM-3) for system: " + nextSystem.getDescription());
+				addCodeSystems(retVal.getCodeSystems9007(), nextSystem.getDrugAdministrationCodeSystemRxa5(), hspId9004, "Drug Administration Code (RXA-5) for system: " + nextSystem.getDescription());
+				addCodeSystems(retVal.getCodeSystems9007(), nextSystem.getDrugComponentCodeSystemRxc2(), hspId9004, "Drug Component Code (RXC-2) for system: " + nextSystem.getDescription());
+				addCodeSystems(retVal.getCodeSystems9007(), nextSystem.getDrugGiveCodeSystemRxe2(), hspId9004, "Drug Give Code (RXE-2) for system: " + nextSystem.getDescription());
 			}
-			
+
 		}
-		
-	    return retVal;
-    }
+
+		return retVal;
+	}
+
+
+	private String toMetadataValue(List<ca.cgta.input.model.config.Code> theOids) {
+		if (theOids == null || theOids.size() == 0) {
+			return "";
+		} else if (theOids.size() == 1) {
+			return theOids.get(0).getCode();
+		} else {
+			StringBuilder b = new StringBuilder();
+			for (ca.cgta.input.model.config.Code code : theOids) {
+				b.append(code.getCode());
+				b.append(" (");
+				b.append(code.getDescription());
+				b.append(") ");
+			}
+			return b.toString();
+		}
+	}
 
 
 	private List<Code> toCodes(List<ca.cgta.input.model.config.Code> theOtherOids) {
@@ -340,15 +359,15 @@ public class ValidatorServiceImpl extends RemoteServiceServlet implements Valida
 		for (ca.cgta.input.model.config.Code code : theOtherOids) {
 			Code newCode = new Code(code.getCode(), code.getDescription());
 			retVal.add(newCode);
-        }
-	    return retVal;
-    }
+		}
+		return retVal;
+	}
 
 
 	private void addCodeSystems(List<Code> theDest, List<String> theCodesToUse, String theHspId9004, String theUsage) {
 		for (String next : theCodesToUse) {
 			theDest.add(new Code(next, "Code System for use in " + theUsage, theHspId9004));
 		}
-    }
+	}
 
 }

@@ -22,9 +22,9 @@ import ca.uhn.hl7v2.validation.impl.ValidationContextImpl;
 
 import com.google.gson.GsonBuilder;
 
-public class ConverterTest {
+public class ConverterTestOld {
 
-	private Logger ourLog = LoggerFactory.getLogger(ConverterTest.class);
+	private Logger ourLog = LoggerFactory.getLogger(ConverterTestOld.class);
 	
 	@Test
 	public void testJoinTextualObxSegments() throws EncodingNotSupportedException, HL7Exception, JAXBException {

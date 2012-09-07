@@ -175,6 +175,9 @@
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.5.102.1</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.5.102.2</result_codesystem_obx3_9007>
             <allergen_codesystem_iam3_9007>2.16.840.1.113883.3.239.23.5.102.9</allergen_codesystem_iam3_9007>
+            <drug_administration_codesystem_rxa5_9007>2.16.840.1.113883.3.239.23.5.102.17</drug_administration_codesystem_rxa5_9007>
+            <drug_component_codesystem_rxc2_9007>2.16.840.1.113883.3.239.23.5.102.18</drug_component_codesystem_rxc2_9007>
+            <drug_give_codesystem_rxe2_9007>2.16.840.1.113883.3.239.23.5.102.19</drug_give_codesystem_rxe2_9007>
             <management_console_system_id>Soarian</management_console_system_id>
         </hsp_sending_system_9008>
         <hsp_sending_system_9008 description="Sovera" code="2.16.840.1.113883.3.239.23.5.101.2">
@@ -203,10 +206,17 @@
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.5.102.14</result_codesystem_obx3_9007>
             <management_console_system_id>MUSE</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 description="MUSE" code="2.16.840.1.113883.3.239.23.5.101.7">
+        <hsp_sending_system_9008 description="XCelera" code="2.16.840.1.113883.3.239.23.5.101.7">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.5.102.15</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.5.102.16</result_codesystem_obx3_9007>
-            <management_console_system_id>MUSE</management_console_system_id>
+            <management_console_system_id>XCelera</management_console_system_id>
+        </hsp_sending_system_9008>
+        <hsp_sending_system_9008 description="Pharmacy" code="2.16.840.1.113883.3.239.23.5.101.8">
+            <allergen_codesystem_iam3_9007>2.16.840.1.113883.3.239.23.5.102.20</allergen_codesystem_iam3_9007>
+            <drug_administration_codesystem_rxa5_9007>2.16.840.1.113883.3.239.23.5.102.21</drug_administration_codesystem_rxa5_9007>
+            <drug_component_codesystem_rxc2_9007>2.16.840.1.113883.3.239.23.5.102.22</drug_component_codesystem_rxc2_9007>
+            <drug_give_codesystem_rxe2_9007>2.16.840.1.113883.3.239.23.5.102.23</drug_give_codesystem_rxe2_9007>
+            <management_console_system_id>Pharmacy</management_console_system_id>
         </hsp_sending_system_9008>
     </contributor>
     <contributor provider_pool_oid="2.16.840.1.113883.3.239.23.6.1" name="Mount Sinai Hospital Joseph and Wolf Lebovic Health Complex" mrn_pool_oid="2.16.840.1.113883.3.239.18.97" hospital_facility_number="0842">
@@ -354,6 +364,7 @@
     </contributor>
     <contributor provider_pool_oid="2.16.840.1.113883.3.239.23.10.1" name="Trillium Health Centre" mrn_pool_oid="2.16.840.1.113883.3.239.18.146" hospital_facility_number="0975">
         <dev_listen_port>14016</dev_listen_port>
+        <dev_listen_port>14036</dev_listen_port>
         <dev_security_token>2387527832459kkk</dev_security_token>
         <hsp_facility_9005 description="Credit Valley Hospital and Trillium Health Centre -- Mississauga Site" code="2.16.840.1.113883.3.239.23.10.100.1"/>
         <hsp_facility_9005 description="Credit Valley Hospital and Trillium Health Centre -- West Toronto Site" code="2.16.840.1.113883.3.239.23.10.100.2"/>

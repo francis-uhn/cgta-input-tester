@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
@@ -121,7 +122,7 @@ public class PatientWithVisits extends AbstractDocument {
     public Visit findAndRemoveVisit(Cx theVisitNumber) {
         ensureVisits();
         for (Visit nextVisit : myVisits) {
-            if (nextVisit.myVisitNumber.equals(theVisitNumber)) {
+            if (ObjectUtils.equals(nextVisit.myVisitNumber, theVisitNumber)) {
                 myVisits.remove(nextVisit);
                 return nextVisit;
             }
@@ -135,7 +136,7 @@ public class PatientWithVisits extends AbstractDocument {
     public Visit findVisit(Cx theVisitNumber) {
         ensureVisits();
         for (Visit nextVisit : myVisits) {
-            if (nextVisit.myVisitNumber.equals(theVisitNumber)) {                
+            if (ObjectUtils.equals(nextVisit.myVisitNumber, theVisitNumber)) {                
                 return nextVisit;
             }
         }

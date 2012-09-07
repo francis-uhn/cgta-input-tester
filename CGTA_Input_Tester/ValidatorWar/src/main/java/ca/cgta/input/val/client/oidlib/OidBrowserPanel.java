@@ -20,6 +20,7 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 public class OidBrowserPanel extends BaseLayoutPanel {
 
 	public static final String HSP_METADATA_MRNOID = "MRNOID";
+	public static final String HSP_METADATA_VISITOID = "VISITOID";
 	public static final String HSP_METADATA_HOSPITAL_FAC = "FAC";
 	public static final String HSP_METADATA_PROVIDEROID = "PROV";
 	
@@ -160,6 +161,7 @@ public class OidBrowserPanel extends BaseLayoutPanel {
 		if (isHsp) {
 			grid.setText(0, col++, "MOH Facility");
 			grid.setText(0, col++, "MRN OID");
+			grid.setText(0, col++, "Visit/Encounter OID");
 			grid.setText(0, col++, "Provider OID");
 		}
 		
@@ -175,6 +177,7 @@ public class OidBrowserPanel extends BaseLayoutPanel {
 			if (isHsp) {
 				grid.setText(row, col++, defaultString(next.getMetadata().get(HSP_METADATA_HOSPITAL_FAC)));
 				grid.setText(row, col++, defaultString(next.getMetadata().get(HSP_METADATA_MRNOID)));
+				grid.setText(row, col++, defaultString(next.getMetadata().get(HSP_METADATA_VISITOID)));
 				grid.setText(row, col++, defaultString(next.getMetadata().get(HSP_METADATA_PROVIDEROID)));
 			}
 			

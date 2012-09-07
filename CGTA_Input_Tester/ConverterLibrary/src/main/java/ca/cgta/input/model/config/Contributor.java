@@ -40,15 +40,17 @@ public class Contributor {
 	@XmlElement(name = "management_console_org_id")
 	private String myManagementConsoleOrgId;
 
-	@XmlAttribute(name = "mrn_pool_oid")
-	private String myMrnPoolOid;
+	@XmlElement(name = "mrn_pool_oid")
+	private List<Code> myMrnPoolOids;
 
 	@XmlAttribute(name = "name")
 	private String myName;
 
-	@XmlAttribute(name = "provider_pool_oid")
-	private String myProviderPoolOid;
+	@XmlElement(name = "provider_pool_oid")
+	private Code myProviderPoolOid;
 
+	@XmlElement(name = "visit_number_pool_oid")
+	private List<Code> myVisitNumberPoolOids;
 
 	@XmlElement(name = "hsp_sending_system_9008")
 	private List<SendingSystem> mySendingSystem9008;
@@ -138,8 +140,11 @@ public class Contributor {
 	/**
      * @return the mrnPoolOid
      */
-    public String getMrnPoolOid() {
-    	return myMrnPoolOid;
+    public List<Code> getMrnPoolOid() {
+    	if (myMrnPoolOids == null) {
+    		myMrnPoolOids = new ArrayList<Code>();
+    	}
+    	return myMrnPoolOids;
     }
 
 
@@ -155,7 +160,7 @@ public class Contributor {
      * @return the providerPoolOid
      */
     public String getProviderPoolOid() {
-    	return myProviderPoolOid;
+    	return myProviderPoolOid != null ? myProviderPoolOid.getCode() : null;
     }
 
 
@@ -216,9 +221,10 @@ public class Contributor {
 	/**
 	 * The ID for this HSP as provided by eHO
 	 */
-	public void setHspId9004(String theHspId9004) {
+	public void setHspId9004AndSubIds(String theHspId9004) {
 		myHspId9004 = theHspId9004;
-		setProviderPoolOid(theHspId9004 + ".1");
+		setProviderPoolOidAndName(theHspId9004 + ".1");
+		setVisitNumberPoolOidAndName(theHspId9004 + ".2");
 	}
 
 
@@ -229,15 +235,6 @@ public class Contributor {
     public void setManagementConsoleOrgId(String theManagementConsoleOrgId) {
     	myManagementConsoleOrgId = theManagementConsoleOrgId;
     }
-
-
-	/**
-     * @param theMrnPoolOid the mrnPoolOid to set
-     */
-    public void setMrnPoolOid(String theMrnPoolOid) {
-    	myMrnPoolOid = theMrnPoolOid;
-    }
-
 
 	/**
 	 * Set the plain text name for this HSP
@@ -250,8 +247,21 @@ public class Contributor {
 	/**
      * @param theProviderPoolOid the providerPoolOid to set
      */
-    public void setProviderPoolOid(String theProviderPoolOid) {
-    	myProviderPoolOid = theProviderPoolOid;
+    public void setProviderPoolOidAndName(String theProviderPoolOid) {
+    	myProviderPoolOid = new Code(theProviderPoolOid, myName + " Provider IDs");
     }
 	
+	/**
+     * @param theVisitNumberPoolOid the providerPoolOid to set
+     */
+    public void setVisitNumberPoolOidAndName(String theVisitNumberPoolOid) {
+    	getVisitNumberPoolOids().add(new Code(theVisitNumberPoolOid, myName + " Visit/Encounter Number/IDs"));
+    }
+
+	public List<Code> getVisitNumberPoolOids() {
+		if (myVisitNumberPoolOids == null) {
+			myVisitNumberPoolOids = new ArrayList<Code>();
+		}
+	    return myVisitNumberPoolOids;
+    }
 }

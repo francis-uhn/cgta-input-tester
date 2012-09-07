@@ -155,6 +155,16 @@
 				<module>ValidatorWar</module>
 			</modules>
 		</profile>
+		<profile>
+			<id>ALL</id>
+			<modules>
+				<module>ConverterLibrary</module>
+				<module>ViewsUploader</module>
+				<module>TestDataUploader</module>
+				<module>ValidatorWar</module>
+				<module>ListenerWar</module>
+			</modules>
+		</profile>
 	</profiles>
 
 </project>

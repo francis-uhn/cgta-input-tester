@@ -17,7 +17,6 @@ import sail.wsdl.infrastructure.journalling.InvalidInputException;
 import sail.wsdl.infrastructure.journalling.JournallingWebService;
 import sail.xsd.canonical.hl7v2.CanonicalHl7V2Message;
 import sail.xsd.canonical.hl7v2.MessagePhase;
-import sail.xsd.canonical.hl7v2.OutboundInterface;
 import sail.xsd.infrastructure.services.journal.JournalMessageRequest;
 import ca.cgta.input.converter.Converter;
 import ca.cgta.input.converter.Failure;
@@ -26,7 +25,6 @@ import ca.cgta.input.model.config.Contributor;
 import ca.cgta.input.model.config.ContributorConfigFactory;
 import ca.cgta.input.model.config.SendingSystem;
 import ca.cgta.input.model.inner.MedicationOrder;
-import ca.cgta.input.model.inner.Tables;
 import ca.cgta.input.model.outer.ClinicalDocumentGroup;
 import ca.cgta.input.model.outer.MedicationOrderWithAdmins;
 import ca.cgta.input.model.outer.PatientWithVisits;
@@ -76,7 +74,7 @@ public class Listener extends HttpServlet {
 
 
 	public Listener(boolean theUnitTestMode) throws JAXBException {
-	    System.setProperty(Varies.DEFAULT_OBX2_TYPE_PROP, "ST");
+		System.setProperty(Varies.DEFAULT_OBX2_TYPE_PROP, "ST");
 		System.setProperty(Varies.INVALID_OBX2_TYPE_PROP, "ST");
 
 		myUnitTestMode = theUnitTestMode;
@@ -84,7 +82,7 @@ public class Listener extends HttpServlet {
 
 		myParser = new MyPipeParser();
 		myParser.setValidationContext(new ValidationContextImpl());
-    }
+	}
 
 
 	/**
@@ -116,7 +114,7 @@ public class Listener extends HttpServlet {
 			if (myUnitTestMode && !contributor.getHspId9004().equals("1.3.6.1.4.1.12201.999")) {
 				continue;
 			}
-			
+
 			ourLog.info("Starting server ports for org {}", contributor.getName());
 
 			for (Integer nextPort : contributor.getDevListenPort()) {
@@ -132,6 +130,14 @@ public class Listener extends HttpServlet {
 		}
 
 		ourLog.info("Successfully started {} servers", myServers.size());
+
+		ourLog.info("Initializing SAIL system registry");
+		try {
+			UploadContributorConfig.uploadContributorConfig();
+			ourLog.info("Done initializing SAIL system registry");
+		} catch (Exception e) {
+			ourLog.info("Failed to initialize SAIL system registry", e);
+		}
 
 	}
 
@@ -205,7 +211,7 @@ public class Listener extends HttpServlet {
 			} catch (Exception e) {
 				// ignore
 			}
-			
+
 			Converter converter;
 			try {
 				converter = new Converter(true);
@@ -333,23 +339,25 @@ public class Listener extends HttpServlet {
 				throw new HL7Exception("Failed to process message");
 			}
 
-//			// Journal again for the destination
-//			canon.setDestination(new OutboundInterface());
-//			canon.getDestination().setBoxId(canon.getSource().getBoxId());
-//			canon.getDestination().setDomainId(canon.getSource().getDomainId());
-//			canon.getDestination().setInterfaceDirection("O");
-//			canon.getDestination().setOrgId("SIMS");
-//			canon.getDestination().setSystemId("CGTA_Interim_CDR");
-//			canon.getDestination().setInterfaceId("All");
-//			canon.setCurrentMessagePhase(MessagePhase.OUTGOING);
-//			try {
-//				myJournalSvc.journalMessage(request);
-//			} catch (final InvalidInputException e) {
-//				ourLog.error("Failed to send message to journal", e);
-//			} catch (final sail.wsdl.infrastructure.journalling.UnexpectedErrorException e) {
-//				ourLog.error("Failed to send message to dead letter", e);
-//			}
-			
+			// // Journal again for the destination
+			// canon.setDestination(new OutboundInterface());
+			// canon.getDestination().setBoxId(canon.getSource().getBoxId());
+			// canon.getDestination().setDomainId(canon.getSource().getDomainId());
+			// canon.getDestination().setInterfaceDirection("O");
+			// canon.getDestination().setOrgId("SIMS");
+			// canon.getDestination().setSystemId("CGTA_Interim_CDR");
+			// canon.getDestination().setInterfaceId("All");
+			// canon.setCurrentMessagePhase(MessagePhase.OUTGOING);
+			// try {
+			// myJournalSvc.journalMessage(request);
+			// } catch (final InvalidInputException e) {
+			// ourLog.error("Failed to send message to journal", e);
+			// } catch (final
+			// sail.wsdl.infrastructure.journalling.UnexpectedErrorException e)
+			// {
+			// ourLog.error("Failed to send message to dead letter", e);
+			// }
+
 			try {
 				ACK ack = (ACK) theArg0.generateACK();
 
@@ -397,30 +405,29 @@ public class Listener extends HttpServlet {
 		@Override
 		public Message parse(String theMessage) throws HL7Exception, EncodingNotSupportedException {
 			ourLog.info("Incoming message:\n" + theMessage);
-			
+
 			char delim = theMessage.charAt(3);
 			for (String nextLine : theMessage.split("\\r")) {
 				if (!nextLine.matches("[A-Z0-9]{3}.*") || nextLine.charAt(3) != delim) {
 					throw new HL7Exception("Message appears to have CR characters (ASCII-13) within segment contents");
 				}
 			}
-			
+
 			return super.parse(theMessage);
 		}
 
 
 		/**
-         * {@inheritDoc}
-         */
-        
-        @Override
-        public String encode(Message theSource) throws HL7Exception {
-	        String retVal = super.encode(theSource);
-        	ourLog.info("Response message:\n" + retVal);
+		 * {@inheritDoc}
+		 */
+
+		@Override
+		public String encode(Message theSource) throws HL7Exception {
+			String retVal = super.encode(theSource);
+			ourLog.info("Response message:\n" + retVal);
 			return retVal;
-        }
-		
-		
+		}
+
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -90,6 +91,37 @@ public class Visit {
 	}
 	
 	
+    @JsonIgnore
+    //may need in the future
+    private void copySuppliedValuesFrom(Visit theHl7MsgVisit) {
+        myAdmissionLevelOfCareForEmergencyVisit = (theHl7MsgVisit.myAdmissionLevelOfCareForEmergencyVisit != null) ? theHl7MsgVisit.myAdmissionLevelOfCareForEmergencyVisit : myAdmissionLevelOfCareForEmergencyVisit;
+        myAdmitDate = (theHl7MsgVisit.myAdmitDate != null) ? theHl7MsgVisit.myAdmitDate : myAdmitDate;
+        myAdmitDateFormatted = (StringUtils.isNotBlank(theHl7MsgVisit.myAdmitDateFormatted)) ? theHl7MsgVisit.myAdmitDateFormatted : myAdmitDateFormatted;
+        myAdmitReasonForEmergencyVisit = (theHl7MsgVisit.myAdmitReasonForEmergencyVisit != null) ? theHl7MsgVisit.myAdmitReasonForEmergencyVisit : myAdmitReasonForEmergencyVisit;
+        myAdmittingDoctors = (theHl7MsgVisit.myAdmittingDoctors != null && theHl7MsgVisit.myAdmittingDoctors.size()!= 0) ? theHl7MsgVisit.myAdmittingDoctors : myAdmittingDoctors;
+        myAssignedPatientLocation = (theHl7MsgVisit.myAssignedPatientLocation != null) ? theHl7MsgVisit.myAssignedPatientLocation : myAssignedPatientLocation;
+        myAttendingDoctors = (theHl7MsgVisit.myAttendingDoctors != null && theHl7MsgVisit.myAttendingDoctors.size()!= 0) ? theHl7MsgVisit.myAttendingDoctors : myAttendingDoctors;
+        myConsultingDoctors = (theHl7MsgVisit.myConsultingDoctors != null && theHl7MsgVisit.myConsultingDoctors.size()!= 0) ? theHl7MsgVisit.myConsultingDoctors : myConsultingDoctors;
+        myDischargeDates = (theHl7MsgVisit.myDischargeDates != null && theHl7MsgVisit.myDischargeDates.size()!= 0) ? theHl7MsgVisit.myDischargeDates : myDischargeDates;
+        myDiagnoses = (theHl7MsgVisit.myDiagnoses != null && theHl7MsgVisit.myDiagnoses.size()!= 0) ? theHl7MsgVisit.myDiagnoses : myDiagnoses;
+        myDischargeDatesFormatted = (theHl7MsgVisit.myDischargeDatesFormatted != null && theHl7MsgVisit.myDischargeDatesFormatted.size()!= 0) ? theHl7MsgVisit.myDischargeDatesFormatted : myDischargeDatesFormatted;
+        myHospitalService = (StringUtils.isNotBlank(theHl7MsgVisit.myHospitalService)) ? theHl7MsgVisit.myHospitalService : myHospitalService;
+        myHospitalServiceName = (StringUtils.isNotBlank(theHl7MsgVisit.myHospitalServiceName)) ? theHl7MsgVisit.myHospitalServiceName : myHospitalServiceName;
+        myPatientClassCode = (StringUtils.isNotBlank(theHl7MsgVisit.myPatientClassCode)) ? theHl7MsgVisit.myPatientClassCode : myPatientClassCode;
+        myAdmissionType = (StringUtils.isNotBlank(theHl7MsgVisit.myAdmissionType)) ? theHl7MsgVisit.myAdmissionType : myAdmissionType;
+        myPatientClassName = (StringUtils.isNotBlank(theHl7MsgVisit.myPatientClassName)) ? theHl7MsgVisit.myPatientClassName : myPatientClassName;
+        myPatientRequestedRecordLock = (StringUtils.isNotBlank(theHl7MsgVisit.myPatientRequestedRecordLock)) ? theHl7MsgVisit.myPatientRequestedRecordLock : myPatientRequestedRecordLock;
+        myPriorPatientLocation = (theHl7MsgVisit.myPriorPatientLocation != null) ? theHl7MsgVisit.myPriorPatientLocation : myPriorPatientLocation;
+        myReferringDoctors = (theHl7MsgVisit.myReferringDoctors != null && theHl7MsgVisit.myReferringDoctors.size()!= 0) ? theHl7MsgVisit.myReferringDoctors : myReferringDoctors;
+        myVisitNumber = (theHl7MsgVisit.myVisitNumber != null) ? theHl7MsgVisit.myVisitNumber : myVisitNumber;
+        
+    }
+	
+	
+	
+	
+	
+	
     @JsonIgnore  
     private void setRecordUpdatedTime() {
         myRecordUpdatedDate = new Date();
@@ -106,7 +138,7 @@ public class Visit {
             throw new IllegalArgumentException("Eventype must be supplied");
         }
         
-        if ( theEventType.equals("A01") || theEventType.equals("A04") || theEventType.equals("A08")) {
+        if ( theEventType.equals("A01") || theEventType.equals("A04") || theEventType.equals("A05") || theEventType.equals("A08")) {
             this.copyFrom(theHl7MsgVisit);
             setRecordUpdatedTime();
             
@@ -133,7 +165,7 @@ public class Visit {
         
         
         if ( theEventType.equals("A13")) {
-            if ( myAssignedPatientLocation == null && theHl7MsgVisit.myAssignedPatientLocation != null ) {
+            if ( theHl7MsgVisit.myAssignedPatientLocation != null ) {
                 myAssignedPatientLocation = theHl7MsgVisit.myAssignedPatientLocation;   
                 setRecordUpdatedTime(); 
             }
@@ -163,6 +195,13 @@ public class Visit {
             setRecordUpdatedTime(); 
             return;
         }
+        
+        if ( theEventType.equals("A05")) {            
+            this.myVisitStatus = Constants.PREADMIT_VISIT_STATUS;
+            this.myDischargeDates = null;            
+            setRecordUpdatedTime(); 
+            return;
+        }        
         
         
         if ( theEventType.equals("A11")) {

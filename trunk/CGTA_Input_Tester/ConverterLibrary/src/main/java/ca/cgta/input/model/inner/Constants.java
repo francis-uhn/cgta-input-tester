@@ -18,6 +18,7 @@ public class Constants {
     public static final String UNDEF_VISIT_STATUS = "UNDEFINED";
     public static final String DELETED_VISIT_STATUS = "DELETED";
     public static final String CANCELLED_VISIT_STATUS = "CANCELLED";
+    public static final String PREADMIT_VISIT_STATUS = "PRE-ADMIT";
     
     
 

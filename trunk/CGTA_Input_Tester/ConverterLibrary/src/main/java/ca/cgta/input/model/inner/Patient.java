@@ -78,6 +78,26 @@ public class Patient {
 		myAssociatedParties = theHl7MsgPatient.myAssociatedParties;			
 		
 	}
+	
+	
+    @JsonIgnore
+    //may need in the future
+    private void copySuppliedDemographicsFrom(Patient theHl7MsgPatient) {
+        myDeathIndicator = (StringUtils.isNotBlank(theHl7MsgPatient.myDeathIndicator)) ? theHl7MsgPatient.myDeathIndicator : myDeathIndicator;
+        myPatientIds = (theHl7MsgPatient.myPatientIds != null && theHl7MsgPatient.myPatientIds.size()!= 0) ? theHl7MsgPatient.myPatientIds : myPatientIds;
+        myPatientNames = (theHl7MsgPatient.myPatientNames != null && theHl7MsgPatient.myPatientNames.size()!= 0) ? theHl7MsgPatient.myPatientNames : myPatientNames;
+        myMothersMaidenName = (theHl7MsgPatient.myMothersMaidenName != null) ? theHl7MsgPatient.myMothersMaidenName : myMothersMaidenName;
+        myDateOfBirth = (theHl7MsgPatient.myDateOfBirth != null) ? theHl7MsgPatient.myDateOfBirth : myDateOfBirth;
+        myAdministrativeSex = (StringUtils.isNotBlank(theHl7MsgPatient.myAdministrativeSex)) ? theHl7MsgPatient.myAdministrativeSex : myAdministrativeSex;
+        myPatientAddresses = (theHl7MsgPatient.myPatientAddresses != null && theHl7MsgPatient.myPatientAddresses.size()!= 0) ? theHl7MsgPatient.myPatientAddresses : myPatientAddresses;
+        myPrimaryLanguage = (theHl7MsgPatient.myPrimaryLanguage != null) ? theHl7MsgPatient.myPrimaryLanguage : myPrimaryLanguage;
+        myDeathDateAndTime = (theHl7MsgPatient.myDeathDateAndTime != null) ? theHl7MsgPatient.myDeathDateAndTime : myDeathDateAndTime;
+        myDeathDateAndTimeFormatted = (StringUtils.isNotBlank(theHl7MsgPatient.myDeathDateAndTimeFormatted)) ? theHl7MsgPatient.myDeathDateAndTimeFormatted : myDeathDateAndTimeFormatted;
+        myPhoneNumbers = (theHl7MsgPatient.myPhoneNumbers != null && theHl7MsgPatient.myPhoneNumbers.size()!= 0) ? theHl7MsgPatient.myPhoneNumbers : myPhoneNumbers;
+        myPersonInRoles = (theHl7MsgPatient.myPersonInRoles != null && theHl7MsgPatient.myPersonInRoles.size()!= 0) ? theHl7MsgPatient.myPersonInRoles : myPersonInRoles;
+        myAssociatedParties = (theHl7MsgPatient.myAssociatedParties != null && theHl7MsgPatient.myAssociatedParties.size()!= 0) ? theHl7MsgPatient.myAssociatedParties : myAssociatedParties;         
+        
+    }	
 		
 
 

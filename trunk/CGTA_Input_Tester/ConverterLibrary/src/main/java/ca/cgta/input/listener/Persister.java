@@ -137,6 +137,10 @@ public class Persister {
             updateVisit(existing, thePatientWithVisits);
         	appendOutcomeForVisit(outcome, existing);
             outcome.append("Activate outpatient visit");
+        } else if ("A05".equals(thePatientWithVisits.myMostRecentEventCode)) {
+            updateVisit(existing, thePatientWithVisits);
+            appendOutcomeForVisit(outcome, existing);
+            outcome.append("Process pre-admit visit");    
         } else if ("A06".equals(thePatientWithVisits.myMostRecentEventCode)) {
             convertVisit(existing, thePatientWithVisits);
         	appendOutcomeForVisit(outcome, existing);

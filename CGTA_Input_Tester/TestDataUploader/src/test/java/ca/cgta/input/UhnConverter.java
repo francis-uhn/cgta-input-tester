@@ -117,10 +117,7 @@ public class UhnConverter {
 		if (theInputString.contains("EPR|WP") || theInputString.contains("EPR|TRI") || theInputString.contains("EPR|SJR")) {
 			return null;
 		}
-
-		if (theInputString.contains("ADT^A05")) {
-			return null;
-		}
+		
 		if (theInputString.contains("ADT^A14")) {
 			return null;
 		}

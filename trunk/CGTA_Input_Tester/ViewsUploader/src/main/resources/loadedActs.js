@@ -81,7 +81,7 @@ function (doc) {
                                         
                     // Discharge Date
                     if (visit.myDischargeDatesFormatted && visit.myDischargeDatesFormatted.length > 0) {
-                        notesArray.push({name: "Visit End Date", note: nullConvert(visit.myDischargeDatesFormatted[visit.myDischargeDates.length - 1])}); 
+                        notesArray.push({name: "Visit End Date", note: nullConvert(visit.myDischargeDatesFormatted[visit.myDischargeDatesFormatted.length - 1])}); 
                     }
                     else {
                         notesArray.push({name: "Visit End Date", note: "NULL"});                     

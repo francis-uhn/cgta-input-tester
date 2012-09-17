@@ -146,29 +146,46 @@ public class Visit {
         
 
         if ( theEventType.equals("A10") && theHl7MsgVisit.myPatientClassCode.equals("R")) {
-            myArrivalDates.add(theHl7MsgVisit.myAdmitDate);
+            myArrivalDates.add(theHl7MsgVisit.myAdmitDate);            
             myFormattedArrivalDates.add(theHl7MsgVisit.myAdmitDateFormatted);
             setRecordUpdatedTime();
             
         }
         
         
-        if ( theEventType.equals("A02") || theEventType.equals("A03")) {
+        if ( theEventType.equals("A02")) {
             myPriorPatientLocation = theHl7MsgVisit.myPriorPatientLocation;
-            myAssignedPatientLocation = theHl7MsgVisit.myAssignedPatientLocation;
-            if (theEventType.equals("A03")) {
-                myDischargeDates = theHl7MsgVisit.myDischargeDates;
-                myDischargeDatesFormatted = theHl7MsgVisit.myDischargeDatesFormatted;
-            }
+            myAssignedPatientLocation = theHl7MsgVisit.myAssignedPatientLocation;           
             setRecordUpdatedTime(); 
         }
         
         
-        if ( theEventType.equals("A13")) {
-            if ( theHl7MsgVisit.myAssignedPatientLocation != null ) {
-                myAssignedPatientLocation = theHl7MsgVisit.myAssignedPatientLocation;   
-                setRecordUpdatedTime(); 
+        if ( theEventType.equals("A03")) {
+            
+            if ( theHl7MsgVisit.myPriorPatientLocation != null ) {
+                myPriorPatientLocation = theHl7MsgVisit.myPriorPatientLocation;                
             }
+            if ( theHl7MsgVisit.myAssignedPatientLocation != null ) {
+                myAssignedPatientLocation = theHl7MsgVisit.myAssignedPatientLocation;                
+            }
+            myDischargeDates = theHl7MsgVisit.myDischargeDates;
+            myDischargeDatesFormatted = theHl7MsgVisit.myDischargeDatesFormatted;
+            
+            setRecordUpdatedTime(); 
+        }
+        
+        
+        
+        
+        if ( theEventType.equals("A13") && (theHl7MsgVisit.myAssignedPatientLocation != null || theHl7MsgVisit.myPriorPatientLocation != null)) {            
+            
+            if ( theHl7MsgVisit.myAssignedPatientLocation != null) {
+                myAssignedPatientLocation = theHl7MsgVisit.myAssignedPatientLocation;
+            }
+            if ( theHl7MsgVisit.myPriorPatientLocation != null) {                
+                myPriorPatientLocation = theHl7MsgVisit.myPriorPatientLocation;
+            }                
+            setRecordUpdatedTime();
         }        
        
         
@@ -186,6 +203,7 @@ public class Visit {
                 || theEventType.equals("A07") || theEventType.equals("A13")) {
             this.myVisitStatus = Constants.ACTIVE_VISIT_STATUS;
             this.myDischargeDates = null;
+            this.myDischargeDatesFormatted = null;
             setRecordUpdatedTime(); 
             return;
         }

@@ -216,7 +216,8 @@ public class Visit {
         
         if ( theEventType.equals("A05")) {            
             this.myVisitStatus = Constants.PREADMIT_VISIT_STATUS;
-            this.myDischargeDates = null;            
+            this.myDischargeDates = null;         
+            this.myDischargeDatesFormatted = null;
             setRecordUpdatedTime(); 
             return;
         }        

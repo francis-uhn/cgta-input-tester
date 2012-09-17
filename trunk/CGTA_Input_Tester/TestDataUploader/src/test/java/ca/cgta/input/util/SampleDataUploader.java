@@ -70,8 +70,8 @@ public class SampleDataUploader {
 
         //assign command line args to variables and use defaults if not supplied  
         String url = cmdLine.getOptionValue("u", "http://uhnvprx01t.uhn.ca:5984");
-        String dbName = cmdLine.getOptionValue("d", "cgta_input_test_db");
-        //String dbName = cmdLine.getOptionValue("d", "neal_test_db");
+        //String dbName = cmdLine.getOptionValue("d", "cgta_input_test_db");
+        String dbName = cmdLine.getOptionValue("d", "neal_test_db");
         String mrn = cmdLine.getOptionValue("m", "12345");
         if (cmdLine.hasOption("a")) {
         	UhnConverter.ourHspOid = "2.16.840.1.113883.3.239.23.8";
@@ -85,7 +85,7 @@ public class SampleDataUploader {
         CouchDbInstance dbInstance = new StdCouchDbInstance(httpClient);        
         StdCouchDbConnector connector = new StdCouchDbConnector(dbName, dbInstance);        
         Persister.setConnector(connector);
-//        ViewUploader.uploadAllViews(connector);	    
+        ViewUploader.uploadAllViews(connector);	    
 	    
 //        persistClinDoc(mrn);
 //        persistClinDoc2(mrn);
@@ -99,6 +99,7 @@ public class SampleDataUploader {
 //        persistDeactivatedPatientWithDocs(mrn);
 //        persistReoccuringPatientWithDocs(mrn);
 //        persistMultiple();
+        persistMessagesFromFile();
         
 	    
 	}
@@ -699,28 +700,76 @@ public class SampleDataUploader {
         
     private static void persistMultiple() throws Exception {
        
-        String mrn = "123456";
+      String msg1 = 
+          "MSH|^~\\&|2.16.840.1.113883.3.239.23.9^2.16.840.1.113883.3.239.23.9.101.1|CVH^0731|cGTA|cGTA|20120810104900-0400|340975709474jjj|ADT^A04^ADT_A01|ADT-MITRA.1.4595|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" + 
+          "EVN||201208101049\r" + 
+          "PID|1||0000000562^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^MR~2222222222^AD^^^JHN^^^^CANON&Ontario&HL70363||CVHCGTA5^TED^^^^^L||19860221000000-0400|M|||55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H||905-555-5555^PRN^PH\r" + 
+          "NK1|1|CVHCGTA5^EMERG5^^^^^L|FND^Friend^HL70063|55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H|905-555-5555^PRN^PH\r" + 
+          "PV1|1|E|ER^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1||||68031^AASHEIM^LISE^HOLM^^^^^2.16.840.1.113883.4.347||||||||||||ER000141/12^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^VN|||||||||||||||||||||||||20120810104800-0400\r" + 
+          "PV2|||TEST^TEST";
+      
+      String msg2 = 
+          "MSH|^~\\&|2.16.840.1.113883.3.239.23.9^2.16.840.1.113883.3.239.23.9.101.1|CVH^0731|cGTA|cGTA|20120810143600-0400|340975709474jjj|ADT^A08^ADT_A01|ADT-MITRA.1.4597|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" + 
+          "EVN||201208101436\r" + 
+          "PID|1||0000000562^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^MR~2222222222^AD^^^JHN^^^^CANON&Ontario&HL70363||CVHCGTA5^TED^^^^^L||19860221000000-0400|M|||55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H||905-555-5555^PRN^PH\r" + 
+          "NK1|1|CVHCGTA5^EMERG5^^^^^L|FND^Friend^HL70063|55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H|905-555-5555^PRN^PH\r" + 
+          "PV1|1|E|ER^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1||||68031^AASHEIM^LISE^HOLM^^^^^2.16.840.1.113883.4.347||||||||||||ER000141/12^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^VN|||||||||||||||||||||||||20120810104800-0400\r" + 
+          "PV2|||TEST^TEST\r";
+      
+      
+      String msg3 = 
+          "MSH|^~\\&|2.16.840.1.113883.3.239.23.9^2.16.840.1.113883.3.239.23.9.101.1|CVH^0731|cGTA|cGTA|20120810143600-0400|340975709474jjj|ADT^A60^ADT_A60|ADT-MITRA.1.4597.A|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" + 
+          "EVN||201208101436\r" + 
+          "PID|1||0000000562^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^MR~2222222222^AD^^^JHN^^^^CANON&Ontario&HL70363||CVHCGTA5^TED^^^^^L||19860221000000-0400|M|||55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H||905-555-5555^PRN^PH\r" + 
+          "NK1|1|CVHCGTA5^EMERG5^^^^^L|FND^Friend^HL70063|55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H|905-555-5555^PRN^PH\r" + 
+          "PV1|1|E|ER^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1||||68031^AASHEIM^LISE^HOLM^^^^^2.16.840.1.113883.4.347||||||||||||ER000141/12^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^VN|||||||||||||||||||||||||20120810104800-0400\r" + 
+          "PV2|||TEST^TEST\r" + 
+          "IAM|1|MA^^HL70127|HAYFEVER^Hayfever^2.16.840.1.113883.3.239.23.9.102.1|MI^^HL70128|Constipation||||||||20120810\r";
+      
+      
+      String msg4 = 
+          "MSH|^~\\&|2.16.840.1.113883.3.239.23.9^2.16.840.1.113883.3.239.23.9.101.1|CVH^0731|cGTA|cGTA|20120810143600-0400|340975709474jjj|ADT^A08^ADT_A01|ADT-MITRA.1.4597|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" + 
+          "EVN||201208101436\r" + 
+          "PID|1||0000000562^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^MR~2222222222^AD^^^JHN^^^^CANON&Ontario&HL70363||CVHCGTA5^TED^^^^^L||19860221000000-0400|M|||55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H||905-555-5555^PRN^PH\r" + 
+          "NK1|1|CVHCGTA5^EMERG5^^^^^L|FND^Friend^HL70063|55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H|905-555-5555^PRN^PH\r" + 
+          "PV1|1|E|ER^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1||||68031^AASHEIM^LISE^HOLM^^^^^2.16.840.1.113883.4.347||||||||||||ER000141/12^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^VN|||||||||||||||||||||||||20120810104800-0400\r" + 
+          "PV2|||TEST^TEST\r";
+      
+      String msg5 = 
+          "MSH|^~\\&|2.16.840.1.113883.3.239.23.9^2.16.840.1.113883.3.239.23.9.101.1|CVH^0731|cGTA|cGTA|20120810143600-0400|340975709474jjj|ADT^A60^ADT_A60|ADT-MITRA.1.4597.A|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" + 
+          "EVN||201208101436\r" + 
+          "PID|1||0000000562^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^MR~2222222222^AD^^^JHN^^^^CANON&Ontario&HL70363||CVHCGTA5^TED^^^^^L||19860221000000-0400|M|||55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H||905-555-5555^PRN^PH\r" + 
+          "NK1|1|CVHCGTA5^EMERG5^^^^^L|FND^Friend^HL70063|55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H|905-555-5555^PRN^PH\r" + 
+          "PV1|1|E|ER^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1||||68031^AASHEIM^LISE^HOLM^^^^^2.16.840.1.113883.4.347||||||||||||ER000141/12^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^VN|||||||||||||||||||||||||20120810104800-0400\r" + 
+          "PV2|||TEST^TEST\r" + 
+          "IAM|1|MA^^HL70127|HAYFEVER^Hayfever^2.16.840.1.113883.3.239.23.9.102.1|MI^^HL70128|Constipation||||||||20120810";
+      
+      String msg6 = 
+          "MSH|^~\\&|2.16.840.1.113883.3.239.23.9^2.16.840.1.113883.3.239.23.9.101.1|CVH^0731|cGTA|cGTA|20120814160200-0400|340975709474jjj|ADT^A03^ADT_A03|ADT-MITRA.1.4603|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" + 
+          "EVN||201208141409\r" + 
+          "PID|1||0000000562^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^MR~2222222222^AD^^^JHN^^^^CANON&Ontario&HL70363||CVHCGTA5^TED^^^^^L||19860221000000-0400|M|||55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H||905-555-5555^PRN^PH\r" + 
+          "PV1|1|E|ER^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1||||68031^AASHEIM^LISE^HOLM^^^^^2.16.840.1.113883.4.347||||||||||||ER000141/12^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^VN|||||||||||||||||||||||||20120810104800-0400|20120814140800-0400\r" + 
+          "PV2|||TEST^TEST\r";
+           
+      
        
+       String[] msgs = { msg1, msg2 , msg3, msg4, msg5 , msg6 /*, msg7*/};
+       processMsgs(msgs);
+   }
+    
+    
+    
+    private static void persistMessagesFromFile() throws Exception {
        
-       String msg1 = "MSH|^~\\&|EPR|G^2.16.840.1.113883.3.59.3:947^L|||201201111123||ADT^A02^ADT_A02|124423|T^|2.5^^||||||CAN||||\r" + 
-                "EVN|A02|201201111123||||201201111123|G^4265^L\r" +
-                "PID|||"+mrn+"^^^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1^MR^G~9287170261^BL^^CANON^JHN^^^^^20111201^^||Smith^Joseph^John^Junior^Mr^MD^L~Smitho^Josepho^Johno^Junior^Mr^MD^A|Blanche^^^^^^L|19310313|M|||26 RIVINGTON AVE^^Goderich^CANON^N7A3Y2^CAN^H^^^^^^20120708^20120813~7 WOODPLUMPTON ROAD^^Port Stanley^CANON^N0L2A0^CAN^M^^^^^^20120708^20120813||1 (416) 340-4800^PRN^PH^^1^416^3404800^4357^Do not call after 5~^NET^BP^test@example.com^^^^^Do not mail after 11pm||eng^English^HL70296||||||||||||||201112021610|Y\r" +
-                "PD1|||UHN^D^^^^UHN^FI^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^^^^^^^^^^^^|||||||N^no special privacy^03ZPrvyFlg^^^|N|||||||||\r" +                 
-                "ROL||UC|PP^Primary Care Provider1^HL70443^^^|13546a1^Generica1^Physiciana1^Moe^^Dr.^MD^^UHN^L~13546a2^Generica2^Physiciana2^Moe^^Dr.^MD^^UHN^L|201111071338||||ET02^Physician^15ZEmpTyp^^^|O^Office^^^^|27a Doctor AVE^^Goderich^CANON^N7A3Y2^CAN^H^^^^^^20120708^20120813~28a Doctor AVE^^Goderich^CANON^N7A3Y2^CAN^H^^^^^^20120708^20120813|1 (416) 340-4800^PRN^PH^^1^416^3404800^4357^Do not call after 5~^NET^BP^test@example.com^^^^^Do not mail after 11pm\r" + 
-                "ROL||UC|PP^Primary Care Provider2^HL70443^^^|13546b1^Genericb1^Physicianb1^Moe^^Dr.^MD^^UHN^L~13546b2^Genericb2^Physicianb2^Moe^^Dr.^MD^^UHN^L|201111071338||||ET02^Physician^15ZEmpTyp^^^|1^Hospital^15ZOrgTyp^^^|27b Doctor AVE^^Goderich^CANON^N7A3Y2^CAN^H^^^^^^20120708^20120813~28b Doctor AVE^^Goderich^CANON^N7A3Y2^CAN^H^^^^^^20120708^20120813|1 (416) 340-4801^PRN^PH^^1^416^3404801^4358^Do not call after 10~^NET^BP^test2@example.com^^^^^Do not mail after 12pm\r" +
-                "NK1|1|Wph^Mom^^^^^L^^^^^^^~Wph^Mommy^^^^^L^^^^^^^|PAR^Parent^HL70063^^^|82 Buttonwood Avenue^^YORK^ON^M6M 2J5^Can^H^^^^^^^|(416)243-3600^PRN^PH^^^^^^^^^||||||||||||||||||||||||||||||||||\r" +
-                "NK1|2|Wph^Brother^^^^^L^^^^^^^~Wph^BooBoo^^^^^L^^^^^^^|BRO^Brother^HL70063^^^|83 Buttonwood Avenue^^YORK^ON^M6M 2J5^Can^H^^^^^^^|(416)243-3601^PRN^PH^^^^^^^^^||||||||||||||||||||||||||||||||||\r" +
-                "PV1||I|PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|R||ES9 GEN S^424^1^G^4265^^^N^ES 9 424^ES 9 424 1^ES9 GEN S^1521 19 1^|13546a^Generic^Physician^MoeA^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546b^Generic^Physician^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^||hospServ||||D|||13546c^Generic^Physician^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|"+mrn+"VIDI^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021621|||||||V|\r" +
-                "PV2||S^Semi^03ZFinbed^^^|^kfkfkfjcjcjcgcgcclcl^03ZAmitRes^^^|||||||||||||||||||N||AI|Elective||||||N|||||||OTH^Self^03ZBrInBy^^^|||||||||||\r" + 
-                "DG1|1||06^KFKFKFJCJCJCGCGCCLCL^2.16.840.1.113883.11.19436^^^|KFKFKFJCJCJCGCGCCLCL|201112021621|A|||||||||1||D||||\r" + 
-                "PR1||||||||||||||||||||\r" + 
-                "ZPV|OTH^Self|F^Standard|||N|||13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^||Medical Services^General Internal Medicine^GMED|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^4265^G^^^^^^^^^^^^|413||3910||^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^|0^1^2|||||||||||N||^^|\r" + 
-                "ZWA||||||||active|\r";
-       
-       String[] msgs = { msg1 /*, msg2 , msg3, msg4, msg5 , msg6, msg7*/};
+       String msgFile = "sampleMsgs.txt";
+       String[] msgs = HL7FileReader.process(msgFile);
        processMsgs(msgs);
                 
-    }
+    }    
+    
+    
+    
+    
     
     
     

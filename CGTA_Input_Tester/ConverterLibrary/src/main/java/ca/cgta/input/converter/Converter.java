@@ -1280,7 +1280,7 @@ public class Converter {
                 addFailure(theTerserPath + "/RXC(" + index + ")-3", FailureCode.F019, null);
             }
             else {
-                mc.myComponentAmount = toNumber(theTerserPath + "/RXC(" + index + ")-3", next.getRxc3_ComponentAmount().getValue());
+                mc.myComponentAmount = toNumberDecimal(theTerserPath + "/RXC(" + index + ")-3", next.getRxc3_ComponentAmount().getValue());
             }
             
             

@@ -25,7 +25,7 @@ public class MedicationComponent {
     
     public String myComponentType;
     public Ce myComponentCode;
-    public int myComponentAmount;    
+    public double myComponentAmount;    
     public Ce myComponentUnits;    
     
     

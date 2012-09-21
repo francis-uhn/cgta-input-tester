@@ -34,14 +34,15 @@ function (doc)
 		var patient;
 		
 		var dob = myPatient.myDateOfBirth;
-		if(!dob)
-			dob = "";
+		if(!dob){
+		 dob = "1800-01-01T05:00:00.000+0000";
+		}	
 		
 		function capitaliseFirstLetter(string)
 		{
 		    return string.charAt(0).toUpperCase() + string.slice(1);
 		}
-		
+				
 		patient = {mrn:mrnKey,
 				firstName: capitaliseFirstLetter(legalName.myFirstName.toLowerCase()),
 				lastName: capitaliseFirstLetter(legalName.myLastName.toLowerCase()),

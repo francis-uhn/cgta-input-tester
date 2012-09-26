@@ -400,6 +400,8 @@
     <contributor name="Trillium Health Centre" hospital_facility_number="0975">
         <dev_listen_port>14016</dev_listen_port>
         <dev_listen_port>14036</dev_listen_port>
+        <dev_listen_port>14037</dev_listen_port>
+        <dev_listen_port>14038</dev_listen_port>
         <dev_security_token>2387527832459kkk</dev_security_token>
         <hsp_facility_9005 description="Credit Valley Hospital and Trillium Health Centre -- Mississauga Site" code="2.16.840.1.113883.3.239.23.10.100.1"/>
         <hsp_facility_9005 description="Credit Valley Hospital and Trillium Health Centre -- West Toronto Site" code="2.16.840.1.113883.3.239.23.10.100.2"/>

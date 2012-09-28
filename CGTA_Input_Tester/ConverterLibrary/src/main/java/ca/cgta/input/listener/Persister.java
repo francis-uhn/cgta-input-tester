@@ -565,7 +565,7 @@ public class Persister {
             existingPostConvVisit.setStatus(eventType);
         }
 
-        if (preConvVisitNumber != null) {
+        if (preConvVisitNumber != null && !preConvVisitNumber.equals(postConvVisitNumber)) {
             existingPostConvVisit.ensurePreviousVisitNumbers();
             //Do this check to make sure we don't add duplicates
             if (!existingPostConvVisit.myPreviousVisitNumbers.contains(preConvVisitNumber)) {

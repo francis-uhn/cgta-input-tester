@@ -1107,7 +1107,237 @@ public class AdtTest {
               
         
         
-    }        
+    }  
+    
+    
+    
+    /**
+     * Testing patient visit conversion from type E to I A06
+     * - admit an emerg patient
+     * - process A06 to convert emerg visit to inpatient visit
+     * - the same visit is used for pre and post conversion visit  
+     *  
+     * @throws Exception ...
+     */
+    @Test
+    public void testAdtA06c() throws Exception {
+        
+        String message1 = "MSH|^~\\&|EPR|G^2.16.840.1.113883.3.59.3:947^L|||201112021621||ADT^A04^ADT_A01|123484|T^|2.5^^||||||CAN||||\r" + 
+                "EVN|A01|201112021621||||201112021621|G^4265^L\r" + 
+                "PID|||7012673^^^UHN^MR^^^^^^^~9287170261^BL^^CANON^JHN^^^^^20111201^^~HN2827^^^UHN^PI^^^^^^^||Test^Majaconversion^^^Mrs.^^L^^^^^201112221537^^~Test^Maj^^^Mrs.^^A^^^^^^^||19731230|F|||1 Bloor Street ^^Toronto^ON^L9K 8J7^Can^H^^^^^^^~|12333|(415)222-3333^PRN^PH^^^^^^^^^~||eng^English^03ZPtlang^^^|||11110000514^^^UHN^VN^^^^^^^~||||||||||||N|||201112221537||||||\r" + 
+                "PD1|||UHN^D^^^^UHN^FI^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^^^^^^^^^^^^|||||||N^no special privacy^03ZPrvyFlg^^^|N|||||||||\r" + 
+                "PV1||E|Emerg^EmergAcute^Exam10^G^4265^^^N^EmergAcute^Exam10^Emerg^185 2 7^|C||^^^G^4265^^^^^^^  ^|13546a^Generic^Physician^MoeA^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546b^Generic^Physician^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^||hospServ||||D|||13546c^Generic^Physician^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|EP^|11110000514^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021621|||||||V|\r" + 
+                "PV2||S^Semi^03ZFinbed^^^|^kfkfkfjcjcjcgcgcclcl^03ZAmitRes^^^|||||||||||||||||||N||AI|Elective||||||N|||||||OTH^Self^03ZBrInBy^^^|||||||||||\r" + 
+                "DG1|1||06^KFKFKFJCJCJCGCGCCLCL^2.16.840.1.113883.11.19436|KFKFKFJCJCJCGCGCCLCL|201112021621|A|||||||||1||D||||\r" + 
+                "PR1||||||||||||||||||||\r" + 
+                "ZPV|OTH^Self|F^Standard|||N|||13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^||Medical Services^General Internal Medicine^GMED|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^4265^G^^^^^^^^^^^^|413||3910||^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^|0^1^2|||||||||||N||^^|\r" + 
+                "ZWA||||||||active|\r";
+        
+        String message2 = "MSH|^~\\&|EPR|G^2.16.840.1.113883.3.59.3:947^L|||201112070000||ADT^A06^ADT_A06|123710|T^|2.5^^||||||CAN||||\r" + 
+                "EVN|A06|201112151111||||201112151111|G^4265^L\r" + 
+                "PID|||7012673^^^UHN^MR^^^^^^^~9287170261^BL^^CANON^JHN^^^^^20111201^^~HN2827^^^UHN^PI^^^^^^^||Test^Majaconversion^^^Mrs.^^L^^^^^201112221537^^~Test^Maj^^^Mrs.^^A^^^^^^^||19731230|F|||1 Bloor Street ^^Toronto^ON^L9K 8J7^Can^H^^^^^^^~|12333|(415)222-3333^PRN^PH^^^^^^^^^~||eng^English^03ZPtlang^^^|||11110000514^^^UHN^VN^^^^^^^~||||||||||||N|||201112221537||||||\r" + 
+                "PD1|||UHN^D^^^^UHN^FI^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^^^^^^^^^^^^|||||||N^no special privacy^03ZPrvyFlg^^^|N|||||||||\r" +
+                "MRG|7012673^^^^MR^^^^^^^~HN2827^^^^PI^^^^^^^||||11110000514^^^EPR^VN^G^4265^^^^^||\r" +
+                "PV1||I||C||^^^G^4265^^^^^^^^|13546a^Generic^Physician^MoeA^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546b^Generic^Physician^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^||hospServ||||A|||13546c^Generic^Physician^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000514^^^UHN^VN^G^4265^^^^^|||||||||||||||||1|||G|||||201112021621|||||||V|\r" + 
+                "PV2||S^Semi^03ZFinbed^^^|^kfkfkfjcjcjcgcgcclcl^03ZAmitRes^^^|||||||||||||||||||N||AI|Elective||||||N|||||||OTH^Self^03ZBrInBy^^^|||||||||||\r" + 
+                "DG1|1||06^KFKFKFJCJCJCGCGCCLCL^2.16.840.1.113883.11.19436|KFKFKFJCJCJCGCGCCLCL|201112021621|A|||||||||1||D||||\r" + 
+                "PR1||||||||||||||||||||\r" + 
+                "ZPV|OTH^Self|^|||N|||3210^Generic^Physician-EM^^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^|6835^Generic^Anaesthetist^^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^||^^|3210^Generic^Physician-EM^^^Dr.^MD^^UHN^L^^^EI^4265^G^^^^^^^^^^^^|||||^^^^^|3210^Generic^Physician-EM^^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^|0^1^2|||||||||||N||^^|\r";
+        
+        
+        Persister.persist(UhnConverter.convertAdtOrFail(message1));
+        Persister.persist(UhnConverter.convertAdtOrFail(message2));
+        
+        ViewQuery query = new ViewQuery().viewName("allVisits").designDocId("_design/application");
+        List<PatientWithVisitsContainer> pwvContainers = Persister.getConnector().queryView(query, PatientWithVisitsContainer.class);
+        
+        PatientWithVisitsContainer pwvContainer = pwvContainers.get(0);
+        Patient patient = pwvContainer.getDocument().myPatient;
+        assertEquals(1, pwvContainer.getDocument().myVisits.size());
+        Visit postCvisit = pwvContainer.getDocument().myVisits.get(0);
+        
+        //check patient lastUpdateTime
+        Date now = new Date();
+        long nowMilli = now.getTime();
+        assertTrue(nowMilli > patient.myRecordUpdatedDate.getTime());
+        
+        //check patient
+        assertEquals("F", patient.myAdministrativeSex);
+        assertEquals(ourTsFormat.parse("197312300000"), patient.myDateOfBirth);
+        assertEquals(null, patient.myDeathDateAndTime);
+        assertEquals("N", patient.myDeathIndicator);
+        assertEquals(null, patient.myMothersMaidenName);
+        
+        
+        Cx patId = patient.myPatientIds.get(0);
+        assertEquals("7012673", patId.myIdNumber);
+        assertEquals("MR", patId.myIdTypeCode);
+        
+        Xpn patName = patient.myPatientNames.get(0);
+        assertEquals("Test", patName.myLastName);
+        assertEquals("Majaconversion", patName.myFirstName);
+                
+        Xad patAddresses = patient.myPatientAddresses.get(0);
+        assertEquals("1 Bloor Street ", patAddresses.myStreetAddress);
+        assertEquals("Toronto", patAddresses.myCity);
+        
+        Xtn patPhone = patient.myPhoneNumbers.get(0);
+        assertEquals("(415)222-3333", patPhone.myPhoneNumber);
+        
+        Ce lang = patient.myPrimaryLanguage;
+        assertEquals("eng", lang.myCode);
+        assertEquals("English", lang.myText);
+          
+        //check visit lastUpdateTime
+        assertTrue(nowMilli > postCvisit.myRecordUpdatedDate.getTime());
+        
+        //check visit after conversion
+        assertEquals("11110000514", postCvisit.myVisitNumber.myIdNumber);
+        assertEquals(Constants.ACTIVE_VISIT_STATUS, postCvisit.myVisitStatus);
+        assertEquals(null, postCvisit.myPreviousVisitNumbers);
+        assertEquals("I", postCvisit.myPatientClassCode);
+        assertEquals(ourTsFormat.parse("201112021621"), postCvisit.myAdmitDate);        
+        assertEquals("hospServ", postCvisit.myHospitalService);
+        
+        Xcn admitDoc = postCvisit.myAdmittingDoctors.get(0);
+        assertEquals("13546c", admitDoc.myId);
+        assertEquals("Physician", admitDoc.myFirstName);
+        assertEquals("Generic", admitDoc.myLastName);
+        assertEquals("MoeC", admitDoc.myMiddleName);
+        
+        Xcn attendDoc = postCvisit.myAttendingDoctors.get(0);
+        assertEquals("13546a", attendDoc.myId);
+        assertEquals("Physician", attendDoc.myFirstName);
+        assertEquals("Generic", attendDoc.myLastName);
+        assertEquals("MoeA", attendDoc.myMiddleName);
+        
+        Xcn refDoc = postCvisit.myReferringDoctors.get(0);
+        assertEquals("13546b", refDoc.myId);
+        assertEquals("Physician", refDoc.myFirstName);
+        assertEquals("Generic", refDoc.myLastName);
+        assertEquals("MoeB", refDoc.myMiddleName);
+        
+        Diagnosis dg = postCvisit.myDiagnoses.get(0);
+        Ce dgCode = dg.myDiagnosis;
+        assertEquals("06", dgCode.myCode);
+        assertEquals("KFKFKFJCJCJCGCGCCLCL", dgCode.myText);
+        assertEquals("2.16.840.1.113883.11.19436", dgCode.myCodeSystem);
+        
+    }    
+    
+    
+    
+    /**
+     * Testing patient visit conversion from type E to I A06
+     * - no admit message received
+     * - process A06 to create inpatient visit for the patient
+     * - the same visit is used for pre and post conversion visit  
+     *  
+     * @throws Exception ...
+     */
+    @Test
+    public void testAdtA06d() throws Exception {
+        
+        
+        String message1 = "MSH|^~\\&|EPR|G^2.16.840.1.113883.3.59.3:947^L|||201112070000||ADT^A06^ADT_A06|123710|T^|2.5^^||||||CAN||||\r" + 
+                "EVN|A06|201112151111||||201112151111|G^4265^L\r" + 
+                "PID|||7012673^^^UHN^MR^^^^^^^~9287170261^BL^^CANON^JHN^^^^^20111201^^~HN2827^^^UHN^PI^^^^^^^||Test^Majaconversion^^^Mrs.^^L^^^^^201112221537^^~Test^Maj^^^Mrs.^^A^^^^^^^||19731230|F|||1 Bloor Street ^^Toronto^ON^L9K 8J7^Can^H^^^^^^^~|12333|(415)222-3333^PRN^PH^^^^^^^^^~||eng^English^03ZPtlang^^^|||11110000515^^^UHN^VN^^^^^^^~||||||||||||N|||201112221537||||||\r" + 
+                "PD1|||UHN^D^^^^UHN^FI^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^^^^^^^^^^^^|||||||N^no special privacy^03ZPrvyFlg^^^|N|||||||||\r" +
+                "MRG|7012673^^^^MR^^^^^^^~HN2827^^^^PI^^^^^^^||||11110000515^^^EPR^VN^G^4265^^^^^||\r" +
+                "PV1||I||C||^^^G^4265^^^^^^^^|13546a^Generic^Physician^MoeA^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546b^Generic^Physician^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^||hospServ||||A|||13546c^Generic^Physician^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000515^^^UHN^VN^G^4265^^^^^|||||||||||||||||1|||G|||||201112021621|||||||V|\r" + 
+                "PV2||S^Semi^03ZFinbed^^^|^kfkfkfjcjcjcgcgcclcl^03ZAmitRes^^^|||||||||||||||||||N||AI|Elective||||||N|||||||OTH^Self^03ZBrInBy^^^|||||||||||\r" + 
+                "DG1|1||06^KFKFKFJCJCJCGCGCCLCL^2.16.840.1.113883.11.19436|KFKFKFJCJCJCGCGCCLCL|201112021621|A|||||||||1||D||||\r" + 
+                "PR1||||||||||||||||||||\r" + 
+                "ZPV|OTH^Self|^|||N|||3210^Generic^Physician-EM^^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^|6835^Generic^Anaesthetist^^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^||^^|3210^Generic^Physician-EM^^^Dr.^MD^^UHN^L^^^EI^4265^G^^^^^^^^^^^^|||||^^^^^|3210^Generic^Physician-EM^^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^|0^1^2|||||||||||N||^^|\r";
+        
+        
+        Persister.persist(UhnConverter.convertAdtOrFail(message1));        
+        
+        ViewQuery query = new ViewQuery().viewName("allVisits").designDocId("_design/application");
+        List<PatientWithVisitsContainer> pwvContainers = Persister.getConnector().queryView(query, PatientWithVisitsContainer.class);
+        
+        PatientWithVisitsContainer pwvContainer = pwvContainers.get(0);
+        Patient patient = pwvContainer.getDocument().myPatient;
+        assertEquals(1, pwvContainer.getDocument().myVisits.size());        
+        Visit postCvisit = pwvContainer.getDocument().myVisits.get(0);
+        
+        //check patient lastUpdateTime
+        Date now = new Date();
+        long nowMilli = now.getTime();
+        assertTrue(nowMilli > patient.myRecordUpdatedDate.getTime());
+        
+        //check patient
+        assertEquals("F", patient.myAdministrativeSex);
+        assertEquals(ourTsFormat.parse("197312300000"), patient.myDateOfBirth);
+        assertEquals(null, patient.myDeathDateAndTime);
+        assertEquals("N", patient.myDeathIndicator);
+        assertEquals(null, patient.myMothersMaidenName);
+        
+        
+        Cx patId = patient.myPatientIds.get(0);
+        assertEquals("7012673", patId.myIdNumber);
+        assertEquals("MR", patId.myIdTypeCode);
+        
+        Xpn patName = patient.myPatientNames.get(0);
+        assertEquals("Test", patName.myLastName);
+        assertEquals("Majaconversion", patName.myFirstName);
+                
+        Xad patAddresses = patient.myPatientAddresses.get(0);
+        assertEquals("1 Bloor Street ", patAddresses.myStreetAddress);
+        assertEquals("Toronto", patAddresses.myCity);
+        
+        Xtn patPhone = patient.myPhoneNumbers.get(0);
+        assertEquals("(415)222-3333", patPhone.myPhoneNumber);
+        
+        Ce lang = patient.myPrimaryLanguage;
+        assertEquals("eng", lang.myCode);
+        assertEquals("English", lang.myText);
+        
+        
+        //check visit lastUpdateTime
+        assertTrue(nowMilli > postCvisit.myRecordUpdatedDate.getTime());
+        
+        
+        //check visit after conversion
+        assertEquals("11110000515", postCvisit.myVisitNumber.myIdNumber);
+        assertEquals(Constants.ACTIVE_VISIT_STATUS, postCvisit.myVisitStatus);
+        assertEquals(null, postCvisit.myPreviousVisitNumbers);
+        assertEquals("I", postCvisit.myPatientClassCode);
+        assertEquals(ourTsFormat.parse("201112021621"), postCvisit.myAdmitDate);        
+        assertEquals("hospServ", postCvisit.myHospitalService);
+        
+        Xcn admitDoc = postCvisit.myAdmittingDoctors.get(0);
+        assertEquals("13546c", admitDoc.myId);
+        assertEquals("Physician", admitDoc.myFirstName);
+        assertEquals("Generic", admitDoc.myLastName);
+        assertEquals("MoeC", admitDoc.myMiddleName);
+        
+        Xcn attendDoc = postCvisit.myAttendingDoctors.get(0);
+        assertEquals("13546a", attendDoc.myId);
+        assertEquals("Physician", attendDoc.myFirstName);
+        assertEquals("Generic", attendDoc.myLastName);
+        assertEquals("MoeA", attendDoc.myMiddleName);
+        
+        Xcn refDoc = postCvisit.myReferringDoctors.get(0);
+        assertEquals("13546b", refDoc.myId);
+        assertEquals("Physician", refDoc.myFirstName);
+        assertEquals("Generic", refDoc.myLastName);
+        assertEquals("MoeB", refDoc.myMiddleName);
+        
+        Diagnosis dg = postCvisit.myDiagnoses.get(0);
+        Ce dgCode = dg.myDiagnosis;
+        assertEquals("06", dgCode.myCode);
+        assertEquals("KFKFKFJCJCJCGCGCCLCL", dgCode.myText);
+        assertEquals("2.16.840.1.113883.11.19436", dgCode.myCodeSystem);
+        
+              
+        
+        
+    }  
+        
+        
+    
+    
     
     
     

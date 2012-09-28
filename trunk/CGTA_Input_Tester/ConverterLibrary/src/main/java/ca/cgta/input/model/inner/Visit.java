@@ -138,7 +138,8 @@ public class Visit {
             throw new IllegalArgumentException("Eventype must be supplied");
         }
         
-        if ( theEventType.equals("A01") || theEventType.equals("A04") || theEventType.equals("A05") || theEventType.equals("A08")) {
+        if ( theEventType.equals("A01") || theEventType.equals("A04") || theEventType.equals("A05") || theEventType.equals("A06") 
+                || theEventType.equals("A07") || theEventType.equals("A08")) {
             this.copyFrom(theHl7MsgVisit);
             setRecordUpdatedTime();
             

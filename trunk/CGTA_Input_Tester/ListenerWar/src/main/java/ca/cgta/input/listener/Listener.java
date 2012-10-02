@@ -153,7 +153,7 @@ public class Listener extends HttpServlet {
 
 	}
 
-	private class MyApplication implements Application {
+	public class MyApplication implements Application {
 
 		private static final String PROCESSING_FAILED_OUTCOME = "Processing failed, no data saved (see error codes for more information)";
 		private Contributor myContributor;

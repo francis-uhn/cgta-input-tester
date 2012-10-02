@@ -344,11 +344,11 @@ public class ContributorConfig {
 	public static void main(String[] args) throws JAXBException, ValidationException, FileNotFoundException, IOException {
 
 		ContributorConfig cfg = new ContributorConfig();
-		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.1", "ConnectingGTA HIAL (System)"));
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.1", "ConnectingGTA HIAL (System) - Also Root OID for HIAL derived OIDs"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.2", "ConnectingGTA CDR (System)"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.3", "UHN eMPI eCID (Client ID Namespace)"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.4", "UHN Provider Registry ePID (Provider ID Namespace)"));
-		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.5", "Unaffiliated "));
+		//cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.5", "Unaffiliated "));
 
 		addProviderType(cfg, "1.3.6.1.4.1.12201.1.2.1.5", "Site Specific Provider ID (Deprocated)");
 		addProviderType(cfg, "2.16.840.1.113883.3.239.13.6", "College of Audiologist and Speech-Language Pathologists of Ontario Licence Number");

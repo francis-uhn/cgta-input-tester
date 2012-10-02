@@ -14,7 +14,7 @@
 	<classpathentry kind="var" path="M2_REPO/commons-lang/commons-lang/2.6/commons-lang-2.6.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/google/code/gson/gson/2.1/gson-2.1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/ca/uhn/hapi/hapi-base/2.0/hapi-base-2.0.jar" sourcepath="M2_REPO/ca/uhn/hapi/hapi-base/2.0-beta1/hapi-base-2.0-beta1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/ca/uhn/hapi/hapi-base/2.1-alpha1/hapi-base-2.1-alpha1.jar" sourcepath="M2_REPO/ca/uhn/hapi/hapi-base/2.0-beta1/hapi-base-2.0-beta1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/ca/uhn/hapi/hapi-structures-v25/2.0/hapi-structures-v25-2.0.jar" sourcepath="M2_REPO/ca/uhn/hapi/hapi-structures-v25/2.0-beta1/hapi-structures-v25-2.0-beta1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/httpcomponents/httpclient/4.1.1/httpclient-4.1.1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/httpcomponents/httpclient-cache/4.1.1/httpclient-cache-4.1.1.jar"/>

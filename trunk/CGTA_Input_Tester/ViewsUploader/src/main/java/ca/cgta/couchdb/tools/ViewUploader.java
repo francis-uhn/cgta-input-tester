@@ -1,8 +1,5 @@
 package ca.cgta.couchdb.tools;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -12,7 +9,6 @@ import org.ektorp.DocumentNotFoundException;
 import org.ektorp.support.DesignDocument;
 
 import ca.cgta.input.listener.Persister;
-import ca.cgta.input.model.config.ContributorConfigFactory;
 
 public class ViewUploader {
 
@@ -45,6 +41,7 @@ public class ViewUploader {
         addToDesignDocument(dd, "unLoadedActsComplex","unLoadedActsComplex.js");
         addToDesignDocument(dd, "allView","allView.js");
         addToDesignDocument(dd, "getEDById", "getEDById.js");
+        addToDesignDocument(dd, "getPatientByHealthCard", "getPatientByHealthCard.js", "_count");
         
         
         try {

@@ -33,6 +33,8 @@ function(doc)
 				healthCardNum = patientsArray[pNumber].myIdNumber;
 			}
 		}
+		if(healthCardNum == null||healthCardNum===""||healthCardNum==="\"\"")
+			return;
 		
 		// iterate over patient Names, use only leagl name
 		var patientNamesArray = myPatient.myPatientNames;

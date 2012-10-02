@@ -215,14 +215,14 @@ public class MedsTest {
         assertEquals("B", components.get(0).myComponentType);
         assertEquals("AMI150I", components.get(0).myComponentCode.myCode);
         assertEquals("amiodarone inj 50 mg per 1mL", components.get(0).myComponentCode.myText);
-        assertEquals(50, components.get(0).myComponentAmount);
+        assertEquals(50, components.get(0).myComponentAmount, 0);
         assertEquals("MG", components.get(0).myComponentUnits.myCode);
         assertEquals("mg", components.get(0).myComponentUnits.myText);
         
         assertEquals("A", components.get(1).myComponentType);
         assertEquals("AMI160I", components.get(1).myComponentCode.myCode);
         assertEquals("amiodarone inj 60 mg per 1mL", components.get(1).myComponentCode.myText);
-        assertEquals(60, components.get(1).myComponentAmount);
+        assertEquals(60, components.get(1).myComponentAmount, 0);
         assertEquals("MG", components.get(1).myComponentUnits.myCode);
         assertEquals("mg", components.get(1).myComponentUnits.myText);
                 
@@ -411,14 +411,14 @@ public class MedsTest {
         assertEquals("B", components.get(0).myComponentType);
         assertEquals("AMI150I", components.get(0).myComponentCode.myCode);
         assertEquals("amiodarone inj 50 mg per 1mL", components.get(0).myComponentCode.myText);
-        assertEquals(50, components.get(0).myComponentAmount);
+        assertEquals(50, components.get(0).myComponentAmount, 0);
         assertEquals("MG", components.get(0).myComponentUnits.myCode);
         assertEquals("mg", components.get(0).myComponentUnits.myText);
         
         assertEquals("A", components.get(1).myComponentType);
         assertEquals("AMI160I", components.get(1).myComponentCode.myCode);
         assertEquals("amiodarone inj 60 mg per 1mL", components.get(1).myComponentCode.myText);
-        assertEquals(60, components.get(1).myComponentAmount);
+        assertEquals(60, components.get(1).myComponentAmount, 0);
         assertEquals("MG", components.get(1).myComponentUnits.myCode);
         assertEquals("mg", components.get(1).myComponentUnits.myText);                
                 
@@ -536,14 +536,14 @@ public class MedsTest {
         assertEquals("B", components.get(0).myComponentType);
         assertEquals("AMI170I", components.get(0).myComponentCode.myCode);
         assertEquals("amiodarone inj 70 mg per 1mL", components.get(0).myComponentCode.myText);
-        assertEquals(70, components.get(0).myComponentAmount);
+        assertEquals(70, components.get(0).myComponentAmount, 0);
         assertEquals("MG", components.get(0).myComponentUnits.myCode);
         assertEquals("mg", components.get(0).myComponentUnits.myText);
         
         assertEquals("A", components.get(1).myComponentType);
         assertEquals("AMI180I", components.get(1).myComponentCode.myCode);
         assertEquals("amiodarone inj 80 mg per 1mL", components.get(1).myComponentCode.myText);
-        assertEquals(80, components.get(1).myComponentAmount);
+        assertEquals(80, components.get(1).myComponentAmount, 0);
         assertEquals("MG", components.get(1).myComponentUnits.myCode);
         assertEquals("mg", components.get(1).myComponentUnits.myText);                
                 
@@ -713,14 +713,14 @@ public class MedsTest {
         assertEquals("B", components.get(0).myComponentType);
         assertEquals("AMI150I", components.get(0).myComponentCode.myCode);
         assertEquals("amiodarone inj 50 mg per 1mL", components.get(0).myComponentCode.myText);
-        assertEquals(50, components.get(0).myComponentAmount);
+        assertEquals(50, components.get(0).myComponentAmount, 0);
         assertEquals("MG", components.get(0).myComponentUnits.myCode);
         assertEquals("mg", components.get(0).myComponentUnits.myText);
         
         assertEquals("A", components.get(1).myComponentType);
         assertEquals("AMI160I", components.get(1).myComponentCode.myCode);
         assertEquals("amiodarone inj 60 mg per 1mL", components.get(1).myComponentCode.myText);
-        assertEquals(60, components.get(1).myComponentAmount);
+        assertEquals(60, components.get(1).myComponentAmount, 0);
         assertEquals("MG", components.get(1).myComponentUnits.myCode);
         assertEquals("mg", components.get(1).myComponentUnits.myText);        
                
@@ -970,14 +970,14 @@ public class MedsTest {
         assertEquals("B", components.get(0).myComponentType);
         assertEquals("AMI160I", components.get(0).myComponentCode.myCode);
         assertEquals("amiodarone inj 60 mg per 1mL", components.get(0).myComponentCode.myText);
-        assertEquals(60, components.get(0).myComponentAmount);
+        assertEquals(60, components.get(0).myComponentAmount, 0);
         assertEquals("MG", components.get(0).myComponentUnits.myCode);
         assertEquals("mg", components.get(0).myComponentUnits.myText);
         
         assertEquals("A", components.get(1).myComponentType);
         assertEquals("AMI170I", components.get(1).myComponentCode.myCode);
         assertEquals("amiodarone inj 70 mg per 1mL", components.get(1).myComponentCode.myText);
-        assertEquals(70, components.get(1).myComponentAmount);
+        assertEquals(70, components.get(1).myComponentAmount, 0);
         assertEquals("MG", components.get(1).myComponentUnits.myCode);
         assertEquals("mg", components.get(1).myComponentUnits.myText);        
                
@@ -1229,14 +1229,14 @@ public class MedsTest {
         assertEquals("B", components.get(0).myComponentType);
         assertEquals("AMI150I", components.get(0).myComponentCode.myCode);
         assertEquals("amiodarone inj 50 mg per 1mL", components.get(0).myComponentCode.myText);
-        assertEquals(50, components.get(0).myComponentAmount);
+        assertEquals(50, components.get(0).myComponentAmount, 0);
         assertEquals("MG", components.get(0).myComponentUnits.myCode);
         assertEquals("mg", components.get(0).myComponentUnits.myText);
         
         assertEquals("A", components.get(1).myComponentType);
         assertEquals("AMI160I", components.get(1).myComponentCode.myCode);
         assertEquals("amiodarone inj 60 mg per 1mL", components.get(1).myComponentCode.myText);
-        assertEquals(60, components.get(1).myComponentAmount);
+        assertEquals(60, components.get(1).myComponentAmount, 0);
         assertEquals("MG", components.get(1).myComponentUnits.myCode);
         assertEquals("mg", components.get(1).myComponentUnits.myText);        
                
@@ -1494,14 +1494,14 @@ public class MedsTest {
         assertEquals("B", components.get(0).myComponentType);
         assertEquals("AMI150I", components.get(0).myComponentCode.myCode);
         assertEquals("amiodarone inj 50 mg per 1mL", components.get(0).myComponentCode.myText);
-        assertEquals(50, components.get(0).myComponentAmount);
+        assertEquals(50, components.get(0).myComponentAmount, 0);
         assertEquals("MG", components.get(0).myComponentUnits.myCode);
         assertEquals("mg", components.get(0).myComponentUnits.myText);
         
         assertEquals("A", components.get(1).myComponentType);
         assertEquals("AMI160I", components.get(1).myComponentCode.myCode);
         assertEquals("amiodarone inj 60 mg per 1mL", components.get(1).myComponentCode.myText);
-        assertEquals(60, components.get(1).myComponentAmount);
+        assertEquals(60, components.get(1).myComponentAmount, 0);
         assertEquals("MG", components.get(1).myComponentUnits.myCode);
         assertEquals("mg", components.get(1).myComponentUnits.myText);     
         
@@ -1666,14 +1666,14 @@ public class MedsTest {
         assertEquals("B", components.get(0).myComponentType);
         assertEquals("AMI170I", components.get(0).myComponentCode.myCode);
         assertEquals("amiodarone inj 70 mg per 1mL", components.get(0).myComponentCode.myText);
-        assertEquals(70, components.get(0).myComponentAmount);
+        assertEquals(70, components.get(0).myComponentAmount, 0);
         assertEquals("MG", components.get(0).myComponentUnits.myCode);
         assertEquals("mg", components.get(0).myComponentUnits.myText);
         
         assertEquals("A", components.get(1).myComponentType);
         assertEquals("AMI180I", components.get(1).myComponentCode.myCode);
         assertEquals("amiodarone inj 80 mg per 1mL", components.get(1).myComponentCode.myText);
-        assertEquals(80, components.get(1).myComponentAmount);
+        assertEquals(80, components.get(1).myComponentAmount, 0);
         assertEquals("MG", components.get(1).myComponentUnits.myCode);
         assertEquals("mg", components.get(1).myComponentUnits.myText);            
             

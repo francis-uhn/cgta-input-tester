@@ -14,6 +14,7 @@ import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBException;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -73,6 +74,8 @@ public class Listener extends HttpServlet {
 	private final List<Integer> myServerPorts = new ArrayList<Integer>();
 	private final List<SimpleServer> myServers = new ArrayList<SimpleServer>();
 	private final boolean myUnitTestMode;
+
+
 	public Listener() throws JAXBException {
 		this(false);
 	}
@@ -116,6 +119,7 @@ public class Listener extends HttpServlet {
 		myJournalSvc = SailInfrastructureServicesFactory.getInstance().getJournallingService();
 
 		for (Contributor contributor : myContributorConfig.getContributorConfig().getContributors()) {
+			Object constributorLock = new Object();
 			if (myUnitTestMode && !contributor.getHspId9004().equals("1.3.6.1.4.1.12201.999")) {
 				continue;
 			}
@@ -127,7 +131,9 @@ public class Listener extends HttpServlet {
 
 				SocketFactory socketFactory = new MySocketFactory();
 				SimpleServer nextServer = new SimpleServer(socketFactory, nextPort, new MinLowerLayerProtocol(), myParser);
-				nextServer.registerApplication("*", "*", new MyApplication(contributor, nextPort));
+				MyApplication application = new MyApplication(contributor, nextPort, constributorLock);
+
+				nextServer.registerApplication("*", "*", application);
 				nextServer.start();
 
 				myServerPorts.add(nextPort);
@@ -147,17 +153,21 @@ public class Listener extends HttpServlet {
 
 	}
 
-
 	private class MyApplication implements Application {
 
 		private static final String PROCESSING_FAILED_OUTCOME = "Processing failed, no data saved (see error codes for more information)";
 		private Contributor myContributor;
 		private int myPort;
+		private Object myContributorLock;
 
 
-		public MyApplication(Contributor theContributor, int thePort) {
+		public MyApplication(Contributor theContributor, int thePort, Object theConstributorLock) {
+			Validate.notNull(theContributor);
+			Validate.notNull(theConstributorLock);
+
 			myContributor = theContributor;
 			myPort = thePort;
+			myContributorLock = theConstributorLock;
 		}
 
 
@@ -200,7 +210,6 @@ public class Listener extends HttpServlet {
 
 
 		private Message doProcess(Message theArg0) throws HL7Exception, ApplicationException {
-			ourLog.info("Received message of object type {} from port {}" + theArg0.getClass().getName(), myPort);
 			String encodedMessage = theArg0.encode();
 
 			Terser terser = new Terser(theArg0);
@@ -389,17 +398,28 @@ public class Listener extends HttpServlet {
 
 
 		public Message processMessage(Message theArg0) throws ApplicationException, HL7Exception {
+			ourLog.info("Received message of object type {} from port {}" + theArg0.getClass().getName(), myPort);
+
+			Message retVal;
+
 			try {
-				return doProcess(theArg0);
+				synchronized (myContributorLock) {
+					ourLog.info("Starting processing");
+					retVal = doProcess(theArg0);
+				}
 			} catch (Throwable e) {
 				ourLog.error("Failed to process", e);
 				HL7Exception e2 = new HL7Exception("Processing failed due to internal error, please contact your ConnectingGTA site coordinator.");
 				try {
-					return theArg0.generateACK("AE", e2);
+					retVal = theArg0.generateACK("AE", e2);
 				} catch (IOException e1) {
 					throw e2;
 				}
 			}
+
+			ourLog.info("Done processing message of object type {} from port {}" + theArg0.getClass().getName(), myPort);
+			return retVal;
+
 		}
 
 	}
@@ -444,27 +464,27 @@ public class Listener extends HttpServlet {
 
 	public class MySocketFactory extends StandardSocketFactory {
 
-	    public ServerSocket createServerSocket() throws IOException {
-		    ServerSocket serverSocket = super.createServerSocket();
-		    serverSocket.setReuseAddress(true);
+		public ServerSocket createServerSocket() throws IOException {
+			ServerSocket serverSocket = super.createServerSocket();
+			serverSocket.setReuseAddress(true);
 			return serverSocket;
-	    }
+		}
 
 
-	    public Socket createSocket() throws IOException {
-		    return super.createSocket();
-	    }
+		public Socket createSocket() throws IOException {
+			return super.createSocket();
+		}
 
 
-	    public ServerSocket createTlsServerSocket() throws IOException {
-		    return super.createTlsServerSocket();
-	    }
+		public ServerSocket createTlsServerSocket() throws IOException {
+			return super.createTlsServerSocket();
+		}
 
 
-	    public Socket createTlsSocket() throws IOException {
-		    return super.createTlsSocket();
-	    }
+		public Socket createTlsSocket() throws IOException {
+			return super.createTlsSocket();
+		}
 
-    }
+	}
 
 }

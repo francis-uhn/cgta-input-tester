@@ -1,12 +1,16 @@
 package ca.cgta.input.listener;
 
 import java.io.IOException;
+import java.io.StringWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
+import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBException;
 
 import org.apache.commons.lang.StringUtils;
@@ -45,6 +49,8 @@ import ca.uhn.hl7v2.model.v25.segment.MSH;
 import ca.uhn.hl7v2.parser.CanonicalModelClassFactory;
 import ca.uhn.hl7v2.parser.EncodingNotSupportedException;
 import ca.uhn.hl7v2.parser.PipeParser;
+import ca.uhn.hl7v2.util.SocketFactory;
+import ca.uhn.hl7v2.util.StandardSocketFactory;
 import ca.uhn.hl7v2.util.Terser;
 import ca.uhn.hl7v2.validation.impl.ValidationContextImpl;
 import ca.uhn.sail.integration.AbstractPojo;
@@ -60,14 +66,13 @@ public class Listener extends HttpServlet {
 	private static final Logger ourLog = LoggerFactory.getLogger(Listener.class);
 
 	private static final long serialVersionUID = 1L;
+
 	private ContributorConfigFactory myContributorConfig;
 	private JournallingWebService myJournalSvc;
 	private final PipeParser myParser;
 	private final List<Integer> myServerPorts = new ArrayList<Integer>();
 	private final List<SimpleServer> myServers = new ArrayList<SimpleServer>();
 	private final boolean myUnitTestMode;
-
-
 	public Listener() throws JAXBException {
 		this(false);
 	}
@@ -120,7 +125,8 @@ public class Listener extends HttpServlet {
 			for (Integer nextPort : contributor.getDevListenPort()) {
 				ourLog.info("Starting server on port {} for org {}", nextPort, contributor.getName());
 
-				SimpleServer nextServer = new SimpleServer(nextPort, new MinLowerLayerProtocol(), myParser);
+				SocketFactory socketFactory = new MySocketFactory();
+				SimpleServer nextServer = new SimpleServer(socketFactory, nextPort, new MinLowerLayerProtocol(), myParser);
 				nextServer.registerApplication("*", "*", new MyApplication(contributor, nextPort));
 				nextServer.start();
 
@@ -140,6 +146,7 @@ public class Listener extends HttpServlet {
 		}
 
 	}
+
 
 	private class MyApplication implements Application {
 
@@ -330,13 +337,18 @@ public class Listener extends HttpServlet {
 			final JournalMessageRequest request = new JournalMessageRequest();
 			request.setCanonicalHl7V2Message(canon);
 			try {
-				myJournalSvc.journalMessage(request);
+				AbstractPojo.tryToJournalMessage(myJournalSvc, request);
 			} catch (final InvalidInputException e) {
 				ourLog.error("Failed to send message to journal", e);
 				throw new HL7Exception("Failed to process message");
 			} catch (final sail.wsdl.infrastructure.journalling.UnexpectedErrorException e) {
 				ourLog.error("Failed to send message to dead letter", e);
 				throw new HL7Exception("Failed to process message");
+			} catch (Exception e) {
+				ourLog.error("Failed to journal message. Moving on", e);
+				StringWriter w = new StringWriter();
+				JAXB.marshal(request, w);
+				ourLog.error("Request was: " + w.toString());
 			}
 
 			// // Journal again for the destination
@@ -402,6 +414,18 @@ public class Listener extends HttpServlet {
 		/**
 		 * {@inheritDoc}
 		 */
+
+		@Override
+		public String encode(Message theSource) throws HL7Exception {
+			String retVal = super.encode(theSource);
+			ourLog.info("Response message:\n" + retVal);
+			return retVal;
+		}
+
+
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public Message parse(String theMessage) throws HL7Exception, EncodingNotSupportedException {
 			ourLog.info("Incoming message:\n" + theMessage);
@@ -416,18 +440,31 @@ public class Listener extends HttpServlet {
 			return super.parse(theMessage);
 		}
 
-
-		/**
-		 * {@inheritDoc}
-		 */
-
-		@Override
-		public String encode(Message theSource) throws HL7Exception {
-			String retVal = super.encode(theSource);
-			ourLog.info("Response message:\n" + retVal);
-			return retVal;
-		}
-
 	}
+
+	public class MySocketFactory extends StandardSocketFactory {
+
+	    public ServerSocket createServerSocket() throws IOException {
+		    ServerSocket serverSocket = super.createServerSocket();
+		    serverSocket.setReuseAddress(true);
+			return serverSocket;
+	    }
+
+
+	    public Socket createSocket() throws IOException {
+		    return super.createSocket();
+	    }
+
+
+	    public ServerSocket createTlsServerSocket() throws IOException {
+		    return super.createTlsServerSocket();
+	    }
+
+
+	    public Socket createTlsSocket() throws IOException {
+		    return super.createTlsSocket();
+	    }
+
+    }
 
 }

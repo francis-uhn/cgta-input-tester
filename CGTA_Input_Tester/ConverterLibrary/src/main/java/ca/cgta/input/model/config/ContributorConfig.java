@@ -509,6 +509,9 @@ public class ContributorConfig {
 			contributor.getDevListenPort().add(14004);
 			contributor.getDevListenPort().add(14005);
 			contributor.getDevListenPort().add(14006);
+			contributor.getDevListenPort().add(14039);
+			contributor.getDevListenPort().add(14040);
+			contributor.getDevListenPort().add(14041);
 
 			contributor.setName("Ontario Association of Community Care Access Centres (OACCAC)");
 			contributor.setDevSecurityToken("3498749864ccc");

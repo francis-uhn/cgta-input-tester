@@ -68,6 +68,9 @@
         <dev_listen_port>14004</dev_listen_port>
         <dev_listen_port>14005</dev_listen_port>
         <dev_listen_port>14006</dev_listen_port>
+        <dev_listen_port>14039</dev_listen_port>
+        <dev_listen_port>14040</dev_listen_port>
+        <dev_listen_port>14041</dev_listen_port>
         <dev_security_token>3498749864ccc</dev_security_token>
         <hsp_facility_9005 description="Central West CCAC" code="2.16.840.1.113883.3.239.23.1.100.1"/>
         <hsp_facility_9005 description="Mississauga Halton CCAC" code="2.16.840.1.113883.3.239.23.1.100.2"/>

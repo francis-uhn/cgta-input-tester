@@ -30,6 +30,7 @@ public class Patient {
     public Date myRecordUpdatedDate;
     public String myRecordUpdatedDateFormatted;
     public String myDeactivatePatientIndicator;     
+    public String myPatientRequestedRecordLock;
     
     
     
@@ -75,7 +76,8 @@ public class Patient {
 		myDeathDateAndTimeFormatted = theHl7MsgPatient.myDeathDateAndTimeFormatted;
 		myPhoneNumbers = theHl7MsgPatient.myPhoneNumbers;
 		myPersonInRoles = theHl7MsgPatient.myPersonInRoles;
-		myAssociatedParties = theHl7MsgPatient.myAssociatedParties;			
+		myAssociatedParties = theHl7MsgPatient.myAssociatedParties;		
+		myPatientRequestedRecordLock = theHl7MsgPatient.myPatientRequestedRecordLock;
 		
 	}
 	
@@ -96,7 +98,7 @@ public class Patient {
         myPhoneNumbers = (theHl7MsgPatient.myPhoneNumbers != null && theHl7MsgPatient.myPhoneNumbers.size()!= 0) ? theHl7MsgPatient.myPhoneNumbers : myPhoneNumbers;
         myPersonInRoles = (theHl7MsgPatient.myPersonInRoles != null && theHl7MsgPatient.myPersonInRoles.size()!= 0) ? theHl7MsgPatient.myPersonInRoles : myPersonInRoles;
         myAssociatedParties = (theHl7MsgPatient.myAssociatedParties != null && theHl7MsgPatient.myAssociatedParties.size()!= 0) ? theHl7MsgPatient.myAssociatedParties : myAssociatedParties;         
-        
+        myPatientRequestedRecordLock = (StringUtils.isNotBlank(theHl7MsgPatient.myPatientRequestedRecordLock)) ? theHl7MsgPatient.myPatientRequestedRecordLock : myPatientRequestedRecordLock;
     }	
 		
 

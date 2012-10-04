@@ -362,6 +362,7 @@ public class Persister {
         Visit visitToKeep = theExisting.getDocument().findVisit(visitToKeepId);
         if ( visitToKeep == null ) {
             visitToKeep = theHl7PatientWithVisits.myVisits.get(0);
+            visitToKeep.clearHl7Nulls(eventType);
             visitToKeep.setStatus(eventType);
             theExisting.getDocument().myVisits.add(visitToKeep);            
         }
@@ -559,6 +560,7 @@ public class Persister {
         Visit existingPostConvVisit = existing.findAndRemoveVisit(postConvVisitNumber);
         if (existingPostConvVisit == null) {
             postConvVisit.setStatus(eventType);
+            postConvVisit.clearHl7Nulls(eventType);
             existingPostConvVisit = postConvVisit;
         } else {
             existingPostConvVisit.copyFromHl7(postConvVisit, eventType);
@@ -631,6 +633,7 @@ public class Persister {
                 newVisit.myArrivalDates.add(newVisit.myAdmitDate);
                 newVisit.myFormattedArrivalDates.add(newVisit.myAdmitDateFormatted);
             }
+            newVisit.clearHl7Nulls(eventType);
             existingVisit = newVisit;
         } else {
             existingVisit.copyFromHl7(newVisit, eventType);

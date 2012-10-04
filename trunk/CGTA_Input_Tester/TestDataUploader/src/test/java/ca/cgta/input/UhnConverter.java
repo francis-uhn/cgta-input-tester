@@ -185,8 +185,11 @@ public class UhnConverter {
 
 		// PV1
 		boolean processPv1 = true;
+		boolean processRecordLock = true;
+		
 		if (theInputString.contains("ADT^A40")) {
 			processPv1 = false;
+			processRecordLock = false;
 		}
 		if (triggerEvent.equals("A28") || triggerEvent.equals("A31")) {
 			processPv1 = false;
@@ -199,8 +202,10 @@ public class UhnConverter {
 			convertPv1(pv1);
 			convertPv2(pv2);
 		} else {
-			pv1.parse("PV1|");
-			pv2.parse("PV2|");
+		    if (!processRecordLock) {
+		        pv1.parse("PV1|");
+                pv2.parse("PV2|");                
+            }			
 		}
 
 		for (DG1 next : input.getDG1All()) {

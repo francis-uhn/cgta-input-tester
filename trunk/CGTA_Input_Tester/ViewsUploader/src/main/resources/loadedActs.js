@@ -228,7 +228,7 @@ function (doc) {
                     
                     notesArray.push({name: "Hospital Service Code", note: nullConvert(visit.myHospitalService)});
                     notesArray.push({name: "Hospital Service Name", note: nullConvert(visit.myHospitalServiceName)});
-                    notesArray.push({name: "Patient Requested Record Lock", note: nullConvert(visit.myPatientRequestedRecordLock)});
+                    //notesArray.push({name: "Patient Requested Record Lock", note: nullConvert(visit.myPatientRequestedRecordLock)});
                     
                     
                     // reoccuring outpatient visit arrival times
@@ -571,6 +571,9 @@ function (doc) {
                 else {
                     notesArray.push({name: "Patient Phone Numbers", note: "NULL"});                     
                 }
+                
+                //print consent lock indicator
+                notesArray.push({name: "Patient Requested Record Lock", note: nullConvert(patient.myPatientRequestedRecordLock)});
                 
                 
                 //function to create provider names string from a names array

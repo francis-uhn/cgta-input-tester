@@ -22,7 +22,6 @@ public class Visit {
 	public Ce myAdmitReasonForEmergencyVisit;
 	public ArrayList<Xcn> myAdmittingDoctors;
 	public Pl myAssignedPatientLocation;
-	public ArrayList<Xcn> myAttendingDoctors;
 	public ArrayList<Xcn> myConsultingDoctors;
 	public ArrayList<Date> myDischargeDates;
 	public ArrayList<Diagnosis> myDiagnoses;
@@ -33,8 +32,7 @@ public class Visit {
 	public String myPatientClassCode;
 	public String myAdmissionType;
 
-	public String myPatientClassName;
-	public String myPatientRequestedRecordLock;
+	public String myPatientClassName;	
 	
 	public Pl myPriorPatientLocation;
 	public ArrayList<Xcn> myReferringDoctors;
@@ -46,11 +44,13 @@ public class Visit {
     //Only used for visits with AdmissionType of R 
     public List<Date> myArrivalDates = new ArrayList<Date>();
     public List<String> myFormattedArrivalDates = new ArrayList<String>();
+    
+    
+    //These fields can have hl7null ("") as a value in the first component
+    public ArrayList<Xcn> myAttendingDoctors;
 	
-  
 	
-	
-	//NOTE: These fields are not set using data extracted from an HL7 message
+	//These fields are not set using data extracted from an HL7 message
     public List<Cx> myPreviousVisitNumbers;	
 	public String myVisitStatus;
 	
@@ -82,8 +82,7 @@ public class Visit {
         myHospitalServiceName = theHl7MsgVisit.myHospitalServiceName;
 		myPatientClassCode = theHl7MsgVisit.myPatientClassCode;
 		myAdmissionType = theHl7MsgVisit.myAdmissionType;
-		myPatientClassName = theHl7MsgVisit.myPatientClassName;
-		myPatientRequestedRecordLock = theHl7MsgVisit.myPatientRequestedRecordLock;
+		myPatientClassName = theHl7MsgVisit.myPatientClassName;	
 		myPriorPatientLocation = theHl7MsgVisit.myPriorPatientLocation;
 		myReferringDoctors = theHl7MsgVisit.myReferringDoctors;
 		myVisitNumber = theHl7MsgVisit.myVisitNumber;
@@ -109,17 +108,30 @@ public class Visit {
         myHospitalServiceName = (StringUtils.isNotBlank(theHl7MsgVisit.myHospitalServiceName)) ? theHl7MsgVisit.myHospitalServiceName : myHospitalServiceName;
         myPatientClassCode = (StringUtils.isNotBlank(theHl7MsgVisit.myPatientClassCode)) ? theHl7MsgVisit.myPatientClassCode : myPatientClassCode;
         myAdmissionType = (StringUtils.isNotBlank(theHl7MsgVisit.myAdmissionType)) ? theHl7MsgVisit.myAdmissionType : myAdmissionType;
-        myPatientClassName = (StringUtils.isNotBlank(theHl7MsgVisit.myPatientClassName)) ? theHl7MsgVisit.myPatientClassName : myPatientClassName;
-        myPatientRequestedRecordLock = (StringUtils.isNotBlank(theHl7MsgVisit.myPatientRequestedRecordLock)) ? theHl7MsgVisit.myPatientRequestedRecordLock : myPatientRequestedRecordLock;
+        myPatientClassName = (StringUtils.isNotBlank(theHl7MsgVisit.myPatientClassName)) ? theHl7MsgVisit.myPatientClassName : myPatientClassName;        
         myPriorPatientLocation = (theHl7MsgVisit.myPriorPatientLocation != null) ? theHl7MsgVisit.myPriorPatientLocation : myPriorPatientLocation;
         myReferringDoctors = (theHl7MsgVisit.myReferringDoctors != null && theHl7MsgVisit.myReferringDoctors.size()!= 0) ? theHl7MsgVisit.myReferringDoctors : myReferringDoctors;
         myVisitNumber = (theHl7MsgVisit.myVisitNumber != null) ? theHl7MsgVisit.myVisitNumber : myVisitNumber;
         
     }
-	
-	
-	
-	
+    
+    
+    
+    @JsonIgnore
+    private ArrayList<Xcn> processHl7NullableField(ArrayList<Xcn> storedField, ArrayList<Xcn> hl7MsgField){
+        
+        if (hl7MsgField == null || hl7MsgField.size() == 0) {
+            return storedField;
+        }
+        
+        if ("\"\"".equals(hl7MsgField.get(0).myId)) {
+            return null;
+        }
+        
+        return hl7MsgField;        
+        
+    }
+    
 	
 	
     @JsonIgnore  
@@ -162,6 +174,8 @@ public class Visit {
         
         
         if ( theEventType.equals("A03")) {
+            
+            myAttendingDoctors = processHl7NullableField(myAttendingDoctors,theHl7MsgVisit.myAttendingDoctors);
             
             if ( theHl7MsgVisit.myPriorPatientLocation != null ) {
                 myPriorPatientLocation = theHl7MsgVisit.myPriorPatientLocation;                
@@ -242,6 +256,26 @@ public class Visit {
         }
                 
     }    
+    
+    
+    
+    /**
+     *  Use this method to clear hl7Nullable fields 
+     *  that have been set to hl7Null ("") for a given
+     *  event type
+     */
+    @JsonIgnore
+    public void clearHl7Nulls(String theEventType){
+        
+        if (theEventType.equals("A03")) {
+            if (myAttendingDoctors != null && myAttendingDoctors.size() != 0
+                    && "\"\"".equals(myAttendingDoctors.get(0).myId)) {
+                myAttendingDoctors = null;
+            }
+        }
+        
+    }
+        
     
     
 	

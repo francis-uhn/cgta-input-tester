@@ -274,6 +274,7 @@ public class Converter {
         retVal.myVisits = new ArrayList<Visit>();
 
         boolean processVisit = true;
+        boolean processRecordLock = true;
         
         if ("A31".equals(retVal.myMostRecentEventCode)) {
             processVisit = false;
@@ -290,11 +291,13 @@ public class Converter {
 
         if ("A40".equals(retVal.myMostRecentEventCode)) {
             processVisit = false;
+            processRecordLock = false;
         }
 
         // Unlink person
         if ("A37".equals(retVal.myMostRecentEventCode)) {
             processVisit = false;
+            processRecordLock = false;
             PID pid2 = (PID) theAdt.get("PID2");
             retVal.myUnlinkSecondPatient = convertPid("PID2", pid2);
             if (retVal.myUnlinkSecondPatient == null || retVal.myUnlinkSecondPatient.hasIdWithTypeMr() == false) {
@@ -323,6 +326,7 @@ public class Converter {
             }
         }
 
+        
         if (processVisit) {
             Visit pv1 = convertPv1("PV1", theAdt.getPV1());
 
@@ -342,6 +346,15 @@ public class Converter {
             }
             retVal.myVisits.add(pv1);
         }
+        
+        
+        
+        if (processRecordLock) {            
+            addRecordLockIndicator(theAdt.getPV1(),retVal.myPatient);            
+        }
+        
+        
+        
 
         if (theAdt.getNonStandardNames().contains("MRG")) {
             retVal.myMergeInfo = convertMrg("MRG", (MRG) theAdt.get("MRG"));
@@ -915,8 +928,6 @@ public class Converter {
 
 		return retVal;
 	}
-
-
 
 
 
@@ -1832,6 +1843,22 @@ public class Converter {
 
 		return retVal;
 	}
+	
+	
+    private void addRecordLockIndicator(PV1 thePV1, Patient thePatient) throws HL7Exception {
+        
+        String theTerserPath = "PV1"; 
+        
+        thePatient.myPatientRequestedRecordLock = thePV1.getPv116_VIPIndicator().getValue();
+        if (isNotBlank(thePatient.myPatientRequestedRecordLock)) {
+            if (!"Y".equals(thePatient.myPatientRequestedRecordLock) && !"N".equals(thePatient.myPatientRequestedRecordLock)) {
+                addFailure(theTerserPath + "-16", FailureCode.F076, thePatient.myPatientRequestedRecordLock);
+            }
+        }
+        
+    }
+	
+	
 
 
 	private Visit convertPv1(String theTerserPath, PV1 thePV1) throws HL7Exception {
@@ -1863,6 +1890,12 @@ public class Converter {
 
 		retVal.myAttendingDoctors = new ArrayList<Xcn>();
 		for (int i = 1; i <= thePV1.getPv17_AttendingDoctorReps(); i++) {
+		    if("\"\"".equals(thePV1.getPv17_AttendingDoctor(0).getXcn1_IDNumber().getValue())){
+                Xcn deleteVal = new Xcn();
+                deleteVal.myId = "\"\"";
+                retVal.myAttendingDoctors.add(deleteVal);
+                break;
+            }
 			retVal.myAttendingDoctors.add(convertXcn(theTerserPath + "-7(" + i + ")", thePV1.getPv17_AttendingDoctor(i - 1)));
 		}
 		if (retVal.myAttendingDoctors.size() > 10) {
@@ -1871,6 +1904,12 @@ public class Converter {
 
 		retVal.myReferringDoctors = new ArrayList<Xcn>();
 		for (int i = 1; i <= thePV1.getPv18_ReferringDoctorReps(); i++) {
+//		    if("\"\"".equals(thePV1.getPv18_ReferringDoctor(0).getXcn1_IDNumber().getValue())){
+//                Xcn deleteVal = new Xcn();
+//                deleteVal.myId = "\"\"";
+//                retVal.myReferringDoctors.add(deleteVal);
+//                break;
+//            }
 			retVal.myReferringDoctors.add(convertXcn(theTerserPath + "-8(" + i + ")", thePV1.getPv18_ReferringDoctor(i - 1)));
 		}
 		if (retVal.myReferringDoctors.size() > 10) {
@@ -1879,6 +1918,12 @@ public class Converter {
 
 		retVal.myConsultingDoctors = new ArrayList<Xcn>();
 		for (int i = 1; i <= thePV1.getPv19_ConsultingDoctorReps(); i++) {
+//		    if("\"\"".equals(thePV1.getPv19_ConsultingDoctor(0).getXcn1_IDNumber().getValue())){
+//                Xcn deleteVal = new Xcn();
+//                deleteVal.myId = "\"\"";
+//                retVal.myConsultingDoctors.add(deleteVal);
+//                break;
+//            }
 			retVal.myConsultingDoctors.add(convertXcn(theTerserPath + "-9(" + i + ")", thePV1.getPv19_ConsultingDoctor(i - 1)));
 		}
 		if (retVal.myConsultingDoctors.size() > 10) {
@@ -1890,15 +1935,21 @@ public class Converter {
 			retVal.myHospitalServiceName = retVal.myHospitalService;
 		}
 
-		retVal.myPatientRequestedRecordLock = thePV1.getPv116_VIPIndicator().getValue();
-		if (isNotBlank(retVal.myPatientRequestedRecordLock)) {
-			if (!"Y".equals(retVal.myPatientRequestedRecordLock) && !"N".equals(retVal.myPatientRequestedRecordLock)) {
-				addFailure(theTerserPath + "-16", FailureCode.F076, retVal.myPatientRequestedRecordLock);
-			}
-		}
+//		retVal.myPatientRequestedRecordLock = thePV1.getPv116_VIPIndicator().getValue();
+//		if (isNotBlank(retVal.myPatientRequestedRecordLock)) {
+//			if (!"Y".equals(retVal.myPatientRequestedRecordLock) && !"N".equals(retVal.myPatientRequestedRecordLock)) {
+//				addFailure(theTerserPath + "-16", FailureCode.F076, retVal.myPatientRequestedRecordLock);
+//			}
+//		}
 
 		retVal.myAdmittingDoctors = new ArrayList<Xcn>();
 		for (int i = 1; i <= thePV1.getPv117_AdmittingDoctorReps(); i++) {
+//		    if("\"\"".equals(thePV1.getPv117_AdmittingDoctor(0).getXcn1_IDNumber().getValue())){
+//		        Xcn deleteVal = new Xcn();
+//		        deleteVal.myId = "\"\"";
+//		        retVal.myAdmittingDoctors.add(deleteVal);
+//		        break;
+//		    }
 			retVal.myAdmittingDoctors.add(convertXcn(theTerserPath + "-17(" + i + ")", thePV1.getPv117_AdmittingDoctor(i - 1)));
 		}
 		if (retVal.myAdmittingDoctors.size() > 10) {

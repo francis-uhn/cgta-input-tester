@@ -422,7 +422,8 @@ public class AdtTest {
 	
     /**
      * Testing patient discharge A03
-     * - admit patient into a bed and then discharge him and change the attending physician on discharge.
+     * - admit patient into a bed and then discharge him 
+     * - change the attending,admitting,consulting,referring physician assignments during the discharge.
      *  
      * @throws Exception ...
      */
@@ -433,7 +434,7 @@ public class AdtTest {
                 "EVN|A01|201112021621||||201112021621|G^4265^L\r" + 
                 "PID|||7012673^^^UHN^MR^^^^^^^~9287170261^BL^^CANON^JHN^^^^^20111201^^~HN2827^^^UHN^PI^^^^^^^||Test^Majaconversion^^^Mrs.^^L^^^^^201112221537^^~Test^Maj^^^Mrs.^^A^^^^^^^||19731230|F|||1 Bloor Street ^^Toronto^ON^L9K 8J7^Can^H^^^^^^^~|12333|(415)222-3333^PRN^PH^^^^^^^^^~||eng^English^03ZPtlang^^^|||11110000514^^^UHN^VN^^^^^^^~||||||||||||N|||201112221537||||||\r" + 
                 "PD1|||UHN^D^^^^UHN^FI^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^^^^^^^^^^^^|||||||N^no special privacy^03ZPrvyFlg^^^|N|||||||||\r" + 
-                "PV1||I|PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|C||^^^G^4265^^^^^^^  ^|13546a^Generic^Physician^MoeA^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546b^Generic^Physician^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^||hospServ||||D|||13546c^Generic^Physician^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000514^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021621|||||||V|\r" + 
+                "PV1||I|PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|C||^^^G^4265^^^^^^^  ^|13546a^Generic^Physician^MoeA^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546b^Generic^Physician^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546d^Generic^Physician^MoeD^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|hospServ||||D|||13546c^Generic^Physician^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000514^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021621|||||||V|\r" + 
                 "PV2||S^Semi^03ZFinbed^^^|^kfkfkfjcjcjcgcgcclcl^03ZAmitRes^^^|||||||||||||||||||N||AI|Elective||||||N|||||||OTH^Self^03ZBrInBy^^^|||||||||||\r" + 
                 "DG1|1||06^KFKFKFJCJCJCGCGCCLCL^2.16.840.1.113883.11.19436|KFKFKFJCJCJCGCGCCLCL|201112021621|A|||||||||1||D||||\r" + 
                 "PR1||||||||||||||||||||\r" + 
@@ -444,7 +445,7 @@ public class AdtTest {
         		"EVN|A03|201112070000||||201112070000|G^4265^L\r" + 
                 "PID|||7012673^^^UHN^MR^^^^^^^~9287170261^BL^^CANON^JHN^^^^^20111201^^~HN2827^^^UHN^PI^^^^^^^||Test^Majaconversion^^^Mrs.^^L^^^^^201112221537^^~Test^Maj^^^Mrs.^^A^^^^^^^||19731230|F|||1 Bloor Street ^^Toronto^ON^L9K 8J7^Can^H^^^^^^^~|12333|(415)222-3333^PRN^PH^^^^^^^^^~||eng^English^03ZPtlang^^^|||11110000514^^^UHN^VN^^^^^^^~||||||||||||N|||201112221537||||||\r" + 
                 "PD1|||UHN^D^^^^UHN^FI^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^^^^^^^^^^^^|||||||N^no special privacy^03ZPrvyFlg^^^|N|||||||||\r" + 
-        		"PV1||I||C||PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|13546D^GenericD^PhysicianD^MoeD^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546b^Generic^Physician^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^||hospServ||||A|||13546c^Generic^Physician^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000514^^^UHN^VN^G^4265^^^^^|||||||||||||||||1|||G|||||201112021621|201112052359||||||V|\r" + 
+        		"PV1||I||C||PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|13546aa^Generic^Physician^MoeAA^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546bb^Generic^Physician^MoeBB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546dd^Generic^Physician^MoeDD^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|hospServ||||A|||13546cc^Generic^Physician^MoeCC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000514^^^UHN^VN^G^4265^^^^^|||||||||||||||||1|||G|||||201112021621|201112052359||||||V|\r" + 
                 "PV2||S^Semi^03ZFinbed^^^|^kfkfkfjcjcjcgcgcclcl^03ZAmitRes^^^|||||||||||||||||||N||AI|Elective||||||N|||||||OTH^Self^03ZBrInBy^^^|||||||||||\r" + 
         		"DG1|1||||||||||||||||||||\r" +
                 "PR1||||||||||||||||||||\r" + 
@@ -517,24 +518,31 @@ public class AdtTest {
         assertEquals("2", loc.myBed);
         
                       
-        
-        Xcn admitDoc = visit.myAdmittingDoctors.get(0);
-        assertEquals("13546c", admitDoc.myId);
-        assertEquals("Physician", admitDoc.myFirstName);
-        assertEquals("Generic", admitDoc.myLastName);
-        assertEquals("MoeC", admitDoc.myMiddleName);
-        
+               
         Xcn attendDoc = visit.myAttendingDoctors.get(0);
-        assertEquals("13546D", attendDoc.myId);
-        assertEquals("PhysicianD", attendDoc.myFirstName);
-        assertEquals("GenericD", attendDoc.myLastName);
-        assertEquals("MoeD", attendDoc.myMiddleName);
+        assertEquals("13546aa", attendDoc.myId);
+        assertEquals("Physician", attendDoc.myFirstName);
+        assertEquals("Generic", attendDoc.myLastName);
+        assertEquals("MoeAA", attendDoc.myMiddleName);
         
         Xcn refDoc = visit.myReferringDoctors.get(0);
-        assertEquals("13546b", refDoc.myId);
+        assertEquals("13546bb", refDoc.myId);
         assertEquals("Physician", refDoc.myFirstName);
         assertEquals("Generic", refDoc.myLastName);
-        assertEquals("MoeB", refDoc.myMiddleName);
+        assertEquals("MoeBB", refDoc.myMiddleName);
+        
+        Xcn consultDoc = visit.myConsultingDoctors.get(0);
+        assertEquals("13546dd", consultDoc.myId);
+        assertEquals("Physician", consultDoc.myFirstName);
+        assertEquals("Generic", consultDoc.myLastName);
+        assertEquals("MoeDD", consultDoc.myMiddleName);
+                
+        Xcn admitDoc = visit.myAdmittingDoctors.get(0);
+        assertEquals("13546cc", admitDoc.myId);
+        assertEquals("Physician", admitDoc.myFirstName);
+        assertEquals("Generic", admitDoc.myLastName);
+        assertEquals("MoeCC", admitDoc.myMiddleName);
+        
         
         Diagnosis dg = visit.myDiagnoses.get(0);
         Ce dgCode = dg.myDiagnosis;
@@ -562,7 +570,7 @@ public class AdtTest {
                 "EVN|A01|201112021621||||201112021621|G^4265^L\r" + 
                 "PID|||7012673^^^UHN^MR^^^^^^^~9287170261^BL^^CANON^JHN^^^^^20111201^^~HN2827^^^UHN^PI^^^^^^^||Test^Majaconversion^^^Mrs.^^L^^^^^201112221537^^~Test^Maj^^^Mrs.^^A^^^^^^^||19731230|F|||1 Bloor Street ^^Toronto^ON^L9K 8J7^Can^H^^^^^^^~|12333|(415)222-3333^PRN^PH^^^^^^^^^~||eng^English^03ZPtlang^^^|||11110000514^^^UHN^VN^^^^^^^~||||||||||||N|||201112221537||||||\r" + 
                 "PD1|||UHN^D^^^^UHN^FI^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^^^^^^^^^^^^|||||||N^no special privacy^03ZPrvyFlg^^^|N|||||||||\r" + 
-                "PV1||I|PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|C||^^^G^4265^^^^^^^  ^|13546a1^Generic1^Physician1^MoeA1^^Dr.^MD^^^L^^^EI~13546a2^Generic2^Physician2^MoeA2^^Dr.^MD^^^L^^^EI|13546b^Generic^Physician^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^||hospServ||||D|||13546c^Generic^Physician^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000514^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021621|||||||V|\r" + 
+                "PV1||I|PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|C||^^^G^4265^^^^^^^  ^|13546a1^Generic1^Physician1^MoeA1^^Dr.^MD^^^L^^^EI~13546a2^Generic2^Physician2^MoeA2^^Dr.^MD^^^L^^^EI|13546b^Generic^Physician^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546d^Generic^Physician^MoeD^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|hospServ||||D|||13546c^Generic^Physician^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000514^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021621|||||||V|\r" + 
                 "PV2||S^Semi^03ZFinbed^^^|^kfkfkfjcjcjcgcgcclcl^03ZAmitRes^^^|||||||||||||||||||N||AI|Elective||||||N|||||||OTH^Self^03ZBrInBy^^^|||||||||||\r" + 
                 "DG1|1||06^KFKFKFJCJCJCGCGCCLCL^2.16.840.1.113883.11.19436|KFKFKFJCJCJCGCGCCLCL|201112021621|A|||||||||1||D||||\r" + 
                 "PR1||||||||||||||||||||\r" + 
@@ -573,7 +581,7 @@ public class AdtTest {
                 "EVN|A03|201112070000||||201112070000|G^4265^L\r" + 
                 "PID|||7012673^^^UHN^MR^^^^^^^~9287170261^BL^^CANON^JHN^^^^^20111201^^~HN2827^^^UHN^PI^^^^^^^||Test^Majaconversion^^^Mrs.^^L^^^^^201112221537^^~Test^Maj^^^Mrs.^^A^^^^^^^||19731230|F|||1 Bloor Street ^^Toronto^ON^L9K 8J7^Can^H^^^^^^^~|12333|(415)222-3333^PRN^PH^^^^^^^^^~||eng^English^03ZPtlang^^^|||11110000514^^^UHN^VN^^^^^^^~||||||||||||N|||201112221537||||||\r" + 
                 "PD1|||UHN^D^^^^UHN^FI^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^^^^^^^^^^^^|||||||N^no special privacy^03ZPrvyFlg^^^|N|||||||||\r" + 
-                "PV1||I||C||PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|\"\"|13546b^Generic^Physician^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^||hospServ||||A|||13546c^Generic^Physician^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000514^^^UHN^VN^G^4265^^^^^|||||||||||||||||1|||G|||||201112021621|201112052359||||||V|\r" + 
+                "PV1||I||C||PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|\"\"|\"\"|\"\"|hospServ||||A|||\"\"|IP^|11110000514^^^UHN^VN^G^4265^^^^^|||||||||||||||||1|||G|||||201112021621|201112052359||||||V|\r" + 
                 "PV2||S^Semi^03ZFinbed^^^|^kfkfkfjcjcjcgcgcclcl^03ZAmitRes^^^|||||||||||||||||||N||AI|Elective||||||N|||||||OTH^Self^03ZBrInBy^^^|||||||||||\r" + 
                 "DG1|1||||||||||||||||||||\r" +
                 "PR1||||||||||||||||||||\r" + 
@@ -622,12 +630,20 @@ public class AdtTest {
         assertEquals("Generic2", attendDoc.myLastName);
         assertEquals("MoeA2", attendDoc.myMiddleName);
         
+         
+        Xcn consultDoc = visit.myConsultingDoctors.get(0);
+        assertEquals("13546d", consultDoc.myId);
+        assertEquals("Physician", consultDoc.myFirstName);
+        assertEquals("Generic", consultDoc.myLastName);
+        assertEquals("MoeD", consultDoc.myMiddleName);
+        
         
         Xcn refDoc = visit.myReferringDoctors.get(0);
         assertEquals("13546b", refDoc.myId);
         assertEquals("Physician", refDoc.myFirstName);
         assertEquals("Generic", refDoc.myLastName);
         assertEquals("MoeB", refDoc.myMiddleName);
+
         
         Diagnosis dg = visit.myDiagnoses.get(0);
         Ce dgCode = dg.myDiagnosis;
@@ -695,19 +711,12 @@ public class AdtTest {
         assertEquals("413", loc.myRoom);
         assertEquals("2", loc.myBed);
                               
-        admitDoc = visit.myAdmittingDoctors.get(0);
-        assertEquals("13546c", admitDoc.myId);
-        assertEquals("Physician", admitDoc.myFirstName);
-        assertEquals("Generic", admitDoc.myLastName);
-        assertEquals("MoeC", admitDoc.myMiddleName);
         
         assertEquals(null, visit.myAttendingDoctors);
+        assertEquals(null, visit.myAdmittingDoctors);
+        assertEquals(null, visit.myAttendingDoctors);
+        assertEquals(null, visit.myAttendingDoctors);
         
-        refDoc = visit.myReferringDoctors.get(0);
-        assertEquals("13546b", refDoc.myId);
-        assertEquals("Physician", refDoc.myFirstName);
-        assertEquals("Generic", refDoc.myLastName);
-        assertEquals("MoeB", refDoc.myMiddleName);
         
         dg = visit.myDiagnoses.get(0);
         dgCode = dg.myDiagnosis;
@@ -1701,7 +1710,7 @@ public class AdtTest {
                 "ROL||UC|PP^Primary Care Provider^15ZRole^^^|13546b^Genericb^Physicianb^Moeb^^Dr.^MD^^UHN^L^^^EI^G^2.16.840.1.113883.3.59.3:947^^^^^^^^^^|201111071338||||ET02^Physician^15ZEmpTyp^^^|1^Hospital^15ZOrgTyp^^^|^^^ON^^Can^^^^^^^^|(416) 340-3388^WPN^PH^^^^^^^^^\r" +
                 "NK1|1|Wph^Mom^^^^^L^^^^^^^|PAR^Parent^03ZRelshp^^^|82 Buttonwood Avenue^^YORK^ON^M6M 2J5^Can^H^^^^^^^|(416)243-3600^PRN^PH^^^^^^^^^~(416)123-1234^PRN^CP^^^^^^^^^|(416)243-3600^PRN^PH^^^^^^^^^|N^Next-of-Kin^03ZConRol^^^||||||||||||||||||||||||||||||||\r" +
                 "NK1|2|Wph^Brother^^^^^L^^^^^^^|BRO^Brother^03ZRelshp^^^|83 Buttonwood Avenue^^YORK^ON^M6M 2J5^Can^H^^^^^^^|(416)243-3601^PRN^PH^^^^^^^^^|(416)525-2525^PRN^PH^^^^^^^^^|C^Emergency Contact^03ZConRol^^^||||||||||||||||||||||||||||||||\r" + 
-                "PV1||I|PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|C||^^^G^4265^^^^^^^  ^|13546a^Generic^Physician^MoeA^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546b^Generic^Physician^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^||hospServ||||D||N|13546c^Generic^Physician^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000514^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021621|||||||V|\r" + 
+                "PV1||I|PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|C||^^^G^4265^^^^^^^  ^|13546a^Generic^Physician^MoeA^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546b^Generic^Physician^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546d^Generic^Physician^MoeD^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|hospServ||||D||N|13546c^Generic^Physician^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000514^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021621|||||||V|\r" + 
                 "PV2||S^Semi^03ZFinbed^^^|^kfkfkfjcjcjcgcgcclcl^03ZAmitRes^^^|||||||||||||||||||N||AI|Elective||||||N|||||||OTH^Self^03ZBrInBy^^^|||||||||||\r" + 
                 "DG1|1||^KFKFKFJCJCJCGCGCCLCLX|KFKFKFJCJCJCGCGCCLCL|201112021621|A|||||||||1||D||||\r" + 
                 "PR1||||||||||||||||||||\r" + 
@@ -1716,7 +1725,7 @@ public class AdtTest {
                 "ROL||UC|PP^Primary Care Provider^15ZRole^^^|13546b^Genericb2^Physicianb2^Moeb2^^Dr.^MD^^UHN^L^^^EI^G^2.16.840.1.113883.3.59.3:947^^^^^^^^^^|201111071338||||ET02^Physician^15ZEmpTyp^^^|1^Hospital^15ZOrgTyp^^^|^^^ON^^Can^^^^^^^^|(416) 340-3388^WPN^PH^^^^^^^^^\r" +
                 "NK1|1|Wph^Mom^^^^^L^^^^^^^|PAR^Parent^03ZRelshp^^^|82 Buttonwood Avenue2^^YORK^ON^M6M 2J5^Can^H^^^^^^^|(416)243-3600^PRN^PH^^^^^^^^^~(416)123-1234^PRN^CP^^^^^^^^^|(416)243-3600^PRN^PH^^^^^^^^^|N^Next-of-Kin^03ZConRol^^^||||||||||||||||||||||||||||||||\r" +
                 "NK1|2|Wph^Brother^^^^^L^^^^^^^|BRO^Brother^03ZRelshp^^^|83 Buttonwood Avenue2^^YORK^ON^M6M 2J5^Can^H^^^^^^^|(416)243-3601^PRN^PH^^^^^^^^^|(416)525-2525^PRN^PH^^^^^^^^^|C^Emergency Contact^03ZConRol^^^||||||||||||||||||||||||||||||||\r" + 
-                "PV1||I|ES9 GEN S^424^1^G^4265^^^N^ES 9 424^ES 9 424 1^ES9 GEN S^1521 19 1^|R|||13546a^Generic^Physician2^MoeA^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546b^Generic^Physician2^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^||hospServ||||D||Y|13546c^Generic^Physician2^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000514^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021622|||||||V|\r" +
+                "PV1||I|ES9 GEN S^424^1^G^4265^^^N^ES 9 424^ES 9 424 1^ES9 GEN S^1521 19 1^|R|||13546a^Generic^Physician2^MoeA^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546b^Generic^Physician2^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|\"\"|hospServ||||D||Y||IP^|11110000514^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021622|||||||V|\r" +
                 "PV2||S^Semi^03ZFinbed^^^|^kfkfkfjcjcjcgcgcclcl^03ZAmitRes^^^|||||||||||||||||||N||AI|Elective||||||N|||||||OTH^Self^03ZBrInBy^^^|||||||||||\r" + 
                 "DG1|1||06^KFKFKFJCJCJCGCGCCLCL^2.16.840.1.113883.11.19436|KFKFKFJCJCJCGCGCCLCL|201112021621|A|||||||||1||D||||\r" + 
                 "PR1||||||||||||||||||||\r" + 
@@ -1827,25 +1836,27 @@ public class AdtTest {
         assertEquals("424", cloc.myRoom);
         assertEquals("1", cloc.myBed);
         
-        
-        Xcn admitDoc = visit.myAdmittingDoctors.get(0);
-        assertEquals("13546c", admitDoc.myId);
-        assertEquals("Physician2", admitDoc.myFirstName);
-        assertEquals("Generic", admitDoc.myLastName);
-        assertEquals("MoeC", admitDoc.myMiddleName);
-        
+                
         Xcn attendDoc = visit.myAttendingDoctors.get(0);
         assertEquals("13546a", attendDoc.myId);
         assertEquals("Physician2", attendDoc.myFirstName);
         assertEquals("Generic", attendDoc.myLastName);
         assertEquals("MoeA", attendDoc.myMiddleName);
         
-        
-        Xcn refDoc = visit.myReferringDoctors.get(0);
+         Xcn refDoc = visit.myReferringDoctors.get(0);
         assertEquals("13546b", refDoc.myId);
         assertEquals("Physician2", refDoc.myFirstName);
         assertEquals("Generic", refDoc.myLastName);
         assertEquals("MoeB", refDoc.myMiddleName);
+        
+        assertEquals(null,visit.myConsultingDoctors);
+        
+        Xcn admitDoc = visit.myAdmittingDoctors.get(0);
+        assertEquals("13546c", admitDoc.myId);
+        assertEquals("Physician", admitDoc.myFirstName);
+        assertEquals("Generic", admitDoc.myLastName);
+        assertEquals("MoeC", admitDoc.myMiddleName);
+                
         
         Diagnosis dg = visit.myDiagnoses.get(0);
         Ce dgCode = dg.myDiagnosis;

@@ -387,7 +387,7 @@ public class Converter {
         	addFailure("PV1-2", FailureCode.F129, null);
         }
 
-        List<String> outpatientVisitTypes = Arrays.asList("E", "O", "R", "U");
+        List<String> outpatientVisitTypes = Arrays.asList("E", "O", "R", "U", "C");
         if ("A04".equals(retVal.myMostRecentEventCode) && !outpatientVisitTypes.contains(retVal.myVisits.get(0).myPatientClassCode)) {
         	addFailure("PV1-2", FailureCode.F130, null);
         }
@@ -950,7 +950,7 @@ public class Converter {
 		Cx retVal = new Cx();
 
 		retVal.myIdNumber = theCx.getCx1_IDNumber().getValue();
-		validateStringLength(theTerserPath + "-1", retVal.myIdNumber, 20);
+		validateStringLength(theTerserPath + "-1", retVal.myIdNumber, 50);
 
 		retVal.myCheckDigit = theCx.getCx2_CheckDigit().getValue();
 		validateStringLength(theTerserPath + "-2", retVal.myCheckDigit, 5);

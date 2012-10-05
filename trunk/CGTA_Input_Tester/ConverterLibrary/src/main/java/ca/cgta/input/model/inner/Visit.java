@@ -19,10 +19,8 @@ public class Visit {
 	public Ce myAdmissionLevelOfCareForEmergencyVisit;
 	public Date myAdmitDate;
 	public String myAdmitDateFormatted;
-	public Ce myAdmitReasonForEmergencyVisit;
-	public ArrayList<Xcn> myAdmittingDoctors;
-	public Pl myAssignedPatientLocation;
-	public ArrayList<Xcn> myConsultingDoctors;
+	public Ce myAdmitReasonForEmergencyVisit;	
+	public Pl myAssignedPatientLocation;	
 	public ArrayList<Date> myDischargeDates;
 	public ArrayList<Diagnosis> myDiagnoses;
 	public ArrayList<String> myDischargeDatesFormatted;
@@ -34,8 +32,7 @@ public class Visit {
 
 	public String myPatientClassName;	
 	
-	public Pl myPriorPatientLocation;
-	public ArrayList<Xcn> myReferringDoctors;
+	public Pl myPriorPatientLocation;	
 	public Cx myVisitNumber;
 	/** Just an internal flag to show when the database actually saved/updated this record */
     public Date myRecordUpdatedDate;
@@ -48,6 +45,9 @@ public class Visit {
     
     //These fields can have hl7null ("") as a value in the first component
     public ArrayList<Xcn> myAttendingDoctors;
+    public ArrayList<Xcn> myAdmittingDoctors;
+    public ArrayList<Xcn> myConsultingDoctors;
+    public ArrayList<Xcn> myReferringDoctors;
 	
 	
 	//These fields are not set using data extracted from an HL7 message
@@ -71,10 +71,7 @@ public class Visit {
 	    myAdmitDate = theHl7MsgVisit.myAdmitDate;
 	    myAdmitDateFormatted = theHl7MsgVisit.myAdmitDateFormatted;
 	    myAdmitReasonForEmergencyVisit = theHl7MsgVisit.myAdmissionLevelOfCareForEmergencyVisit;
-        myAdmittingDoctors = theHl7MsgVisit.myAdmittingDoctors;
-        myAssignedPatientLocation = theHl7MsgVisit.myAssignedPatientLocation;
-        myAttendingDoctors = theHl7MsgVisit.myAttendingDoctors;
-        myConsultingDoctors = theHl7MsgVisit.myConsultingDoctors;
+        myAssignedPatientLocation = theHl7MsgVisit.myAssignedPatientLocation;        
         myDischargeDates = theHl7MsgVisit.myDischargeDates;
         myDiagnoses = theHl7MsgVisit.myDiagnoses;
         myDischargeDatesFormatted = theHl7MsgVisit.myDischargeDatesFormatted;
@@ -83,9 +80,13 @@ public class Visit {
 		myPatientClassCode = theHl7MsgVisit.myPatientClassCode;
 		myAdmissionType = theHl7MsgVisit.myAdmissionType;
 		myPatientClassName = theHl7MsgVisit.myPatientClassName;	
-		myPriorPatientLocation = theHl7MsgVisit.myPriorPatientLocation;
-		myReferringDoctors = theHl7MsgVisit.myReferringDoctors;
+		myPriorPatientLocation = theHl7MsgVisit.myPriorPatientLocation;		
 		myVisitNumber = theHl7MsgVisit.myVisitNumber;
+		
+		myAttendingDoctors = processHl7NullableField(myAttendingDoctors,theHl7MsgVisit.myAttendingDoctors);
+        myAdmittingDoctors = processHl7NullableField(myAdmittingDoctors,theHl7MsgVisit.myAdmittingDoctors);
+        myConsultingDoctors = processHl7NullableField(myConsultingDoctors,theHl7MsgVisit.myConsultingDoctors);
+        myReferringDoctors = processHl7NullableField(myReferringDoctors,theHl7MsgVisit.myReferringDoctors);
 		
 	}
 	
@@ -96,11 +97,8 @@ public class Visit {
         myAdmissionLevelOfCareForEmergencyVisit = (theHl7MsgVisit.myAdmissionLevelOfCareForEmergencyVisit != null) ? theHl7MsgVisit.myAdmissionLevelOfCareForEmergencyVisit : myAdmissionLevelOfCareForEmergencyVisit;
         myAdmitDate = (theHl7MsgVisit.myAdmitDate != null) ? theHl7MsgVisit.myAdmitDate : myAdmitDate;
         myAdmitDateFormatted = (StringUtils.isNotBlank(theHl7MsgVisit.myAdmitDateFormatted)) ? theHl7MsgVisit.myAdmitDateFormatted : myAdmitDateFormatted;
-        myAdmitReasonForEmergencyVisit = (theHl7MsgVisit.myAdmitReasonForEmergencyVisit != null) ? theHl7MsgVisit.myAdmitReasonForEmergencyVisit : myAdmitReasonForEmergencyVisit;
-        myAdmittingDoctors = (theHl7MsgVisit.myAdmittingDoctors != null && theHl7MsgVisit.myAdmittingDoctors.size()!= 0) ? theHl7MsgVisit.myAdmittingDoctors : myAdmittingDoctors;
+        myAdmitReasonForEmergencyVisit = (theHl7MsgVisit.myAdmitReasonForEmergencyVisit != null) ? theHl7MsgVisit.myAdmitReasonForEmergencyVisit : myAdmitReasonForEmergencyVisit;        
         myAssignedPatientLocation = (theHl7MsgVisit.myAssignedPatientLocation != null) ? theHl7MsgVisit.myAssignedPatientLocation : myAssignedPatientLocation;
-        myAttendingDoctors = (theHl7MsgVisit.myAttendingDoctors != null && theHl7MsgVisit.myAttendingDoctors.size()!= 0) ? theHl7MsgVisit.myAttendingDoctors : myAttendingDoctors;
-        myConsultingDoctors = (theHl7MsgVisit.myConsultingDoctors != null && theHl7MsgVisit.myConsultingDoctors.size()!= 0) ? theHl7MsgVisit.myConsultingDoctors : myConsultingDoctors;
         myDischargeDates = (theHl7MsgVisit.myDischargeDates != null && theHl7MsgVisit.myDischargeDates.size()!= 0) ? theHl7MsgVisit.myDischargeDates : myDischargeDates;
         myDiagnoses = (theHl7MsgVisit.myDiagnoses != null && theHl7MsgVisit.myDiagnoses.size()!= 0) ? theHl7MsgVisit.myDiagnoses : myDiagnoses;
         myDischargeDatesFormatted = (theHl7MsgVisit.myDischargeDatesFormatted != null && theHl7MsgVisit.myDischargeDatesFormatted.size()!= 0) ? theHl7MsgVisit.myDischargeDatesFormatted : myDischargeDatesFormatted;
@@ -110,8 +108,12 @@ public class Visit {
         myAdmissionType = (StringUtils.isNotBlank(theHl7MsgVisit.myAdmissionType)) ? theHl7MsgVisit.myAdmissionType : myAdmissionType;
         myPatientClassName = (StringUtils.isNotBlank(theHl7MsgVisit.myPatientClassName)) ? theHl7MsgVisit.myPatientClassName : myPatientClassName;        
         myPriorPatientLocation = (theHl7MsgVisit.myPriorPatientLocation != null) ? theHl7MsgVisit.myPriorPatientLocation : myPriorPatientLocation;
-        myReferringDoctors = (theHl7MsgVisit.myReferringDoctors != null && theHl7MsgVisit.myReferringDoctors.size()!= 0) ? theHl7MsgVisit.myReferringDoctors : myReferringDoctors;
         myVisitNumber = (theHl7MsgVisit.myVisitNumber != null) ? theHl7MsgVisit.myVisitNumber : myVisitNumber;
+        
+        myAttendingDoctors = processHl7NullableField(myAttendingDoctors,theHl7MsgVisit.myAttendingDoctors);
+        myAdmittingDoctors = processHl7NullableField(myAdmittingDoctors,theHl7MsgVisit.myAdmittingDoctors);
+        myConsultingDoctors = processHl7NullableField(myConsultingDoctors,theHl7MsgVisit.myConsultingDoctors);
+        myReferringDoctors = processHl7NullableField(myReferringDoctors,theHl7MsgVisit.myReferringDoctors);
         
     }
     
@@ -176,6 +178,9 @@ public class Visit {
         if ( theEventType.equals("A03")) {
             
             myAttendingDoctors = processHl7NullableField(myAttendingDoctors,theHl7MsgVisit.myAttendingDoctors);
+            myAdmittingDoctors = processHl7NullableField(myAdmittingDoctors,theHl7MsgVisit.myAdmittingDoctors);
+            myConsultingDoctors = processHl7NullableField(myConsultingDoctors,theHl7MsgVisit.myConsultingDoctors);
+            myReferringDoctors = processHl7NullableField(myReferringDoctors,theHl7MsgVisit.myReferringDoctors);
             
             if ( theHl7MsgVisit.myPriorPatientLocation != null ) {
                 myPriorPatientLocation = theHl7MsgVisit.myPriorPatientLocation;                
@@ -266,13 +271,24 @@ public class Visit {
      */
     @JsonIgnore
     public void clearHl7Nulls(String theEventType){
-        
-        if (theEventType.equals("A03")) {
-            if (myAttendingDoctors != null && myAttendingDoctors.size() != 0
-                    && "\"\"".equals(myAttendingDoctors.get(0).myId)) {
-                myAttendingDoctors = null;
-            }
+
+        if (myAttendingDoctors != null && myAttendingDoctors.size() != 0
+                && "\"\"".equals(myAttendingDoctors.get(0).myId)) {
+            myAttendingDoctors = null;
         }
+        if (myAdmittingDoctors != null && myAdmittingDoctors.size() != 0
+                && "\"\"".equals(myAdmittingDoctors.get(0).myId)) {
+            myAdmittingDoctors = null;
+        }
+        if (myConsultingDoctors != null && myConsultingDoctors.size() != 0
+                && "\"\"".equals(myConsultingDoctors.get(0).myId)) {
+            myConsultingDoctors = null;
+        }
+        if (myReferringDoctors != null && myReferringDoctors.size() != 0
+                && "\"\"".equals(myReferringDoctors.get(0).myId)) {
+            myReferringDoctors = null;
+        }
+        
         
     }
         

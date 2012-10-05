@@ -1904,12 +1904,12 @@ public class Converter {
 
 		retVal.myReferringDoctors = new ArrayList<Xcn>();
 		for (int i = 1; i <= thePV1.getPv18_ReferringDoctorReps(); i++) {
-//		    if("\"\"".equals(thePV1.getPv18_ReferringDoctor(0).getXcn1_IDNumber().getValue())){
-//                Xcn deleteVal = new Xcn();
-//                deleteVal.myId = "\"\"";
-//                retVal.myReferringDoctors.add(deleteVal);
-//                break;
-//            }
+		    if("\"\"".equals(thePV1.getPv18_ReferringDoctor(0).getXcn1_IDNumber().getValue())){
+                Xcn deleteVal = new Xcn();
+                deleteVal.myId = "\"\"";
+                retVal.myReferringDoctors.add(deleteVal);
+                break;
+            }
 			retVal.myReferringDoctors.add(convertXcn(theTerserPath + "-8(" + i + ")", thePV1.getPv18_ReferringDoctor(i - 1)));
 		}
 		if (retVal.myReferringDoctors.size() > 10) {
@@ -1918,12 +1918,12 @@ public class Converter {
 
 		retVal.myConsultingDoctors = new ArrayList<Xcn>();
 		for (int i = 1; i <= thePV1.getPv19_ConsultingDoctorReps(); i++) {
-//		    if("\"\"".equals(thePV1.getPv19_ConsultingDoctor(0).getXcn1_IDNumber().getValue())){
-//                Xcn deleteVal = new Xcn();
-//                deleteVal.myId = "\"\"";
-//                retVal.myConsultingDoctors.add(deleteVal);
-//                break;
-//            }
+		    if("\"\"".equals(thePV1.getPv19_ConsultingDoctor(0).getXcn1_IDNumber().getValue())){
+                Xcn deleteVal = new Xcn();
+                deleteVal.myId = "\"\"";
+                retVal.myConsultingDoctors.add(deleteVal);
+                break;
+            }
 			retVal.myConsultingDoctors.add(convertXcn(theTerserPath + "-9(" + i + ")", thePV1.getPv19_ConsultingDoctor(i - 1)));
 		}
 		if (retVal.myConsultingDoctors.size() > 10) {
@@ -1944,12 +1944,12 @@ public class Converter {
 
 		retVal.myAdmittingDoctors = new ArrayList<Xcn>();
 		for (int i = 1; i <= thePV1.getPv117_AdmittingDoctorReps(); i++) {
-//		    if("\"\"".equals(thePV1.getPv117_AdmittingDoctor(0).getXcn1_IDNumber().getValue())){
-//		        Xcn deleteVal = new Xcn();
-//		        deleteVal.myId = "\"\"";
-//		        retVal.myAdmittingDoctors.add(deleteVal);
-//		        break;
-//		    }
+		    if("\"\"".equals(thePV1.getPv117_AdmittingDoctor(0).getXcn1_IDNumber().getValue())){
+		        Xcn deleteVal = new Xcn();
+		        deleteVal.myId = "\"\"";
+		        retVal.myAdmittingDoctors.add(deleteVal);
+		        break;
+		    }
 			retVal.myAdmittingDoctors.add(convertXcn(theTerserPath + "-17(" + i + ")", thePV1.getPv117_AdmittingDoctor(i - 1)));
 		}
 		if (retVal.myAdmittingDoctors.size() > 10) {

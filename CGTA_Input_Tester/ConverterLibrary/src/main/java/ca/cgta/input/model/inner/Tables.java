@@ -45,6 +45,7 @@ public class Tables {
 		{
 			HashMap<String, String> tbl0004 = new HashMap<String, String>();
 			ourTables.put("0004", tbl0004);
+			tbl0004.put("C", "CCAC Client");
 			tbl0004.put("E", "Emergency");
 			tbl0004.put("I", "Inpatient");
 			tbl0004.put("O", "Outpatient");

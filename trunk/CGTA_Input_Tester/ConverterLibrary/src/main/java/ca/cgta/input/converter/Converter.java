@@ -282,21 +282,20 @@ public class Converter {
                 GenericSegment zpd = (GenericSegment) theAdt.get("ZPD");                
                 retVal.myPatient.myDeactivatePatientIndicator =  Terser.get(zpd, 1, 0, 1, 1);                
             }
-        }    
-        
+        }
         
         if ("A28".equals(retVal.myMostRecentEventCode)) {
             processVisit = false;
         }
 
         if ("A40".equals(retVal.myMostRecentEventCode)) {
-            processVisit = false;
-            processRecordLock = false;
+            processVisit = false;            
         }
+        
 
         // Unlink person
         if ("A37".equals(retVal.myMostRecentEventCode)) {
-            processVisit = false;
+            processVisit = false;     
             processRecordLock = false;
             PID pid2 = (PID) theAdt.get("PID2");
             retVal.myUnlinkSecondPatient = convertPid("PID2", pid2);
@@ -307,6 +306,7 @@ public class Converter {
 
         // Swap beds
         if ("A17".equals(retVal.myMostRecentEventCode)) {
+            processRecordLock = false;
             // get second PID mrn
             PID pid2 = (PID) theAdt.get("PID2");
             retVal.myBedSwapSecondPatientMrn = obtainPidMrn("PID2", pid2);

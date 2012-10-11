@@ -5,8 +5,8 @@
 <Encoding>ER7</Encoding>
 </Encodings>
 <DynamicDef AccAck="NE" AppAck="AL" MsgAckMode="Deferred" />
-<HL7v2xStaticDef MsgType="ADT" EventType="A01" MsgStructID="ADT_A01" EventDesc="ADT/ACK - Admit/visit notification" Role="Receiver">
-<MetaData Name="cGTA input-ADT_A01" OrgName="" Version="" Status="" Topics="confsig--2.5-static-ADT-A01-null-ADT_A01---Receiver" />
+<HL7v2xStaticDef MsgType="ADT" EventType="A01" MsgStructID="ADT_A01" EventDesc="ADT/ACK - Admit/visit notification" Role="Sender">
+<MetaData Name="cGTA input-ADT_A01" OrgName="" Version="" Status="" Topics="confsig--2.5-static-ADT-A01-null-ADT_A01---Sender" />
 <Segment Name="MSH" LongName="Message Header" Usage="R" Min="1" Max="1">
 <Field Name="Field Separator" Usage="R" Min="1" Max="1" Datatype="ST" Length="1" ConstantValue="|" ItemNo="00001">
 <Reference>2.15.9.1</Reference>
@@ -357,12 +357,7 @@ third components.</Predicate>
 </SubComponent>
 </Component>
 <Component Name="name validity range" Usage="X" Datatype="DR" Length="53">
-<ImpNote>This component cannot be fully expressed. Identified as
-v
-2.4 erratum. Retained for backwards compatibility only
-as
-of v 2.5.  Refer to Effective Date and Expiration Date
-components.
+<ImpNote>This component cannot be fully expressed. Identified a
 </ImpNote>
 <SubComponent Name="range start date/time" Usage="O" Datatype="TS" Length="26">
 </SubComponent>
@@ -1156,9 +1151,7 @@ third components.</Predicate>
 <Field Name="Phone Number - Home" Usage="RE" Min="0" Max="10" Datatype="XTN" Length="451" ItemNo="00116">
 <Reference>3.4.2.13</Reference>
 <Component Name="telephone number" Usage="C" Datatype="ST" Length="25">
-<ImpNote>Format: [NNN] [(999)]999-9999 [X99999]
-[B99999] [C any
-text]
+<ImpNote>Format: [NNN] [(999)]999-9999 [X99999
 </ImpNote>
 </Component>
 <Component Name="telecommunication use code" Usage="R" Datatype="ID" Length="3" Table="0201">
@@ -1187,8 +1180,7 @@ text]
 <Field Name="Phone Number - Business" Usage="X" Min="0" Max="*" Datatype="XTN" Length="250" ItemNo="00117">
 <Reference>3.4.2.14</Reference>
 <Component Name="telephone number" Usage="B" Datatype="ST" Length="199">
-<ImpNote>Format: [NNN] [(999)]999-9999 [X99999] [B99999] [C any
-text]
+<ImpNote>Format: [NNN] [(999)]999-9999 [X99999] [B99999] [C an
 </ImpNote>
 </Component>
 <Component Name="telecommunication use code" Usage="O" Datatype="ID" Length="3" Table="0201">
@@ -1734,7 +1726,11 @@ third components.</Predicate>
 </Component>
 </Field>
 </Segment>
-<Segment Name="PD1" LongName="Patient Additional Demographic" Usage="X" Min="0" Max="1">
+<Segment Name="ZPD" LongName="" Usage="RE" Min="0" Max="1">
+<Field Name="Deactivated Patient Flag" Usage="RE" Min="0" Max="1" Datatype="ID" Length="4">
+</Field>
+</Segment>
+<Segment Name="PD1" LongName="Patient Additional Demographic" Usage="X" Min="0" Max="*">
 <Field Name="Living Dependency" Usage="X" Min="0" Max="*" Datatype="IS" Length="2" Table="0223" ItemNo="00755">
 <Reference>3.4.5.17</Reference>
 </Field>
@@ -1960,12 +1956,7 @@ third components.</Predicate>
 </SubComponent>
 </Component>
 <Component Name="name validity range" Usage="B" Datatype="DR" Length="53">
-<ImpNote>This component cannot be fully expressed. Identified as
-v
-2.4 erratum. Retained for backwards compatibility only
-as
-of v 2.5.  Refer to Effective Date and Expiration Date
-components.
+<ImpNote>This component cannot be fully expressed. Identified a
 </ImpNote>
 <SubComponent Name="range start date/time" Usage="RE" Datatype="TS" Length="26">
 </SubComponent>
@@ -2325,7 +2316,7 @@ third components.</Predicate>
 <Reference>3.4.10.21</Reference>
 </Field>
 </Segment>
-<Segment Name="ROL" LongName="Role" Usage="RE" Min="0" Max="*">
+<Segment Name="ROL" LongName="Role" Usage="RE" Min="0" Max="1">
 <Field Name="Role Instance ID" Usage="X" Min="0" Max="*" Datatype="EI" Length="424" ItemNo="01206">
 <Reference>15.4.7.1</Reference>
 <Component Name="entity identifier" Usage="RE" Datatype="ST" Length="199">
@@ -2508,12 +2499,7 @@ third components.</Predicate>
 </SubComponent>
 </Component>
 <Component Name="name validity range" Usage="X" Datatype="DR" Length="53">
-<ImpNote>This component cannot be fully expressed. Identified as
-v
-2.4 erratum. Retained for backwards compatibility only
-as
-of v 2.5.  Refer to Effective Date and Expiration Date
-components.
+<ImpNote>This component cannot be fully expressed. Identified a
 </ImpNote>
 <SubComponent Name="range start date/time" Usage="O" Datatype="TS" Length="26">
 </SubComponent>
@@ -2730,9 +2716,7 @@ components.
 <Field Name="Phone" Usage="C" Min="0" Max="10" Datatype="XTN" Length="451" ItemNo="00678">
 <Reference>15.4.7.12</Reference>
 <Component Name="telephone number" Usage="C" Datatype="ST" Length="25">
-<ImpNote>Format: [NNN] [(999)]999-9999 [X99999]
-[B99999] [C any
-text]
+<ImpNote>Format: [NNN] [(999)]999-9999 [X99999
 </ImpNote>
 </Component>
 <Component Name="telecommunication use code" Usage="R" Datatype="ID" Length="3" Table="0201">
@@ -3596,7 +3580,7 @@ third components.</Predicate>
 </Component>
 </Field>
 </Segment>
-<Segment Name="NK1" LongName="Next of Kin / Associated Parties" Usage="RE" Min="0" Max="*">
+<Segment Name="NK1" LongName="Next of Kin / Associated Parties" Usage="RE" Min="0" Max="1">
 <Field Name="Set ID - NK1" Usage="R" Min="1" Max="1" Datatype="SI" Length="4" ItemNo="00190">
 <Reference>3.4.5.1</Reference>
 </Field>
@@ -3750,9 +3734,7 @@ third components.</Predicate>
 <Field Name="Phone Number" Usage="C" Min="0" Max="1" Datatype="XTN" Length="451" ItemNo="00194">
 <Reference>3.4.5.5</Reference>
 <Component Name="telephone number" Usage="C" Datatype="ST" Length="25">
-<ImpNote>Format: [NNN] [(999)]999-9999 [X99999]
-[B99999] [C any
-text]
+<ImpNote>Format: [NNN] [(999)]999-9999 [X99999
 </ImpNote>
 </Component>
 <Component Name="telecommunication use code" Usage="R" Datatype="ID" Length="3" Table="0201">
@@ -3781,8 +3763,7 @@ text]
 <Field Name="Business Phone Number" Usage="X" Min="0" Max="*" Datatype="XTN" Length="250" ItemNo="00195">
 <Reference>3.4.5.6</Reference>
 <Component Name="telephone number" Usage="B" Datatype="ST" Length="199">
-<ImpNote>Format: [NNN] [(999)]999-9999 [X99999] [B99999] [C any
-text]
+<ImpNote>Format: [NNN] [(999)]999-9999 [X99999] [B99999] [C an
 </ImpNote>
 </Component>
 <Component Name="telecommunication use code" Usage="O" Datatype="ID" Length="3" Table="0201">
@@ -4359,8 +4340,7 @@ third components.</Predicate>
 <Field Name="Contact Person_s Telephone Number" Usage="X" Min="0" Max="*" Datatype="XTN" Length="250" ItemNo="00749">
 <Reference>3.4.5.31</Reference>
 <Component Name="telephone number" Usage="B" Datatype="ST" Length="199">
-<ImpNote>Format: [NNN] [(999)]999-9999 [X99999] [B99999] [C any
-text]
+<ImpNote>Format: [NNN] [(999)]999-9999 [X99999] [B99999] [C an
 </ImpNote>
 </Component>
 <Component Name="telecommunication use code" Usage="O" Datatype="ID" Length="3" Table="0201">
@@ -5068,12 +5048,7 @@ third components.</Predicate>
 </SubComponent>
 </Component>
 <Component Name="name validity range" Usage="X" Datatype="DR" Length="53">
-<ImpNote>This component cannot be fully expressed. Identified as
-v
-2.4 erratum. Retained for backwards compatibility only
-as
-of v 2.5.  Refer to Effective Date and Expiration Date
-components.
+<ImpNote>This component cannot be fully expressed. Identified a
 </ImpNote>
 <SubComponent Name="range start date/time" Usage="O" Datatype="TS" Length="26">
 </SubComponent>
@@ -5298,12 +5273,7 @@ third components.</Predicate>
 </SubComponent>
 </Component>
 <Component Name="name validity range" Usage="X" Datatype="DR" Length="53">
-<ImpNote>This component cannot be fully expressed. Identified as
-v
-2.4 erratum. Retained for backwards compatibility only
-as
-of v 2.5.  Refer to Effective Date and Expiration Date
-components.
+<ImpNote>This component cannot be fully expressed. Identified a
 </ImpNote>
 <SubComponent Name="range start date/time" Usage="O" Datatype="TS" Length="26">
 </SubComponent>
@@ -5379,7 +5349,7 @@ components.
 <Reference>3.4.3.9</Reference>
 <Component Name="ID number" Usage="R" Datatype="ST" Length="15">
 </Component>
-<Component Name="family name" Usage="O" Datatype="FN" Length="60">
+<Component Name="family name" Usage="RE" Datatype="FN" Length="60">
 <SubComponent Name="surname" Usage="R" Datatype="ST" Length="60">
 </SubComponent>
 <SubComponent Name="own surname prefix" Usage="X" Datatype="ST" Length="20">
@@ -5465,17 +5435,17 @@ the second and
 third components.</Predicate>
 </SubComponent>
 </Component>
-<Component Name="name type code" Usage="O" Datatype="ID" Length="1" Table="0200">
+<Component Name="name type code" Usage="X" Datatype="ID" Length="1" Table="0200">
 </Component>
-<Component Name="identifier check digit" Usage="O" Datatype="ST" Length="1">
+<Component Name="identifier check digit" Usage="X" Datatype="ST" Length="1">
 </Component>
 <Component Name="check digit scheme" Usage="C" Datatype="ID" Length="3" Table="0061">
 <Predicate>Contains the code identifying the check digit scheme 
 employed.</Predicate>
 </Component>
-<Component Name="identifier type code" Usage="O" Datatype="ID" Length="5" Table="0203">
+<Component Name="identifier type code" Usage="X" Datatype="ID" Length="5" Table="0203">
 </Component>
-<Component Name="assigning facility" Usage="O" Datatype="HD" Length="227">
+<Component Name="assigning facility" Usage="X" Datatype="HD" Length="227">
 <SubComponent Name="namespace ID" Usage="O" Datatype="IS" Length="20" Table="0300">
 </SubComponent>
 <SubComponent Name="universal ID" Usage="C" Datatype="ST" Length="199">
@@ -5511,9 +5481,9 @@ defines a member in the set defined by the second and
 third components.</Predicate>
 </SubComponent>
 </Component>
-<Component Name="name representation code" Usage="O" Datatype="ID" Length="1" Table="0465">
+<Component Name="name representation code" Usage="X" Datatype="ID" Length="1" Table="0465">
 </Component>
-<Component Name="name context" Usage="O" Datatype="CE" Length="483" Table="0448">
+<Component Name="name context" Usage="X" Datatype="CE" Length="483" Table="0448">
 <SubComponent Name="identifier" Usage="O" Datatype="ST" Length="20">
 </SubComponent>
 <SubComponent Name="text" Usage="O" Datatype="ST" Length="199">
@@ -5528,22 +5498,14 @@ third components.</Predicate>
 </SubComponent>
 </Component>
 <Component Name="name validity range" Usage="X" Datatype="DR" Length="53">
-<ImpNote>This component cannot be fully
-expressed. Identified as
-v
-2.4 erratum. Retained for backwards
-compatibility only
-as
-of v 2.5.  Refer to Effective Date and
-Expiration Date
-components.
+<ImpNote>This component cannot be full
 </ImpNote>
 <SubComponent Name="range start date/time" Usage="RE" Datatype="TS" Length="26">
 </SubComponent>
 <SubComponent Name="range end date/time" Usage="RE" Datatype="TS" Length="26">
 </SubComponent>
 </Component>
-<Component Name="name assembly order" Usage="O" Datatype="ID" Length="1" Table="0444">
+<Component Name="name assembly order" Usage="X" Datatype="ID" Length="1" Table="0444">
 </Component>
 <Component Name="effective date" Usage="X" Datatype="TS" Length="26">
 <SubComponent Name="time" Usage="R" Datatype="DTM" Length="24">
@@ -5565,9 +5527,9 @@ components.
 <DataValues ExValue="D" />
 </SubComponent>
 </Component>
-<Component Name="professional suffix" Usage="O" Datatype="ST" Length="199">
+<Component Name="professional suffix" Usage="X" Datatype="ST" Length="199">
 </Component>
-<Component Name="assigning jurisdiction" Usage="O" Datatype="CWE" Length="705">
+<Component Name="assigning jurisdiction" Usage="X" Datatype="CWE" Length="705">
 <SubComponent Name="identifier" Usage="O" Datatype="ST" Length="20">
 </SubComponent>
 <SubComponent Name="text" Usage="O" Datatype="ST" Length="199">
@@ -5587,7 +5549,7 @@ components.
 <SubComponent Name="original text" Usage="O" Datatype="ST" Length="199">
 </SubComponent>
 </Component>
-<Component Name="assigning agency or department" Usage="O" Datatype="CWE" Length="705">
+<Component Name="assigning agency or department" Usage="X" Datatype="CWE" Length="705">
 <SubComponent Name="identifier" Usage="O" Datatype="ST" Length="20">
 </SubComponent>
 <SubComponent Name="text" Usage="O" Datatype="ST" Length="199">
@@ -5882,12 +5844,7 @@ third components.</Predicate>
 </SubComponent>
 </Component>
 <Component Name="name validity range" Usage="X" Datatype="DR" Length="53">
-<ImpNote>This component cannot be fully expressed. Identified as
-v
-2.4 erratum. Retained for backwards compatibility only
-as
-of v 2.5.  Refer to Effective Date and Expiration Date
-components.
+<ImpNote>This component cannot be fully expressed. Identified a
 </ImpNote>
 <SubComponent Name="range start date/time" Usage="O" Datatype="TS" Length="26">
 </SubComponent>
@@ -6661,12 +6618,7 @@ third components.</Predicate>
 </SubComponent>
 </Component>
 <Component Name="name validity range" Usage="B" Datatype="DR" Length="53">
-<ImpNote>This component cannot be fully expressed. Identified as
-v
-2.4 erratum. Retained for backwards compatibility only
-as
-of v 2.5.  Refer to Effective Date and Expiration Date
-components.
+<ImpNote>This component cannot be fully expressed. Identified a
 </ImpNote>
 <SubComponent Name="range start date/time" Usage="RE" Datatype="TS" Length="26">
 </SubComponent>
@@ -7056,12 +7008,7 @@ third components.</Predicate>
 </SubComponent>
 </Component>
 <Component Name="name validity range" Usage="X" Datatype="DR" Length="53">
-<ImpNote>This component cannot be fully expressed. Identified as
-v
-2.4 erratum. Retained for backwards compatibility only
-as
-of v 2.5.  Refer to Effective Date and Expiration Date
-components.
+<ImpNote>This component cannot be fully expressed. Identified a
 </ImpNote>
 <SubComponent Name="range start date/time" Usage="O" Datatype="TS" Length="26">
 </SubComponent>
@@ -7438,7 +7385,567 @@ third components.</Predicate>
 <Reference>3.4.4.49</Reference>
 </Field>
 </Segment>
-<Segment Name="ROL" LongName="Role" Usage="RE" Min="0" Max="*">
+<Segment Name="IAM" LongName="Patient Adverse Reaction Information" Usage="RE" Min="0" Max="*">
+<Field Name="Set ID - IAM" Usage="RE" Min="0" Max="1" Datatype="SI" Length="4" ItemNo="01612">
+<Reference>3.4.7.1</Reference>
+</Field>
+<Field Name="Allergen Type Code" Usage="RE" Min="0" Max="1" Datatype="CE" Length="478" Table="0127" ItemNo="00204">
+<Reference>3.4.6.2</Reference>
+<Component Name="identifier" Usage="R" Datatype="ST" Length="5">
+</Component>
+<Component Name="text" Usage="RE" Datatype="ST" Length="199">
+</Component>
+<Component Name="name of coding system" Usage="R" Datatype="ID" Length="7" Table="0396">
+</Component>
+<Component Name="alternate identifier" Usage="O" Datatype="ST" Length="20">
+</Component>
+<Component Name="alternate text" Usage="O" Datatype="ST" Length="199">
+</Component>
+<Component Name="name of alternate coding system" Usage="O" Datatype="ID" Length="20" Table="0396">
+</Component>
+</Field>
+<Field Name="Allergen Code/Mnemonic/Description" Usage="R" Min="1" Max="1" Datatype="CE" Length="259" ItemNo="00205">
+<Reference>3.4.6.3</Reference>
+<Component Name="identifier" Usage="RE" Datatype="ST" Length="20">
+</Component>
+<Component Name="text" Usage="R" Datatype="ST" Length="199">
+</Component>
+<Component Name="name of coding system" Usage="R" Datatype="ID" Length="40" Table="0396">
+</Component>
+<Component Name="alternate identifier" Usage="X" Datatype="ST" Length="20">
+</Component>
+<Component Name="alternate text" Usage="X" Datatype="ST" Length="199">
+</Component>
+<Component Name="name of alternate coding system" Usage="X" Datatype="ID" Length="20" Table="0396">
+</Component>
+</Field>
+<Field Name="Allergy Severity Code" Usage="RE" Min="0" Max="1" Datatype="CE" Length="478" Table="0128" ItemNo="00206">
+<Reference>3.4.6.4</Reference>
+<Component Name="identifier" Usage="R" Datatype="ST" Length="5">
+</Component>
+<Component Name="text" Usage="RE" Datatype="ST" Length="199">
+</Component>
+<Component Name="name of coding system" Usage="R" Datatype="ID" Length="7" Table="0396">
+</Component>
+<Component Name="alternate identifier" Usage="O" Datatype="ST" Length="20">
+</Component>
+<Component Name="alternate text" Usage="O" Datatype="ST" Length="199">
+</Component>
+<Component Name="name of alternate coding system" Usage="O" Datatype="ID" Length="20" Table="0396">
+</Component>
+</Field>
+<Field Name="Allergy Reaction Code" Usage="RE" Min="0" Max="10" Datatype="ST" Length="60" ItemNo="00207">
+<Reference>3.4.6.5</Reference>
+</Field>
+<Field Name="Allergy Action Code" Usage="X" Min="0" Max="*" Datatype="CNE" Length="697" Table="0323" ItemNo="01551">
+<Reference>3.4.7.6</Reference>
+<Component Name="identifier" Usage="R" Datatype="ST" Length="20">
+</Component>
+<Component Name="text" Usage="X" Datatype="ST" Length="199">
+</Component>
+<Component Name="name of coding system" Usage="X" Datatype="ID" Length="20" Table="0396">
+</Component>
+<Component Name="alternate identifier" Usage="X" Datatype="ST" Length="20">
+</Component>
+<Component Name="alternate text" Usage="X" Datatype="ST" Length="199">
+</Component>
+<Component Name="name of alternate coding system" Usage="X" Datatype="ID" Length="20" Table="0396">
+</Component>
+<Component Name="coding system version ID" Usage="X" Datatype="ST" Length="10">
+</Component>
+<Component Name="alternate coding system version ID" Usage="X" Datatype="ST" Length="10">
+</Component>
+<Component Name="original text" Usage="X" Datatype="ST" Length="199">
+</Component>
+</Field>
+<Field Name="Allergy Unique Identifier" Usage="X" Min="0" Max="*" Datatype="EI" Length="427" ItemNo="01552">
+<Reference>3.4.7.7</Reference>
+<Component Name="entity identifier" Usage="RE" Datatype="ST" Length="199">
+</Component>
+<Component Name="namespace ID" Usage="X" Datatype="IS" Length="20" Table="0363">
+</Component>
+<Component Name="universal ID" Usage="C" Datatype="ST" Length="199">
+</Component>
+<Component Name="universal ID type" Usage="C" Datatype="ID" Length="6" Table="0301">
+</Component>
+</Field>
+<Field Name="Action Reason" Usage="X" Min="0" Max="*" Datatype="ST" Length="60" ItemNo="01553">
+<Reference>3.4.7.8</Reference>
+</Field>
+<Field Name="Sensitivity to Causative Agent Code" Usage="X" Min="0" Max="*" Datatype="CE" Length="478" Table="0436" ItemNo="01554">
+<Reference>3.4.7.9</Reference>
+<Component Name="identifier" Usage="O" Datatype="ST" Length="20">
+</Component>
+<Component Name="text" Usage="O" Datatype="ST" Length="199">
+</Component>
+<Component Name="name of coding system" Usage="O" Datatype="ID" Length="20" Table="0396">
+</Component>
+<Component Name="alternate identifier" Usage="O" Datatype="ST" Length="20">
+</Component>
+<Component Name="alternate text" Usage="O" Datatype="ST" Length="199">
+</Component>
+<Component Name="name of alternate coding system" Usage="O" Datatype="ID" Length="20" Table="0396">
+</Component>
+</Field>
+<Field Name="Allergen Group Code/Mnemonic/Description" Usage="X" Min="0" Max="*" Datatype="CE" Length="478" ItemNo="01555">
+<Reference>3.4.7.10</Reference>
+<Component Name="identifier" Usage="O" Datatype="ST" Length="20">
+</Component>
+<Component Name="text" Usage="O" Datatype="ST" Length="199">
+</Component>
+<Component Name="name of coding system" Usage="O" Datatype="ID" Length="20" Table="0396">
+</Component>
+<Component Name="alternate identifier" Usage="O" Datatype="ST" Length="20">
+</Component>
+<Component Name="alternate text" Usage="O" Datatype="ST" Length="199">
+</Component>
+<Component Name="name of alternate coding system" Usage="O" Datatype="ID" Length="20" Table="0396">
+</Component>
+</Field>
+<Field Name="Onset Date" Usage="RE" Min="0" Max="1" Datatype="DT" Length="8" ItemNo="01556">
+<Reference>3.4.7.11</Reference>
+</Field>
+<Field Name="Onset Date Text" Usage="RE" Min="0" Max="1" Datatype="ST" Length="60" ItemNo="01557">
+<Reference>3.4.7.12</Reference>
+</Field>
+<Field Name="Reported Date/Time" Usage="RE" Min="0" Max="1" Datatype="TS" Length="24" ItemNo="01558">
+<Reference>3.4.7.13</Reference>
+<Component Name="time" Usage="R" Datatype="DTM" Length="24">
+<DataValues ExValue="20040328134623.1234+0300" />
+</Component>
+<Component Name="degree of precision" Usage="X" Datatype="ST" Length="1" Table="0529">
+<ImpNote>Retained for backward compatibility only
+</ImpNote>
+<DataValues ExValue="D" />
+</Component>
+</Field>
+<Field Name="Reported By" Usage="X" Min="0" Max="*" Datatype="XPN" Length="294" ItemNo="01559">
+<Reference>3.4.7.14</Reference>
+<Component Name="family name" Usage="RE" Datatype="FN" Length="194">
+<SubComponent Name="surname" Usage="R" Datatype="ST" Length="50">
+</SubComponent>
+<SubComponent Name="own surname prefix" Usage="X" Datatype="ST" Length="20">
+</SubComponent>
+<SubComponent Name="own surname" Usage="X" Datatype="ST" Length="50">
+</SubComponent>
+<SubComponent Name="surname prefix from partner/spouse" Usage="X" Datatype="ST" Length="20">
+</SubComponent>
+<SubComponent Name="surname from partner/spouse" Usage="X" Datatype="ST" Length="50">
+</SubComponent>
+</Component>
+<Component Name="given name" Usage="X" Datatype="ST" Length="30">
+</Component>
+<Component Name="second and further given names or initials thereof" Usage="X" Datatype="ST" Length="30">
+</Component>
+<Component Name="suffix (e.g., JR or III)" Usage="X" Datatype="ST" Length="20">
+</Component>
+<Component Name="prefix (e.g., DR)" Usage="X" Datatype="ST" Length="20">
+</Component>
+<Component Name="degree (e.g., MD)" Usage="X" Datatype="IS" Length="6" Table="0360">
+</Component>
+<Component Name="name type code" Usage="X" Datatype="ID" Length="1" Table="0200">
+</Component>
+<Component Name="name representation code" Usage="X" Datatype="ID" Length="1" Table="0465">
+</Component>
+<Component Name="name context" Usage="X" Datatype="CE" Length="483" Table="0448">
+<SubComponent Name="identifier" Usage="O" Datatype="ST" Length="20">
+</SubComponent>
+<SubComponent Name="text" Usage="O" Datatype="ST" Length="199">
+</SubComponent>
+<SubComponent Name="name of coding system" Usage="O" Datatype="ID" Length="20" Table="0396">
+</SubComponent>
+<SubComponent Name="alternate identifier" Usage="O" Datatype="ST" Length="20">
+</SubComponent>
+<SubComponent Name="alternate text" Usage="O" Datatype="ST" Length="199">
+</SubComponent>
+<SubComponent Name="name of alternate coding system" Usage="O" Datatype="ID" Length="20" Table="0396">
+</SubComponent>
+</Component>
+<Component Name="name validity range" Usage="X" Datatype="DR" Length="53">
+<SubComponent Name="range start date/time" Usage="O" Datatype="TS" Length="26">
+</SubComponent>
+<SubComponent Name="range end date/time" Usage="O" Datatype="TS" Length="26">
+</SubComponent>
+</Component>
+<Component Name="name assembly order" Usage="X" Datatype="ID" Length="1" Table="0444">
+</Component>
+<Component Name="effective date" Usage="RE" Datatype="TS" Length="26">
+<SubComponent Name="time" Usage="R" Datatype="DTM" Length="24">
+<DataValues ExValue="20040328134623.1234+0300" />
+</SubComponent>
+<SubComponent Name="degree of precision" Usage="X" Datatype="ST" Length="1" Table="0529">
+<ImpNote>Retained for backward compatibility only
+</ImpNote>
+<DataValues ExValue="D" />
+</SubComponent>
+</Component>
+<Component Name="expiration date" Usage="RE" Datatype="TS" Length="26">
+<SubComponent Name="time" Usage="R" Datatype="DTM" Length="24">
+<DataValues ExValue="20040328134623.1234+0300" />
+</SubComponent>
+<SubComponent Name="degree of precision" Usage="X" Datatype="ST" Length="1" Table="0529">
+<ImpNote>Retained for backward compatibility only
+</ImpNote>
+<DataValues ExValue="D" />
+</SubComponent>
+</Component>
+<Component Name="professional suffix" Usage="X" Datatype="ST" Length="199">
+</Component>
+</Field>
+<Field Name="Relationship to Patient Code" Usage="RE" Min="0" Max="1" Datatype="CE" Length="478" Table="0063" ItemNo="01560">
+<Reference>3.4.7.15</Reference>
+<Component Name="identifier" Usage="R" Datatype="ST" Length="5">
+</Component>
+<Component Name="text" Usage="RE" Datatype="ST" Length="199">
+</Component>
+<Component Name="name of coding system" Usage="R" Datatype="ID" Length="7" Table="0396">
+</Component>
+<Component Name="alternate identifier" Usage="O" Datatype="ST" Length="20">
+</Component>
+<Component Name="alternate text" Usage="O" Datatype="ST" Length="199">
+</Component>
+<Component Name="name of alternate coding system" Usage="O" Datatype="ID" Length="20" Table="0396">
+</Component>
+</Field>
+<Field Name="Alert Device Code" Usage="X" Min="0" Max="*" Datatype="CE" Length="478" Table="0437" ItemNo="01561">
+<Reference>3.4.7.16</Reference>
+<Component Name="identifier" Usage="O" Datatype="ST" Length="20">
+</Component>
+<Component Name="text" Usage="O" Datatype="ST" Length="199">
+</Component>
+<Component Name="name of coding system" Usage="O" Datatype="ID" Length="20" Table="0396">
+</Component>
+<Component Name="alternate identifier" Usage="O" Datatype="ST" Length="20">
+</Component>
+<Component Name="alternate text" Usage="O" Datatype="ST" Length="199">
+</Component>
+<Component Name="name of alternate coding system" Usage="O" Datatype="ID" Length="20" Table="0396">
+</Component>
+</Field>
+<Field Name="Allergy Clinical Status Code" Usage="X" Min="0" Max="*" Datatype="CE" Length="478" Table="0438" ItemNo="01562">
+<Reference>3.4.7.17</Reference>
+<Component Name="identifier" Usage="O" Datatype="ST" Length="20">
+</Component>
+<Component Name="text" Usage="O" Datatype="ST" Length="199">
+</Component>
+<Component Name="name of coding system" Usage="O" Datatype="ID" Length="20" Table="0396">
+</Component>
+<Component Name="alternate identifier" Usage="O" Datatype="ST" Length="20">
+</Component>
+<Component Name="alternate text" Usage="O" Datatype="ST" Length="199">
+</Component>
+<Component Name="name of alternate coding system" Usage="O" Datatype="ID" Length="20" Table="0396">
+</Component>
+</Field>
+<Field Name="Statused by Person" Usage="X" Min="0" Max="*" Datatype="XCN" Length="309" ItemNo="01563">
+<Reference>3.4.7.18</Reference>
+<Component Name="ID numbee" Usage="X" Datatype="ST" Length="15">
+</Component>
+<Component Name="family name" Usage="RE" Datatype="FN" Length="194">
+<SubComponent Name="surname" Usage="R" Datatype="ST" Length="50">
+</SubComponent>
+<SubComponent Name="own surname prefix" Usage="X" Datatype="ST" Length="20">
+</SubComponent>
+<SubComponent Name="own surname" Usage="X" Datatype="ST" Length="50">
+</SubComponent>
+<SubComponent Name="surname prefix from partner/spouse" Usage="X" Datatype="ST" Length="20">
+</SubComponent>
+<SubComponent Name="surname from partner/spouse" Usage="X" Datatype="ST" Length="50">
+</SubComponent>
+</Component>
+<Component Name="given name" Usage="X" Datatype="ST" Length="30">
+</Component>
+<Component Name="second and further given names or initials thereof" Usage="X" Datatype="ST" Length="30">
+</Component>
+<Component Name="suffix (e.g., JR or III)" Usage="X" Datatype="ST" Length="20">
+</Component>
+<Component Name="prefix (e.g., DR)" Usage="X" Datatype="ST" Length="20">
+</Component>
+<Component Name="degree (e.g., MD)" Usage="X" Datatype="IS" Length="5" Table="0360">
+</Component>
+<Component Name="source table" Usage="C" Datatype="IS" Length="4" Table="0297">
+<Predicate>Used to delineate the first component.</Predicate>
+</Component>
+<Component Name="assigning authority" Usage="X" Datatype="HD" Length="227" Table="0363">
+<SubComponent Name="namespace ID" Usage="O" Datatype="IS" Length="20" Table="0300">
+</SubComponent>
+<SubComponent Name="universal ID" Usage="C" Datatype="ST" Length="199">
+<Predicate>If the first component for the HD data type is present, 
+the second and third components are optional. If the 
+third component is present, then the second must also 
+be present (although in this case the first is optional). 
+The second and third components must either both be 
+valued (both non-null), or both be not valued (both null). 
+This means that if all three components of the HD are 
+valued, the entity identified by the first component is the 
+same as the entity identified by components two and 
+three taken together. However, implementers may 
+choose, by site agreement, to specify that if all three 
+components of the HD are valued, the first component 
+defines a member in the set defined by the second and 
+third components.</Predicate>
+</SubComponent>
+<SubComponent Name="universal ID type" Usage="C" Datatype="ID" Length="6" Table="0301">
+<Predicate>If the first component for the HD data type is present, 
+the second and third components are optional. If the 
+third component is present, then the second must also 
+be present (although in this case the first is optional). 
+The second and third components must either both be 
+valued (both non-null), or both be not valued (both null). 
+This means that if all three components of the HD are 
+valued, the entity identified by the first component is the 
+same as the entity identified by components two and 
+three taken together. However, implementers may 
+choose, by site agreement, to specify that if all three 
+components of the HD are valued, the first component 
+defines a member in the set defined by the second and 
+third components.</Predicate>
+</SubComponent>
+</Component>
+<Component Name="name type code" Usage="X" Datatype="ID" Length="1" Table="0200">
+</Component>
+<Component Name="identifier check digit" Usage="X" Datatype="ST" Length="1">
+</Component>
+<Component Name="check digit scheme" Usage="C" Datatype="ID" Length="3" Table="0061">
+<Predicate>Contains the code identifying the check digit scheme 
+employed.</Predicate>
+</Component>
+<Component Name="identifier type code" Usage="X" Datatype="ID" Length="5" Table="0203">
+</Component>
+<Component Name="assigning facility" Usage="X" Datatype="HD" Length="227">
+<SubComponent Name="namespace ID" Usage="O" Datatype="IS" Length="20" Table="0300">
+</SubComponent>
+<SubComponent Name="universal ID" Usage="C" Datatype="ST" Length="199">
+<Predicate>If the first component for the HD data type is present, 
+the second and third components are optional. If the 
+third component is present, then the second must also 
+be present (although in this case the first is optional). 
+The second and third components must either both be 
+valued (both non-null), or both be not valued (both null). 
+This means that if all three components of the HD are 
+valued, the entity identified by the first component is the 
+same as the entity identified by components two and 
+three taken together. However, implementers may 
+choose, by site agreement, to specify that if all three 
+components of the HD are valued, the first component 
+defines a member in the set defined by the second and 
+third components.</Predicate>
+</SubComponent>
+<SubComponent Name="universal ID type" Usage="C" Datatype="ID" Length="6" Table="0301">
+<Predicate>If the first component for the HD data type is present, 
+the second and third components are optional. If the 
+third component is present, then the second must also 
+be present (although in this case the first is optional). 
+The second and third components must either both be 
+valued (both non-null), or both be not valued (both null). 
+This means that if all three components of the HD are 
+valued, the entity identified by the first component is the 
+same as the entity identified by components two and 
+three taken together. However, implementers may 
+choose, by site agreement, to specify that if all three 
+components of the HD are valued, the first component 
+defines a member in the set defined by the second and 
+third components.</Predicate>
+</SubComponent>
+</Component>
+<Component Name="name representation code" Usage="X" Datatype="ID" Length="1" Table="0465">
+</Component>
+<Component Name="name context" Usage="X" Datatype="CE" Length="483" Table="0448">
+<SubComponent Name="identifier" Usage="O" Datatype="ST" Length="20">
+</SubComponent>
+<SubComponent Name="text" Usage="O" Datatype="ST" Length="199">
+</SubComponent>
+<SubComponent Name="name of coding system" Usage="O" Datatype="ID" Length="20" Table="0396">
+</SubComponent>
+<SubComponent Name="alternate identifier" Usage="O" Datatype="ST" Length="20">
+</SubComponent>
+<SubComponent Name="alternate text" Usage="O" Datatype="ST" Length="199">
+</SubComponent>
+<SubComponent Name="name of alternate coding system" Usage="O" Datatype="ID" Length="20" Table="0396">
+</SubComponent>
+</Component>
+<Component Name="name validity range" Usage="X" Datatype="DR" Length="53">
+<ImpNote>This component cannot be fully expressed. Identified as
+v
+2.4 erratum. Retained for backwards compatibility only
+as
+of v 2.5.  Refer to Effective Date and Expiration Date
+components.
+</ImpNote>
+<SubComponent Name="range start date/time" Usage="O" Datatype="TS" Length="26">
+</SubComponent>
+<SubComponent Name="range end date/time" Usage="O" Datatype="TS" Length="26">
+</SubComponent>
+</Component>
+<Component Name="name assembly order" Usage="X" Datatype="ID" Length="1" Table="0444">
+</Component>
+<Component Name="effective date" Usage="RE" Datatype="TS" Length="26">
+<SubComponent Name="time" Usage="R" Datatype="DTM" Length="24">
+<DataValues ExValue="20040328134623.1234+0300" />
+</SubComponent>
+<SubComponent Name="degree of precision" Usage="X" Datatype="ST" Length="1" Table="0529">
+<ImpNote>Retained for backward compatibility only
+</ImpNote>
+<DataValues ExValue="D" />
+</SubComponent>
+</Component>
+<Component Name="expiration date" Usage="RE" Datatype="TS" Length="26">
+<SubComponent Name="time" Usage="R" Datatype="DTM" Length="24">
+<DataValues ExValue="20040328134623.1234+0300" />
+</SubComponent>
+<SubComponent Name="degree of precision" Usage="X" Datatype="ST" Length="1" Table="0529">
+<ImpNote>Retained for backward compatibility only
+</ImpNote>
+<DataValues ExValue="D" />
+</SubComponent>
+</Component>
+<Component Name="professional suffix" Usage="X" Datatype="ST" Length="199">
+</Component>
+<Component Name="assigning jurisdiction" Usage="X" Datatype="CWE" Length="705">
+<SubComponent Name="identifier" Usage="O" Datatype="ST" Length="20">
+</SubComponent>
+<SubComponent Name="text" Usage="O" Datatype="ST" Length="199">
+</SubComponent>
+<SubComponent Name="name of coding system" Usage="O" Datatype="ID" Length="20" Table="0396">
+</SubComponent>
+<SubComponent Name="alternate identifier" Usage="O" Datatype="ST" Length="20">
+</SubComponent>
+<SubComponent Name="alternate text" Usage="O" Datatype="ST" Length="199">
+</SubComponent>
+<SubComponent Name="name of alternate coding system" Usage="O" Datatype="ID" Length="20" Table="0396">
+</SubComponent>
+<SubComponent Name="coding system version ID" Usage="O" Datatype="ST" Length="10">
+</SubComponent>
+<SubComponent Name="alternate coding system version ID" Usage="O" Datatype="ST" Length="10">
+</SubComponent>
+<SubComponent Name="original text" Usage="O" Datatype="ST" Length="199">
+</SubComponent>
+</Component>
+<Component Name="assigning agency or department" Usage="X" Datatype="CWE" Length="705">
+<SubComponent Name="identifier" Usage="O" Datatype="ST" Length="20">
+</SubComponent>
+<SubComponent Name="text" Usage="O" Datatype="ST" Length="199">
+</SubComponent>
+<SubComponent Name="name of coding system" Usage="O" Datatype="ID" Length="20" Table="0396">
+</SubComponent>
+<SubComponent Name="alternate identifier" Usage="O" Datatype="ST" Length="20">
+</SubComponent>
+<SubComponent Name="alternate text" Usage="O" Datatype="ST" Length="199">
+</SubComponent>
+<SubComponent Name="name of alternate coding system" Usage="O" Datatype="ID" Length="20" Table="0396">
+</SubComponent>
+<SubComponent Name="coding system version ID" Usage="O" Datatype="ST" Length="10">
+</SubComponent>
+<SubComponent Name="alternate coding system version ID" Usage="O" Datatype="ST" Length="10">
+</SubComponent>
+<SubComponent Name="original text" Usage="O" Datatype="ST" Length="199">
+</SubComponent>
+</Component>
+</Field>
+<Field Name="Statused by Organization" Usage="X" Min="0" Max="*" Datatype="XON" Length="250" ItemNo="01564">
+<Reference>3.4.7.19</Reference>
+<Component Name="organization name" Usage="O" Datatype="ST" Length="50">
+</Component>
+<Component Name="organization name type code" Usage="O" Datatype="IS" Length="20" Table="0204">
+</Component>
+<Component Name="ID number" Usage="B" Datatype="NM" Length="4">
+</Component>
+<Component Name="check digit" Usage="O" Datatype="NM" Length="1">
+</Component>
+<Component Name="check digit scheme" Usage="O" Datatype="ID" Length="3" Table="0061">
+</Component>
+<Component Name="assigning authority" Usage="O" Datatype="HD" Length="227" Table="0363">
+<SubComponent Name="namespace ID" Usage="O" Datatype="IS" Length="20" Table="0300">
+</SubComponent>
+<SubComponent Name="universal ID" Usage="C" Datatype="ST" Length="199">
+<Predicate>If the first component for the HD data type is present, 
+the second and third components are optional. If the 
+third component is present, then the second must also 
+be present (although in this case the first is optional). 
+The second and third components must either both be 
+valued (both non-null), or both be not valued (both null). 
+This means that if all three components of the HD are 
+valued, the entity identified by the first component is the 
+same as the entity identified by components two and 
+three taken together. However, implementers may 
+choose, by site agreement, to specify that if all three 
+components of the HD are valued, the first component 
+defines a member in the set defined by the second and 
+third components.</Predicate>
+</SubComponent>
+<SubComponent Name="universal ID type" Usage="C" Datatype="ID" Length="6" Table="0301">
+<Predicate>If the first component for the HD data type is present, 
+the second and third components are optional. If the 
+third component is present, then the second must also 
+be present (although in this case the first is optional). 
+The second and third components must either both be 
+valued (both non-null), or both be not valued (both null). 
+This means that if all three components of the HD are 
+valued, the entity identified by the first component is the 
+same as the entity identified by components two and 
+three taken together. However, implementers may 
+choose, by site agreement, to specify that if all three 
+components of the HD are valued, the first component 
+defines a member in the set defined by the second and 
+third components.</Predicate>
+</SubComponent>
+</Component>
+<Component Name="identifier type code" Usage="O" Datatype="IS" Length="5" Table="0203">
+</Component>
+<Component Name="assigning facility ID" Usage="O" Datatype="HD" Length="227">
+<SubComponent Name="namespace ID" Usage="O" Datatype="IS" Length="20" Table="0300">
+</SubComponent>
+<SubComponent Name="universal ID" Usage="C" Datatype="ST" Length="199">
+<Predicate>If the first component for the HD data type is present, 
+the second and third components are optional. If the 
+third component is present, then the second must also 
+be present (although in this case the first is optional). 
+The second and third components must either both be 
+valued (both non-null), or both be not valued (both null). 
+This means that if all three components of the HD are 
+valued, the entity identified by the first component is the 
+same as the entity identified by components two and 
+three taken together. However, implementers may 
+choose, by site agreement, to specify that if all three 
+components of the HD are valued, the first component 
+defines a member in the set defined by the second and 
+third components.</Predicate>
+</SubComponent>
+<SubComponent Name="universal ID type" Usage="C" Datatype="ID" Length="6" Table="0301">
+<Predicate>If the first component for the HD data type is present, 
+the second and third components are optional. If the 
+third component is present, then the second must also 
+be present (although in this case the first is optional). 
+The second and third components must either both be 
+valued (both non-null), or both be not valued (both null). 
+This means that if all three components of the HD are 
+valued, the entity identified by the first component is the 
+same as the entity identified by components two and 
+three taken together. However, implementers may 
+choose, by site agreement, to specify that if all three 
+components of the HD are valued, the first component 
+defines a member in the set defined by the second and 
+third components.</Predicate>
+</SubComponent>
+</Component>
+<Component Name="name representation code" Usage="O" Datatype="ID" Length="1" Table="0465">
+</Component>
+<Component Name="organization identifier" Usage="O" Datatype="ST" Length="20">
+</Component>
+</Field>
+<Field Name="Statused at Date/Time" Usage="X" Min="0" Max="*" Datatype="TS" Length="24" ItemNo="01565">
+<Reference>3.4.7.20</Reference>
+<Component Name="time" Usage="R" Datatype="DTM" Length="24">
+<DataValues ExValue="20040328134623.1234+0300" />
+</Component>
+<Component Name="degree of precision" Usage="X" Datatype="ST" Length="1" Table="0529">
+<ImpNote>Retained for backward compatibility only
+</ImpNote>
+<DataValues ExValue="D" />
+</Component>
+</Field>
+</Segment>
+<Segment Name="ROL" LongName="Role" Usage="RE" Min="0" Max="1">
 <Field Name="Role Instance ID" Usage="X" Min="0" Max="*" Datatype="EI" Length="424" ItemNo="01206">
 <Reference>15.4.7.1</Reference>
 <Component Name="entity identifier" Usage="RE" Datatype="ST" Length="199">
@@ -7621,12 +8128,7 @@ third components.</Predicate>
 </SubComponent>
 </Component>
 <Component Name="name validity range" Usage="X" Datatype="DR" Length="53">
-<ImpNote>This component cannot be fully expressed. Identified as
-v
-2.4 erratum. Retained for backwards compatibility only
-as
-of v 2.5.  Refer to Effective Date and Expiration Date
-components.
+<ImpNote>This component cannot be fully expressed. Identified a
 </ImpNote>
 <SubComponent Name="range start date/time" Usage="O" Datatype="TS" Length="26">
 </SubComponent>
@@ -7842,9 +8344,7 @@ components.
 <Field Name="Phone" Usage="C" Min="0" Max="1" Datatype="XTN" Length="451" ItemNo="00678">
 <Reference>15.4.7.12</Reference>
 <Component Name="telephone number" Usage="C" Datatype="ST" Length="25">
-<ImpNote>Format: [NNN] [(999)]999-9999 [X99999]
-[B99999] [C any
-text]
+<ImpNote>Format: [NNN] [(999)]999-9999 [X99999
 </ImpNote>
 </Component>
 <Component Name="telecommunication use code" Usage="R" Datatype="ID" Length="3" Table="0201">
@@ -7871,7 +8371,7 @@ text]
 </Component>
 </Field>
 </Segment>
-<Segment Name="DG1" LongName="Diagnosis" Usage="RE" Min="0" Max="*">
+<Segment Name="DG1" LongName="Diagnosis" Usage="RE" Min="0" Max="1">
 <Field Name="Set ID - DG1" Usage="R" Min="1" Max="1" Datatype="SI" Length="4" ItemNo="00375">
 <Reference>6.5.2.1</Reference>
 </Field>
@@ -8129,12 +8629,7 @@ third components.</Predicate>
 </SubComponent>
 </Component>
 <Component Name="name validity range" Usage="X" Datatype="DR" Length="53">
-<ImpNote>This component cannot be fully expressed. Identified as
-v
-2.4 erratum. Retained for backwards compatibility only
-as
-of v 2.5.  Refer to Effective Date and Expiration Date
-components.
+<ImpNote>This component cannot be fully expressed. Identified a
 </ImpNote>
 <SubComponent Name="range start date/time" Usage="O" Datatype="TS" Length="26">
 </SubComponent>

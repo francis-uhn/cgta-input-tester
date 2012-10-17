@@ -26,7 +26,18 @@ public class Ce {
 	 */
 	@Override
 	public boolean equals(Object theObj) {
-		return (theObj instanceof Ce) && myCode.equals(((Ce) theObj).myCode) && myCodeSystem.equals(((Ce) theObj).myCodeSystem);
+//		return (theObj instanceof Ce) && myCode.equals(((Ce) theObj).myCode) && myCodeSystem.equals(((Ce) theObj).myCodeSystem);
+	    
+	    if (!(theObj instanceof Ce)){
+	        return false;
+	    }
+	    
+	    boolean sameCode = (StringUtils.isBlank(myCode))?(StringUtils.isBlank(((Ce) theObj).myCode)): myCode.equals(((Ce) theObj).myCode); 
+	    
+	    boolean sameCodeSys = (StringUtils.isBlank(myCodeSystem))?(StringUtils.isBlank(((Ce) theObj).myCodeSystem)): myCodeSystem.equals(((Ce) theObj).myCodeSystem);
+	    
+	    return (sameCode && sameCodeSys);
+		
 	}
 
 

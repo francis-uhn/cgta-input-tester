@@ -292,6 +292,12 @@ public class Converter {
             processVisit = false;            
         }
         
+        //PV1 segment is optional for an A45 - will process if it is there 
+        if ("A45".equals(retVal.myMostRecentEventCode)) {
+            if(theAdt.getPV1().isEmpty()) {
+            	processVisit = false;            
+            }
+        }
 
         // Unlink person
         if ("A37".equals(retVal.myMostRecentEventCode)) {

@@ -1208,8 +1208,20 @@ public class AdtTest {
         
         PatientWithVisitsContainer pwvContainer = pwvContainers.get(0);
         Patient patient = pwvContainer.getDocument().myPatient;
-        Visit preCvisit = pwvContainer.getDocument().myVisits.get(0);
-        Visit postCvisit = pwvContainer.getDocument().myVisits.get(1);
+        Visit preCvisit = null;                
+        Visit postCvisit = null;
+        
+        List<Visit> visits = pwvContainer.getDocument().myVisits;
+        for (Visit visit : visits) {
+            if ( visit.myVisitNumber.myIdNumber.equals("11110000514")) {
+                preCvisit = visit;                
+            }
+            if ( visit.myVisitNumber.myIdNumber.equals("11110000515")) {
+                postCvisit = visit;                
+            }            
+        }
+        assertTrue(preCvisit != null && postCvisit != null);
+        
         
         //check patient lastUpdateTime
         Date now = new Date();
@@ -3986,6 +3998,209 @@ public class AdtTest {
     
     
     /**
+     * Test patient merge A40
+     * - both prior and current patient exist
+     * - after the merge, update the visit that used to be associated to the prior patient
+     *   and make sure that the corresponding visit in the kept patient gets correctly updated.
+     *   This visit should exist in the kept patient's mergedInPatientWithVists field. In this
+     *   case we'll update the physician assignments 
+     *   
+     * @throws Exception ...
+     */
+    @Test
+    public void testAdtA40e() throws Exception {
+        
+
+        String priorPatientMsg = "MSH|^~\\&|EPR|G^2.16.840.1.113883.3.59.3:947^L|||201112021621||ADT^A01^ADT_A01|123484|T^|2.5^^||||||CAN||||\r" + 
+                "EVN|A01|201112021621||||201112021621|G^4265^L\r" + 
+                "PID|||7012672^^^UHN^MR^^^^^^^~9287170261^BL^^CANON^JHN^^^^^20111201^^~HN2827^^^UHN^PI^^^^^^^||Test2^Majaconversion2^^^Mrs.^^L^^^^^201112221537^^~Test^Maj^^^Mrs.^^A^^^^^^^||19731230|F|||1 Bloor Street ^^Toronto^ON^L9K 8J7^Can^H^^^^^^^~|12333|(415)222-3333^PRN^PH^^^^^^^^^~||eng^English^03ZPtlang^^^|||11110000513^^^UHN^VN^^^^^^^~||||||||||||N|||201112221537||||||\r" + 
+                "PV1||I|PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|C||^^^G^4265^^^^^^^  ^|13546a^Generic^Physician^MoeA^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546b^Generic^Physician^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^||hospServ||||D|||13546c^Generic^Physician^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000513^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021621|||||||V|\r";
+        
+        
+        String currentPatientMsg = "MSH|^~\\&|EPR|G^2.16.840.1.113883.3.59.3:947^L|||201112021621||ADT^A01^ADT_A01|123484|T^|2.5^^||||||CAN||||\r" + 
+                "EVN|A01|201112021621||||201112021621|G^4265^L\r" + 
+                "PID|||7012673^^^UHN^MR^^^^^^^~9287170262^BL^^CANON^JHN^^^^^20111201^^~HN2827^^^UHN^PI^^^^^^^||Test^Majaconversion^^^Mrs.^^L^^^^^201112221537^^~Test^Maj^^^Mrs.^^A^^^^^^^||19731230|F|||1 Bloor Street ^^Toronto^ON^L9K 8J7^Can^H^^^^^^^~|12333|(415)222-3333^PRN^PH^^^^^^^^^~||eng^English^03ZPtlang^^^|||11110000514^^^UHN^VN^^^^^^^~||||||||||||N|||201112221537||||||\r" + 
+                "PV1||I|PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|C||^^^G^4265^^^^^^^  ^|13546a^Generic^Physician^MoeA^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546b^Generic^Physician^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^||hospServ||||D|||13546c^Generic^Physician^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000514^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021621|||||||V|\r"; 
+        
+        
+        String mrgMsg = "MSH|^~\\&|EPR|G^2.16.840.1.113883.3.59.3:947^L|||201202291235||ADT^A40^ADT_A39|126421|T^|2.5^^||||||CAN||||\r" + 
+                "EVN|A40|201202291235||||201202291235|G^4265^L\r" + 
+                "PID|||7012673^^^UHN^MR^^^^^^^~9287170262^BL^^CANON^JHN^^^^^20111201^^~HN2827^^^UHN^PI^^^^^^^||Test^Majaconversion^^^Mrs.^^L^^^^^201112221537^^~Test^Maj^^^Mrs.^^A^^^^^^^||19731230|F|||1 Bloor Street ^^Toronto^ON^L9K 8J7^Can^H^^^^^^^~|12333|(415)222-3333^PRN^PH^^^^^^^^^~||eng^English^03ZPtlang^^^|||11110000514^^^UHN^VN^^^^^^^~||||||||||||N|||201112221537||||||\r" +               
+                "PD1|||UHN^D^^^^UHN^FI^^^^^|13893^Generic^Moe^PhysicianThree^^Dr.^MD^^UHN^L^^^EI^^^^^^^^^^^^|||||||N^no special privacy^03ZPrvyFlg^^^|N|||||||||\r" + 
+                "MRG|7012672^^^UHN^MR^^^^^^^~~HN2827^^^UHN^PI^^^^^^^||||^^^^^^^^^^^||\r";
+        
+        String updatePriorPatVisit = "MSH|^~\\&|EPR|G^2.16.840.1.113883.3.59.3:947^L|||201202291235||ADT^A08^ADT_A01|126421|T^|2.5^^||||||CAN||||\r" + 
+                "EVN|A40|201201111123||||201201111123|G^4265^L\r" + 
+                "PID|||7012673^^^UHN^MR^^^^^^^~9287170262^BL^^CANON^JHN^^^^^20111201^^~HN2827^^^UHN^PI^^^^^^^||Test^Majaconversion^^^Mrs.^^L^^^^^201112221537^^~Test^Maj^^^Mrs.^^A^^^^^^^||19731230|F|||1 Bloor Street ^^Toronto^ON^L9K 8J7^Can^H^^^^^^^~|12333|(415)222-3333^PRN^PH^^^^^^^^^~||eng^English^03ZPtlang^^^|||11110000514^^^UHN^VN^^^^^^^~||||||||||||N|||201112221537||||||\r" + 
+                "PV1||I|PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|C||^^^G^4265^^^^^^^  ^|13546x^Generic^Physician^MoeX^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546x^Generic^Physician^MoeX^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^||hospServ||||D|||13546x^Generic^Physician^MoeX^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000513^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021621|||||||V|\r";
+                
+        
+        
+        Persister.persist(UhnConverter.convertAdtOrFail(priorPatientMsg));
+        Persister.persist(UhnConverter.convertAdtOrFail(currentPatientMsg));
+        Persister.persist(UhnConverter.convertAdtOrFail(mrgMsg));
+        Persister.persist(UhnConverter.convertAdtOrFail(updatePriorPatVisit));
+
+        
+        ViewQuery query = new ViewQuery().viewName("allVisits").designDocId("_design/application");
+        List<PatientWithVisitsContainer> pwvContainers = Persister.getConnector().queryView(query, PatientWithVisitsContainer.class);
+        
+        assertEquals(1, pwvContainers.size());
+                
+        PatientWithVisitsContainer pwvContainer = pwvContainers.get(0);
+        
+        Patient curPatient = pwvContainer.getDocument().myPatient;
+        
+        assertEquals(1, pwvContainer.getDocument().myVisits.size());
+        Visit curVisit = pwvContainer.getDocument().myVisits.get(0);
+        
+        Patient priorPatient = pwvContainer.getDocument().myMergedInPatientsWithVisits.get(0).myPatient;
+        
+        assertEquals(1, pwvContainer.getDocument().myMergedInPatientsWithVisits.get(0).myVisits.size());
+        Visit priorVisit = pwvContainer.getDocument().myMergedInPatientsWithVisits.get(0).myVisits.get(0);
+        
+        
+        //check patient lastUpdateTime
+        Date now = new Date();
+        long nowMilli = now.getTime();
+        assertTrue(nowMilli > curPatient.myRecordUpdatedDate.getTime());
+        
+        
+        //check current patient
+        assertEquals("F", curPatient.myAdministrativeSex);
+        assertEquals(ourTsFormat.parse("197312300000"), curPatient.myDateOfBirth);
+        assertEquals(null, curPatient.myDeathDateAndTime);
+        assertEquals("N", curPatient.myDeathIndicator);
+        assertEquals(null, curPatient.myMothersMaidenName);
+        
+        
+        Cx patId = curPatient.myPatientIds.get(0);
+        assertEquals("7012673", patId.myIdNumber);
+        assertEquals("MR", patId.myIdTypeCode);
+        
+        Xpn patName = curPatient.myPatientNames.get(0);
+        assertEquals("Test", patName.myLastName);
+        assertEquals("Majaconversion", patName.myFirstName);
+                
+        Xad patAddresses = curPatient.myPatientAddresses.get(0);
+        assertEquals("1 Bloor Street ", patAddresses.myStreetAddress);
+        assertEquals("Toronto", patAddresses.myCity);
+        
+        Xtn patPhone = curPatient.myPhoneNumbers.get(0);
+        assertEquals("(415)222-3333", patPhone.myPhoneNumber);
+        
+        Ce lang = curPatient.myPrimaryLanguage;
+        assertEquals("eng", lang.myCode);
+        assertEquals("English", lang.myText);
+        
+        
+        //check visit lastUpdateTime
+        assertTrue(nowMilli > curVisit.myRecordUpdatedDate.getTime()); 
+            
+        
+        //check current visit
+        assertEquals("11110000514", curVisit.myVisitNumber.myIdNumber);
+        assertEquals(Constants.ACTIVE_VISIT_STATUS, curVisit.myVisitStatus);
+        assertEquals("I", curVisit.myPatientClassCode);
+        assertEquals(ourTsFormat.parse("201112021621"), curVisit.myAdmitDate);
+        assertEquals("hospServ", curVisit.myHospitalService);
+        Pl loc = curVisit.myAssignedPatientLocation;
+        assertEquals("PMH 15C", loc.myPointOfCare);
+        assertEquals("413", loc.myRoom);
+        assertEquals("2", loc.myBed);
+        
+        Xcn admitDoc = curVisit.myAdmittingDoctors.get(0);
+        assertEquals("13546c", admitDoc.myId);
+        assertEquals("Physician", admitDoc.myFirstName);
+        assertEquals("Generic", admitDoc.myLastName);
+        assertEquals("MoeC", admitDoc.myMiddleName);
+        
+        Xcn attendDoc = curVisit.myAttendingDoctors.get(0);
+        assertEquals("13546a", attendDoc.myId);
+        assertEquals("Physician", attendDoc.myFirstName);
+        assertEquals("Generic", attendDoc.myLastName);
+        assertEquals("MoeA", attendDoc.myMiddleName);
+        
+        Xcn refDoc = curVisit.myReferringDoctors.get(0);
+        assertEquals("13546b", refDoc.myId);
+        assertEquals("Physician", refDoc.myFirstName);
+        assertEquals("Generic", refDoc.myLastName);
+        assertEquals("MoeB", refDoc.myMiddleName);
+        
+        //check patient lastUpdateTime
+        assertTrue(nowMilli > priorPatient.myRecordUpdatedDate.getTime());
+
+        
+        //check prior patient
+        assertEquals("F", priorPatient.myAdministrativeSex);
+        assertEquals(ourTsFormat.parse("197312300000"), priorPatient.myDateOfBirth);
+        assertEquals(null, priorPatient.myDeathDateAndTime);
+        assertEquals("N", priorPatient.myDeathIndicator);
+        assertEquals(null, priorPatient.myMothersMaidenName);
+        
+        
+        patId = priorPatient.myPatientIds.get(0);
+        assertEquals("7012672", patId.myIdNumber);
+        assertEquals("MR", patId.myIdTypeCode);
+        
+        patName = priorPatient.myPatientNames.get(0);
+        assertEquals("Test2", patName.myLastName);
+        assertEquals("Majaconversion2", patName.myFirstName);
+                
+        patAddresses = priorPatient.myPatientAddresses.get(0);
+        assertEquals("1 Bloor Street ", patAddresses.myStreetAddress);
+        assertEquals("Toronto", patAddresses.myCity);
+        
+        patPhone = priorPatient.myPhoneNumbers.get(0);
+        assertEquals("(415)222-3333", patPhone.myPhoneNumber);
+        
+        lang = priorPatient.myPrimaryLanguage;
+        assertEquals("eng", lang.myCode);
+        assertEquals("English", lang.myText);
+        
+        
+        //check visit lastUpdateTime
+        assertTrue(nowMilli > priorVisit.myRecordUpdatedDate.getTime());
+        
+            
+        
+        //check prior visit
+        assertEquals("11110000513", priorVisit.myVisitNumber.myIdNumber);        
+        assertEquals(Constants.ACTIVE_VISIT_STATUS, priorVisit.myVisitStatus);
+        assertEquals("I", priorVisit.myPatientClassCode);
+        assertEquals(ourTsFormat.parse("201112021621"), priorVisit.myAdmitDate);
+        assertEquals("hospServ", priorVisit.myHospitalService);
+        loc = priorVisit.myAssignedPatientLocation;
+        assertEquals("PMH 15C", loc.myPointOfCare);
+        assertEquals("413", loc.myRoom);
+        assertEquals("2", loc.myBed);
+        
+        admitDoc = priorVisit.myAdmittingDoctors.get(0);
+        assertEquals("13546x", admitDoc.myId);
+        assertEquals("Physician", admitDoc.myFirstName);
+        assertEquals("Generic", admitDoc.myLastName);
+        assertEquals("MoeX", admitDoc.myMiddleName);
+        
+        attendDoc = priorVisit.myAttendingDoctors.get(0);
+        assertEquals("13546x", attendDoc.myId);
+        assertEquals("Physician", attendDoc.myFirstName);
+        assertEquals("Generic", attendDoc.myLastName);
+        assertEquals("MoeX", attendDoc.myMiddleName);
+        
+        refDoc = priorVisit.myReferringDoctors.get(0);
+        assertEquals("13546x", refDoc.myId);
+        assertEquals("Physician", refDoc.myFirstName);
+        assertEquals("Generic", refDoc.myLastName);
+        assertEquals("MoeX", refDoc.myMiddleName);
+        
+        
+        
+    }    
+    
+    
+    
+    
+    /**
      * Test visit merge A42
      * - both toKeep and toRemove visits exist for the patient 
      *   
@@ -4464,7 +4679,7 @@ public class AdtTest {
      */
     @SuppressWarnings("null")
     @Test
-    public void testAdtA37() throws Exception {
+    public void testAdtA37a() throws Exception {
         
 
         String priorPatientMsg = "MSH|^~\\&|EPR|G^2.16.840.1.113883.3.59.3:947^L|||201112021621||ADT^A01^ADT_A01|123484|T^|2.5^^||||||CAN||||\r" + 
@@ -4669,6 +4884,235 @@ public class AdtTest {
         
         
     }    
+    
+    
+    /**
+     * Test patient unlink A37
+     * 
+     * add two patients (each with a visit)
+     * merge the patients
+     * update the visit of the mergePrior patient (this should lead to creating the patient and the visit even though it is in the merge history of another patient)
+     * umerge the patients (ensure that the mergePrior patient does not end up having dup visits due to steps a and c. Also the update done to the visit will be lost) 
+     *   
+     * @throws Exception ...
+     */
+    @SuppressWarnings("null")
+    @Test
+    public void testAdtA37b() throws Exception {
+        
+
+        String priorPatientMsg = "MSH|^~\\&|EPR|G^2.16.840.1.113883.3.59.3:947^L|||201112021621||ADT^A01^ADT_A01|123484|T^|2.5^^||||||CAN||||\r" + 
+                "EVN|A01|201112021621||||201112021621|G^4265^L\r" + 
+                "PID|||7012672^^^UHN^MR^^^^^^^~9287170261^BL^^CANON^JHN^^^^^20111201^^~HN2827^^^UHN^PI^^^^^^^||Test2^Majaconversion2^^^Mrs.^^L^^^^^201112221537^^~Test^Maj^^^Mrs.^^A^^^^^^^||19731230|F|||1 Bloor Street ^^Toronto^ON^L9K 8J7^Can^H^^^^^^^~|12333|(415)222-3333^PRN^PH^^^^^^^^^~||eng^English^03ZPtlang^^^|||11110000513^^^UHN^VN^^^^^^^~||||||||||||N|||201112221537||||||\r" + 
+                "PV1||I|PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|C||^^^G^4265^^^^^^^  ^|13546a^Generic^Physician^MoeA^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546b^Generic^Physician^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^||hospServ||||D|||13546c^Generic^Physician^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000513^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021621|||||||V|\r";
+        
+        
+        String currentPatientMsg = "MSH|^~\\&|EPR|G^2.16.840.1.113883.3.59.3:947^L|||201112021621||ADT^A01^ADT_A01|123484|T^|2.5^^||||||CAN||||\r" + 
+                "EVN|A01|201112021621||||201112021621|G^4265^L\r" + 
+                "PID|||7012673^^^UHN^MR^^^^^^^~9287170261^BL^^CANON^JHN^^^^^20111201^^~HN2827^^^UHN^PI^^^^^^^||Test^Majaconversion^^^Mrs.^^L^^^^^201112221537^^~Test^Maj^^^Mrs.^^A^^^^^^^||19731230|F|||1 Bloor Street ^^Toronto^ON^L9K 8J7^Can^H^^^^^^^~|12333|(415)222-3333^PRN^PH^^^^^^^^^~||eng^English^03ZPtlang^^^|||11110000514^^^UHN^VN^^^^^^^~||||||||||||N|||201112221537||||||\r" + 
+                "PV1||I|PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|C||^^^G^4265^^^^^^^  ^|13546a^Generic^Physician^MoeA^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546b^Generic^Physician^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^||hospServ||||D|||13546c^Generic^Physician^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000514^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021621|||||||V|\r"; 
+        
+        
+        String mrgMsg = "MSH|^~\\&|EPR|G^2.16.840.1.113883.3.59.3:947^L|||201202291235||ADT^A40^ADT_A39|126421|T^|2.5^^||||||CAN||||\r" + 
+                "EVN|A40|201202291235||||201202291235|G^4265^L\r" + 
+                "PID|||7012673^^^UHN^MR^^^^^^^~9287170261^BL^^CANON^JHN^^^^^20111201^^~HN2827^^^UHN^PI^^^^^^^||Test^Majaconversion^^^Mrs.^^L^^^^^201112221537^^~Test^Maj^^^Mrs.^^A^^^^^^^||19731230|F|||1 Bloor Street ^^Toronto^ON^L9K 8J7^Can^H^^^^^^^~|12333|(415)222-3333^PRN^PH^^^^^^^^^~||eng^English^03ZPtlang^^^|||11110000514^^^UHN^VN^^^^^^^~||||||||||||N|||201112221537||||||\r" +               
+                "PD1|||UHN^D^^^^UHN^FI^^^^^|13893^Generic^Moe^PhysicianThree^^Dr.^MD^^UHN^L^^^EI^^^^^^^^^^^^|||||||N^no special privacy^03ZPrvyFlg^^^|N|||||||||\r" + 
+                "MRG|7012672^^^UHN^MR^^^^^^^~HN3151^^^^PI^^^^^^^||||^^^^^^^^^^^||\r";
+        
+        String updatePriorPat = "MSH|^~\\&|EPR|G^2.16.840.1.113883.3.59.3:947^L|||201112021621||ADT^A08^ADT_A01|123484|T^|2.5^^||||||CAN||||\r" + 
+                "EVN|A08|201112021621||||201112021621|G^4265^L\r" + 
+                "PID|||7012672^^^UHN^MR^^^^^^^~9287170261^BL^^CANON^JHN^^^^^20111201^^~HN2827^^^UHN^PI^^^^^^^||Test2^Majaconversion2^^^Mrs.^^L^^^^^201112221537^^~Test^Maj^^^Mrs.^^A^^^^^^^||19731230|F|||1 Bloor Street ^^Toronto^ON^L9K 8J7^Can^H^^^^^^^~|12333|(415)222-3333^PRN^PH^^^^^^^^^~||eng^English^03ZPtlang^^^|||11110000513^^^UHN^VN^^^^^^^~||||||||||||N|||201112221537||||||\r" + 
+                "PV1||I|PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|C||^^^G^4265^^^^^^^  ^|13546x^Generic^Physician^MoeX^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546x^Generic^Physician^MoeX^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^||hospServ||||D|||13546x^Generic^Physician^MoeX^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000513^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021621|||||||V|\r";
+        
+        
+        
+        String unMrgMsg = "MSH|^~\\&|EPR|G^2.16.840.1.113883.3.59.3:947^L|||201201111352||ADT^A37^ADT_A37|124466|T^|2.5^^||||||CAN||||\r" + 
+                "EVN|A37|201201111352||||201201111352|G^4265^L\r" +
+                "PID|||7012673^^^UHN^MR^^^^^^^~9287170261^BL^^CANON^JHN^^^^^20111201^^~HN2827^^^UHN^PI^^^^^^^||Test^Majaconversion^^^Mrs.^^L^^^^^201112221537^^~Test^Maj^^^Mrs.^^A^^^^^^^||19731230|F|||1 Bloor Street ^^Toronto^ON^L9K 8J7^Can^H^^^^^^^~|12333|(415)222-3333^PRN^PH^^^^^^^^^~||eng^English^03ZPtlang^^^|||11110000514^^^UHN^VN^^^^^^^~||||||||||||N|||201112221537||||||\r" +
+                "PD1|||UHN^D^^^^UHN^FI^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^^^^^^^^^^^^|||||||N^no special privacy^03ZPrvyFlg^^^|N|||||||||\r" + 
+                "PV1||||||^^^^^^^^^^^  ^||||||||||||^|^^^^^^^^^^^|||||||||||||||||||||||||||||||||\r" +
+                "PID|||7012672^^^UHN^MR^^^^^^^~9287170261^BL^^CANON^JHN^^^^^20111201^^~HN2827^^^UHN^PI^^^^^^^||Test2^Majaconversion2^^^Mrs.^^L^^^^^201112221537^^~Test^Maj^^^Mrs.^^A^^^^^^^||19731230|F|||1 Bloor Street ^^Toronto^ON^L9K 8J7^Can^H^^^^^^^~|12333|(415)222-3333^PRN^PH^^^^^^^^^~||eng^English^03ZPtlang^^^|||11110000513^^^UHN^VN^^^^^^^~||||||||||||N|||201112221537||||||\r" +
+                "PD1|||UHN^D^^^^UHN^FI^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^^^^^^^^^^^^|||||||N^no special privacy^03ZPrvyFlg^^^|N|||||||||\r" + 
+                "PV1||||||^^^^^^^^^^^  ^||||||||||||^|^^^^^^^^^^^|||||||||||||||||||||||||||||||||";
+        
+       
+        
+        
+        Persister.persist(UhnConverter.convertAdtOrFail(priorPatientMsg));
+        Persister.persist(UhnConverter.convertAdtOrFail(currentPatientMsg));
+        Persister.persist(UhnConverter.convertAdtOrFail(mrgMsg));
+        Persister.persist(UhnConverter.convertAdtOrFail(updatePriorPat));
+        Persister.persist(UhnConverter.convertAdtOrFail(unMrgMsg));
+        
+        
+               
+        ViewQuery query = new ViewQuery().viewName("allVisits").designDocId("_design/application");
+        List<PatientWithVisitsContainer> pwvContainers = Persister.getConnector().queryView(query, PatientWithVisitsContainer.class);
+        
+        //There should be 2 pwv docs now
+        assertEquals(2, pwvContainers.size());
+        
+        Patient curPatient = null;
+        Visit curVisit = null;        
+        Patient priorPatient = null;
+        Visit priorVisit = null;
+                        
+        for (PatientWithVisitsContainer pwvContainer : pwvContainers) {
+            if ( "7012673".equals(pwvContainer.getDocument().getMrn().myIdNumber) ) {
+                assertEquals(1, pwvContainer.getDocument().myVisits.size());
+                curPatient = pwvContainer.getDocument().myPatient;  
+                curVisit = pwvContainer.getDocument().myVisits.get(0);
+            }
+            
+            if ( "7012672".equals(pwvContainer.getDocument().getMrn().myIdNumber) ) {
+                assertEquals(1, pwvContainer.getDocument().myVisits.size());
+                priorPatient = pwvContainer.getDocument().myPatient;  
+                priorVisit = pwvContainer.getDocument().myVisits.get(0);
+            }            
+            
+        }
+        
+        //make sure current and prior patients and visits exist
+        assertTrue(curPatient != null);
+        assertTrue(curVisit != null);
+        assertTrue(priorPatient != null);
+        assertTrue(priorVisit != null);
+        
+        //check patient lastUpdateTime
+        Date now = new Date();
+        long nowMilli = now.getTime();
+        assertTrue(nowMilli > curPatient.myRecordUpdatedDate.getTime());
+        
+        
+        //check current patient
+        assertEquals("F", curPatient.myAdministrativeSex);
+        assertEquals(ourTsFormat.parse("197312300000"), curPatient.myDateOfBirth);
+        assertEquals(null, curPatient.myDeathDateAndTime);
+        assertEquals("N", curPatient.myDeathIndicator);
+        assertEquals(null, curPatient.myMothersMaidenName);
+        
+        
+        Cx patId = curPatient.myPatientIds.get(0);
+        assertEquals("7012673", patId.myIdNumber);
+        assertEquals("MR", patId.myIdTypeCode);
+        
+        Xpn patName = curPatient.myPatientNames.get(0);
+        assertEquals("Test", patName.myLastName);
+        assertEquals("Majaconversion", patName.myFirstName);
+                
+        Xad patAddresses = curPatient.myPatientAddresses.get(0);
+        assertEquals("1 Bloor Street ", patAddresses.myStreetAddress);
+        assertEquals("Toronto", patAddresses.myCity);
+        
+        Xtn patPhone = curPatient.myPhoneNumbers.get(0);
+        assertEquals("(415)222-3333", patPhone.myPhoneNumber);
+        
+        Ce lang = curPatient.myPrimaryLanguage;
+        assertEquals("eng", lang.myCode);
+        assertEquals("English", lang.myText);
+        
+        //check visit lastUpdateTime
+        assertTrue(nowMilli > curVisit.myRecordUpdatedDate.getTime());
+            
+        
+        //check current visit
+        assertEquals("11110000514", curVisit.myVisitNumber.myIdNumber);        
+        assertEquals(Constants.ACTIVE_VISIT_STATUS, curVisit.myVisitStatus);
+        assertEquals("I", curVisit.myPatientClassCode);
+        assertEquals(ourTsFormat.parse("201112021621"), curVisit.myAdmitDate);
+        assertEquals("hospServ", curVisit.myHospitalService);
+        Pl loc = curVisit.myAssignedPatientLocation;
+        assertEquals("PMH 15C", loc.myPointOfCare);
+        assertEquals("413", loc.myRoom);
+        assertEquals("2", loc.myBed);
+        
+        Xcn admitDoc = curVisit.myAdmittingDoctors.get(0);
+        assertEquals("13546c", admitDoc.myId);
+        assertEquals("Physician", admitDoc.myFirstName);
+        assertEquals("Generic", admitDoc.myLastName);
+        assertEquals("MoeC", admitDoc.myMiddleName);
+        
+        Xcn attendDoc = curVisit.myAttendingDoctors.get(0);
+        assertEquals("13546a", attendDoc.myId);
+        assertEquals("Physician", attendDoc.myFirstName);
+        assertEquals("Generic", attendDoc.myLastName);
+        assertEquals("MoeA", attendDoc.myMiddleName);
+        
+        Xcn refDoc = curVisit.myReferringDoctors.get(0);
+        assertEquals("13546b", refDoc.myId);
+        assertEquals("Physician", refDoc.myFirstName);
+        assertEquals("Generic", refDoc.myLastName);
+        assertEquals("MoeB", refDoc.myMiddleName);
+        
+        //check patient lastUpdateTime
+        assertTrue(nowMilli > priorPatient.myRecordUpdatedDate.getTime());
+        
+        //check prior patient
+        assertEquals("F", priorPatient.myAdministrativeSex);
+        assertEquals(ourTsFormat.parse("197312300000"), priorPatient.myDateOfBirth);
+        assertEquals(null, priorPatient.myDeathDateAndTime);
+        assertEquals("N", priorPatient.myDeathIndicator);
+        assertEquals(null, priorPatient.myMothersMaidenName);
+        
+        
+        patId = priorPatient.myPatientIds.get(0);
+        assertEquals("7012672", patId.myIdNumber);
+        assertEquals("MR", patId.myIdTypeCode);
+        
+        patName = priorPatient.myPatientNames.get(0);
+        assertEquals("Test2", patName.myLastName);
+        assertEquals("Majaconversion2", patName.myFirstName);
+                
+        patAddresses = priorPatient.myPatientAddresses.get(0);
+        assertEquals("1 Bloor Street ", patAddresses.myStreetAddress);
+        assertEquals("Toronto", patAddresses.myCity);
+        
+        patPhone = priorPatient.myPhoneNumbers.get(0);
+        assertEquals("(415)222-3333", patPhone.myPhoneNumber);
+        
+        lang = priorPatient.myPrimaryLanguage;
+        assertEquals("eng", lang.myCode);
+        assertEquals("English", lang.myText);
+        
+        
+        //check visit lastUpdateTime
+        assertTrue(nowMilli > priorVisit.myRecordUpdatedDate.getTime());
+            
+        
+        //check prior visit       
+        assertEquals("11110000513", priorVisit.myVisitNumber.myIdNumber);        
+        assertEquals(Constants.ACTIVE_VISIT_STATUS, priorVisit.myVisitStatus);        
+        assertEquals("I", priorVisit.myPatientClassCode);
+        assertEquals(ourTsFormat.parse("201112021621"), priorVisit.myAdmitDate);
+        assertEquals("hospServ", priorVisit.myHospitalService);
+        loc = priorVisit.myAssignedPatientLocation;
+        assertEquals("PMH 15C", loc.myPointOfCare);
+        assertEquals("413", loc.myRoom);
+        assertEquals("2", loc.myBed);
+        
+        admitDoc = priorVisit.myAdmittingDoctors.get(0);
+        assertEquals("13546c", admitDoc.myId);
+        assertEquals("Physician", admitDoc.myFirstName);
+        assertEquals("Generic", admitDoc.myLastName);
+        assertEquals("MoeC", admitDoc.myMiddleName);
+        
+        attendDoc = priorVisit.myAttendingDoctors.get(0);
+        assertEquals("13546a", attendDoc.myId);
+        assertEquals("Physician", attendDoc.myFirstName);
+        assertEquals("Generic", attendDoc.myLastName);
+        assertEquals("MoeA", attendDoc.myMiddleName);
+        
+        refDoc = priorVisit.myReferringDoctors.get(0);
+        assertEquals("13546b", refDoc.myId);
+        assertEquals("Physician", refDoc.myFirstName);
+        assertEquals("Generic", refDoc.myLastName);
+        assertEquals("MoeB", refDoc.myMiddleName);
+       
+        
+    }    
+    
+    
+    
         
     
     

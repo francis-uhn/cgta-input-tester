@@ -118,6 +118,25 @@ public class PatientWithVisits extends AbstractDocument {
 
 
 	
+//    @JsonIgnore
+//    public Visit findAndRemoveVisit(Cx theVisitNumber) {
+//        ensureVisits();
+//        for (Visit nextVisit : myVisits) {
+//            if (ObjectUtils.equals(nextVisit.myVisitNumber, theVisitNumber)) {
+//                myVisits.remove(nextVisit);
+//                return nextVisit;
+//            }
+//        }
+//
+//        return null;
+//    }
+    
+    
+    
+    
+    /**
+     * Checks through regular visits and merged in visits at all levels
+     */
     @JsonIgnore
     public Visit findAndRemoveVisit(Cx theVisitNumber) {
         ensureVisits();
@@ -127,65 +146,185 @@ public class PatientWithVisits extends AbstractDocument {
                 return nextVisit;
             }
         }
+        
+        ensureMergedInPatientsWithVisits();
+        for (PatientWithVisits mergedInPatWithVisits : myMergedInPatientsWithVisits) {
+            Visit removedMergedInVisit = mergedInPatWithVisits.findAndRemoveVisit(theVisitNumber);
+            if (removedMergedInVisit != null) {
+                return removedMergedInVisit;                
+            }
+        }
 
         return null;
     }
     
     
+    
+    
+    
+//    @JsonIgnore
+//    public Visit findVisit(Cx theVisitNumber) {
+//        
+//        ensureVisits();
+//        for (Visit nextVisit : myVisits) {
+//            if (ObjectUtils.equals(nextVisit.myVisitNumber, theVisitNumber)) {                
+//                return nextVisit;
+//            }
+//        }
+//        
+//        
+//        return null;
+//    }
+    
+    
+    /**
+     * Checks through regular visits and merged in visits at all levels
+     */
     @JsonIgnore
-    public Visit findVisit(Cx theVisitNumber) {
+    public Visit findVisit(Cx theVisitNumber) {        
         ensureVisits();
         for (Visit nextVisit : myVisits) {
             if (ObjectUtils.equals(nextVisit.myVisitNumber, theVisitNumber)) {                
                 return nextVisit;
             }
         }
+        
+        ensureMergedInPatientsWithVisits();
+        for (PatientWithVisits mergedInPatWithVisits : myMergedInPatientsWithVisits) {
+            Visit foundMergedInVisit = mergedInPatWithVisits.findVisit(theVisitNumber);
+            if (foundMergedInVisit != null) {
+                return foundMergedInVisit;                
+            }
+        }
+        
         return null;
     }
     
     
     
     
+    
+//    @JsonIgnore
+//    public Visit findAndRemoveMergedInVisit(Cx theVisitNumber) {
+//        ensureMergedInPatientsWithVisits();
+//        for (PatientWithVisits nextPatient : myMergedInPatientsWithVisits) {
+//            nextPatient.ensureVisits();
+//            for (Visit nextVisit : nextPatient.myVisits) {
+//                if (nextVisit.myVisitNumber.equals(theVisitNumber)) {
+//                    nextPatient.myVisits.remove(nextVisit);
+//                    return nextVisit;
+//                }
+//            }
+//        }
+//        return null;
+//    }
+    
+    
+    
+    /**
+     * Checks through merged in visits at all levels
+     */
     @JsonIgnore
     public Visit findAndRemoveMergedInVisit(Cx theVisitNumber) {
         ensureMergedInPatientsWithVisits();
-        for (PatientWithVisits nextPatient : myMergedInPatientsWithVisits) {
-            nextPatient.ensureVisits();
-            for (Visit nextVisit : nextPatient.myVisits) {
-                if (nextVisit.myVisitNumber.equals(theVisitNumber)) {
-                    nextPatient.myVisits.remove(nextVisit);
-                    return nextVisit;
+        for (PatientWithVisits mergedInPatWithVisits : myMergedInPatientsWithVisits) {
+            mergedInPatWithVisits.ensureVisits();
+            for (Visit mergedInVisit : mergedInPatWithVisits.myVisits) {
+                if (mergedInVisit.myVisitNumber.equals(theVisitNumber)) {
+                    mergedInPatWithVisits.myVisits.remove(mergedInVisit);
+                    return mergedInVisit;
                 }
+            }
+            Visit removedMergedInVisit = mergedInPatWithVisits.findAndRemoveMergedInVisit(theVisitNumber);
+            if (removedMergedInVisit != null) {
+                return removedMergedInVisit;                
             }
         }
         return null;
     }
+
     
     
+    
+    
+    
+//    @JsonIgnore
+//    public PatientWithVisits findMergedInPatientWithVisits(Cx theMrn) {
+//        ensureMergedInPatientsWithVisits();
+//        for (PatientWithVisits next : myMergedInPatientsWithVisits) {
+//            if (next.myPatient.getMrn().equals(theMrn)) {
+//                return next;
+//            }
+//        }
+//        return null;
+//    }
+    
+
+
+    /**
+     * Checks through merged in patientWithVisits objects at all levels
+     */
     @JsonIgnore
     public PatientWithVisits findMergedInPatientWithVisits(Cx theMrn) {
         ensureMergedInPatientsWithVisits();
-        for (PatientWithVisits next : myMergedInPatientsWithVisits) {
-            if (next.myPatient.getMrn().equals(theMrn)) {
-                return next;
+        for (PatientWithVisits mergedInPatWithVisits : myMergedInPatientsWithVisits) {
+            if (mergedInPatWithVisits.myPatient.getMrn().equals(theMrn)) {
+                return mergedInPatWithVisits;
             }
+            
+            PatientWithVisits foundMergedInPatWithVisits = mergedInPatWithVisits.findMergedInPatientWithVisits(theMrn);
+            if (foundMergedInPatWithVisits != null) {
+                return foundMergedInPatWithVisits;                
+            }            
         }
+        
         return null;
     }
     
     
+    
+    
+    
+    
+//    @JsonIgnore
+//    public PatientWithVisits findAndRemoveMergedInPatientWithVisits(Cx theMrn) {
+//        ensureMergedInPatientsWithVisits();
+//        for (Iterator<PatientWithVisits> iter = myMergedInPatientsWithVisits.iterator(); iter.hasNext(); ) {
+//            PatientWithVisits next = iter.next();
+//            if (next.myPatient.getMrn().equals(theMrn)) {
+//                iter.remove();
+//                return next;
+//            }
+//        }
+//        return null;
+//    }
+    
+    
+    
+    
+    /**
+     * Checks through merged in patientWithVisits objects at all levels
+     */
     @JsonIgnore
     public PatientWithVisits findAndRemoveMergedInPatientWithVisits(Cx theMrn) {
         ensureMergedInPatientsWithVisits();
         for (Iterator<PatientWithVisits> iter = myMergedInPatientsWithVisits.iterator(); iter.hasNext(); ) {
-            PatientWithVisits next = iter.next();
-            if (next.myPatient.getMrn().equals(theMrn)) {
+            PatientWithVisits mergedInPatWithVisits = iter.next();
+            if (mergedInPatWithVisits.myPatient.getMrn().equals(theMrn)) {
                 iter.remove();
-                return next;
+                return mergedInPatWithVisits;
+            }
+            
+            PatientWithVisits removedMergedInPatWithVisits = mergedInPatWithVisits.findAndRemoveMergedInPatientWithVisits(theMrn);
+            if (removedMergedInPatWithVisits != null) {
+                return removedMergedInPatWithVisits;                
             }
         }
         return null;
-    }
+    }    
+    
+    
+    
     
     
     @JsonIgnore

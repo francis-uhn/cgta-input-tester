@@ -263,6 +263,10 @@ public class Converter {
         if (theAdt.getNonStandardNames().contains("IAM")) {
             for (Structure next : theAdt.getAll("IAM")) {
                 IAM iam = (IAM) next;
+                if (iam.encode().length() <= 4) {
+                    continue;
+                }
+
                 AdverseReaction adv = convertIam("IAM(" + index + ")", iam);
                 if (adv != null) {
                     retVal.myPatient.myAdverseReactions.add(adv);

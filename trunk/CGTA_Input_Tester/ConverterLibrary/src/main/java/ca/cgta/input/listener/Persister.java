@@ -37,7 +37,7 @@ public class Persister {
 
 	// public static final String ADDRESS = "http://10.7.7.45:5984";
 	public static final String ADDRESS = "http://uhnvprx01t.uhn.ca:5984";
-	// public static final String ADDRESS = "http://localhost:5984";
+	//public static final String ADDRESS = "http://localhost:5984";
 
 	public static final String DB = "cgta_input_test_db";
 
@@ -46,6 +46,7 @@ public class Persister {
 
 	private static boolean ourUnitTestMode;
 	public static final String UNIT_TEST_DB = "unit_test";
+	//public static final String UNIT_TEST_DB = "neal_test_db";
 
 
 
@@ -320,7 +321,8 @@ public class Persister {
 				existing.myMergedInPatientsWithVisits.add(new PatientWithVisits(new Patient(secondMrn)));
 			}
 
-			ourLog.warn("Could not merge patient with MRN {} into {} because it did not exist", secondMrn, firstMrn);
+			ourLog.warn("Could not merge patient with MRN {} into {} because it did not exist, but we will create a stub record " +
+					"for this patient and add it to the merge history for the kept patient ", secondMrn, firstMrn);
 			getConnector().update(theExisting);
 
 		} else {
@@ -495,7 +497,7 @@ public class Persister {
 
     private static void unlinkPatient(PatientWithVisitsContainer theExisting, PatientWithVisits theHl7PatientWithVisits) throws Exception {
 
-        // NOTE: theExisting pertains to the mergedKept patient in the
+        // NOTE: the existing pertains to the mergedKept patient in the
         // transaction
 
         PatientWithVisits existing = theExisting.getDocument();
@@ -506,27 +508,33 @@ public class Persister {
 
         Patient secondPatient = theHl7PatientWithVisits.myUnlinkSecondPatient;
         if (secondPatient == null || !secondPatient.hasIdWithTypeMr()) {
-            ourLog.warn("Failed to unlink patient {} as no second patient was found", existing.getMrn());
+            ourLog.warn("Failed to unlink patient {} as no second patient was provided in the Hl7 message", existing.getMrn());
             return;
         }
 
-        PatientWithVisitsContainer secondPatientContainer = getOrCreatePatientContainer(secondPatient);
-        PatientWithVisits secondPatientWithVisits = secondPatientContainer.getDocument();
+//        PatientWithVisitsContainer secondPatientContainer = getOrCreatePatientContainer(secondPatient);
+//        PatientWithVisits secondPatientWithVisits = secondPatientContainer.getDocument();
+
+        PatientWithVisitsContainer secondPatientContainer = null ;
+        PatientWithVisits secondPatientWithVisits = null ;        
         Cx secondMrn = secondPatient.getMrn();
 
         PatientWithVisits patientWithVisitsToMove = existing.findAndRemoveMergedInPatientWithVisits(secondMrn);
+
 
         if (patientWithVisitsToMove == null) {
             ourLog.warn("Could not unlink patient {} from {} because it was not found", secondMrn, firstMrn);
             return;
         } else {
+            secondPatientContainer = getOrCreatePatientContainer(secondPatient);
+            secondPatientWithVisits = secondPatientContainer.getDocument();
             patientWithVisitsToMove.ensureVisits();
             secondPatientWithVisits.ensureVisits();
             List<Visit> visitsToMove = patientWithVisitsToMove.myVisits;
             //NOTE: This is only being done incase the mergedPrior patient some how got recreated since the merge event
             //and has visits attached to it. We should avoid making any duplicate visits in this case.
             for (Visit visit : visitsToMove) {
-                Visit inTheWayVisit = theExisting.getDocument().findAndRemoveVisit(visit.myVisitNumber);
+                Visit inTheWayVisit = secondPatientContainer.getDocument().findAndRemoveVisit(visit.myVisitNumber);
                 if (inTheWayVisit != null) {
                     ourLog.warn("Visit {} from the mergedKept patient already exisits for the mergedPrior patient, so going to overwrite it", visit.myVisitNumber);                    
                 }                                
@@ -556,12 +564,15 @@ public class Persister {
 
         Visit postConvVisit = theHl7PatientWithVisits.myVisits.get(0);
         Cx postConvVisitNumber = postConvVisit.myVisitNumber;
-
-        Visit existingPostConvVisit = existing.findAndRemoveVisit(postConvVisitNumber);
+        
+         
+        Visit existingPostConvVisit = existing.findVisit(postConvVisitNumber);
         if (existingPostConvVisit == null) {
             postConvVisit.setStatus(eventType);
             postConvVisit.clearHl7Nulls(eventType);
             existingPostConvVisit = postConvVisit;
+            existing.ensureVisits();
+            existing.myVisits.add(existingPostConvVisit);
         } else {
             existingPostConvVisit.copyFromHl7(postConvVisit, eventType);
             existingPostConvVisit.setStatus(eventType);
@@ -572,8 +583,7 @@ public class Persister {
             //Do this check to make sure we don't add duplicates
             if (!existingPostConvVisit.myPreviousVisitNumbers.contains(preConvVisitNumber)) {
                 existingPostConvVisit.myPreviousVisitNumbers.add(preConvVisitNumber);                
-            }
-            existing.ensureVisits();
+            }            
             // need to set the status on the existing's preconv visit to
             // INACTIVE
             Visit existingPreConvVisit = existing.findVisit(preConvVisitNumber);
@@ -586,12 +596,13 @@ public class Persister {
                 Visit newV = new Visit();
                 newV.myVisitNumber = preConvVisitNumber;
                 newV.myVisitStatus = Constants.INACTIVE_VISIT_STATUS;
+                existing.ensureVisits();
                 existing.myVisits.add(newV);
             }
 
         }
 
-        existing.myVisits.add(existingPostConvVisit);
+        
         existing.myPatient.copyFromHl7(theHl7PatientWithVisits.myPatient, eventType);
 
         ourLog.info("Converting visit {} to new visit {}", preConvVisitNumber, postConvVisitNumber);
@@ -624,7 +635,7 @@ public class Persister {
         String eventType = theHl7PatientWithVisits.myMostRecentEventCode;
         Visit newVisit = theHl7PatientWithVisits.myVisits.get(0);
 
-        Visit existingVisit = existing.findAndRemoveVisit(newVisit.myVisitNumber);
+        Visit existingVisit = existing.findVisit(newVisit.myVisitNumber);
         if (existingVisit == null) {
             newVisit.setStatus(eventType);
             if ( eventType.equals("A10") && newVisit.myPatientClassCode.equals("R") ) {
@@ -635,13 +646,13 @@ public class Persister {
             }
             newVisit.clearHl7Nulls(eventType);
             existingVisit = newVisit;
+            existing.ensureVisits();
+            existing.myVisits.add(existingVisit);
         } else {
             existingVisit.copyFromHl7(newVisit, eventType);
             existingVisit.setStatus(eventType);
         }
-
-        existing.ensureVisits();
-        existing.myVisits.add(existingVisit);
+        
         existing.myPatient.copyFromHl7(theHl7PatientWithVisits.myPatient, eventType);
 
         ourLog.info("Updating visit for MRN {}", theHl7PatientWithVisits.myPatient.getMrn().myIdNumber);

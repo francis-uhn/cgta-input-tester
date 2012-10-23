@@ -750,10 +750,10 @@ public class SampleDataUploader {
           "PID|1||0000000562^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^MR~2222222222^AD^^^JHN^^^^CANON&Ontario&HL70363||CVHCGTA5^TED^^^^^L||19860221000000-0400|M|||55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H||905-555-5555^PRN^PH\r" + 
           "PV1|1|E|ER^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1||||68031^AASHEIM^LISE^HOLM^^^^^2.16.840.1.113883.4.347||||||||||||ER000141/12^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^VN|||||||||||||||||||||||||20120810104800-0400|20120814140800-0400\r" + 
           "PV2|||TEST^TEST\r";
-           
       
+         
        
-       String[] msgs = { msg1, msg2 , msg3, msg4, msg5 , msg6 /*, msg7*/};
+       String[] msgs = { /*msg1, msg2 , msg3, msg4, msg5 , msg6,*/};
        processMsgs(msgs);
    }
     
@@ -785,14 +785,8 @@ public class SampleDataUploader {
 
         Parser parser = new PipeParser();
         Converter c = new Converter();
-        ADT_A01 inputAdt = new ADT_A01();
-        inputAdt.setParser(PipeParser.getInstanceWithNoValidation());
-        ORU_R01 inputOru = new ORU_R01();
-        inputOru.setParser(PipeParser.getInstanceWithNoValidation());
-        RDE_O11 inputRde = new RDE_O11();
-        inputRde.setParser(PipeParser.getInstanceWithNoValidation());
-        RAS_O17 inputRas = new RAS_O17();
-        inputRde.setParser(PipeParser.getInstanceWithNoValidation());
+        
+        
 
         for (int i = 0; i < theMsgs.length; i++) {
 
@@ -804,6 +798,8 @@ public class SampleDataUploader {
                     Persister.persist(UhnConverter.convertAdtOrFail(theMsgs[i]));
                 }
                 else {
+                    ADT_A01 inputAdt = new ADT_A01();
+                    inputAdt.setParser(PipeParser.getInstanceWithNoValidation());
                     inputAdt.parse(theMsgs[i]);
                     Persister.persist(c.convertPatientWithVisits(inputAdt));
                 }
@@ -814,17 +810,23 @@ public class SampleDataUploader {
                     Persister.persist(UhnConverter.convertOru(theMsgs[i]));
                 }
                 else {
+                    ORU_R01 inputOru = new ORU_R01();
+                    inputOru.setParser(PipeParser.getInstanceWithNoValidation());
                     inputOru.parse(theMsgs[i]);
                     Persister.persist(c.convertClinicalDocument(inputOru));
                 }
             }
 
             if (msgType.equals("RDE")) {
+                RDE_O11 inputRde = new RDE_O11();
+                inputRde.setParser(PipeParser.getInstanceWithNoValidation());
                 inputRde.parse(theMsgs[i]);
                 Persister.persistMedicationOrders(c.convertMedicationOrder(inputRde));
             }
 
             if (msgType.equals("RAS")) {
+                RAS_O17 inputRas = new RAS_O17();
+                inputRas.setParser(PipeParser.getInstanceWithNoValidation());
                 inputRas.parse(theMsgs[i]);
                 Persister.persistMedicationAdmins(c.convertMedicationAdmin(inputRas));
             }

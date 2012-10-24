@@ -433,6 +433,8 @@ function (doc) {
                         noteText += "<br><b>Id Type Description: </b>" + nullConvert(id.myIdTypeDescription);
                         noteText += "<br><b>Id Assigning Jurisdiction Id: </b>" + nullConvert(id.myAssigningJurisdictionId);                        
                         noteText += "<br><b>Id Assigning Jurisdiction Text: </b>" + nullConvert(id.myAssigningJurisdictionText);
+                        noteText += "<br><b>Id Effective Date: </b>" + nullConvert(id.myEffectiveDate);
+                        noteText += "<br><b>Id Expiration Date: </b>" + nullConvert(id.myExpirationDate);
                         if ( index < patient.myPatientIds.length - 1 ) {
                             noteText += "<br><br>";
                         }

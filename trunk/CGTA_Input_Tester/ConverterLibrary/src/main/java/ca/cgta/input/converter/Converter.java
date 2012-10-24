@@ -1405,12 +1405,21 @@ public class Converter {
 			}
 		}
 
-		retVal.myRelationship = convertCe(theTerserPath + "-3", theNk1.getNk13_Relationship());
-		if (retVal == null || retVal.myRelationship == null || Tables.lookupHl7Code("0063", retVal.myRelationship.myCode) == null) {
+		retVal.myRelationship = convertCeAndAllowNoCode(theTerserPath + "-3", theNk1.getNk13_Relationship());
+		if (retVal == null || retVal.myRelationship == null || isBlank(retVal.myRelationship.myCode) && isBlank(retVal.myRelationship.myText) 
+		        || ( isNotBlank(retVal.myRelationship.myCode) && (Tables.lookupHl7Code("0063", retVal.myRelationship.myCode) == null) )) {
 			addFailure(theTerserPath + "-3", FailureCode.F083, theNk1.getNk13_Relationship().encode());
-		} else {
-			retVal.myRelationshipName = Tables.lookupHl7Code("0063", retVal.myRelationship.myCode);
+		} 
+		else {		    
+			if (isNotBlank(retVal.myRelationship.myCode)) {
+			    retVal.myRelationship.myText = Tables.lookupHl7Code("0063", retVal.myRelationship.myCode);
+			    retVal.myRelationshipName = retVal.myRelationship.myText;			    			                    
+            } else if (isNotBlank(retVal.myRelationship.myText)) {            
+                retVal.myRelationshipName = retVal.myRelationship.myText;                
+            }   
+            		    
 		}
+		
 
 		retVal.myAddresses = new ArrayList<Xad>();
 		for (int i = 0; i < theNk1.getNk14_AddressReps(); i++) {

@@ -284,7 +284,8 @@ public enum FailureCode {
 	
 //	F082("ROL (Role) segment is missing mandatory ROL-4 (Role Person Name)"), // -
 	
-	F083("Associated Party Relationship code is missing or invalid. Values must be drawn from Table 0063", "Valid values are: " + Tables.getHl7TableAsHtml("0063"), MED), // -
+	F083("Either Associated Party Relationship text or code must be supplied. If a code is supplied then the value must be drawn from Table 0063 and its description" +
+			" will overwrite any text value that has been supplied", "Valid values are: " + Tables.getHl7TableAsHtml("0063"), MED), // -
 	
 	F084("Date (DT) values must be of the format YYYYMMDD", "If sending system captures more precision than year-month-day, it is " +
 			"acceptable to trim the value in this field to only the first 8 characters.", MED), // -	

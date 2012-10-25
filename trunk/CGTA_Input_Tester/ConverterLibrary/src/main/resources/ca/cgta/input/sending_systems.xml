@@ -39,6 +39,18 @@
             <allergen_codesystem_iam3_9007>1.3.6.1.4.1.12201.102.1</allergen_codesystem_iam3_9007>
             <management_console_system_id>EPR</management_console_system_id>
         </hsp_sending_system_9008>
+        <hsp_sending_system_9008 description="CAPS (Cardiology)" code="1.3.6.1.4.1.12201.101.2">
+            <management_console_org_id>SIMS</management_console_org_id>
+            <request_codesystem_obr4_9007>1.3.6.1.4.1.12201.102.7</request_codesystem_obr4_9007>
+            <result_codesystem_obx3_9007>1.3.6.1.4.1.12201.102.8</result_codesystem_obx3_9007>
+            <management_console_system_id>CAPS</management_console_system_id>
+        </hsp_sending_system_9008>
+        <hsp_sending_system_9008 description="HPF (Scanned Documents)" code="1.3.6.1.4.1.12201.101.3">
+            <management_console_org_id>SIMS</management_console_org_id>
+            <request_codesystem_obr4_9007>1.3.6.1.4.1.12201.102.9</request_codesystem_obr4_9007>
+            <result_codesystem_obx3_9007>1.3.6.1.4.1.12201.102.10</result_codesystem_obx3_9007>
+            <management_console_system_id>HPF</management_console_system_id>
+        </hsp_sending_system_9008>
     </contributor>
     <contributor name="North York General Hospital" hospital_facility_number="0632">
         <dev_listen_port>14010</dev_listen_port>
@@ -99,13 +111,13 @@
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.1.102.9</result_codesystem_obx3_9007>
             <management_console_system_id>Strata</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 description="CHRIS-QA" code="2.16.840.1.113883.3.239.23.1.101.4">
+        <hsp_sending_system_9008 description="CHRISQA" code="2.16.840.1.113883.3.239.23.1.101.4">
             <drug_administration_codesystem_rxa5_9007>2.16.840.1.113883.3.239.23.1.102.11</drug_administration_codesystem_rxa5_9007>
-            <drug_component_codesystem_rxc2_9007>2.16.840.1.113883.3.239.23.1.102.4.102.12</drug_component_codesystem_rxc2_9007>
+            <drug_component_codesystem_rxc2_9007>2.16.840.1.113883.3.239.23.1.102.12</drug_component_codesystem_rxc2_9007>
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.1.102.13</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.1.102.14</result_codesystem_obx3_9007>
             <allergen_codesystem_iam3_9007>2.16.840.1.113883.3.239.23.1.102.10</allergen_codesystem_iam3_9007>
-            <management_console_system_id>CHRIS-QA</management_console_system_id>
+            <management_console_system_id>CHRISQA</management_console_system_id>
         </hsp_sending_system_9008>
     </contributor>
     <contributor name="Lakeridge Health" hospital_facility_number="0952">
@@ -166,10 +178,10 @@
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.3.102.9</result_codesystem_obx3_9007>
             <management_console_system_id>Onbase</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 description="Accentus" code="2.16.840.1.113883.3.239.23.3.101.4">
+        <hsp_sending_system_9008 description="Powerscribe" code="2.16.840.1.113883.3.239.23.3.101.4">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.3.102.10</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.3.102.11</result_codesystem_obx3_9007>
-            <management_console_system_id>Accentus</management_console_system_id>
+            <management_console_system_id>Powerscribe</management_console_system_id>
         </hsp_sending_system_9008>
     </contributor>
     <contributor name="The Rouge Valley Health System" hospital_facility_number="0954">
@@ -570,10 +582,11 @@
         <provider_pool_oid description="York Central Hospital Provider IDs" code="2.16.840.1.113883.3.239.23.26.1"/>
         <visit_number_pool_oid description="York Central Hospital Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.26.2"/>
     </contributor>
-    <other_oid description="ConnectingGTA HIAL (System)" code="2.16.840.1.113883.3.239.22.1"/>
+    <other_oid description="ConnectingGTA HIAL (System) - Also Root OID for HIAL derived OIDs" code="2.16.840.1.113883.3.239.22.1"/>
     <other_oid description="ConnectingGTA CDR (System)" code="2.16.840.1.113883.3.239.22.2"/>
     <other_oid description="UHN eMPI eCID (Client ID Namespace)" code="2.16.840.1.113883.3.239.22.3"/>
     <other_oid description="UHN Provider Registry ePID (Provider ID Namespace)" code="2.16.840.1.113883.3.239.22.4"/>
+    <other_oid description="Base OID for CDR Input Specification HL7 v2 Tables" code="2.16.840.1.113883.3.239.22.6"/>
     <provider_oid_9001 description="Site Specific Provider ID (Deprocated)" code="1.3.6.1.4.1.12201.1.2.1.5"/>
     <provider_oid_9001 description="College of Audiologist and Speech-Language Pathologists of Ontario Licence Number" code="2.16.840.1.113883.3.239.13.6"/>
     <provider_oid_9001 description="College of Chiropodists of Ontario Licence Number" code="2.16.840.1.113883.3.239.13.17"/>

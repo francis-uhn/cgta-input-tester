@@ -42,6 +42,12 @@ public class Visit {
     public List<Date> myArrivalDates = new ArrayList<Date>();
     public List<String> myFormattedArrivalDates = new ArrayList<String>();
     
+    /**
+     * This is no longer used. Don't use it! (But don't remove it since some stuff is already stored with it)
+     */
+    @Deprecated
+    @JsonIgnore
+    public String myPatientRequestedRecordLock;
     
     //These fields can have hl7null ("") as a value in the first component
     public ArrayList<Xcn> myAttendingDoctors;

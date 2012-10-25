@@ -143,12 +143,14 @@ public class Listener extends HttpServlet {
 
 		ourLog.info("Successfully started {} servers", myServers.size());
 
-		ourLog.info("Initializing SAIL system registry");
-		try {
-			UploadContributorConfig.uploadContributorConfig();
-			ourLog.info("Done initializing SAIL system registry");
-		} catch (Exception e) {
-			ourLog.info("Failed to initialize SAIL system registry", e);
+		if (System.getProperty("sail.env.id") != null) {
+			ourLog.info("Initializing SAIL system registry");
+			try {
+				UploadContributorConfig.uploadContributorConfig();
+				ourLog.info("Done initializing SAIL system registry");
+			} catch (Exception e) {
+				ourLog.info("Failed to initialize SAIL system registry", e);
+			}
 		}
 
 	}

@@ -445,8 +445,26 @@ public class ContributorConfig {
 			epr.getDrugGiveCodeSystemRxe2().add("1.3.6.1.4.1.12201.102.4");
 			epr.getRequestCodeSystemSystemObr4().add("1.3.6.1.4.1.12201.102.5");
 			epr.getResultCodeSystemSystemObx3().add("1.3.6.1.4.1.12201.102.6");
-
 			contributor.getSendingSystem().add(epr);
+
+			SendingSystem caps = new SendingSystem();
+			caps.setCode("1.3.6.1.4.1.12201.101.2");
+			caps.setDescription("CAPS (Cardiology)");
+			caps.setManagementConsoleOrgId("SIMS");
+			caps.setManagementConsoleSystemId("CAPS");
+			caps.getRequestCodeSystemSystemObr4().add("1.3.6.1.4.1.12201.102.7");
+			caps.getResultCodeSystemSystemObx3().add("1.3.6.1.4.1.12201.102.8");
+			contributor.getSendingSystem().add(caps);
+
+			SendingSystem hpf = new SendingSystem();
+			hpf.setCode("1.3.6.1.4.1.12201.101.3");
+			hpf.setDescription("HPF (Scanned Documents)");
+			hpf.setManagementConsoleOrgId("SIMS");
+			hpf.setManagementConsoleSystemId("HPF");
+			hpf.getRequestCodeSystemSystemObr4().add("1.3.6.1.4.1.12201.102.9");
+			hpf.getResultCodeSystemSystemObx3().add("1.3.6.1.4.1.12201.102.10");
+			contributor.getSendingSystem().add(hpf);
+			
 		}
 
 		// *******************************************************
@@ -566,8 +584,8 @@ public class ContributorConfig {
 			SendingSystem chris_qa = new SendingSystem();
 			// Should be the value from table 9008 with ".101.x" at the end
 			chris_qa.setCode("2.16.840.1.113883.3.239.23.1.101.4");
-			chris_qa.setDescription("CHRIS-QA");
-			chris_qa.setManagementConsoleSystemId("CHRIS-QA");
+			chris_qa.setDescription("CHRISQA");
+			chris_qa.setManagementConsoleSystemId("CHRISQA");
 			// Should be the value from table 9007 with ".102.x" at the end
 			chris_qa.getAllergenCodeSystemIam3().add("2.16.840.1.113883.3.239.23.1.102.10");
 			chris_qa.getDrugAdministrationCodeSystemRxa5().add("2.16.840.1.113883.3.239.23.1.102.11");
@@ -686,8 +704,8 @@ public class ContributorConfig {
 			SendingSystem powerscribe = new SendingSystem();
 			// Should be the value from table 9008 with ".101.x" at the end
 			powerscribe.setCode("2.16.840.1.113883.3.239.23.3.101.4");
-			powerscribe.setDescription("Accentus");
-			powerscribe.setManagementConsoleSystemId("Accentus");
+			powerscribe.setDescription("Powerscribe");
+			powerscribe.setManagementConsoleSystemId("Powerscribe");
 			powerscribe.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.3.102.10");
 			powerscribe.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.3.102.11");
 			contributor.getSendingSystem().add(powerscribe);

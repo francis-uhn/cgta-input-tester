@@ -1895,7 +1895,7 @@ public class AdtTest {
                 "NK1|1|Wph^Mom^^^^^L^^^^^^^|PAR^Parent^03ZRelshp^^^|82 Buttonwood Avenue^^YORK^ON^M6M 2J5^Can^H^^^^^^^|(416)243-3600^PRN^PH^^^^^^^^^~(416)123-1234^PRN^CP^^^^^^^^^|(416)243-3600^PRN^PH^^^^^^^^^|N^Next-of-Kin^03ZConRol^^^||||||||||||||||||||||||||||||||\r" +
                 "NK1|2|Wph^Brother^^^^^L^^^^^^^|BRO^Brother^03ZRelshp^^^|83 Buttonwood Avenue^^YORK^ON^M6M 2J5^Can^H^^^^^^^|(416)243-3601^PRN^PH^^^^^^^^^|(416)525-2525^PRN^PH^^^^^^^^^|C^Emergency Contact^03ZConRol^^^||||||||||||||||||||||||||||||||\r" + 
                 "PV1||I|PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|C||^^^G^4265^^^^^^^  ^|13546a^Generic^Physician^MoeA^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546b^Generic^Physician^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546d^Generic^Physician^MoeD^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|hospServ||||D||N|13546c^Generic^Physician^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000514^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021621|||||||V|\r" + 
-                "PV2||S^Semi^03ZFinbed^^^|^kfkfkfjcjcjcgcgcclcl^03ZAmitRes^^^|||||||||||||||||||N||AI|Elective||||||N|||||||OTH^Self^03ZBrInBy^^^|||||||||||\r" + 
+                "PV2||S^Semi^03ZFinbed^^^|^kfkfkfjcjcjcgcgcclcl^03ZAmitRes^^^|||||||||||||||||||N||AI|Elective||||||N|||||||OTH^Self^03ZBrInBy^^^||2^CTAS 2 - Emergent|||||||||\r" + 
                 "DG1|1||^KFKFKFJCJCJCGCGCCLCLX|KFKFKFJCJCJCGCGCCLCL|201112021621|A|||||||||1||D||||\r" + 
                 "PR1||||||||||||||||||||\r" + 
                 "ZPV|OTH^Self|F^Standard|||N|||13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^||Medical Services^General Internal Medicine^GMED|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^4265^G^^^^^^^^^^^^|413||3910||^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^|0^1^2|||||||||||N||^^|\r" + 
@@ -1910,7 +1910,7 @@ public class AdtTest {
                 "NK1|1|Wph^Mom^^^^^L^^^^^^^|PAR^Parent^03ZRelshp^^^|82 Buttonwood Avenue2^^YORK^ON^M6M 2J5^Can^H^^^^^^^|(416)243-3600^PRN^PH^^^^^^^^^~(416)123-1234^PRN^CP^^^^^^^^^|(416)243-3600^PRN^PH^^^^^^^^^|N^Next-of-Kin^03ZConRol^^^||||||||||||||||||||||||||||||||\r" +
                 "NK1|2|Wph^Brother^^^^^L^^^^^^^|BRO^Brother^03ZRelshp^^^|83 Buttonwood Avenue2^^YORK^ON^M6M 2J5^Can^H^^^^^^^|(416)243-3601^PRN^PH^^^^^^^^^|(416)525-2525^PRN^PH^^^^^^^^^|C^Emergency Contact^03ZConRol^^^||||||||||||||||||||||||||||||||\r" + 
                 "PV1||I|ES9 GEN S^424^1^G^4265^^^N^ES 9 424^ES 9 424 1^ES9 GEN S^1521 19 1^|R|||13546a^Generic^Physician2^MoeA^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546b^Generic^Physician2^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|\"\"|hospServ||||D||Y||IP^|11110000514^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021622|||||||V|\r" +
-                "PV2||S^Semi^03ZFinbed^^^|^kfkfkfjcjcjcgcgcclcl^03ZAmitRes^^^|||||||||||||||||||N||AI|Elective||||||N|||||||OTH^Self^03ZBrInBy^^^|||||||||||\r" + 
+                "PV2||S^Semi^03ZFinbed^^^|pain^kfkfkfjcjcjcgcgcclcl^03ZAmitRes^^^|||||||||||||||||||N||AI|Elective||||||N|||||||OTH^Self^03ZBrInBy^^^||1^CTAS 1 - Resuscitation|||||||||\r" + 
                 "DG1|1||06^KFKFKFJCJCJCGCGCCLCL^2.16.840.1.113883.11.19436|KFKFKFJCJCJCGCGCCLCL|201112021621|A|||||||||1||D||||\r" + 
                 "PR1||||||||||||||||||||\r" + 
                 "ZPV|OTH^Self|F^Standard|||N|||13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^||Medical Services^General Internal Medicine^GMED|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^4265^G^^^^^^^^^^^^|413||3910||^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^|0^1^2|||||||||||N||^^|\r" + 
@@ -2014,6 +2014,14 @@ public class AdtTest {
         assertEquals("I", visit.myPatientClassCode);
         assertEquals(ourTsFormat.parse("201112021622"), visit.myAdmitDate);
         assertEquals("hospServ", visit.myHospitalService);
+        
+        
+        assertEquals("kfkfkfjcjcjcgcgcclcl", visit.myAdmitReasonForEmergencyVisit.myText);
+        
+        
+        assertEquals("1", visit.myAdmissionLevelOfCareForEmergencyVisit.myCode);
+        assertEquals("CTAS 1 - Resuscitation", visit.myAdmissionLevelOfCareForEmergencyVisit.myText);
+                      
         
         Pl cloc = visit.myAssignedPatientLocation;
         assertEquals("ES9 GEN S", cloc.myPointOfCare);

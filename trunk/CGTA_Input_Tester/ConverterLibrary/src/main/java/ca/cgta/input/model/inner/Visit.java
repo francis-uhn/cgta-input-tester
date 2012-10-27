@@ -76,7 +76,7 @@ public class Visit {
 	    myAdmissionLevelOfCareForEmergencyVisit = theHl7MsgVisit.myAdmissionLevelOfCareForEmergencyVisit;
 	    myAdmitDate = theHl7MsgVisit.myAdmitDate;
 	    myAdmitDateFormatted = theHl7MsgVisit.myAdmitDateFormatted;
-	    myAdmitReasonForEmergencyVisit = theHl7MsgVisit.myAdmissionLevelOfCareForEmergencyVisit;
+	    myAdmitReasonForEmergencyVisit = theHl7MsgVisit.myAdmitReasonForEmergencyVisit;
         myAssignedPatientLocation = theHl7MsgVisit.myAssignedPatientLocation;        
         myDischargeDates = theHl7MsgVisit.myDischargeDates;
         myDiagnoses = theHl7MsgVisit.myDiagnoses;

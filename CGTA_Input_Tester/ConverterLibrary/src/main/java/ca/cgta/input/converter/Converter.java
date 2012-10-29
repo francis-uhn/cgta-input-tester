@@ -1504,12 +1504,17 @@ public class Converter {
 				if (b.length() > 0) {
 					b.append("<br>");
 				}
-
+					
 				AbstractTextPrimitive text = (AbstractTextPrimitive) nextRep;
 				b.append(text.getValueAsHtml());
 			}
-			retVal.myValue = b.toString();
+			
+				// Replace < and > with their appropriate code it if is needed
+				String v = b.toString().replaceAll("<", "&lt;");
+				v = v.toString().replaceAll(">", "&gt;");
+				retVal.myValue = v.toString();
 
+				
 		} else if ("DT".equals(retVal.myDataType)) {
 
 			validateOnlyOneRep(theTerserPath, theGroup, retVal);

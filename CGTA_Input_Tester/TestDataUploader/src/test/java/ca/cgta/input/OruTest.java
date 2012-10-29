@@ -57,6 +57,56 @@ public class OruTest {
 		
 	}
 	
+    /**
+     * Testing < and > characters in OBX segment
+     *   
+     * @throws Exception ...
+     */
+    @Test
+    public void testHTMLSpecialCharacters() throws Exception {
+        
+                
+        String message1 = 
+                "MSH|^~\\&|1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1|UHNG|||20120501103100-0500|2954864636aaa|ORU^R01^ORU_R01|31768|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" +
+                "PID|1||7005728^^^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1^MR^G~00000000000^AA^^^JHN^G^^^CANON&&HL70363||Smith^Joseph^John^Junior^Mr^MD^L~Smith^Joe^^^^^A|Blanche^^^^^^L|19310313|M|||26 RIVINGTON AVE^^Goderich^CANON^N7A3Y2^CAN^H~7 WOODPLUMPTON ROAD^^Port Stanley^CANON^N0L2A0^CAN^M||1 (416) 340-4800^PRN^PH^^1^416^3404800^^Do not call after 5~^NET^^test@example.com||eng^English^HL70296|||||||||||||||N\r" +                 
+                "PV1|1|I|JS12^123^4^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.100.1||||38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|GIM|||||||38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1||284675^^^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1^VN\r" +                 
+                "ORC|1|||777^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1\r" +                
+                "OBR|1|7777^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1||50111^OR/Procedure Note^1.3.6.1.4.1.12201.102.5|||20110126124300-0500|20110126125000-0500|||||||||||||||||F|7776&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1||||||5555&Smith&John&&&&Dr&&2.16.840.1.113883.4.347\r" +
+                "OBX|1|ST|10017^Date Dictated^1.3.6.1.4.1.12201.102.6||<Insert Special <Characters>||||||F\r" + 
+                "NTE|1||Note1||\r" +
+                "NTE|2||Note2||\r" +
+                "NTE|3||Note3||\r";
+        
+       
+        
+        Converter c = new Converter();
+        ORU_R01 input = new ORU_R01();
+        input.setParser(PipeParser.getInstanceWithNoValidation());
+        input.parse(message1);
+        List<ClinicalDocumentGroup> clinDocs = c.convertClinicalDocument(input);
+        Persister.persist(clinDocs);
+                
+        ViewQuery query = new ViewQuery().viewName("allDocuments").designDocId("_design/application");
+        List<ClinicalDocumentContainer> clinDocContainers = Persister.getConnector().queryView(query, ClinicalDocumentContainer.class);
+        
+        ClinicalDocumentContainer clinDocContainer = clinDocContainers.get(0);
+        ClinicalDocumentSection clinDocSection = clinDocContainer.getDocument().mySections.get(0);
+        
+        
+        
+        //check ClinicalDocumentData (observation groups)
+        
+        List<ClinicalDocumentData> clinDocDataList = clinDocSection.myData;
+        
+        assertEquals("ST", clinDocDataList.get(0).myDataType);
+        assertEquals("10017", clinDocDataList.get(0).myCode.myCode);
+        assertEquals("Date Dictated", clinDocDataList.get(0).myCode.myText);
+        assertEquals("F", clinDocDataList.get(0).myDataStatusCode);
+        assertEquals("Final", clinDocDataList.get(0).myDataStatus);
+        assertEquals("&lt;Insert Special &lt;Characters&gt;", clinDocDataList.get(0).myValue);
+        
+                
+    }
 	
 	
     /**

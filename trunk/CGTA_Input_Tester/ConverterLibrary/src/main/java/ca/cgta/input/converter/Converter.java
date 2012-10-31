@@ -1506,13 +1506,13 @@ public class Converter {
 				}
 					
 				AbstractTextPrimitive text = (AbstractTextPrimitive) nextRep;
-				b.append(text.getValueAsHtml());
+				String v = text.getValueAsHtml();
+				v = v.replaceAll("<", "&lt;");
+				v = v.replaceAll(">", "&gt;");
+				b.append(v);
 			}
 			
-				// Replace < and > with their appropriate code it if is needed
-				String v = b.toString().replaceAll("<", "&lt;");
-				v = v.toString().replaceAll(">", "&gt;");
-				retVal.myValue = v.toString();
+				retVal.myValue = b.toString();
 
 				
 		} else if ("DT".equals(retVal.myDataType)) {

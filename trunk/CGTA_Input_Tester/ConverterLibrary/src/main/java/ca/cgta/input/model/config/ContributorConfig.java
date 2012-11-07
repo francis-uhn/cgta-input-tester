@@ -528,9 +528,6 @@ public class ContributorConfig {
 			contributor.getDevListenPort().add(14004);
 			contributor.getDevListenPort().add(14005);
 			contributor.getDevListenPort().add(14006);
-			contributor.getDevListenPort().add(14039);
-			contributor.getDevListenPort().add(14040);
-			contributor.getDevListenPort().add(14041);
 
 			contributor.setName("Ontario Association of Community Care Access Centres (OACCAC)");
 			contributor.setDevSecurityToken("3498749864ccc");
@@ -579,23 +576,46 @@ public class ContributorConfig {
 			strata.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.1.102.8");
 			strata.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.1.102.9");
 			contributor.getSendingSystem().add(strata);
-			
-			// CHRIS-QA testing environment
-			SendingSystem chris_qa = new SendingSystem();
-			// Should be the value from table 9008 with ".101.x" at the end
-			chris_qa.setCode("2.16.840.1.113883.3.239.23.1.101.4");
-			chris_qa.setDescription("CHRISQA");
-			chris_qa.setManagementConsoleSystemId("CHRISQA");
-			// Should be the value from table 9007 with ".102.x" at the end
-			chris_qa.getAllergenCodeSystemIam3().add("2.16.840.1.113883.3.239.23.1.102.10");
-			chris_qa.getDrugAdministrationCodeSystemRxa5().add("2.16.840.1.113883.3.239.23.1.102.11");
-			chris_qa.getDrugComponentCodeSystemRxc2().add("2.16.840.1.113883.3.239.23.1.102.12");
-			chris_qa.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.1.102.13");
-			chris_qa.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.1.102.14");
-			contributor.getSendingSystem().add(chris_qa);
-
 
 		}
+		// *******************************************************
+		// OACCAC-QA
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.getDevListenPort().add(14039);
+			contributor.getDevListenPort().add(14040);
+			contributor.getDevListenPort().add(14041);
+
+			contributor.setName("Ontario Association of Community Care Access Centres (OACCAC) - QA");
+			contributor.setDevSecurityToken("2385472197mmm");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.22.7");
+			contributor.setManagementConsoleOrgId("OACCAC_QA");
+
+			// Should be the value from table 9005 with ".100.x" at the end
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.22.7.100.1", "Central West CCAC"));
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.22.7.100.2", "Mississauga Halton CCAC"));
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.22.7.100.3", "Toronto Central CCAC"));
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.22.7.100.4", "Central CCAC"));
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.22.7.100.5", "Central East CCAC"));
+			
+			// CHRIS-QA testing environment
+			SendingSystem chris = new SendingSystem();
+			// Should be the value from table 9008 with ".101.x" at the end
+			chris.setCode("2.16.840.1.113883.3.239.22.7.101.1");
+			chris.setDescription("CHRIS");
+			chris.setManagementConsoleSystemId("CHRIS");
+			// Should be the value from table 9007 with ".102.x" at the end
+			chris.getAllergenCodeSystemIam3().add("2.16.840.1.113883.3.239.22.7.102.1");
+			chris.getDrugAdministrationCodeSystemRxa5().add("2.16.840.1.113883.3.239.22.7.102.2");
+			chris.getDrugComponentCodeSystemRxc2().add("2.16.840.1.113883.3.239.22.7.102.3");
+			chris.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.22.7.102.4");
+			chris.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.22.7.102.5");
+			contributor.getSendingSystem().add(chris);
+		}
+
 		// *******************************************************
 		// Lakeridge
 		// *******************************************************

@@ -577,7 +577,6 @@ function (doc) {
                 //print consent lock indicator
                 notesArray.push({name: "Patient Requested Record Lock", note: nullConvert(patient.myPatientRequestedRecordLock)});
                 
-                
                 //function to create provider names string from a names array
                 //print all name fields
                 function createProviderNamesString(pnames)
@@ -1200,8 +1199,9 @@ function (doc) {
         			else
         				obsDateTime = doc.document.myRecordUpdatedDateFormatted;
                 	
+        			var obsDateTimeFormated = String(obsDateTime).slice(0,19).replace(/T.*/, " ");
         			//DateTimeOfObservation
-        			observationText += "<b>Last Update Time: </b>"+obsDateTime.replace(/T.*/, "").slice(0,10)+"<br>";
+        			observationText += "<b>Last Update Time: </b>"+obsDateTime+"<br>";
 
                 	// VALUE
                 	observationText += "<b>Value: </b>"+nullConvert(observation.myValue)+"<br>";

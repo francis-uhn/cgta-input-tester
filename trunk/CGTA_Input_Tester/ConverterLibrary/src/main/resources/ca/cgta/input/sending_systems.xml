@@ -121,8 +121,8 @@
         <hsp_facility_9005 description="Central East CCAC" code="2.16.840.1.113883.3.239.22.7.100.5"/>
         <hsp_id_9004>2.16.840.1.113883.3.239.22.7</hsp_id_9004>
         <management_console_org_id>OACCAC_QA</management_console_org_id>
-        <provider_pool_oid description="Ontario Association of Community Care Access Centres (OACCAC) Provider IDs" code="2.16.840.1.113883.3.239.22.7.1"/>
-        <visit_number_pool_oid description="Ontario Association of Community Care Access Centres (OACCAC) Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.22.7.2"/>
+        <provider_pool_oid description="Ontario Association of Community Care Access Centres (OACCAC) - QA Provider IDs" code="2.16.840.1.113883.3.239.22.7.1"/>
+        <visit_number_pool_oid description="Ontario Association of Community Care Access Centres (OACCAC) - QA Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.22.7.2"/>
         <hsp_sending_system_9008 description="CHRIS" code="2.16.840.1.113883.3.239.22.7.101.1">
             <drug_administration_codesystem_rxa5_9007>2.16.840.1.113883.3.239.22.7.102.2</drug_administration_codesystem_rxa5_9007>
             <drug_component_codesystem_rxc2_9007>2.16.840.1.113883.3.239.22.7.102.3</drug_component_codesystem_rxc2_9007>

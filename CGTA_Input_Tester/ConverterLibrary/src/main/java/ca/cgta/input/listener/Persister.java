@@ -124,55 +124,55 @@ public class Persister {
         
         if ("A01".equals(thePatientWithVisits.myMostRecentEventCode)) {
             updateVisit(existing, thePatientWithVisits);
-        	appendOutcomeForVisit(outcome, existing);
+        	appendOutcomeForVisit(outcome, thePatientWithVisits);
             outcome.append("Activate inpatient visit");
         } else if ("A02".equals(thePatientWithVisits.myMostRecentEventCode)) {
             updateVisit(existing, thePatientWithVisits);
-        	appendOutcomeForVisit(outcome, existing);
+        	appendOutcomeForVisit(outcome, thePatientWithVisits);
             outcome.append("Transfer visit");
         } else if ("A03".equals(thePatientWithVisits.myMostRecentEventCode)) {
             updateVisit(existing, thePatientWithVisits);
-        	appendOutcomeForVisit(outcome, existing);
+        	appendOutcomeForVisit(outcome, thePatientWithVisits);
             outcome.append("Discharge visit");
         } else if ("A04".equals(thePatientWithVisits.myMostRecentEventCode)) {
             updateVisit(existing, thePatientWithVisits);
-        	appendOutcomeForVisit(outcome, existing);
+        	appendOutcomeForVisit(outcome, thePatientWithVisits);
             outcome.append("Activate outpatient visit");
         } else if ("A05".equals(thePatientWithVisits.myMostRecentEventCode)) {
             updateVisit(existing, thePatientWithVisits);
-            appendOutcomeForVisit(outcome, existing);
+            appendOutcomeForVisit(outcome, thePatientWithVisits);
             outcome.append("Process pre-admit visit");    
         } else if ("A06".equals(thePatientWithVisits.myMostRecentEventCode)) {
             convertVisit(existing, thePatientWithVisits);
-        	appendOutcomeForVisit(outcome, existing);
+        	appendOutcomeForVisit(outcome, thePatientWithVisits);
             outcome.append("Convert outpatient visit to inpatient");
         } else if ("A07".equals(thePatientWithVisits.myMostRecentEventCode)) {
             convertVisit(existing, thePatientWithVisits);
-        	appendOutcomeForVisit(outcome, existing);
+        	appendOutcomeForVisit(outcome, thePatientWithVisits);
             outcome.append("Convert inpatient visit to outpatient");
         } else if ("A08".equals(thePatientWithVisits.myMostRecentEventCode)) {
             updateVisit(existing, thePatientWithVisits);
-        	appendOutcomeForVisit(outcome, existing);
+        	appendOutcomeForVisit(outcome, thePatientWithVisits);
             outcome.append("Update visit");
         } else if ("A10".equals(thePatientWithVisits.myMostRecentEventCode)) {
             updateVisit(existing, thePatientWithVisits);    
-        	appendOutcomeForVisit(outcome, existing);
+        	appendOutcomeForVisit(outcome, thePatientWithVisits);
             outcome.append("Add arrival for recurring outpatient");
         } else if ("A11".equals(thePatientWithVisits.myMostRecentEventCode)) {
             updateVisit(existing, thePatientWithVisits);
-        	appendOutcomeForVisit(outcome, existing);
+        	appendOutcomeForVisit(outcome, thePatientWithVisits);
             outcome.append("Cancel admit");
         } else if ("A13".equals(thePatientWithVisits.myMostRecentEventCode)) {
             updateVisit(existing, thePatientWithVisits);
-        	appendOutcomeForVisit(outcome, existing);
+        	appendOutcomeForVisit(outcome, thePatientWithVisits);
             outcome.append("Cancel discharge");
         } else if ("A17".equals(thePatientWithVisits.myMostRecentEventCode)) {
             swapLocations(existing, thePatientWithVisits);
-        	appendOutcomeForVisit(outcome, existing);
+        	appendOutcomeForVisit(outcome, thePatientWithVisits);
             outcome.append("Perform bedswap with visit " + thePatientWithVisits.getRawVisitNumberOrUnknown());
         } else if ("A23".equals(thePatientWithVisits.myMostRecentEventCode)) {
         	updateVisit(existing, thePatientWithVisits);
-        	appendOutcomeForVisit(outcome, existing);
+        	appendOutcomeForVisit(outcome, thePatientWithVisits);
             outcome.append("Delete visit " + thePatientWithVisits.getRawVisitNumberOrUnknown());
         } else if ("A28".equals(thePatientWithVisits.myMostRecentEventCode)) {
             updatePatient(existing, thePatientWithVisits);
@@ -192,15 +192,15 @@ public class Persister {
             outcome.append("Merge person or patient with MRN " + thePatientWithVisits.getRawMergeMrnOrUnknown());
         } else if ("A42".equals(thePatientWithVisits.myMostRecentEventCode)) {
             mergeVisit(existing, thePatientWithVisits);
-            appendOutcomeForVisit(outcome, existing);
+            appendOutcomeForVisit(outcome, thePatientWithVisits);
             outcome.append("Merge visits for patient with MRN " + thePatientWithVisits.getRawMergeMrnOrUnknown());    
         } else if ("A45".equals(thePatientWithVisits.myMostRecentEventCode)) {
             moveVisit(existing, thePatientWithVisits);
-        	appendOutcomeForVisit(outcome, existing);
+        	appendOutcomeForVisit(outcome, thePatientWithVisits);
             outcome.append("Move visit to patient with MRN " + thePatientWithVisits.getRawMergeMrnOrUnknown());
         } else if ("A60".equals(thePatientWithVisits.myMostRecentEventCode)) {
             updateVisit(existing, thePatientWithVisits);
-        	appendOutcomeForVisit(outcome, existing);
+        	appendOutcomeForVisit(outcome, thePatientWithVisits);
             outcome.append("Update allergy information");
         }
 
@@ -218,9 +218,9 @@ public class Persister {
     }
 
 
-	private static void appendOutcomeForVisit(StringBuilder theOutcome, PatientWithVisitsContainer theExisting) {
+	private static void appendOutcomeForVisit(StringBuilder theOutcome, PatientWithVisits theExisting) {
     	theOutcome.append(" visit/encounter ");
-    	theOutcome.append(theExisting.getDocument().getRawVisitNumberOrUnknown());
+    	theOutcome.append(theExisting.getRawVisitNumberOrUnknown());
 		theOutcome.append(": ");
     }
 

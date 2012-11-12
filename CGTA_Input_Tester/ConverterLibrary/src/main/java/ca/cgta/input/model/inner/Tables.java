@@ -131,6 +131,7 @@ public class Tables {
 			tbl.put("C", "Corrected");
 			tbl.put("W", "Withdrawn");
 			tbl.put("I", "Incomplete / In Progress");
+			tbl.put("D", "Draft");
 		}
 		{
 			HashMap<String, String> tbl = new HashMap<String, String>();
@@ -259,6 +260,7 @@ public class Tables {
 			tbl0271.put("W", "Withdrawn");
 			tbl0271.put("I", "Incomplete / In Progress");
 			tbl0271.put("P", "Preliminary");
+			tbl0271.put("D", "Draft");
 		}
 		{
 			HashMap<String, String> tbl0272 = new HashMap<String, String>();

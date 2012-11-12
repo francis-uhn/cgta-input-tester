@@ -4,6 +4,7 @@ function(doc) {
 	var mrnKey;
 	var siteId;
 	var systemId;
+	var formatedSiteId;
 	if (doc.document.myType.toString() == "DOCUMENT"|| doc.document.myType.toString() == "PATIENT_WITH_VISITS" || doc.document.myType.toString() == "MEDICATION_ORDER") {
 
 		
@@ -26,7 +27,7 @@ function(doc) {
 			}
 		}
 	}
-
+	formatedSiteId = siteId.replace(/\./g, "").slice(0,20);
 	// Patient with visits (each PRO row will be one visit)
 	if (doc.document.myType == "PATIENT_WITH_VISITS") {
 		
@@ -75,7 +76,7 @@ function(doc) {
 							visitPid:null,
 							resulted: true};
 				
-				var complexKey = [mrnKey, formattedTime.slice(0,10), "F"];
+				var complexKey = [mrnKey, formatedSiteId, formattedTime.slice(0,10), "F"];
 				emit(complexKey, act);
 			}
 		}
@@ -109,7 +110,7 @@ function(doc) {
                         visitPid:null,
                         resulted: true};
             
-            var complexKey = [mrnKey, patient.myRecordUpdatedDateFormatted.slice(0,10), "F"];
+            var complexKey = [mrnKey, formatedSiteId, patient.myRecordUpdatedDateFormatted.slice(0,10), "F"];
             emit(complexKey, act);                
                 
         }   
@@ -142,7 +143,7 @@ function(doc) {
                     visitPid:null,
                     resulted: true};
 
-            var complexKey = [mrnKey, patient.myRecordUpdatedDateFormatted.slice(0,10), "F"];
+            var complexKey = [mrnKey, formatedSiteId, patient.myRecordUpdatedDateFormatted.slice(0,10), "F"];
             emit(complexKey, act);
                 
          }        
@@ -232,7 +233,7 @@ function(doc) {
 			else
 				statusCode = "X";
 				
-			var complexKey = [mrnKey, formattedTime.slice(0,10), statusCode];	
+			var complexKey = [mrnKey, formatedSiteId, formattedTime.slice(0,10), statusCode];	
 			emit( complexKey, act);
 		}
 	}	
@@ -272,7 +273,7 @@ function(doc) {
                     visitPid:null,
                     resulted: true};
 
-            var complexKey = [mrnKey, formattedTime.slice(0,10), "F"];
+            var complexKey = [mrnKey, formatedSiteId, formattedTime.slice(0,10), "F"];
             emit(complexKey, act);
        
         

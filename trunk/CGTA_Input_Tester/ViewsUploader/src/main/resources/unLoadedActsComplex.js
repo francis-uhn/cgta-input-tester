@@ -28,6 +28,13 @@ function(doc) {
 		}
 	}
 	formatedSiteId = siteId.replace(/\./g, "").slice(0,20);
+	
+	// This two organizations have too long site id that does not much to PRO site model
+	if ("2.16.840.1.113883.3.239.23.10" == siteId) // Trillium Health Centre 
+		formatedSiteId = "16840111388332392310";
+	if ("2.16.840.1.113883.3.239.23.11" == siteId) // William Osler Health Centre
+		formatedSiteId = "16840111388332392311";
+	
 	// Patient with visits (each PRO row will be one visit)
 	if (doc.document.myType == "PATIENT_WITH_VISITS") {
 		

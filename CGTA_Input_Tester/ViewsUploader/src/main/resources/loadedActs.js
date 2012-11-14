@@ -1029,6 +1029,10 @@ function (doc) {
     				effectiveTime = doc.document.myRecordUpdatedDateFormatted;
     			}
     			
+    			
+    			//Create status codes used for view key and the act         
+                var actStatusCode = convertToActStatus(medicationOrder.myStatusCode,"MEDICATION_ORDER");
+    			
                 
                 // Forming loaded act object
                 var act = {pid: null,
@@ -1037,8 +1041,8 @@ function (doc) {
                         fullyLoaded: true,                        
                         availabilityTime: doc.document.myRecordUpdatedDateFormatted,
                         effectiveTime: effectiveTime,
-                        statusCode: {id: "COMPLETE", name: "Complete"},
-                        statusCodes: [{id: "COMPLETE", name: "Complete"}],
+                        statusCode: {id: actStatusCode, name: actStatusCode},
+                        statusCodes: [{id: actStatusCode, name: actStatusCode}],
                         departmentCode: {},
                         procCodes: [{}],
                         notes: actNotesArray,
@@ -1290,16 +1294,20 @@ function (doc) {
 			}	
 			else
 				effectiveTime = doc.document.myRecordUpdatedDateFormatted;
+				
+				
+			//Create status code for the act          
+            var actStatusCode = convertToActStatus(doc.document.mySections[actNumber].myStatusCode,"DOCUMENT");	
             
-			  // Forming loaded act object
+            // Forming loaded act object
             var act = {pid: null,
                         id: documentKey, 
                         name: doc.document.mySections[actNumber].mySectionName,
                         fullyLoaded: false,
                         availabilityTime: doc.document.myRecordUpdatedDateFormatted,
                         effectiveTime: effectiveTime,
-                        statusCode: {id: "COMPLETE", name: "Complete"},
-                        statusCodes: [{id: "COMPLETE", name: "Complete"}],
+                        statusCode: {id: actStatusCode, name: actStatusCode},
+                        statusCodes: [{id: actStatusCode, name: actStatusCode}],
                         departmentCode: {},
                         procCodes: [{}],
                         notes: actNotesArray,
@@ -1313,5 +1321,45 @@ function (doc) {
          } 
 
     }
+    
+    
+    
+    function convertToActStatus(statusCode,docType)
+    {
+        if (docType == "DOCUMENT"){             
+            //I   Incomplete / In Progress
+            //P   Preliminary
+            //F   Final
+            //C   Corrected
+            //W   Withdrawn
+            if ( statusCode == "C" || statusCode == "F") {
+                return "COMPLETE"
+            }               
+            if ( statusCode == "W") {
+                return "DELETED"
+            }                
+            return "INCOMPLETE"
+        }
+        
+        if (docType == "MEDICATION_ORDER"){             
+            //NW  New Order placed in ordering system 
+            //CA  Order cancelled
+            //OK  Order verified
+            //OR  Order replaced (changed/modified)
+            //OD  Order discontinued
+            //HD  Order held
+            //RL  Order released (after being held)
+            
+            if ( statusCode == "OK" || statusCode == "OR" || statusCode == "HD" || statusCode == "RL") {
+                return "COMPLETE"
+            }
+            if ( statusCode == "CA" || statusCode == "OD") {
+                return "DELETED"
+            }                
+            return "INCOMPLETE"
+        }
+        
+    }
+        
 
 }

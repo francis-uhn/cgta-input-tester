@@ -214,8 +214,15 @@ function(doc) {
 			{
 				formattedTime = doc.document.mySections[actNumber].myDateFormatted;
 			}	
-			else
+			else {
 				formattedTime = doc.document.myRecordUpdatedDateFormatted;
+			}
+			
+			//Create status codes used for view key and the act			
+            var actStatusCode = convertToActStatus(doc.document.mySections[actNumber].myStatusCode,"DOCUMENT");
+            var viewStatusCode = convertToViewKeyStatus(doc.document.mySections[actNumber].myStatusCode,"DOCUMENT");
+			
+			
 			
 			var act = {pid: null,
 						id: documentKey, 
@@ -223,8 +230,8 @@ function(doc) {
 						fullyLoaded: false,
 						availabilityTime: doc.document.myRecordUpdatedDateFormatted,
 						effectiveTime: formattedTime,						
-						statusCode: {id: "COMPLETE", name: "Complete"},
-                        statusCodes: [{id: "COMPLETE", name: "Complete"}],
+						statusCode: {id: actStatusCode, name: actStatusCode},
+                        statusCodes: [{id: actStatusCode, name: actStatusCode}],
 						departmentCode: {},
 						procCodes: [{}],
 						notes:[],
@@ -232,17 +239,15 @@ function(doc) {
 						procCode:null,
 						visitPid:null,
 						resulted: true};
-			
-			// Check if myStatusCode exist in the section
-			var statusCode;		
-			if (doc.document.mySections[actNumber].myStatusCode)
-				statusCode = doc.document.mySections[actNumber].myStatusCode;
-			else
-				statusCode = "X";
+						
+						
+
+            
 				
-			var complexKey = [mrnKey, formatedSiteId, formattedTime.slice(0,10), statusCode];	
+			var complexKey = [mrnKey, formatedSiteId, formattedTime.slice(0,10), viewStatusCode];	
 			emit( complexKey, act);
 		}
+		
 	}	
 	else if (doc.document.myType.toString() == "MEDICATION_ORDER") {
 
@@ -262,6 +267,12 @@ function(doc) {
 			}	
 			else
 				formattedTime = doc.document.myRecordUpdatedDateFormatted;
+				
+				
+            //Create status codes used for view key and the act         
+            var actStatusCode = convertToActStatus(medicationOrder.myStatusCode,"MEDICATION_ORDER");
+            var viewStatusCode = convertToViewKeyStatus(medicationOrder.myStatusCode,"MEDICATION_ORDER");				
+				
 			
             // Forming unloaded act object
             var act = {pid: null,
@@ -270,8 +281,8 @@ function(doc) {
                     fullyLoaded: false,                        
                     availabilityTime: formattedTime,
                     effectiveTime: formattedTime,
-                    statusCode: {id: "COMPLETE", name: "Complete"},
-                    statusCodes: [{id: "COMPLETE", name: "Complete"}],
+                    statusCode: {id: actStatusCode, name: actStatusCode},
+                    statusCodes: [{id: actStatusCode, name: actStatusCode}],
                     departmentCode: {},
                     procCodes: [{}],
                     notes: [],
@@ -280,12 +291,85 @@ function(doc) {
                     visitPid:null,
                     resulted: true};
 
-            var complexKey = [mrnKey, formatedSiteId, formattedTime.slice(0,10), "F"];
+            var complexKey = [mrnKey, formatedSiteId, formattedTime.slice(0,10), viewStatusCode];
             emit(complexKey, act);
-       
-        
             
     }
+    
+    
+    function convertToActStatus(statusCode,docType)
+    {
+        if (docType == "DOCUMENT"){             
+            //I   Incomplete / In Progress
+            //P   Preliminary
+            //F   Final
+            //C   Corrected
+            //W   Withdrawn
+            if ( statusCode == "C" || statusCode == "F") {
+                return "COMPLETE"
+            }               
+            if ( statusCode == "W") {
+                return "DELETED"
+            }                
+            return "INCOMPLETE"
+        }
+        
+        if (docType == "MEDICATION_ORDER"){             
+            //NW  New Order placed in ordering system 
+            //CA  Order cancelled
+            //OK  Order verified
+            //OR  Order replaced (changed/modified)
+            //OD  Order discontinued
+            //HD  Order held
+            //RL  Order released (after being held)
+            
+            if ( statusCode == "OK" || statusCode == "OR" || statusCode == "HD" || statusCode == "RL") {
+                return "COMPLETE"
+            }
+            if ( statusCode == "CA" || statusCode == "OD") {
+                return "DELETED"
+            }                
+            return "INCOMPLETE"
+        }
+        
+    }
+    
+    
+    function convertToViewKeyStatus(statusCode,docType)
+    {
+        if (docType == "DOCUMENT"){             
+            //I   Incomplete / In Progress
+            //P   Preliminary
+            //F   Final
+            //C   Corrected
+            //W   Withdrawn
+            if ( statusCode == "F" || statusCode == "C" || statusCode == "I" || statusCode == "W") {
+                return statusCode;
+            }              
+            return "I"
+        }
+        
+        if (docType == "MEDICATION_ORDER"){             
+            //NW  New Order placed in ordering system 
+            //CA  Order cancelled
+            //OK  Order verified
+            //OR  Order replaced (changed/modified)
+            //OD  Order discontinued
+            //HD  Order held
+            //RL  Order released (after being held)            
+            if ( statusCode == "OK" || statusCode == "OR" || statusCode == "HD" || statusCode == "RL") {
+                return "F"
+            }
+            if ( statusCode == "CA" || statusCode == "OD") {
+                return "W"
+            }                
+            return "I"
+        }
+        
+    }    
+    
+    
+    
 	
 	
 }

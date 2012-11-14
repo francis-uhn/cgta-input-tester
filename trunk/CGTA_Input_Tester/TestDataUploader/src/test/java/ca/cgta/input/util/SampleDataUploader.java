@@ -70,8 +70,8 @@ public class SampleDataUploader {
 
         //assign command line args to variables and use defaults if not supplied  
         String url = cmdLine.getOptionValue("u", "http://uhnvprx01t.uhn.ca:5984");
-        //String dbName = cmdLine.getOptionValue("d", "cgta_input_test_db");
-        String dbName = cmdLine.getOptionValue("d", "neal_test_db");
+        String dbName = cmdLine.getOptionValue("d", "cgta_input_test_db");
+        //String dbName = cmdLine.getOptionValue("d", "neal_test_db");
         String mrn = cmdLine.getOptionValue("m", "12345");
         if (cmdLine.hasOption("a")) {
         	UhnConverter.ourHspOid = "2.16.840.1.113883.3.239.23.8";
@@ -85,7 +85,7 @@ public class SampleDataUploader {
         CouchDbInstance dbInstance = new StdCouchDbInstance(httpClient);        
         StdCouchDbConnector connector = new StdCouchDbConnector(dbName, dbInstance);        
         Persister.setConnector(connector);
-        ViewUploader.uploadAllViews(connector);	    
+//        ViewUploader.uploadAllViews(connector);	    
 	    
 //        persistClinDoc(mrn);
 //        persistClinDoc2(mrn);
@@ -98,8 +98,8 @@ public class SampleDataUploader {
 //        persistMedicationOrderWithAdminsDoc(mrn);
 //        persistDeactivatedPatientWithDocs(mrn);
 //        persistReoccuringPatientWithDocs(mrn);
-//        persistMultiple();
-        persistMessagesFromFile();
+//        persistMultiple(mrn);
+//        persistMessagesFromFile();
         
 	    
 	}
@@ -113,12 +113,15 @@ public class SampleDataUploader {
      */    
     private static void persistClinDoc(String mrn) throws Exception {
         
+                
+        
+        
         String message1 =
                 "MSH|^~\\&|EPR|UHNG|||201205011031||ORU^R01^ORU_R01|31768|T|2.5\r" +
                 "PID|1||"+mrn+"^^^UHN^MR^G^4265~9287170261^BL^^CANON^JHN^G||Smith^Joseph^John^Junior^Mr^MD^L~Smith^Joe^^^^^A|Blanche^^^^^^L|19310313|M|||26 RIVINGTON AVE^^Goderich^ON^N7A3Y2^CAN^H~7 WOODPLUMPTON ROAD^^Port Stanley^ON^N0L2A0^CAN^M||1 (416) 340-4800^PRN^PH^^1^416^3404800^^Do not call after 5~^NET^^test@example.com||eng^English|||||||||||||||N\r" +                 
                 "PV1|1|I|JS12^123^4^G^^Q Building^12^JS12-123-4 GIM Inpatient Unit||||38946^Blake^Donald^Thor^^^^^|38946^Blake^Donald^Thor^^^^^|38946^Blake^Donald^Thor^^^^^|GIM|||||||38946^Blake^Donald^Thor^^^^^||"+mrn+"VID1^^^2.16.840.1.113883.3.59.3:0947^VN^G\r" +                 
                 "ORC|1|"+mrn+"OID1^EPR^2.16.840.1.113883.3.59.3:947|||CM\r" +                
-                "OBR|1|"+mrn+"OID1^EPR^2.16.840.1.113883.3.59.3:947||50111^OR/Procedure Note1^HL70396|||20110126124300-0500|20110126125000-0500||||||||||N|||||||F|7776&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.1||||||5555&Smith&John&&&&Dr&&2.16.840.1.113883.4.347\r" +                 
+                "OBR|1|"+mrn+"OID1^EPR^2.16.840.1.113883.3.59.3:947||50111^OR/Procedure Note1^HL70396|||20110126124300-0500|20110126125000-0500||||||||||N|||||||I|7776&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.1||||||5555&Smith&John&&&&Dr&&2.16.840.1.113883.4.347\r" +                 
                 "OBX|1|DT|10017^Date Dictated^HL70396||12 Jan 2012||||||F\r" + 
                 "OBX|2|ST|1126527^Dictated by^HL70396||John Smith, MD||||||F\r" + 
                 "OBX|3|NM|14007^Pressure^HL70396||0|ml|-2 - 4|N|||F\r" +
@@ -147,7 +150,7 @@ public class SampleDataUploader {
                 "PID|1||"+mrn+"^^^UHN^MR^G^4265~9287170261^BL^^CANON^JHN^G||Smith^Joseph^John^Junior^Mr^MD^L~Smith^Joe^^^^^A|Blanche^^^^^^L|19310313|M|||26 RIVINGTON AVE^^Goderich^ON^N7A3Y2^CAN^H~7 WOODPLUMPTON ROAD^^Port Stanley^ON^N0L2A0^CAN^M||1 (416) 340-4800^PRN^PH^^1^416^3404800^^Do not call after 5~^NET^^test@example.com||eng^English|||||||||||||||N\r" +                 
                 "PV1|1|I|JS12^123^4^G^^Q Building^12^JS12-123-4 GIM Inpatient Unit||||38946^Blake^Donald^Thor^^^^^|38946^Blake^Donald^Thor^^^^^|38946^Blake^Donald^Thor^^^^^|GIM|||||||38946^Blake^Donald^Thor^^^^^||"+mrn+"VID2^^^2.16.840.1.113883.3.59.3:0947^VN^G\r" +                 
                 "ORC|1|"+mrn+"OID2^EPR^2.16.840.1.113883.3.59.3:947|||CM\r" +                
-                "OBR|1|"+mrn+"OID2^EPR^2.16.840.1.113883.3.59.3:947||50111^OR/Procedure Note2^HL70396|||20110126124300-0500|20110126125000-0500||||||||||N|||||||F|7776&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.1||||||5555&Smith&John&&&&Dr&&2.16.840.1.113883.4.347\r" +                 
+                "OBR|1|"+mrn+"OID2^EPR^2.16.840.1.113883.3.59.3:947||50111^OR/Procedure Note2^HL70396|||20110126124300-0500|20110126125000-0500||||||||||N|||||||P|7776&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.1||||||5555&Smith&John&&&&Dr&&2.16.840.1.113883.4.347\r" +                 
                 "OBX|1|DT|10017^Date Dictated^HL70396||12 Jan 2012||||||F\r" + 
                 "OBX|2|ST|1126527^Dictated by^HL70396||John Smith, MD||||||F\r" + 
                 "OBX|3|NM|14007^Pressure^HL70396||0|ml|-2 - 4|N|||F\r" +
@@ -219,7 +222,7 @@ public class SampleDataUploader {
                 "PID|1||"+mrn+"^^^UHN^MR^G^4265~9287170261^BL^^CANON^JHN^G||Smith^Joseph^John^Junior^Mr^MD^L~Smith^Joe^^^^^A|Blanche^^^^^^L|19310313|M|||26 RIVINGTON AVE^^Goderich^ON^N7A3Y2^CAN^H~7 WOODPLUMPTON ROAD^^Port Stanley^ON^N0L2A0^CAN^M||1 (416) 340-4800^PRN^PH^^1^416^3404800^^Do not call after 5~^NET^^test@example.com||eng^English|||||||||||||||N\r" +                 
                 "PV1|1|I|JS12^123^4^G^^Q Building^12^JS12-123-4 GIM Inpatient Unit||||38946^Blake^Donald^Thor^^^^^|38946^Blake^Donald^Thor^^^^^|38946^Blake^Donald^Thor^^^^^|GIM|||||||38946^Blake^Donald^Thor^^^^^||"+mrn+"VID4^^^2.16.840.1.113883.3.59.3:0947^VN^G\r" +                 
                 "ORC|1|"+mrn+"OID4^EPR^2.16.840.1.113883.3.59.3:947|||CM\r" +                
-                "OBR|1|"+mrn+"OID4^EPR^2.16.840.1.113883.3.59.3:947||50111^OR/Procedure Note4^HL70396|||20110126124300-0500|20110126125000-0500||||||||||N|||||||F|7776&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.1||||||5555&Smith&John&&&&Dr&&2.16.840.1.113883.4.347\r" +                 
+                "OBR|1|"+mrn+"OID4^EPR^2.16.840.1.113883.3.59.3:947||50111^OR/Procedure Note4^HL70396|||20110126124300-0500|20110126125000-0500||||||||||N|||||||C|7776&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.1||||||5555&Smith&John&&&&Dr&&2.16.840.1.113883.4.347\r" +                 
                 "OBX|1|DT|10017^Date Dictated^HL70396||12 Jan 2012||||||F\r" + 
                 "OBX|2|ST|1126527^Dictated by^HL70396||John Smith, MD||||||F\r" + 
                 "OBX|3|NM|14007^Pressure^HL70396||0|ml|-2 - 4|N|||F\r" +
@@ -253,7 +256,7 @@ public class SampleDataUploader {
                 "PID|1||"+mrn+"^^^UHN^MR^G^4265~9287170261^BL^^CANON^JHN^G||Smith^Joseph^John^Junior^Mr^MD^L~Smith^Joe^^^^^A|Blanche^^^^^^L|19310313|M|||26 RIVINGTON AVE^^Goderich^ON^N7A3Y2^CAN^H~7 WOODPLUMPTON ROAD^^Port Stanley^ON^N0L2A0^CAN^M||1 (416) 340-4800^PRN^PH^^1^416^3404800^^Do not call after 5~^NET^^test@example.com||eng^English|||||||||||||||N\r" +                 
                 "PV1|1|I|JS12^123^4^G^^Q Building^12^JS12-123-4 GIM Inpatient Unit||||38946^Blake^Donald^Thor^^^^^|38946^Blake^Donald^Thor^^^^^|38946^Blake^Donald^Thor^^^^^|GIM|||||||38946^Blake^Donald^Thor^^^^^||"+mrn+"VID5^^^2.16.840.1.113883.3.59.3:0947^VN^G\r" +                 
                 "ORC|1|"+mrn+"OID5^EPR^2.16.840.1.113883.3.59.3:947|||CM\r" +                
-                "OBR|1|"+mrn+"OID5^EPR^2.16.840.1.113883.3.59.3:947||50111^OR/Procedure Note5^HL70396|||20110126124300-0500|20110126125000-0500||||||||||N|||||||F|7776&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.1||||||5555&Smith&John&&&&Dr&&2.16.840.1.113883.4.347\r" +                 
+                "OBR|1|"+mrn+"OID5^EPR^2.16.840.1.113883.3.59.3:947||50111^OR/Procedure Note5^HL70396|||20110126124300-0500|20110126125000-0500||||||||||N|||||||W|7776&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.1||||||5555&Smith&John&&&&Dr&&2.16.840.1.113883.4.347\r" +                 
                 "OBX|1|DT|10017^Date Dictated^HL70396||12 Jan 2012||||||F\r" + 
                 "OBX|2|ST|1126527^Dictated by^HL70396||John Smith, MD||||||F\r" + 
                 "OBX|3|NM|14007^Pressure^HL70396||0|ml|-2 - 4|N|||F\r" +        
@@ -551,7 +554,7 @@ public class SampleDataUploader {
                 "MSH|^~\\&|1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1|UHNG|||20120501103100-0500|2954864636aaa|RDE^O11^RDE_O11|31768|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" +
                 "PID|1||"+mrn+"^^^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1^MR^G~9287170261^BL^^^JHN^G^^^CANON&&HL70363||Smith^Joseph^John^Junior^Mr^MD^L~Smith^Joe^^^^^A|Blanche^^^^^^L|19310313000000-0500|M|||26 RIVINGTON AVE^^Goderich^CANON^N7A3Y2^CAN^H~7 WOODPLUMPTON ROAD^^Port Stanley^CANON^N0L2A0^CAN^M||1 (416) 340-4800^PRN^PH^^1^416^3404800^^Do not call after 5~^NET^^test@example.com||eng^English^HL70296|||||||||||||||N\r" +                 
                 "PV1|1|I|JS12^123^4^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.100.1||||38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|GIM|||||||38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1||"+mrn+"VID7^^^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1^VN\r" +                 
-                "ORC|OK|"+mrn+"MED1^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1||"+mrn+"MED^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1|\r" +
+                "ORC|OK|"+mrn+"MED1^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1||"+mrn+"MED1^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1|\r" +
                 "RXE|3^Q24H^INDEF^201204181000-0400^201205221000-0400|QUE25T^quetiapine tab 25 mg^1.3.6.1.4.1.12201.102.4|1|2|MG^milligram|INJ^Injection|^Hold PCA if patient confused or loses IV access~^Hold PCA if patient loses IV access\r" +                
                 "NTE|1||Note1||\r" +
                 "NTE|2||Note2||\r" +
@@ -567,13 +570,16 @@ public class SampleDataUploader {
                 "MSH|^~\\&|1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1|UHNG|||20120501103100-0500|2954864636aaa|RAS^O17^RAS_O17|31768|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" +
                 "PID|1||"+mrn+"^^^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1^MR^G~9287170261^BL^^^JHN^G^^^CANON&&HL70363||Smith^Joseph^John^Junior^Mr^MD^L~Smith^Joe^^^^^A|Blanche^^^^^^L|19310313000000-0500|M|||26 RIVINGTON AVE^^Goderich^CANON^N7A3Y2^CAN^H~7 WOODPLUMPTON ROAD^^Port Stanley^CANON^N0L2A0^CAN^M||1 (416) 340-4800^PRN^PH^^1^416^3404800^^Do not call after 5~^NET^^test@example.com||eng^English^HL70296|||||||||||||||N\r" +                 
                 "PV1|1|I|JS12^123^4^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.100.1||||38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|GIM|||||||38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1||"+mrn+"VID7^^^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1^VN\r" +                 
-                "ORC|OK|"+mrn+"MED1^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1||"+mrn+"MED^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1|\r" +
+                "ORC|OK|"+mrn+"MED1^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1||"+mrn+"MED1^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1|\r" +
                 "RXA||1|201204250101-0400|201204250201-0400|NITRO^Nitroglycerine^1.3.6.1.4.1.12201.102.2|100|mg||D5WGB^100 mg bottle~^premixed solution|||100mg/min\r" +
                 "RXA||2|201204250201-0400|201204250301-0400|NITRO^Nitroglycerine^1.3.6.1.4.1.12201.102.2|100|mg||D5WGB^100 mg bottle~^premixed solution|||100mg/min\r" +
                 "RXR|INJ^Injection||||||\r" +
                 "RXA||1|201204250101-0400|201204250201-0400|^fish oil|200|mg||D5WGB^200 mg bottle~^premixed solution|||200mg/min\r" +
                 "RXA||2|201204250201-0400|201204250301-0400|^fish oil|200|mg||D5WGB^200 mg bottle~^premixed solution|||200mg/min\r" +
                 "RXR|^Intravenous||||||\r";
+        
+        
+ 
         
         
         
@@ -698,62 +704,131 @@ public class SampleDataUploader {
     
         
         
-    private static void persistMultiple() throws Exception {
+    private static void persistMultiple(String mrn) throws Exception {
+        
+        //try out meds with different statuses
+        //NW  New Order placed in ordering system 
+        //CA  Order cancelled
+        //OK  Order verified
+        //OR  Order replaced (changed/modified)
+        //OD  Order discontinued
+        //HD  Order held
+        //RL  Order released (after being held)
+                
        
-      String msg1 = 
-          "MSH|^~\\&|2.16.840.1.113883.3.239.23.9^2.16.840.1.113883.3.239.23.9.101.1|CVH^0731|cGTA|cGTA|20120810104900-0400|340975709474jjj|ADT^A04^ADT_A01|ADT-MITRA.1.4595|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" + 
-          "EVN||201208101049\r" + 
-          "PID|1||0000000562^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^MR~2222222222^AD^^^JHN^^^^CANON&Ontario&HL70363||CVHCGTA5^TED^^^^^L||19860221000000-0400|M|||55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H||905-555-5555^PRN^PH\r" + 
-          "NK1|1|CVHCGTA5^EMERG5^^^^^L|FND^Friend^HL70063|55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H|905-555-5555^PRN^PH\r" + 
-          "PV1|1|E|ER^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1||||68031^AASHEIM^LISE^HOLM^^^^^2.16.840.1.113883.4.347||||||||||||ER000141/12^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^VN|||||||||||||||||||||||||20120810104800-0400\r" + 
-          "PV2|||TEST^TEST";
-      
-      String msg2 = 
-          "MSH|^~\\&|2.16.840.1.113883.3.239.23.9^2.16.840.1.113883.3.239.23.9.101.1|CVH^0731|cGTA|cGTA|20120810143600-0400|340975709474jjj|ADT^A08^ADT_A01|ADT-MITRA.1.4597|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" + 
-          "EVN||201208101436\r" + 
-          "PID|1||0000000562^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^MR~2222222222^AD^^^JHN^^^^CANON&Ontario&HL70363||CVHCGTA5^TED^^^^^L||19860221000000-0400|M|||55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H||905-555-5555^PRN^PH\r" + 
-          "NK1|1|CVHCGTA5^EMERG5^^^^^L|FND^Friend^HL70063|55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H|905-555-5555^PRN^PH\r" + 
-          "PV1|1|E|ER^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1||||68031^AASHEIM^LISE^HOLM^^^^^2.16.840.1.113883.4.347||||||||||||ER000141/12^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^VN|||||||||||||||||||||||||20120810104800-0400\r" + 
-          "PV2|||TEST^TEST\r";
-      
-      
-      String msg3 = 
-          "MSH|^~\\&|2.16.840.1.113883.3.239.23.9^2.16.840.1.113883.3.239.23.9.101.1|CVH^0731|cGTA|cGTA|20120810143600-0400|340975709474jjj|ADT^A60^ADT_A60|ADT-MITRA.1.4597.A|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" + 
-          "EVN||201208101436\r" + 
-          "PID|1||0000000562^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^MR~2222222222^AD^^^JHN^^^^CANON&Ontario&HL70363||CVHCGTA5^TED^^^^^L||19860221000000-0400|M|||55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H||905-555-5555^PRN^PH\r" + 
-          "NK1|1|CVHCGTA5^EMERG5^^^^^L|FND^Friend^HL70063|55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H|905-555-5555^PRN^PH\r" + 
-          "PV1|1|E|ER^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1||||68031^AASHEIM^LISE^HOLM^^^^^2.16.840.1.113883.4.347||||||||||||ER000141/12^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^VN|||||||||||||||||||||||||20120810104800-0400\r" + 
-          "PV2|||TEST^TEST\r" + 
-          "IAM|1|MA^^HL70127|HAYFEVER^Hayfever^2.16.840.1.113883.3.239.23.9.102.1|MI^^HL70128|Constipation||||||||20120810\r";
-      
-      
-      String msg4 = 
-          "MSH|^~\\&|2.16.840.1.113883.3.239.23.9^2.16.840.1.113883.3.239.23.9.101.1|CVH^0731|cGTA|cGTA|20120810143600-0400|340975709474jjj|ADT^A08^ADT_A01|ADT-MITRA.1.4597|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" + 
-          "EVN||201208101436\r" + 
-          "PID|1||0000000562^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^MR~2222222222^AD^^^JHN^^^^CANON&Ontario&HL70363||CVHCGTA5^TED^^^^^L||19860221000000-0400|M|||55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H||905-555-5555^PRN^PH\r" + 
-          "NK1|1|CVHCGTA5^EMERG5^^^^^L|FND^Friend^HL70063|55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H|905-555-5555^PRN^PH\r" + 
-          "PV1|1|E|ER^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1||||68031^AASHEIM^LISE^HOLM^^^^^2.16.840.1.113883.4.347||||||||||||ER000141/12^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^VN|||||||||||||||||||||||||20120810104800-0400\r" + 
-          "PV2|||TEST^TEST\r";
-      
-      String msg5 = 
-          "MSH|^~\\&|2.16.840.1.113883.3.239.23.9^2.16.840.1.113883.3.239.23.9.101.1|CVH^0731|cGTA|cGTA|20120810143600-0400|340975709474jjj|ADT^A60^ADT_A60|ADT-MITRA.1.4597.A|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" + 
-          "EVN||201208101436\r" + 
-          "PID|1||0000000562^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^MR~2222222222^AD^^^JHN^^^^CANON&Ontario&HL70363||CVHCGTA5^TED^^^^^L||19860221000000-0400|M|||55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H||905-555-5555^PRN^PH\r" + 
-          "NK1|1|CVHCGTA5^EMERG5^^^^^L|FND^Friend^HL70063|55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H|905-555-5555^PRN^PH\r" + 
-          "PV1|1|E|ER^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1||||68031^AASHEIM^LISE^HOLM^^^^^2.16.840.1.113883.4.347||||||||||||ER000141/12^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^VN|||||||||||||||||||||||||20120810104800-0400\r" + 
-          "PV2|||TEST^TEST\r" + 
-          "IAM|1|MA^^HL70127|HAYFEVER^Hayfever^2.16.840.1.113883.3.239.23.9.102.1|MI^^HL70128|Constipation||||||||20120810";
-      
-      String msg6 = 
-          "MSH|^~\\&|2.16.840.1.113883.3.239.23.9^2.16.840.1.113883.3.239.23.9.101.1|CVH^0731|cGTA|cGTA|20120814160200-0400|340975709474jjj|ADT^A03^ADT_A03|ADT-MITRA.1.4603|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" + 
-          "EVN||201208141409\r" + 
-          "PID|1||0000000562^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^MR~2222222222^AD^^^JHN^^^^CANON&Ontario&HL70363||CVHCGTA5^TED^^^^^L||19860221000000-0400|M|||55 UPTOWN STREET^^UPTOWN^CANON^L5L 3A9^Canada^H||905-555-5555^PRN^PH\r" + 
-          "PV1|1|E|ER^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1||||68031^AASHEIM^LISE^HOLM^^^^^2.16.840.1.113883.4.347||||||||||||ER000141/12^^^2.16.840.1.113883.3.239.23.9&2.16.840.1.113883.3.239.23.9.101.1^VN|||||||||||||||||||||||||20120810104800-0400|20120814140800-0400\r" + 
-          "PV2|||TEST^TEST\r";
-      
+       String msg1 = 
+                "MSH|^~\\&|1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1|UHNG|||20120501103100-0500|2954864636aaa|RDE^O11^RDE_O11|31768|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" +
+                "PID|1||"+mrn+"^^^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1^MR^G~9287170261^BL^^^JHN^G^^^CANON&&HL70363||Smith^Joseph^John^Junior^Mr^MD^L~Smith^Joe^^^^^A|Blanche^^^^^^L|19310313000000-0500|M|||26 RIVINGTON AVE^^Goderich^CANON^N7A3Y2^CAN^H~7 WOODPLUMPTON ROAD^^Port Stanley^CANON^N0L2A0^CAN^M||1 (416) 340-4800^PRN^PH^^1^416^3404800^^Do not call after 5~^NET^^test@example.com||eng^English^HL70296|||||||||||||||N\r" +                 
+                "PV1|1|I|JS12^123^4^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.100.1||||38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|GIM|||||||38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1||"+mrn+"VID7^^^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1^VN\r" +                 
+                "ORC|NW|"+mrn+"MEDNW^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1||"+mrn+"MEDNW^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1|\r" +
+                "RXE|3^Q24H^INDEF^201204181000-0400^201205221000-0400|QUE25T^quetiapine tab 25 mg^1.3.6.1.4.1.12201.102.4|1|2|MG^milligram|INJ^Injection|^Hold PCA if patient confused or loses IV access~^Hold PCA if patient loses IV access\r" +                
+                "NTE|1||Note1||\r" +
+                "NTE|2||Note2||\r" +
+                "NTE|3||Note3||\r" +
+                "RXR|^Intravenous||\r" +
+                "RXR|INJ^Injection||||||\r" +
+                "RXC|B|AMI150I^amiodarone inj 50 mg per 1mL^1.3.6.1.4.1.12201.102.3|50|MG^mg|\r" +
+                "RXC|A|AMI160I^amiodarone inj 60 mg per 1mL^1.3.6.1.4.1.12201.102.3|60|MG^mg|\r";
+        
+        
+        
+        String msg2 = 
+                "MSH|^~\\&|1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1|UHNG|||20120501103100-0500|2954864636aaa|RDE^O11^RDE_O11|31768|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" +
+                "PID|1||"+mrn+"^^^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1^MR^G~9287170261^BL^^^JHN^G^^^CANON&&HL70363||Smith^Joseph^John^Junior^Mr^MD^L~Smith^Joe^^^^^A|Blanche^^^^^^L|19310313000000-0500|M|||26 RIVINGTON AVE^^Goderich^CANON^N7A3Y2^CAN^H~7 WOODPLUMPTON ROAD^^Port Stanley^CANON^N0L2A0^CAN^M||1 (416) 340-4800^PRN^PH^^1^416^3404800^^Do not call after 5~^NET^^test@example.com||eng^English^HL70296|||||||||||||||N\r" +                 
+                "PV1|1|I|JS12^123^4^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.100.1||||38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|GIM|||||||38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1||"+mrn+"VID7^^^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1^VN\r" +                 
+                "ORC|CA|"+mrn+"MEDCA^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1||"+mrn+"MEDCA^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1|\r" +
+                "RXE|3^Q24H^INDEF^201204181000-0400^201205221000-0400|QUE25T^quetiapine tab 25 mg^1.3.6.1.4.1.12201.102.4|1|2|MG^milligram|INJ^Injection|^Hold PCA if patient confused or loses IV access~^Hold PCA if patient loses IV access\r" +                
+                "NTE|1||Note1||\r" +
+                "NTE|2||Note2||\r" +
+                "NTE|3||Note3||\r" +
+                "RXR|^Intravenous||\r" +
+                "RXR|INJ^Injection||||||\r" +
+                "RXC|B|AMI150I^amiodarone inj 50 mg per 1mL^1.3.6.1.4.1.12201.102.3|50|MG^mg|\r" +
+                "RXC|A|AMI160I^amiodarone inj 60 mg per 1mL^1.3.6.1.4.1.12201.102.3|60|MG^mg|\r";
+        
+        
+        String msg3 = 
+                "MSH|^~\\&|1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1|UHNG|||20120501103100-0500|2954864636aaa|RDE^O11^RDE_O11|31768|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" +
+                "PID|1||"+mrn+"^^^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1^MR^G~9287170261^BL^^^JHN^G^^^CANON&&HL70363||Smith^Joseph^John^Junior^Mr^MD^L~Smith^Joe^^^^^A|Blanche^^^^^^L|19310313000000-0500|M|||26 RIVINGTON AVE^^Goderich^CANON^N7A3Y2^CAN^H~7 WOODPLUMPTON ROAD^^Port Stanley^CANON^N0L2A0^CAN^M||1 (416) 340-4800^PRN^PH^^1^416^3404800^^Do not call after 5~^NET^^test@example.com||eng^English^HL70296|||||||||||||||N\r" +                 
+                "PV1|1|I|JS12^123^4^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.100.1||||38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|GIM|||||||38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1||"+mrn+"VID7^^^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1^VN\r" +                 
+                "ORC|OK|"+mrn+"MEDOK^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1||"+mrn+"MEDOK^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1|\r" +
+                "RXE|3^Q24H^INDEF^201204181000-0400^201205221000-0400|QUE25T^quetiapine tab 25 mg^1.3.6.1.4.1.12201.102.4|1|2|MG^milligram|INJ^Injection|^Hold PCA if patient confused or loses IV access~^Hold PCA if patient loses IV access\r" +                
+                "NTE|1||Note1||\r" +
+                "NTE|2||Note2||\r" +
+                "NTE|3||Note3||\r" +
+                "RXR|^Intravenous||\r" +
+                "RXR|INJ^Injection||||||\r" +
+                "RXC|B|AMI150I^amiodarone inj 50 mg per 1mL^1.3.6.1.4.1.12201.102.3|50|MG^mg|\r" +
+                "RXC|A|AMI160I^amiodarone inj 60 mg per 1mL^1.3.6.1.4.1.12201.102.3|60|MG^mg|\r";
+        
+        
+        String msg4 = 
+                "MSH|^~\\&|1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1|UHNG|||20120501103100-0500|2954864636aaa|RDE^O11^RDE_O11|31768|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" +
+                "PID|1||"+mrn+"^^^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1^MR^G~9287170261^BL^^^JHN^G^^^CANON&&HL70363||Smith^Joseph^John^Junior^Mr^MD^L~Smith^Joe^^^^^A|Blanche^^^^^^L|19310313000000-0500|M|||26 RIVINGTON AVE^^Goderich^CANON^N7A3Y2^CAN^H~7 WOODPLUMPTON ROAD^^Port Stanley^CANON^N0L2A0^CAN^M||1 (416) 340-4800^PRN^PH^^1^416^3404800^^Do not call after 5~^NET^^test@example.com||eng^English^HL70296|||||||||||||||N\r" +                 
+                "PV1|1|I|JS12^123^4^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.100.1||||38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|GIM|||||||38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1||"+mrn+"VID7^^^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1^VN\r" +                 
+                "ORC|OR|"+mrn+"MEDOR^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1||"+mrn+"MEDOR^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1|\r" +
+                "RXE|3^Q24H^INDEF^201204181000-0400^201205221000-0400|QUE25T^quetiapine tab 25 mg^1.3.6.1.4.1.12201.102.4|1|2|MG^milligram|INJ^Injection|^Hold PCA if patient confused or loses IV access~^Hold PCA if patient loses IV access\r" +                
+                "NTE|1||Note1||\r" +
+                "NTE|2||Note2||\r" +
+                "NTE|3||Note3||\r" +
+                "RXR|^Intravenous||\r" +
+                "RXR|INJ^Injection||||||\r" +
+                "RXC|B|AMI150I^amiodarone inj 50 mg per 1mL^1.3.6.1.4.1.12201.102.3|50|MG^mg|\r" +
+                "RXC|A|AMI160I^amiodarone inj 60 mg per 1mL^1.3.6.1.4.1.12201.102.3|60|MG^mg|\r";
+        
+        
+        String msg5 = 
+                "MSH|^~\\&|1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1|UHNG|||20120501103100-0500|2954864636aaa|RDE^O11^RDE_O11|31768|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" +
+                "PID|1||"+mrn+"^^^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1^MR^G~9287170261^BL^^^JHN^G^^^CANON&&HL70363||Smith^Joseph^John^Junior^Mr^MD^L~Smith^Joe^^^^^A|Blanche^^^^^^L|19310313000000-0500|M|||26 RIVINGTON AVE^^Goderich^CANON^N7A3Y2^CAN^H~7 WOODPLUMPTON ROAD^^Port Stanley^CANON^N0L2A0^CAN^M||1 (416) 340-4800^PRN^PH^^1^416^3404800^^Do not call after 5~^NET^^test@example.com||eng^English^HL70296|||||||||||||||N\r" +                 
+                "PV1|1|I|JS12^123^4^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.100.1||||38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|GIM|||||||38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1||"+mrn+"VID7^^^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1^VN\r" +                 
+                "ORC|OD|"+mrn+"MEDOD^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1||"+mrn+"MEDOD^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1|\r" +
+                "RXE|3^Q24H^INDEF^201204181000-0400^201205221000-0400|QUE25T^quetiapine tab 25 mg^1.3.6.1.4.1.12201.102.4|1|2|MG^milligram|INJ^Injection|^Hold PCA if patient confused or loses IV access~^Hold PCA if patient loses IV access\r" +                
+                "NTE|1||Note1||\r" +
+                "NTE|2||Note2||\r" +
+                "NTE|3||Note3||\r" +
+                "RXR|^Intravenous||\r" +
+                "RXR|INJ^Injection||||||\r" +
+                "RXC|B|AMI150I^amiodarone inj 50 mg per 1mL^1.3.6.1.4.1.12201.102.3|50|MG^mg|\r" +
+                "RXC|A|AMI160I^amiodarone inj 60 mg per 1mL^1.3.6.1.4.1.12201.102.3|60|MG^mg|\r";
+        
+        
+        
+        String msg6 = 
+                "MSH|^~\\&|1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1|UHNG|||20120501103100-0500|2954864636aaa|RDE^O11^RDE_O11|31768|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" +
+                "PID|1||"+mrn+"^^^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1^MR^G~9287170261^BL^^^JHN^G^^^CANON&&HL70363||Smith^Joseph^John^Junior^Mr^MD^L~Smith^Joe^^^^^A|Blanche^^^^^^L|19310313000000-0500|M|||26 RIVINGTON AVE^^Goderich^CANON^N7A3Y2^CAN^H~7 WOODPLUMPTON ROAD^^Port Stanley^CANON^N0L2A0^CAN^M||1 (416) 340-4800^PRN^PH^^1^416^3404800^^Do not call after 5~^NET^^test@example.com||eng^English^HL70296|||||||||||||||N\r" +                 
+                "PV1|1|I|JS12^123^4^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.100.1||||38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|GIM|||||||38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1||"+mrn+"VID7^^^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1^VN\r" +                 
+                "ORC|HD|"+mrn+"MEDHD^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1||"+mrn+"MEDHD^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1|\r" +
+                "RXE|3^Q24H^INDEF^201204181000-0400^201205221000-0400|QUE25T^quetiapine tab 25 mg^1.3.6.1.4.1.12201.102.4|1|2|MG^milligram|INJ^Injection|^Hold PCA if patient confused or loses IV access~^Hold PCA if patient loses IV access\r" +                
+                "NTE|1||Note1||\r" +
+                "NTE|2||Note2||\r" +
+                "NTE|3||Note3||\r" +
+                "RXR|^Intravenous||\r" +
+                "RXR|INJ^Injection||||||\r" +
+                "RXC|B|AMI150I^amiodarone inj 50 mg per 1mL^1.3.6.1.4.1.12201.102.3|50|MG^mg|\r" +
+                "RXC|A|AMI160I^amiodarone inj 60 mg per 1mL^1.3.6.1.4.1.12201.102.3|60|MG^mg|\r";
+
+        
+        
+        String msg7 = 
+                "MSH|^~\\&|1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1|UHNG|||20120501103100-0500|2954864636aaa|RDE^O11^RDE_O11|31768|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" +
+                "PID|1||"+mrn+"^^^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1^MR^G~9287170261^BL^^^JHN^G^^^CANON&&HL70363||Smith^Joseph^John^Junior^Mr^MD^L~Smith^Joe^^^^^A|Blanche^^^^^^L|19310313000000-0500|M|||26 RIVINGTON AVE^^Goderich^CANON^N7A3Y2^CAN^H~7 WOODPLUMPTON ROAD^^Port Stanley^CANON^N0L2A0^CAN^M||1 (416) 340-4800^PRN^PH^^1^416^3404800^^Do not call after 5~^NET^^test@example.com||eng^English^HL70296|||||||||||||||N\r" +                 
+                "PV1|1|I|JS12^123^4^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.100.1||||38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1|GIM|||||||38946^Blake^Donald^Thor^^^^^1.3.6.1.4.1.12201.1.2.1.5&1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1||"+mrn+"VID7^^^1.3.6.1.4.1.12201&1.3.6.1.4.1.12201.101.1^VN\r" +                 
+                "ORC|RL|"+mrn+"MEDRL^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1||"+mrn+"MEDRL^1.3.6.1.4.1.12201^1.3.6.1.4.1.12201.101.1|\r" +
+                "RXE|3^Q24H^INDEF^201204181000-0400^201205221000-0400|QUE25T^quetiapine tab 25 mg^1.3.6.1.4.1.12201.102.4|1|2|MG^milligram|INJ^Injection|^Hold PCA if patient confused or loses IV access~^Hold PCA if patient loses IV access\r" +                
+                "NTE|1||Note1||\r" +
+                "NTE|2||Note2||\r" +
+                "NTE|3||Note3||\r" +
+                "RXR|^Intravenous||\r" +
+                "RXR|INJ^Injection||||||\r" +
+                "RXC|B|AMI150I^amiodarone inj 50 mg per 1mL^1.3.6.1.4.1.12201.102.3|50|MG^mg|\r" +
+                "RXC|A|AMI160I^amiodarone inj 60 mg per 1mL^1.3.6.1.4.1.12201.102.3|60|MG^mg|\r";
+        
+        
+        
+
          
        
-       String[] msgs = { /*msg1, msg2 , msg3, msg4, msg5 , msg6,*/};
+       String[] msgs = { msg1, msg2 , msg3, msg4, msg5 , msg6, msg7};
        processMsgs(msgs);
    }
     

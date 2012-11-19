@@ -1507,9 +1507,12 @@ public class Converter {
 					
 				AbstractTextPrimitive text = (AbstractTextPrimitive) nextRep;
 				String v = text.getValueAsHtml();
-				v = v.replaceAll("<", "&lt;");
-				v = v.replaceAll(">", "&gt;");
-				b.append(v);
+				if(v != null)
+				{
+					v = v.replaceAll("<", "&lt;");
+					v = v.replaceAll(">", "&gt;");				
+					b.append(v);
+				}
 			}
 			
 				retVal.myValue = b.toString();

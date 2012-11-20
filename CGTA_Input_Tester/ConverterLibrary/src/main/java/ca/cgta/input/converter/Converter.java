@@ -718,6 +718,7 @@ public class Converter {
 
 			if (isBlank(section.mySectionName)) {
 				addFailure(theTerserPath + "/ORDER_OBSERVATION(" + orderObservationIndex + ")/OBR-4-2", FailureCode.F003, usi.encode());
+				section.mySectionName = "MISSING PROCEDURE NAME";	
 			}
 
 			// OBR-7

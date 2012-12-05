@@ -13,7 +13,7 @@ public class MedicationOrder {
 	public Ei myPlacerGroupNumber;
 	public Ei myPlacerOrderNumber;
 	public Visit myVisit;
-	public int myEncodedOrderQuantityNumber;
+	public double myEncodedOrderQuantityNumber;
 	public String myEncodedOrderQuantityRepeatPattern;
 	public String myEncodedOrderQuantityDuration;
 	public Date myEncodedOrderQuantityStartTime;

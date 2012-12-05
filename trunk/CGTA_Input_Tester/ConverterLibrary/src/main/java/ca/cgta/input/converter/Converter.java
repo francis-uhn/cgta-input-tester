@@ -205,10 +205,26 @@ public class Converter {
         if (Tables.lookupHl7Code("0003ADT", retVal.myMostRecentEventCode) == null) {
             addFailure("MSH-9-2", FailureCode.F092, theAdt.getMSH().getMsh9_MessageType().encode());
         }
-
+        
+        
+        Date lastTransactionTime = null;
+        String lastTransactionTimeFormatted = null;
+        if (isNotBlank(theAdt.getEVN().getEvn2_RecordedDateTime().getTs1_Time().getValue())) {            
+                lastTransactionTime = theAdt.getEVN().getEvn2_RecordedDateTime().getTs1_Time().getValueAsDate();
+                lastTransactionTimeFormatted = DateFormatter.formatDate(theAdt.getEVN().getEvn2_RecordedDateTime().getTs1_Time().getValue());            
+        }
+        else {
+                lastTransactionTime = theAdt.getMSH().getMsh7_DateTimeOfMessage().getTs1_Time().getValueAsDate();
+                lastTransactionTimeFormatted = DateFormatter.formatDate(theAdt.getMSH().getMsh7_DateTimeOfMessage().getTs1_Time().getValue());
+        }
+            
+        
         retVal.myAdminHistory = new ArrayList<String>();
 
         retVal.myPatient = convertPid("PID", theAdt.getPID());
+        
+        retVal.myPatient.myLastTransactionDate = lastTransactionTime;
+        retVal.myPatient.myLastTransactionDateFormatted = lastTransactionTimeFormatted;
 
         if (!retVal.myPatient.hasIdWithTypeMr()) {
             addFailure("PID-3", FailureCode.F060, null);
@@ -339,6 +355,11 @@ public class Converter {
         
         if (processVisit) {
             Visit pv1 = convertPv1("PV1", theAdt.getPV1());
+            
+            pv1.myLastTransactionDate = lastTransactionTime;
+            pv1.myLastTransactionDateFormatted = lastTransactionTimeFormatted;
+            
+            
 
             if (pv1.myVisitNumber == null) {
             	addFailure("PV1-19", FailureCode.F128, null);

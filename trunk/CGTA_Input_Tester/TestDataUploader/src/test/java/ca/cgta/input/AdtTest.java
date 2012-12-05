@@ -409,6 +409,182 @@ public class AdtTest {
         
         
     }    
+    
+    
+    
+    /**
+     * Testing patient transfer A02
+     * - admit patient into a bed and then transfer him to another bed
+     *  
+     * @throws Exception ...
+     */
+    @Test
+    public void testAdtA02a() throws Exception {
+        
+        String message1 = "MSH|^~\\&|EPR|G^2.16.840.1.113883.3.59.3:947^L|||201112021621||ADT^A01^ADT_A01|123484|T^|2.5^^||||||CAN||||\r" + 
+                "EVN|A01|201112021621||||201112021621|G^4265^L\r" + 
+                "PID|||7012673^^^UHN^MR^^^^^^^~9287170261^BL^^CANON^JHN^^^^^20111201^^~HN2827^^^UHN^PI^^^^^^^||Test^Majaconversion^^^Mrs.^^L^^^^^201112221537^^~Test^Maj^^^Mrs.^^A^^^^^^^||19731230|F|||1 Bloor Street ^^Toronto^ON^L9K 8J7^Can^H^^^^^^^~|12333|(415)222-3333^PRN^PH^^^^^^^^^~||eng^English^03ZPtlang^^^|||11110000514^^^UHN^VN^^^^^^^~||||||||||||N|||201112221537||||||\r" + 
+                "PD1|||UHN^D^^^^UHN^FI^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^^^^^^^^^^^^|||||||N^no special privacy^03ZPrvyFlg^^^|N|||||||||\r" +                 
+                "ROL||UC|PP^Primary Care Provider^15ZRole^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^^^^^^^^^^^^^|201111071338||||ET02^Physician^15ZEmpTyp^^^|O^Office^^^^|^^^ON^^Can^^^^^^^^|(416) 340-3391^WPN^PH^^^^^^^^^\r" + 
+                "ROL||UC|PP^Primary Care Provider^15ZRole^^^|13546b^Genericb^Physicianb^Moeb^^Dr.^MD^^UHN^L^^^EI^G^2.16.840.1.113883.3.59.3:947^^^^^^^^^^|201111071338||||ET02^Physician^15ZEmpTyp^^^|1^Hospital^15ZOrgTyp^^^|^^^ON^^Can^^^^^^^^|(416) 340-3388^WPN^PH^^^^^^^^^\r" +
+                "NK1|1|Wph^Mom^^^^^L^^^^^^^|PAR^Parent^03ZRelshp^^^|82 Buttonwood Avenue^^YORK^ON^M6M 2J5^Can^H^^^^^^^|(416)243-3600^PRN^PH^^^^^^^^^~(416)123-1234^PRN^CP^^^^^^^^^|(416)243-3600^PRN^PH^^^^^^^^^|N^Next-of-Kin^03ZConRol^^^||||||||||||||||||||||||||||||||\r" +
+                "NK1|2|Wph^Brother^^^^^L^^^^^^^|BRO^Brother^03ZRelshp^^^|83 Buttonwood Avenue^^YORK^ON^M6M 2J5^Can^H^^^^^^^|(416)243-3601^PRN^PH^^^^^^^^^|(416)525-2525^PRN^PH^^^^^^^^^|C^Emergency Contact^03ZConRol^^^||||||||||||||||||||||||||||||||\r" + 
+                "PV1||I|PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|C||^^^G^4265^^^^^^^  ^|13546a^Generic^Physician^MoeA^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546b^Generic^Physician^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^||hospServ||||D|||13546c^Generic^Physician^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000514^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021621|||||||V|\r" + 
+                "PV2||S^Semi^03ZFinbed^^^|^kfkfkfjcjcjcgcgcclcl^03ZAmitRes^^^|||||||||||||||||||N||AI|Elective||||||N|||||||OTH^Self^03ZBrInBy^^^|||||||||||\r" + 
+                "DG1|1||06^KFKFKFJCJCJCGCGCCLCL^2.16.840.1.113883.11.19436^^^|KFKFKFJCJCJCGCGCCLCL|201112021621|A|||||||||1||D||||\r" + 
+                "PR1||||||||||||||||||||\r" + 
+                "ZPV|OTH^Self|F^Standard|||N|||13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^||Medical Services^General Internal Medicine^GMED|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^4265^G^^^^^^^^^^^^|413||3910||^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^|0^1^2|||||||||||N||^^|\r" + 
+                "ZWA||||||||active|\r";
+        
+        String message2 = "MSH|^~\\&|EPR|G^2.16.840.1.113883.3.59.3:947^L|||201201111123||ADT^A02^ADT_A02|124423|T^|2.5^^||||||CAN||||\r" + 
+                "EVN|A02|201201111123||||201201111123|G^4265^L\r" + 
+                "PID|||7012673^^^UHN^MR^^^^^^^~9287170261^BL^^CANON^JHN^^^^^20111201^^~HN2827^^^UHN^PI^^^^^^^||Test^Majaconversion^^^Mrs.^^L^^^^^201112221537^^~Test^Maj^^^Mrs.^^A^^^^^^^||19731230|F|||1 Bloor Street ^^Toronto^ON^L9K 8J7^Can^H^^^^^^^~|12333|(415)222-3333^PRN^PH^^^^^^^^^~||eng^English^03ZPtlang^^^|||11110000514^^^UHN^VN^^^^^^^~||||||||||||N|||201112221537||||||\r" + 
+                "PD1|||UHN^D^^^^UHN^FI^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^^^^^^^^^^^^|||||||N^no special privacy^03ZPrvyFlg^^^|N|||||||||\r" + 
+                "PV1||I|ES9 GEN S^424^1^G^4265^^^N^ES 9 424^ES 9 424 1^ES9 GEN S^1521 19 1^|R||PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|13546a^Generic^Physician^MoeA^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546b^Generic^Physician^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^||hospServ||||D|||13546c^Generic^Physician^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000514^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021621|||||||V|\r" +
+                "PV2||S^Semi^03ZFinbed^^^|^kfkfkfjcjcjcgcgcclcl^03ZAmitRes^^^|||||||||||||||||||N||AI|Elective||||||N|||||||OTH^Self^03ZBrInBy^^^|||||||||||\r" + 
+                "DG1|1||||||||||||||||||||\r" +
+                "PR1||||||||||||||||||||\r" + 
+                "ZPV|OTH^Self|F^Standard|||N|||13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^||Medical Services^General Internal Medicine^GMED|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^4265^G^^^^^^^^^^^^|413||3910||^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^|0^1^2|||||||||||N||^^|\r" + 
+                "ZWA||||||||active|\r";
+        
+        
+        
+        Persister.persist(UhnConverter.convertAdtOrFail(message1));
+        Persister.persist(UhnConverter.convertAdtOrFail(message2));
+        
+        ViewQuery query = new ViewQuery().viewName("allVisits").designDocId("_design/application");
+        List<PatientWithVisitsContainer> pwvContainers = Persister.getConnector().queryView(query, PatientWithVisitsContainer.class);
+        
+        PatientWithVisitsContainer pwvContainer = pwvContainers.get(0);
+        Patient patient = pwvContainer.getDocument().myPatient;
+        Visit visit = pwvContainer.getDocument().myVisits.get(0);
+        
+        
+        //check patient lastUpdateTime
+        Date now = new Date();
+        long nowMilli = now.getTime();
+        assertTrue(nowMilli > patient.myRecordUpdatedDate.getTime());
+
+        
+        //check patient
+        assertEquals("F", patient.myAdministrativeSex);
+        assertEquals(ourTsFormat.parse("197312300000"), patient.myDateOfBirth);
+        assertEquals(null, patient.myDeathDateAndTime);
+        assertEquals("N", patient.myDeathIndicator);
+        assertEquals(null, patient.myMothersMaidenName);
+        
+        
+        Cx patId = patient.myPatientIds.get(0);
+        assertEquals("7012673", patId.myIdNumber);
+        assertEquals("MR", patId.myIdTypeCode);
+        
+        Xpn patName = patient.myPatientNames.get(0);
+        assertEquals("Test", patName.myLastName);
+        assertEquals("Majaconversion", patName.myFirstName);
+                
+        Xad patAddresses = patient.myPatientAddresses.get(0);
+        assertEquals("1 Bloor Street ", patAddresses.myStreetAddress);
+        assertEquals("Toronto", patAddresses.myCity);
+        
+        Xtn patPhone = patient.myPhoneNumbers.get(0);
+        assertEquals("(415)222-3333", patPhone.myPhoneNumber);
+        
+        Ce lang = patient.myPrimaryLanguage;
+        assertEquals("eng", lang.myCode);
+        assertEquals("English", lang.myText);
+        
+        //check patient roles
+        List<PersonInRole> roles  = patient.myPersonInRoles;
+        assertEquals(2, roles.size());
+        PersonInRole rol_1 = patient.myPersonInRoles.get(0);
+        PersonInRole rol_2 = patient.myPersonInRoles.get(1);        
+        //ROL(1)
+        assertEquals("PP",rol_1.myRole.myCode);
+        assertEquals("Primary Care Provider",rol_1.myRole.myText);        
+        assertEquals("Generic", rol_1.myPersonNames.get(0).myLastName);
+        assertEquals("Physician", rol_1.myPersonNames.get(0).myFirstName);
+        assertEquals("Moe", rol_1.myPersonNames.get(0).myMiddleName);
+        assertEquals("(416) 340-3391", rol_1.myContactInformation.get(0).myPhoneNumber);
+        //ROL(2)
+        assertEquals("PP",rol_2.myRole.myCode);
+        assertEquals("Primary Care Provider",rol_2.myRole.myText);        
+        assertEquals("Genericb", rol_2.myPersonNames.get(0).myLastName);
+        assertEquals("Physicianb", rol_2.myPersonNames.get(0).myFirstName);
+        assertEquals("Moeb", rol_2.myPersonNames.get(0).myMiddleName);
+        assertEquals("(416) 340-3388", rol_2.myContactInformation.get(0).myPhoneNumber);
+        
+        //check patient associated parties
+        List<AssociatedParty> parties  = patient.myAssociatedParties;
+        assertEquals(2, parties.size());
+        AssociatedParty party_1 = patient.myAssociatedParties.get(0);
+        AssociatedParty party_2 = patient.myAssociatedParties.get(1);        
+        //NK1(1)
+        assertEquals("Wph",party_1.myNames.get(0).myLastName);
+        assertEquals("Mom",party_1.myNames.get(0).myFirstName);
+        assertEquals("PAR",party_1.myRelationship.myCode);
+        assertEquals("Parent",party_1.myRelationshipName);
+        assertEquals("82 Buttonwood Avenue",party_1.myAddresses.get(0).myStreetAddress);
+        assertEquals("(416)243-3600",party_1.myContactInformation.get(0).myPhoneNumber);
+        //NK1(2)
+        assertEquals("Wph",party_2.myNames.get(0).myLastName);
+        assertEquals("Brother",party_2.myNames.get(0).myFirstName);
+        assertEquals("BRO",party_2.myRelationship.myCode);
+        assertEquals("Brother",party_2.myRelationshipName);
+        assertEquals("83 Buttonwood Avenue",party_2.myAddresses.get(0).myStreetAddress);
+        assertEquals("(416)243-3601",party_2.myContactInformation.get(0).myPhoneNumber);
+        
+        
+        //check visit lastUpdateTime
+        assertTrue(nowMilli > visit.myRecordUpdatedDate.getTime());
+
+        
+        //check visit
+        assertEquals("11110000514", visit.myVisitNumber.myIdNumber);
+        assertEquals(Constants.ACTIVE_VISIT_STATUS, visit.myVisitStatus);
+        assertEquals("I", visit.myPatientClassCode);
+        assertEquals(ourTsFormat.parse("201112021621"), visit.myAdmitDate);
+        assertEquals("hospServ", visit.myHospitalService);
+        
+        Pl ploc = visit.myPriorPatientLocation;
+        assertEquals("PMH 15C", ploc.myPointOfCare);
+        assertEquals("413", ploc.myRoom);
+        assertEquals("2", ploc.myBed);
+                
+        Pl cloc = visit.myAssignedPatientLocation;
+        assertEquals("ES9 GEN S", cloc.myPointOfCare);
+        assertEquals("424", cloc.myRoom);
+        assertEquals("1", cloc.myBed);
+        
+        
+        Xcn admitDoc = visit.myAdmittingDoctors.get(0);
+        assertEquals("13546c", admitDoc.myId);
+        assertEquals("Physician", admitDoc.myFirstName);
+        assertEquals("Generic", admitDoc.myLastName);
+        assertEquals("MoeC", admitDoc.myMiddleName);
+        
+        Xcn attendDoc = visit.myAttendingDoctors.get(0);
+        assertEquals("13546a", attendDoc.myId);
+        assertEquals("Physician", attendDoc.myFirstName);
+        assertEquals("Generic", attendDoc.myLastName);
+        assertEquals("MoeA", attendDoc.myMiddleName);
+        
+        Xcn refDoc = visit.myReferringDoctors.get(0);
+        assertEquals("13546b", refDoc.myId);
+        assertEquals("Physician", refDoc.myFirstName);
+        assertEquals("Generic", refDoc.myLastName);
+        assertEquals("MoeB", refDoc.myMiddleName);
+        
+        Diagnosis dg = visit.myDiagnoses.get(0);
+        Ce dgCode = dg.myDiagnosis;
+        assertEquals("06", dgCode.myCode);
+        assertEquals("KFKFKFJCJCJCGCGCCLCL", dgCode.myText);
+        assertEquals("2.16.840.1.113883.11.19436", dgCode.myCodeSystem);
+        
+        
+        
+        
+        
+    }    
 	
 	
 	
@@ -418,11 +594,12 @@ public class AdtTest {
 	/**
 	 * Testing patient transfer A02
 	 * - admit patient into a bed and then transfer him to another bed
+	 * - check to see that the transferred into location time is correctly populated
 	 *  
 	 * @throws Exception ...
 	 */
 	@Test
-	public void testAdtA02() throws Exception {
+	public void testAdtA02b() throws Exception {
 		
 		String message1 = "MSH|^~\\&|EPR|G^2.16.840.1.113883.3.59.3:947^L|||201112021621||ADT^A01^ADT_A01|123484|T^|2.5^^||||||CAN||||\r" + 
 				"EVN|A01|201112021621||||201112021621|G^4265^L\r" + 
@@ -439,8 +616,8 @@ public class AdtTest {
 				"ZPV|OTH^Self|F^Standard|||N|||13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^||Medical Services^General Internal Medicine^GMED|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^4265^G^^^^^^^^^^^^|413||3910||^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^|0^1^2|||||||||||N||^^|\r" + 
 				"ZWA||||||||active|\r";
 		
-		String message2 = "MSH|^~\\&|EPR|G^2.16.840.1.113883.3.59.3:947^L|||201201111123||ADT^A02^ADT_A02|124423|T^|2.5^^||||||CAN||||\r" + 
-				"EVN|A02|201201111123||||201201111123|G^4265^L\r" + 
+		String message2 = "MSH|^~\\&|EPR|G^2.16.840.1.113883.3.59.3:947^L|||201112021622||ADT^A02^ADT_A02|124423|T^|2.5^^||||||CAN||||\r" + 
+				"EVN|A02|201112021622||||201112021622|G^4265^L\r" + 
 				"PID|||7012673^^^UHN^MR^^^^^^^~9287170261^BL^^CANON^JHN^^^^^20111201^^~HN2827^^^UHN^PI^^^^^^^||Test^Majaconversion^^^Mrs.^^L^^^^^201112221537^^~Test^Maj^^^Mrs.^^A^^^^^^^||19731230|F|||1 Bloor Street ^^Toronto^ON^L9K 8J7^Can^H^^^^^^^~|12333|(415)222-3333^PRN^PH^^^^^^^^^~||eng^English^03ZPtlang^^^|||11110000514^^^UHN^VN^^^^^^^~||||||||||||N|||201112221537||||||\r" + 
                 "PD1|||UHN^D^^^^UHN^FI^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^^^^^^^^^^^^|||||||N^no special privacy^03ZPrvyFlg^^^|N|||||||||\r" + 
 				"PV1||I|ES9 GEN S^424^1^G^4265^^^N^ES 9 424^ES 9 424 1^ES9 GEN S^1521 19 1^|R||PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|13546a^Generic^Physician^MoeA^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546b^Generic^Physician^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^||hospServ||||D|||13546c^Generic^Physician^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000514^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021621|||||||V|\r" +
@@ -450,10 +627,27 @@ public class AdtTest {
                 "ZPV|OTH^Self|F^Standard|||N|||13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^||Medical Services^General Internal Medicine^GMED|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^4265^G^^^^^^^^^^^^|413||3910||^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^|0^1^2|||||||||||N||^^|\r" + 
                 "ZWA||||||||active|\r";
 		
+		//This A08 does nothing but change the last trasaction time for the visit
+		String message3 = "MSH|^~\\&|EPR|G^2.16.840.1.113883.3.59.3:947^L|||201112021623||ADT^A08^ADT_A01|124423|T^|2.5^^||||||CAN||||\r" + 
+                "EVN|A08|201112021623||||201112021623|G^4265^L\r" + 
+                "PID|||7012673^^^UHN^MR^^^^^^^~9287170261^BL^^CANON^JHN^^^^^20111201^^~HN2827^^^UHN^PI^^^^^^^||Test^Majaconversion^^^Mrs.^^L^^^^^201112221537^^~Test^Maj^^^Mrs.^^A^^^^^^^||19731230|F|||1 Bloor Street ^^Toronto^ON^L9K 8J7^Can^H^^^^^^^~|12333|(415)222-3333^PRN^PH^^^^^^^^^~||eng^English^03ZPtlang^^^|||11110000514^^^UHN^VN^^^^^^^~||||||||||||N|||201112221537||||||\r" + 
+                "PD1|||UHN^D^^^^UHN^FI^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^^^^^^^^^^^^|||||||N^no special privacy^03ZPrvyFlg^^^|N|||||||||\r" +                 
+                "ROL||UC|PP^Primary Care Provider^15ZRole^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^^^^^^^^^^^^^|201111071338||||ET02^Physician^15ZEmpTyp^^^|O^Office^^^^|^^^ON^^Can^^^^^^^^|(416) 340-3391^WPN^PH^^^^^^^^^\r" + 
+                "ROL||UC|PP^Primary Care Provider^15ZRole^^^|13546b^Genericb^Physicianb^Moeb^^Dr.^MD^^UHN^L^^^EI^G^2.16.840.1.113883.3.59.3:947^^^^^^^^^^|201111071338||||ET02^Physician^15ZEmpTyp^^^|1^Hospital^15ZOrgTyp^^^|^^^ON^^Can^^^^^^^^|(416) 340-3388^WPN^PH^^^^^^^^^\r" +
+                "NK1|1|Wph^Mom^^^^^L^^^^^^^|PAR^Parent^03ZRelshp^^^|82 Buttonwood Avenue^^YORK^ON^M6M 2J5^Can^H^^^^^^^|(416)243-3600^PRN^PH^^^^^^^^^~(416)123-1234^PRN^CP^^^^^^^^^|(416)243-3600^PRN^PH^^^^^^^^^|N^Next-of-Kin^03ZConRol^^^||||||||||||||||||||||||||||||||\r" +
+                "NK1|2|Wph^Brother^^^^^L^^^^^^^|BRO^Brother^03ZRelshp^^^|83 Buttonwood Avenue^^YORK^ON^M6M 2J5^Can^H^^^^^^^|(416)243-3601^PRN^PH^^^^^^^^^|(416)525-2525^PRN^PH^^^^^^^^^|C^Emergency Contact^03ZConRol^^^||||||||||||||||||||||||||||||||\r" + 
+                "PV1||I|ES9 GEN S^424^1^G^4265^^^N^ES 9 424^ES 9 424 1^ES9 GEN S^1521 19 1^|R||PMH 15C^413^2^G^4265^^^N^P15C 413^P15C 413 2^PMH 15C^1980 2 2^|13546a^Generic^Physician^MoeA^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|13546b^Generic^Physician^MoeB^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^||hospServ||||D|||13546c^Generic^Physician^MoeC^^Dr.^MD^^^L^^^EI^^^^^^^^^^^^^|IP^|11110000514^^^UHN^VN^G^4265^^^^^||||N||||||||||||||||G|||||201112021621|||||||V|\r" + 
+                "PV2||S^Semi^03ZFinbed^^^|^kfkfkfjcjcjcgcgcclcl^03ZAmitRes^^^|||||||||||||||||||N||AI|Elective||||||N|||||||OTH^Self^03ZBrInBy^^^|||||||||||\r" + 
+                "DG1|1||06^KFKFKFJCJCJCGCGCCLCL^2.16.840.1.113883.11.19436^^^|KFKFKFJCJCJCGCGCCLCL|201112021621|A|||||||||1||D||||\r" + 
+                "PR1||||||||||||||||||||\r" + 
+                "ZPV|OTH^Self|F^Standard|||N|||13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^^^||Medical Services^General Internal Medicine^GMED|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^4265^G^^^^^^^^^^^^|413||3910||^^^^^|13546^Generic^Physician^Moe^^Dr.^MD^^UHN^L^^^EI^G^4265^^^^^^^^^^|0^1^2|||||||||||N||^^|\r" + 
+                "ZWA||||||||active|\r";
+		
 		
 		
 		Persister.persist(UhnConverter.convertAdtOrFail(message1));
 		Persister.persist(UhnConverter.convertAdtOrFail(message2));
+		Persister.persist(UhnConverter.convertAdtOrFail(message3));
 		
 		ViewQuery query = new ViewQuery().viewName("allVisits").designDocId("_design/application");
 		List<PatientWithVisitsContainer> pwvContainers = Persister.getConnector().queryView(query, PatientWithVisitsContainer.class);
@@ -547,6 +741,8 @@ public class AdtTest {
 		assertEquals("I", visit.myPatientClassCode);
 		assertEquals(ourTsFormat.parse("201112021621"), visit.myAdmitDate);
 		assertEquals("hospServ", visit.myHospitalService);
+		assertEquals(ourTsFormat.parse("201112021623"), visit.myLastTransactionDate);
+		assertEquals(ourTsFormat.parse("201112021622"), visit.myLastTransferDate);
 		
 		Pl ploc = visit.myPriorPatientLocation;
 		assertEquals("PMH 15C", ploc.myPointOfCare);

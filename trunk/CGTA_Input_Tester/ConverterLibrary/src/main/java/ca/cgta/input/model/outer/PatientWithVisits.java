@@ -1,6 +1,7 @@
 package ca.cgta.input.model.outer;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -39,7 +40,8 @@ public class PatientWithVisits extends AbstractDocument {
      */
     @JsonIgnore	
 	public String myMostRecentEventCode;
-	
+    
+    
 	
     /**
      * This just comes from the HL7 processor module, it is not stored in the DB

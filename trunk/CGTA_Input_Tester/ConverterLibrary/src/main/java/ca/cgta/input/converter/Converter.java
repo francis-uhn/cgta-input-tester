@@ -1163,7 +1163,7 @@ public class Converter {
         }*/	
     	
     	if (isNotBlank(rxe.getRxe1_QuantityTiming().getTq1_Quantity().getCq1_Quantity().getValue())) {
-            nextOrder.myEncodedOrderQuantityNumber = toNumber(theTerserPath + "/RXE-1-1-1", rxe.getRxe1_QuantityTiming().getTq1_Quantity().getCq1_Quantity().getValue());
+            nextOrder.myEncodedOrderQuantityNumber = toNumberDecimal(theTerserPath + "/RXE-1-1-1", rxe.getRxe1_QuantityTiming().getTq1_Quantity().getCq1_Quantity().getValue());
        	}
        
         nextOrder.myEncodedOrderQuantityRepeatPattern = rxe.getRxe1_QuantityTiming().getTq2_Interval().getRi1_RepeatPattern().getValue();

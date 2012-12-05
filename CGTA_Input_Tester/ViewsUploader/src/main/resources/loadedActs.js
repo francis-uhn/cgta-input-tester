@@ -246,6 +246,7 @@ function (doc) {
                         notesArray.push({name: "Reoccurring Oupatient Arrival Dates", note: "NULL"});                     
                     }              
                     
+                    notesArray.push({name: "Transferred into Location Time", note: nullConvert(visit.myLastTransferDateFormatted)});
                     
                     
                     // Null check for DOB

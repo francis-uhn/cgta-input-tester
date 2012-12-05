@@ -45,8 +45,9 @@ public class Persister {
 	private static final Logger ourLog = LoggerFactory.getLogger(Persister.class);
 
 	private static boolean ourUnitTestMode;
-	public static final String UNIT_TEST_DB = "unit_test";
+	public static final String UNIT_TEST_DB = "unit_test";	
 	//public static final String UNIT_TEST_DB = "neal_test_db";
+	//public static final String UNIT_TEST_DB = "unit_test2";
 
 
 
@@ -561,6 +562,7 @@ public class Persister {
         Cx preConvVisitNumber = theHl7PatientWithVisits.myMergeInfo != null ? theHl7PatientWithVisits.myMergeInfo.myMergeVisitId : null;
         PatientWithVisits existing = theExisting.getDocument();
         String eventType = theHl7PatientWithVisits.myMostRecentEventCode;
+        
 
         Visit postConvVisit = theHl7PatientWithVisits.myVisits.get(0);
         Cx postConvVisitNumber = postConvVisit.myVisitNumber;

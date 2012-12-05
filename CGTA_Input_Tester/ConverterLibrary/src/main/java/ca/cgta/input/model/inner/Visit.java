@@ -13,10 +13,8 @@ import ca.cgta.input.converter.DateFormatter;
 
 public class Visit {
 
-	// TODO: visit status
+
 	
-	/** Presenting Triage Code (0-5) for EP visit */
-	public Ce myAdmissionLevelOfCareForEmergencyVisit;
 	public Date myAdmitDate;
 	public String myAdmitDateFormatted;
 	public Ce myAdmitReasonForEmergencyVisit;	
@@ -26,14 +24,19 @@ public class Visit {
 	public ArrayList<String> myDischargeDatesFormatted;
 	public String myHospitalService;
 	public String myHospitalServiceName;
-
 	public String myPatientClassCode;
 	public String myAdmissionType;
-
-	public String myPatientClassName;	
-	
+	public String myPatientClassName;
 	public Pl myPriorPatientLocation;	
 	public Cx myVisitNumber;
+    public Date myLastTransactionDate;
+    public String myLastTransactionDateFormatted;
+	
+    
+    
+    /** Presenting Triage Code (0-5) for EP visit */
+    public Ce myAdmissionLevelOfCareForEmergencyVisit;    
+	
 	/** Just an internal flag to show when the database actually saved/updated this record */
     public Date myRecordUpdatedDate;
     public String myRecordUpdatedDateFormatted;
@@ -59,6 +62,13 @@ public class Visit {
 	//These fields are not set using data extracted from an HL7 message
     public List<Cx> myPreviousVisitNumbers;	
 	public String myVisitStatus;
+	
+    //Only populated for A02 messages	
+    public Date myLastTransferDate;
+    public String myLastTransferDateFormatted;
+ 	
+	
+	
 	
 	
 	private static final Logger ourLog = LoggerFactory.getLogger(Visit.class);
@@ -88,6 +98,8 @@ public class Visit {
 		myPatientClassName = theHl7MsgVisit.myPatientClassName;	
 		myPriorPatientLocation = theHl7MsgVisit.myPriorPatientLocation;		
 		myVisitNumber = theHl7MsgVisit.myVisitNumber;
+		myLastTransactionDate = theHl7MsgVisit.myLastTransactionDate;
+		myLastTransactionDateFormatted = theHl7MsgVisit.myLastTransactionDateFormatted;
 		
 		myAttendingDoctors = processHl7NullableField(myAttendingDoctors,theHl7MsgVisit.myAttendingDoctors);
         myAdmittingDoctors = processHl7NullableField(myAdmittingDoctors,theHl7MsgVisit.myAdmittingDoctors);
@@ -115,6 +127,9 @@ public class Visit {
         myPatientClassName = (StringUtils.isNotBlank(theHl7MsgVisit.myPatientClassName)) ? theHl7MsgVisit.myPatientClassName : myPatientClassName;        
         myPriorPatientLocation = (theHl7MsgVisit.myPriorPatientLocation != null) ? theHl7MsgVisit.myPriorPatientLocation : myPriorPatientLocation;
         myVisitNumber = (theHl7MsgVisit.myVisitNumber != null) ? theHl7MsgVisit.myVisitNumber : myVisitNumber;
+        myLastTransactionDate = (theHl7MsgVisit.myLastTransactionDate != null) ? theHl7MsgVisit.myLastTransactionDate : myLastTransactionDate;
+        myLastTransactionDateFormatted = (StringUtils.isNotBlank(theHl7MsgVisit.myLastTransactionDateFormatted)) ? 
+                theHl7MsgVisit.myLastTransactionDateFormatted : myLastTransactionDateFormatted;
         
         myAttendingDoctors = processHl7NullableField(myAttendingDoctors,theHl7MsgVisit.myAttendingDoctors);
         myAdmittingDoctors = processHl7NullableField(myAdmittingDoctors,theHl7MsgVisit.myAdmittingDoctors);
@@ -158,6 +173,9 @@ public class Visit {
             throw new IllegalArgumentException("Eventype must be supplied");
         }
         
+        myLastTransactionDate = theHl7MsgVisit.myLastTransactionDate;
+        myLastTransactionDateFormatted = theHl7MsgVisit.myLastTransactionDateFormatted;
+        
         if ( theEventType.equals("A01") || theEventType.equals("A04") || theEventType.equals("A05") || theEventType.equals("A06") 
                 || theEventType.equals("A07") || theEventType.equals("A08")) {
             this.copyFrom(theHl7MsgVisit);
@@ -177,6 +195,8 @@ public class Visit {
         if ( theEventType.equals("A02")) {
             myPriorPatientLocation = theHl7MsgVisit.myPriorPatientLocation;
             myAssignedPatientLocation = theHl7MsgVisit.myAssignedPatientLocation;           
+            myLastTransferDate = theHl7MsgVisit.myLastTransactionDate;
+            myLastTransferDateFormatted = theHl7MsgVisit.myLastTransactionDateFormatted;
             setRecordUpdatedTime(); 
         }
         

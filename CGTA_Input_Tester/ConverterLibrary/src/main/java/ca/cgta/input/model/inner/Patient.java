@@ -26,11 +26,16 @@ public class Patient {
     public ArrayList<PersonInRole> myPersonInRoles;
     public ArrayList<AssociatedParty> myAssociatedParties;
     public ArrayList<AdverseReaction> myAdverseReactions;
-    /** Just an internal flag to show when the database actually saved/updated this record */
-    public Date myRecordUpdatedDate;
     public String myRecordUpdatedDateFormatted;
     public String myDeactivatePatientIndicator;     
     public String myPatientRequestedRecordLock;
+    public Date myLastTransactionDate;
+    public String myLastTransactionDateFormatted;
+    
+    /** Just an internal flag to show when the database actually saved/updated this record */
+    public Date myRecordUpdatedDate;
+
+
     
     
     
@@ -78,6 +83,8 @@ public class Patient {
 		myPersonInRoles = theHl7MsgPatient.myPersonInRoles;
 		myAssociatedParties = theHl7MsgPatient.myAssociatedParties;		
 		myPatientRequestedRecordLock = theHl7MsgPatient.myPatientRequestedRecordLock;
+        myLastTransactionDate = theHl7MsgPatient.myLastTransactionDate;
+        myLastTransactionDateFormatted = theHl7MsgPatient.myLastTransactionDateFormatted;
 		
 	}
 	
@@ -99,6 +106,9 @@ public class Patient {
         myPersonInRoles = (theHl7MsgPatient.myPersonInRoles != null && theHl7MsgPatient.myPersonInRoles.size()!= 0) ? theHl7MsgPatient.myPersonInRoles : myPersonInRoles;
         myAssociatedParties = (theHl7MsgPatient.myAssociatedParties != null && theHl7MsgPatient.myAssociatedParties.size()!= 0) ? theHl7MsgPatient.myAssociatedParties : myAssociatedParties;         
         myPatientRequestedRecordLock = (StringUtils.isNotBlank(theHl7MsgPatient.myPatientRequestedRecordLock)) ? theHl7MsgPatient.myPatientRequestedRecordLock : myPatientRequestedRecordLock;
+        myLastTransactionDate = (theHl7MsgPatient.myLastTransactionDate != null) ? theHl7MsgPatient.myLastTransactionDate : myLastTransactionDate;
+        myLastTransactionDateFormatted = (StringUtils.isNotBlank(theHl7MsgPatient.myLastTransactionDateFormatted)) ? 
+                theHl7MsgPatient.myLastTransactionDateFormatted : myLastTransactionDateFormatted;
     }	
 		
 
@@ -123,7 +133,10 @@ public class Patient {
         
         if ( theEventType == null || theEventType.equals("")) {
             throw new IllegalArgumentException("Eventype must be supplied");
-        }  
+        }
+        
+        myLastTransactionDate = theHl7MsgPatient.myLastTransactionDate;
+        myLastTransactionDateFormatted = theHl7MsgPatient.myLastTransactionDateFormatted;
         
         if ( theEventType.equals("A01") || theEventType.equals("A04") || 
                 theEventType.equals("A08") || theEventType.equals("A28") || theEventType.equals("A31")) {

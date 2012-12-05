@@ -70,8 +70,8 @@ public class SampleDataUploader {
 
         //assign command line args to variables and use defaults if not supplied  
         String url = cmdLine.getOptionValue("u", "http://uhnvprx01t.uhn.ca:5984");
-        String dbName = cmdLine.getOptionValue("d", "cgta_input_test_db");
-        //String dbName = cmdLine.getOptionValue("d", "neal_test_db");
+        //String dbName = cmdLine.getOptionValue("d", "cgta_input_test_db");
+        String dbName = cmdLine.getOptionValue("d", "neal_test_db");
         String mrn = cmdLine.getOptionValue("m", "12345");
         if (cmdLine.hasOption("a")) {
         	UhnConverter.ourHspOid = "2.16.840.1.113883.3.239.23.8";

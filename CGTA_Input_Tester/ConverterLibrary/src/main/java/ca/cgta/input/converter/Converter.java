@@ -1166,14 +1166,14 @@ public class Converter {
             nextOrder.myEncodedOrderQuantityNumber = toNumberDecimal(theTerserPath + "/RXE-1-1-1", rxe.getRxe1_QuantityTiming().getTq1_Quantity().getCq1_Quantity().getValue());
        	}
        
-        nextOrder.myEncodedOrderQuantityRepeatPattern = rxe.getRxe1_QuantityTiming().getTq2_Interval().getRi1_RepeatPattern().getValue();
-        if (isBlank(nextOrder.myEncodedOrderQuantityRepeatPattern)) {
-            addFailure(theTerserPath + "/RXE-1-2-1", FailureCode.F095, null);
-        }
-        nextOrder.myEncodedOrderQuantityDuration = rxe.getRxe1_QuantityTiming().getTq3_Duration().getValue();
-        if (isBlank(nextOrder.myEncodedOrderQuantityRepeatPattern)) {
-            addFailure(theTerserPath + "/RXE-1-3", FailureCode.F096, null);
-        }
+    	if (isNotBlank(rxe.getRxe1_QuantityTiming().getTq2_Interval().getRi1_RepeatPattern().getValue())) {
+    		nextOrder.myEncodedOrderQuantityRepeatPattern = rxe.getRxe1_QuantityTiming().getTq2_Interval().getRi1_RepeatPattern().getValue();       	
+    	}
+
+    	if (isNotBlank(rxe.getRxe1_QuantityTiming().getTq3_Duration().getValue())) {
+    		nextOrder.myEncodedOrderQuantityDuration = rxe.getRxe1_QuantityTiming().getTq3_Duration().getValue();    		
+    	}
+
         if (isNotBlank(rxe.getRxe1_QuantityTiming().getTq4_StartDateTime().getTs1_Time().getValue())) {
             if (validateTsWithAtLeastMinutePrecisionAndAddFailure(theTerserPath + "/RXE-1-4", rxe.getRxe1_QuantityTiming().getTq4_StartDateTime().getTs1_Time().getValue())) {
             	nextOrder.myEncodedOrderQuantityStartTime = rxe.getRxe1_QuantityTiming().getTq4_StartDateTime().getTs1_Time().getValueAsDate();

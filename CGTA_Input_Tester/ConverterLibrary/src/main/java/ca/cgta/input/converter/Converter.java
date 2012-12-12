@@ -1011,8 +1011,8 @@ public class Converter {
 
 		retVal.myAssigningJurisdictionId = theCx.getCx9_AssigningJurisdiction().getCwe1_Identifier().getValue();
 		if (isNotBlank(retVal.myAssigningJurisdictionId)) {
-			String assigningJurisdictionText = Tables.lookupHl7Code("0363", retVal.myAssigningJurisdictionId);
-			if (assigningJurisdictionText == null) {
+			retVal.myAssigningJurisdictionText = Tables.lookupHl7Code("0363", retVal.myAssigningJurisdictionId);
+			if (retVal.myAssigningJurisdictionText == null) {
 				addFailure(theTerserPath + "-9-1", FailureCode.F044, theCx.encode());
 			}
 

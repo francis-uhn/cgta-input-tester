@@ -665,6 +665,16 @@ public class ContributorConfig {
 			meditech_cs.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.2.102.7");
 			contributor.getSendingSystem().add(meditech_cs);
 
+			// OnBase
+			SendingSystem onbase = new SendingSystem();
+			// Should be the value from table 9008 with ".101.x" at the end
+			onbase.setCode("2.16.840.1.113883.3.239.23.2.101.3");
+			onbase.setDescription("Onbase");
+			onbase.setManagementConsoleSystemId("Onbase");
+			onbase.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.2.102.9");
+			onbase.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.2.102.10");
+			contributor.getSendingSystem().add(onbase);
+
 		}
 		// *******************************************************
 		// Scarborough

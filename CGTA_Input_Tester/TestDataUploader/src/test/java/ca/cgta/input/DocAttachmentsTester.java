@@ -33,6 +33,8 @@ public class DocAttachmentsTester {
     private static final String DB = "neal_test_db";
     private static final Logger ourLog = LoggerFactory.getLogger(DocAttachmentsTester.class);
     private static Base64 ourBase64 = new Base64();
+    private static final String user = "admin";
+    private static final String pwd = "denali6194";
 
     /**
      * 
@@ -44,7 +46,7 @@ public class DocAttachmentsTester {
         
 
         // Create connector
-        HttpClient httpClient = new StdHttpClient.Builder().url(ADDRESS).connectionTimeout(10000)
+        HttpClient httpClient = new StdHttpClient.Builder().url(ADDRESS).username(user).password(pwd).connectionTimeout(10000)
                 .build();
         CouchDbInstance dbInstance = new StdCouchDbInstance(httpClient);
         CouchDbConnector connector = new StdCouchDbConnector(DB, dbInstance);

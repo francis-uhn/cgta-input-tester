@@ -28,6 +28,8 @@ public class UhnDataPurger {
 
         options.addOption("u", "url", true, "URL of the couchDb instance");
         options.addOption("d", "databaseName", true, "Name of the couchDb database");
+        options.addOption("c", "clientName", true, "couchDb account username");
+        options.addOption("p", "password", true, "couchDb account pwd");
         
         CommandLine cmdLine = null;
         // parse the command line arguments
@@ -37,8 +39,10 @@ public class UhnDataPurger {
         String url = cmdLine.getOptionValue("u", "http://uhnvprx01t.uhn.ca:5984");
         String dbName = cmdLine.getOptionValue("d", "cgta_input_test_db");
         //String dbName = cmdLine.getOptionValue("d", "neal_test_db");
+        String user = cmdLine.getOptionValue("c", "admin");
+        String pwd = cmdLine.getOptionValue("p", "denali6194");
         
-        HttpClient httpClient = new StdHttpClient.Builder().url(url).connectionTimeout(10000).build();
+        HttpClient httpClient = new StdHttpClient.Builder().url(url).username(user).password(pwd).connectionTimeout(10000).build();
         CouchDbInstance dbInstance = new StdCouchDbInstance(httpClient);        
         StdCouchDbConnector connector = new StdCouchDbConnector(dbName, dbInstance);
                 

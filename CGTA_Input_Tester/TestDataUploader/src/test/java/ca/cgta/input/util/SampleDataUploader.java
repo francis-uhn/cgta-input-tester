@@ -40,6 +40,8 @@ public class SampleDataUploader {
 	/**
 	 * Command line args:
 	 * u = URL of the couchDb instance to connect to
+	 * c = couchDb account username
+	 * p = couchDb account pwd
 	 * d = couchDb database name
 	 * m = mrn of the Patient to create reports for 
 	 * 
@@ -60,7 +62,8 @@ public class SampleDataUploader {
         Options options = new Options();
 
         options.addOption("u", "url", true, "URL of the couchDb instance");
-        options.addOption("d", "databaseName", true, "Name of the couchDb database");
+        options.addOption("c", "clientName", true, "couchDb account username");
+        options.addOption("p", "password", true, "couchDb account pwd");
         options.addOption("m", "mrn", true, "Patient mrn");
         options.addOption("a", "altfacility", false, "Set this flag to upload using NYGH as the facility instead of UHN");
         
@@ -70,6 +73,8 @@ public class SampleDataUploader {
 
         //assign command line args to variables and use defaults if not supplied  
         String url = cmdLine.getOptionValue("u", "http://uhnvprx01t.uhn.ca:5984");
+        String user = cmdLine.getOptionValue("c", "admin");
+        String pwd = cmdLine.getOptionValue("p", "denali6194");
         //String dbName = cmdLine.getOptionValue("d", "cgta_input_test_db");
         String dbName = cmdLine.getOptionValue("d", "neal_test_db");
         String mrn = cmdLine.getOptionValue("m", "12345");
@@ -81,7 +86,7 @@ public class SampleDataUploader {
         	UhnConverter.ourSendingSystemOid = "2.16.840.1.113883.3.239.23.8.101.1";
         }
         
-	    HttpClient httpClient = new StdHttpClient.Builder().url(url).connectionTimeout(10000).build();
+	    HttpClient httpClient = new StdHttpClient.Builder().url(url).username(user).password(pwd).connectionTimeout(10000).build();
         CouchDbInstance dbInstance = new StdCouchDbInstance(httpClient);        
         StdCouchDbConnector connector = new StdCouchDbConnector(dbName, dbInstance);        
         Persister.setConnector(connector);

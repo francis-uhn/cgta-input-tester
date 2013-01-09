@@ -36,10 +36,12 @@ public class DbQueryUtil {
         String placerGroup = "";
         String url = "http://uhnvprx01t.uhn.ca:5984";	       
         String dbName = "cgta_input_test_db";
+        String user = "admin";
+        String pwd = "denali6194";
 //        String dbName = "neal_test_db";	    
         
         
-	    HttpClient httpClient = new StdHttpClient.Builder().url(url).connectionTimeout(10000).build();
+	    HttpClient httpClient = new StdHttpClient.Builder().url(url).username(user).password(pwd).connectionTimeout(10000).build();
         CouchDbInstance dbInstance = new StdCouchDbInstance(httpClient);        
         StdCouchDbConnector connector = new StdCouchDbConnector(dbName, dbInstance);        
         Persister.setConnector(connector);

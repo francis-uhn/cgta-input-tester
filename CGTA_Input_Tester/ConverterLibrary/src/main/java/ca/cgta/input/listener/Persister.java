@@ -38,16 +38,16 @@ public class Persister {
 	// public static final String ADDRESS = "http://10.7.7.45:5984";
 	public static final String ADDRESS = "http://uhnvprx01t.uhn.ca:5984";
 	//public static final String ADDRESS = "http://localhost:5984";
-
 	public static final String DB = "cgta_input_test_db";
-
-	private static StdCouchDbConnector ourConnector;
-	private static final Logger ourLog = LoggerFactory.getLogger(Persister.class);
-
-	private static boolean ourUnitTestMode;
-	public static final String UNIT_TEST_DB = "unit_test";	
+	public static final String USER = "admin";
+    public static final String PWD = "denali6194";
+    public static final String UNIT_TEST_DB = "unit_test";	
 	//public static final String UNIT_TEST_DB = "neal_test_db";
-	//public static final String UNIT_TEST_DB = "unit_test2";
+	//public static final String UNIT_TEST_DB = "unit_test2";	
+    private static StdCouchDbConnector ourConnector;
+    private static final Logger ourLog = LoggerFactory.getLogger(Persister.class);
+    private static boolean ourUnitTestMode;
+	
 
 
 
@@ -62,7 +62,7 @@ public class Persister {
 
 	public static CouchDbConnector getConnector() throws Exception {
 		if (ourConnector == null) {
-			HttpClient httpClient = new StdHttpClient.Builder().url(ADDRESS).connectionTimeout(10000).build();
+			HttpClient httpClient = new StdHttpClient.Builder().url(ADDRESS).username(USER).password(PWD).connectionTimeout(10000).build();
 
 			CouchDbInstance dbInstance = new StdCouchDbInstance(httpClient);
 

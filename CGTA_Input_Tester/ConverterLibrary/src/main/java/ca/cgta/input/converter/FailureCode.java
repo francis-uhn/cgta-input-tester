@@ -55,7 +55,7 @@ public enum FailureCode {
 			"assigned a code system ID which should be hardcoded in this position. This code system ID identifies the \"source\" of the codes " +
 			"in OBR-4-1.", HIGH), // -
 	
-	F013("Missing or invalid Observation Type in OBR-2. Valid data types must be drawn from Table 0125", "OBR-2 indicates the datatype which " +
+	F013("Missing or invalid Observation Type in OBX-2. Valid data types must be drawn from Table 0125", "OBX-2 indicates the datatype which " +
 			"is placed in OBX-5 (e.g. if OBX-2 is \"ST\", then OBX-5 is a String data type). Valid values are: " + Tables.getHl7TableAsHtml("0125"), MED), // -
 	
 	F014("Invalid OBX abnormal flag in OBX-8. Values must be drawn from table 0078", "OBX-8 must contain a value which is drawn from " +
@@ -230,7 +230,7 @@ public enum FailureCode {
 			"multiple IDs are assigned at a site, one must be designated as primary. Any additional identifiers may use " +
 			"the type code of 'MRS' (secondary ID).", HIGH), // -
 	
-	F062("ADT^A06 and ADT^A07 messages must have a value for MRG-5 indicating the previous visit number which is being subsumed", MED), // -
+//	F062("ADT^A06 and ADT^A07 messages must have a value for MRG-5 indicating the previous visit number which is being subsumed", MED), // -
 	
 	F063("ADT^A40 and ADT^A45 messages must have a merge-MRN (MRG-1 with ID type code of 'MR')", MED), // -
 
@@ -396,7 +396,7 @@ public enum FailureCode {
 	F119("Medication Component Type (RXC-1) is missing or invalid. Values must be drawn from Table 0166", 
 			"Valid values in this field are: " + Tables.getHl7TableAsHtml("0166"), MED), //-
 	
-	F120("Missing Code (CE.1) and/or Textual Description (CE.2) for Component Code (RXC-2)", HIGH), //-
+	F120("Missing Code (CE.1) and/or Textual Description (CE.2) for Component Units (RXC-4)", HIGH), //-
 	
 //	F121("code (CE-1) and code system (CE-3) must be supplied"), //-
 	
@@ -405,7 +405,7 @@ public enum FailureCode {
 	F123 ("Missing or invalid coding system identifier. Values must be drawn from table 9007", "Your HSP will be assigned a value by ConnectingGTA which must be used in this position. " +
           "This value is unique to your site and sending system. If your site has multiple sending systems, you may have specific allowable values for this field.", HIGH),
           
-    F124("Quantity value (TQ-1-1) must be supplied for Encoded Order Quantity", HIGH), //-
+//    F124("Quantity value (TQ-1-1) must be supplied for Encoded Order Quantity", HIGH), //-
 	
 	F125("Missing Code (CE.1) and/or Textual Description (CE.2) for Encoded Order Give Units (RXE-5)", HIGH), //-
 	

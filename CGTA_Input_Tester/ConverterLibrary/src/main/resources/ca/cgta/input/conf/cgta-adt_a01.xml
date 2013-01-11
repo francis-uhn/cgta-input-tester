@@ -1727,7 +1727,7 @@ third components.</Predicate>
 </Field>
 </Segment>
 <Segment Name="ZPD" LongName="" Usage="RE" Min="0" Max="1">
-<Field Name="Deactivated Patient Flag" Usage="RE" Min="0" Max="1" Datatype="ID" Length="4">
+<Field Name="Deactivated Patient Flag" Usage="RE" Min="0" Max="1" Datatype="ID" Length="1">
 </Field>
 </Segment>
 <Segment Name="PD1" LongName="Patient Additional Demographic" Usage="X" Min="0" Max="*">

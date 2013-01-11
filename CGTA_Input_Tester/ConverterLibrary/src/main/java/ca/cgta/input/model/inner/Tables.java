@@ -222,6 +222,7 @@ public class Tables {
 			HashMap<String, String> tbl0201 = new HashMap<String, String>();
 			ourTables.put("0201", tbl0201);
 			tbl0201.put("PRN", "Primary Residence Number");
+			tbl0201.put("HRN", "Home Residence Number");
 			tbl0201.put("WPN", "Work Number");
 			tbl0201.put("EMP", "Emergency Number");
 			tbl0201.put("NET", "Email Address");

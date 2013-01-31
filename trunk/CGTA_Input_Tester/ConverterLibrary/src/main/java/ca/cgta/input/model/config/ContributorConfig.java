@@ -950,8 +950,8 @@ public class ContributorConfig {
 			SendingSystem efilm = new SendingSystem();
 			// Should be the value from table 9004 with ".101.x" at the end
 			efilm.setCode("2.16.840.1.113883.3.239.23.6.101.3");
-			efilm.setDescription("Dictaphone");
-			efilm.setManagementConsoleSystemId("Dictaphone");
+			efilm.setDescription("eFilm Medical");
+			efilm.setManagementConsoleSystemId("eFilm Medical");
 			// Should be the value from table 9004 with ".102.x" at the end
 			efilm.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.6.102.8");
 			efilm.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.6.102.9");

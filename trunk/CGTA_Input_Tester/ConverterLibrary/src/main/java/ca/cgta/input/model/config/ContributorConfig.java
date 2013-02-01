@@ -355,6 +355,7 @@ public class ContributorConfig {
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.1.2", "HIAL LDAP"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.9", "HRM"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.10", "CGTA_CONSENT_MANAGEMENT_REGISTRY"));
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.11", "HIPAAT"));
 
 		
 		addProviderType(cfg, "1.3.6.1.4.1.12201.1.2.1.5", "Site Specific Provider ID (Deprocated)");

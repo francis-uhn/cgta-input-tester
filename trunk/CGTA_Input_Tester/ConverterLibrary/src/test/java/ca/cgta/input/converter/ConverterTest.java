@@ -199,31 +199,31 @@ public class ConverterTest {
 		assertTrue(found);
 	}
 	
-	@Test
-	public void testRxe11isNotRequired() throws Exception {
-		
-		String inputMessage = "MSH|^~\\&|2.16.840.1.113883.3.239.23.7^2.16.840.1.113883.3.239.23.7.101.1|SHSC|ConnectingGTA|ConnectingGTA|20120822133529-0500|23498643698hhh|RDE^011^RDE_011|        1152|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" + 
-				"EVN||20120822133529-0500|||\r" + 
-				"PID|1||7014692^^^2.16.840.1.113883.3.239.23.7&2.16.840.1.113883.3.239.23.7.101.1^MR||CONCARE^DOCTOR^^^^^L||19600101000000-0500|F|||||||||\r" +
-				"PV1|1|I|||||||||||||||||48010A^^^2.16.840.1.113883.3.239.23.7&2.16.840.1.113883.3.239.23.7.101.1^VN|||||||||||||||||||||\r" + 
-				"ORC|NW|UNK.9657^2.16.840.1.113883.3.239.23.7^2.16.840.1.113883.3.239.23.7.101.1|9657^2.16.840.1.113883.3.239.23.7^2.16.840.1.113883.3.239.23.7.101.1||\r" + 
-				"RXE|^DAILY&1000^INDEF^20120822100000-0500^|COMPOUND^AMLODIPINE 7.5|MG^2.16.840.1.113883.3.239.23.7.102.4|||^|^|^|\r";
-		
-		RDE_O11 rde = new RDE_O11();
-		rde.parse(inputMessage);
-		Converter converter = new Converter(false);
-        List<MedicationOrder> retVal = converter.convertMedicationOrder(rde);
-                
-		List<Failure> failures = converter.getFailures();
-		ourLog.info("Failures was: " + failures);
-		
-		for (Failure failure : failures) {
-	        if (failure.getFailureCode() == FailureCode.F124) {
-	        	fail(failure.toString());
-	        }
-        }
-
-	}
+//	@Test
+//	public void testRxe11isNotRequired() throws Exception {
+//		
+//		String inputMessage = "MSH|^~\\&|2.16.840.1.113883.3.239.23.7^2.16.840.1.113883.3.239.23.7.101.1|SHSC|ConnectingGTA|ConnectingGTA|20120822133529-0500|23498643698hhh|RDE^011^RDE_011|        1152|T|2.5|||NE|AL|CAN|8859/1|||CGTA_CDR_INPUT_2_0\r" + 
+//				"EVN||20120822133529-0500|||\r" + 
+//				"PID|1||7014692^^^2.16.840.1.113883.3.239.23.7&2.16.840.1.113883.3.239.23.7.101.1^MR||CONCARE^DOCTOR^^^^^L||19600101000000-0500|F|||||||||\r" +
+//				"PV1|1|I|||||||||||||||||48010A^^^2.16.840.1.113883.3.239.23.7&2.16.840.1.113883.3.239.23.7.101.1^VN|||||||||||||||||||||\r" + 
+//				"ORC|NW|UNK.9657^2.16.840.1.113883.3.239.23.7^2.16.840.1.113883.3.239.23.7.101.1|9657^2.16.840.1.113883.3.239.23.7^2.16.840.1.113883.3.239.23.7.101.1||\r" + 
+//				"RXE|^DAILY&1000^INDEF^20120822100000-0500^|COMPOUND^AMLODIPINE 7.5|MG^2.16.840.1.113883.3.239.23.7.102.4|||^|^|^|\r";
+//		
+//		RDE_O11 rde = new RDE_O11();
+//		rde.parse(inputMessage);
+//		Converter converter = new Converter(false);
+//        List<MedicationOrder> retVal = converter.convertMedicationOrder(rde);
+//                
+//		List<Failure> failures = converter.getFailures();
+//		ourLog.info("Failures was: " + failures);
+//		
+//		for (Failure failure : failures) {
+//	        if (failure.getFailureCode() == FailureCode.F124) {
+//	        	fail(failure.toString());
+//	        }
+//        }
+//
+//	}
 	
 	@Test
 	public void testCanonicalProvidersAreReadCorrectly() throws HL7Exception, JAXBException {

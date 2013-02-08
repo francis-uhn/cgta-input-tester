@@ -522,6 +522,7 @@ public class ContributorConfig {
 			contributor.getSendingSystem().add(dictaphone);
 
 		}
+		
 		// *******************************************************
 		// OACCAC
 		// *******************************************************

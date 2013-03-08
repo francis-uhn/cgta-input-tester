@@ -13,7 +13,7 @@ public class MedicationAdmin {
 	public Date myEndTime;
 	public String myEndTimeFormatted;
 	public Ce myAdministeredCode;
-	public int myAdministeredAmount;
+	public double myAdministeredAmount;
 	public Ce myAdministeredUnits;
 	public ArrayList<Ce> myAdministrationNotes = new ArrayList<Ce>();
 	public String myAdministeredPerTimeUnit;

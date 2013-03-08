@@ -1491,16 +1491,49 @@ public class ContributorConfig {
 		// St Joseph's Health Centre (Toronto)
 		// *******************************************************
 		{
-			Contributor contributor = new Contributor();
-			cfg.getContributors().add(contributor);
+            Contributor contributor = new Contributor();
+            cfg.getContributors().add(contributor);
 
-			// contributor.getDevListenPort().add(14014);
+            // Anthony, is the last port number 14044 (for TEGH?)
+            contributor.getDevListenPort().add(14045);
+            contributor.getDevListenPort().add(14046);
+            contributor.getDevListenPort().add(14047);
 
-			contributor.setName("St Joseph's Health Centre (Toronto)");
-			contributor.setDevSecurityToken("");
-			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.23");
-			contributor.setHospitalFacilityNumber("0898");
-			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.140", contributor.getName() + " MRNs"));
+            contributor.setName("St Joseph's Health Centre (Toronto)");
+            contributor.setDevSecurityToken("1957395332368kkk");
+            contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.23");
+            // what is this?
+            contributor.setManagementConsoleOrgId("SJHC");
+            // what is this? the MOHLTC number?
+            contributor.setHospitalFacilityNumber("0898");
+            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.140", contributor.getName() + " MRNs"));
+
+
+            // Crescendo
+            SendingSystem crescendo = new SendingSystem();
+            // Should be the value from table 9004 with ".101.x" at the end
+            crescendo.setCode("2.16.840.1.113883.3.239.23.23.101.1");
+            crescendo.setDescription("Crescendo");
+            crescendo.setManagementConsoleSystemId("Crescendo");
+            
+            // Should be the value from table 9004 with ".102.x" at the end
+            // HRM does not currently do terminology mapping, these are here as placeholders
+            // crescendo.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.23.102.1");
+            // crescendo.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.23.102.2");
+            // contributor.getSendingSystem().add(crescendo);
+            
+            // Sectra
+            SendingSystem sectra = new SendingSystem();
+            // Should be the value from table 9004 with ".101.x" at the end
+            sectra.setCode("2.16.840.1.113883.3.239.23.23.101.2");
+            sectra.setDescription("Sectra");
+            sectra.setManagementConsoleSystemId("Sectra");
+            
+            // Should be the value from table 9004 with ".102.x" at the end
+            // HRM does not currently do terminology mapping, these are here as placeholders
+            // sectra.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.23.102.3");
+            // sectra.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.23.102.4");
+            // contributor.getSendingSystem().add(sectra);
 		}
 		// *******************************************************
 		// The Stevenson Memorial Hospital
@@ -1522,13 +1555,32 @@ public class ContributorConfig {
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
 
-			// contributor.getDevListenPort().add(14014);
+			contributor.getDevListenPort().add(14042);
+			contributor.getDevListenPort().add(14043);
+			contributor.getDevListenPort().add(14044);
 
 			contributor.setName("The Toronto East General Hospital");
-			contributor.setDevSecurityToken("");
+			contributor.setDevSecurityToken("24591738492ppp");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.25");
+            contributor.setManagementConsoleOrgId("TEGH");
 			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.145", contributor.getName() + " MRNs"));
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.25.100.1", "The Toronto East General Hospital"));
 			contributor.setHospitalFacilityNumber("0858");
+			
+			// Cerner
+			SendingSystem cerner = new SendingSystem();
+
+			// Should be the value from table 9004 with ".101.x" at the end
+			cerner.setCode("2.16.840.1.113883.3.239.23.25.101.1");
+			cerner.setDescription("Cerner HIS");
+			cerner.setManagementConsoleSystemId("Cerner");
+
+			// Should be the value from table 9004 with ".102.x" at the end
+			//cerner.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.25.102.1");
+			//cerner.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.25.102.2");
+
+			contributor.getSendingSystem().add(cerner);
+
 		}
 		// *******************************************************
 		// York Central Hospital

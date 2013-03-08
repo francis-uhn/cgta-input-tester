@@ -352,6 +352,12 @@ public class Converter {
             }
         }
 
+        //PV1 segment is optional for an A60 - will process if it is there 
+        if ("A60".equals(retVal.myMostRecentEventCode)) {
+            if(theAdt.getPV1().isEmpty()) {
+            	processVisit = false;            
+            }
+        }
         
         if (processVisit) {
             Visit pv1 = convertPv1("PV1", theAdt.getPV1());
@@ -583,7 +589,7 @@ public class Converter {
                     
                     //RXA-6 (optional field)
                     if (isNotBlank(nextRxa.getRxa6_AdministeredAmount().getValue())) {
-                        nextAdmin.myAdministeredAmount = toNumber(rxaTerser + "-6", nextRxa.getRxa6_AdministeredAmount().getValue());
+                        nextAdmin.myAdministeredAmount = toNumberDecimal(rxaTerser + "-6", nextRxa.getRxa6_AdministeredAmount().getValue());
                     }
 
                     // RXA-7 (Units) (optional field)

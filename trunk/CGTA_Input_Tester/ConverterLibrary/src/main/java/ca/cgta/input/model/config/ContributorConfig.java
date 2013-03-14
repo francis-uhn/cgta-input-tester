@@ -350,7 +350,7 @@ public class ContributorConfig {
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.4", "UHN Provider Registry ePID (Provider ID Namespace)"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.5", "(Reserved)")); // This was labelled "Unafiiliated".. What was it for?
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.6", "Base OID for CDR Input Specification HL7 v2 Tables"));
-		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.7", "UHN CR"));
+		//cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.7", "UHN CR"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.8", "UHN PR"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.1.2", "HIAL LDAP"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.9", "HRM"));
@@ -795,6 +795,28 @@ public class ContributorConfig {
 			meditech_cs.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.4.102.6");
 			meditech_cs.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.4.102.7");
 			contributor.getSendingSystem().add(meditech_cs);
+
+			
+			// CKM
+			SendingSystem ckm = new SendingSystem();
+			// Should be the value from table 9008 with ".101.x" at the end
+			ckm.setCode("2.16.840.1.113883.3.239.23.4.101.3");
+			ckm.setDescription("CKM");
+			ckm.setManagementConsoleSystemId("CKM");
+			ckm.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.4.102.9");
+			ckm.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.4.102.10");
+			contributor.getSendingSystem().add(ckm);
+
+			// CVIS
+			SendingSystem cvis = new SendingSystem();
+			// Should be the value from table 9008 with ".101.x" at the end
+			cvis.setCode("2.16.840.1.113883.3.239.23.4.101.4");
+			cvis.setDescription("Cardio Vascular Information System");
+			cvis.setManagementConsoleSystemId("CVIS");
+			cvis.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.4.102.11");
+			cvis.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.4.102.12");
+			contributor.getSendingSystem().add(cvis);
+
 
 		}
 		// *******************************************************

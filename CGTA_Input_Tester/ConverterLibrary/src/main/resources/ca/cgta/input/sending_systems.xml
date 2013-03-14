@@ -227,6 +227,16 @@
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.4.102.7</result_codesystem_obx3_9007>
             <management_console_system_id>MeditechCS</management_console_system_id>
         </hsp_sending_system_9008>
+        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.4.101.3" description="CKM">
+            <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.4.102.9</request_codesystem_obr4_9007>
+            <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.4.102.10</result_codesystem_obx3_9007>
+            <management_console_system_id>CKM</management_console_system_id>
+        </hsp_sending_system_9008>
+        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.4.101.4" description="Cardio Vascular Information System">
+            <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.4.102.11</request_codesystem_obr4_9007>
+            <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.4.102.12</result_codesystem_obx3_9007>
+            <management_console_system_id>CVIS</management_console_system_id>
+        </hsp_sending_system_9008>
     </contributor>
     <contributor hospital_facility_number="0852" name="Saint Michael's Hospital">
         <dev_listen_port>14019</dev_listen_port>
@@ -308,10 +318,10 @@
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.6.102.7</result_codesystem_obx3_9007>
             <management_console_system_id>Dictaphone</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.6.101.3" description="Dictaphone">
+        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.6.101.3" description="eFilm Medical">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.6.102.8</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.6.102.9</result_codesystem_obx3_9007>
-            <management_console_system_id>Dictaphone</management_console_system_id>
+            <management_console_system_id>eFilm Medical</management_console_system_id>
         </hsp_sending_system_9008>
     </contributor>
     <contributor hospital_facility_number="0857" name="Sunnybrook Health Sciences Centre">
@@ -573,7 +583,7 @@
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.22.1" description="Ross Memorial Hospital Provider IDs"/>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.22.2" description="Ross Memorial Hospital Visit/Encounter Number/IDs"/>
     </contributor>
-    <contributor name="St Joseph's Health Centre (Toronto)">
+    <contributor hospital_facility_number="0898" name="St Joseph's Health Centre (Toronto)">
         <dev_listen_port>14045</dev_listen_port>
         <dev_listen_port>14046</dev_listen_port>
         <dev_listen_port>14047</dev_listen_port>
@@ -615,7 +625,13 @@
     <other_oid code="2.16.840.1.113883.3.239.22.2" description="ConnectingGTA CDR (System)"/>
     <other_oid code="2.16.840.1.113883.3.239.22.3" description="UHN eMPI eCID (Client ID Namespace)"/>
     <other_oid code="2.16.840.1.113883.3.239.22.4" description="UHN Provider Registry ePID (Provider ID Namespace)"/>
+    <other_oid code="2.16.840.1.113883.3.239.22.5" description="(Reserved)"/>
     <other_oid code="2.16.840.1.113883.3.239.22.6" description="Base OID for CDR Input Specification HL7 v2 Tables"/>
+    <other_oid code="2.16.840.1.113883.3.239.22.8" description="UHN PR"/>
+    <other_oid code="2.16.840.1.113883.3.239.22.1.2" description="HIAL LDAP"/>
+    <other_oid code="2.16.840.1.113883.3.239.22.9" description="HRM"/>
+    <other_oid code="2.16.840.1.113883.3.239.22.10" description="CGTA_CONSENT_MANAGEMENT_REGISTRY"/>
+    <other_oid code="2.16.840.1.113883.3.239.22.11" description="HIPAAT"/>
     <provider_oid_9001 code="1.3.6.1.4.1.12201.1.2.1.5" description="Site Specific Provider ID (Deprocated)"/>
     <provider_oid_9001 code="2.16.840.1.113883.3.239.13.6" description="College of Audiologist and Speech-Language Pathologists of Ontario Licence Number"/>
     <provider_oid_9001 code="2.16.840.1.113883.3.239.13.17" description="College of Chiropodists of Ontario Licence Number"/>

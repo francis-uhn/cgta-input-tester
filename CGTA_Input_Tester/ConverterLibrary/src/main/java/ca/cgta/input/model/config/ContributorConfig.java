@@ -1529,6 +1529,7 @@ public class ContributorConfig {
             // what is this? the MOHLTC number?
             contributor.setHospitalFacilityNumber("0898");
             contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.140", contributor.getName() + " MRNs"));
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.23.100.1", "St Joseph's Health Centre"));
 
 
             // Crescendo
@@ -1537,6 +1538,7 @@ public class ContributorConfig {
             crescendo.setCode("2.16.840.1.113883.3.239.23.23.101.1");
             crescendo.setDescription("Crescendo");
             crescendo.setManagementConsoleSystemId("Crescendo");
+			contributor.getSendingSystem().add(crescendo);
             
             // Should be the value from table 9004 with ".102.x" at the end
             // HRM does not currently do terminology mapping, these are here as placeholders
@@ -1550,7 +1552,8 @@ public class ContributorConfig {
             sectra.setCode("2.16.840.1.113883.3.239.23.23.101.2");
             sectra.setDescription("Sectra");
             sectra.setManagementConsoleSystemId("Sectra");
-            
+			contributor.getSendingSystem().add(sectra);
+           
             // Should be the value from table 9004 with ".102.x" at the end
             // HRM does not currently do terminology mapping, these are here as placeholders
             // sectra.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.23.102.3");

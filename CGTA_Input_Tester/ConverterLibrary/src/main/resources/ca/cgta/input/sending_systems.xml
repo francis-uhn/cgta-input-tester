@@ -588,11 +588,18 @@
         <dev_listen_port>14046</dev_listen_port>
         <dev_listen_port>14047</dev_listen_port>
         <dev_security_token>1957395332368kkk</dev_security_token>
+        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.23.100.1" description="St Joseph's Health Centre"/>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.23</hsp_id_9004>
         <management_console_org_id>SJHC</management_console_org_id>
         <mrn_pool_oid code="2.16.840.1.113883.3.239.18.140" description="St Joseph's Health Centre (Toronto) MRNs"/>
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.23.1" description="St Joseph's Health Centre (Toronto) Provider IDs"/>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.23.2" description="St Joseph's Health Centre (Toronto) Visit/Encounter Number/IDs"/>
+        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.23.101.1" description="Crescendo">
+            <management_console_system_id>Crescendo</management_console_system_id>
+        </hsp_sending_system_9008>
+        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.23.101.2" description="Sectra">
+            <management_console_system_id>Sectra</management_console_system_id>
+        </hsp_sending_system_9008>
     </contributor>
     <contributor name="The Stevenson Memorial Hospital">
         <dev_security_token></dev_security_token>

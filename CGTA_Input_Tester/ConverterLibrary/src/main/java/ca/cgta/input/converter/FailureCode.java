@@ -426,7 +426,9 @@ public enum FailureCode {
 			"should be activated using trigger A01", LOW), //-
 	
 	F131("This field must contain a number (whole integer or decimal), but text was found or it was blank", "This field must contain a whole or decimal number. In other words," +
-			"it must only contain characters 0-9 or '.'", MED), // -
+			"it must only contain characters 0-9 or '.'", MED), //- 
+			
+	F132("This field must contain a number that is below maximum value " + Integer.MAX_VALUE, HIGH) // -
 
 			;
 	

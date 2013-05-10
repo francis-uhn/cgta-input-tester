@@ -2507,7 +2507,12 @@ public class Converter {
 			return 0;
 		}
 
-		return Integer.parseInt(theValue);
+		long value = Long.parseLong(theValue);
+		if (value > Integer.MAX_VALUE) {
+			addFailure(theTerserPath, FailureCode.F132, theValue);
+			return 0;
+		}
+		return (int) value;
 	}
 
     double toNumberDecimal(String theTerserPath, String theValue) {
@@ -2760,5 +2765,18 @@ public class Converter {
        
     }       
 	
+	public long toNumberLong(String theTerserPath, String theValue) {
+		if (theValue == null || theValue.isEmpty()) {
+			return 0;
+		}
+
+		if (!theValue.matches("^[0-9]+$")) {
+			addFailure(theTerserPath, FailureCode.F019, theValue);
+			return 0;
+		}
+
+		return Long.parseLong(theValue);
+    }
+
 
 }

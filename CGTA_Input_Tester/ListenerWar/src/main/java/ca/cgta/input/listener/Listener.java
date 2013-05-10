@@ -33,6 +33,7 @@ import ca.cgta.input.model.inner.MedicationOrder;
 import ca.cgta.input.model.outer.ClinicalDocumentGroup;
 import ca.cgta.input.model.outer.MedicationOrderWithAdmins;
 import ca.cgta.input.model.outer.PatientWithVisits;
+import ca.uhn.hl7v2.DefaultHapiContext;
 import ca.uhn.hl7v2.HL7Exception;
 import ca.uhn.hl7v2.app.Application;
 import ca.uhn.hl7v2.app.ApplicationException;
@@ -70,10 +71,10 @@ public class Listener extends HttpServlet {
 
 	private ContributorConfigFactory myContributorConfig;
 	private JournallingWebService myJournalSvc;
-	private final PipeParser myParser;
 	private final List<Integer> myServerPorts = new ArrayList<Integer>();
 	private final List<SimpleServer> myServers = new ArrayList<SimpleServer>();
 	private final boolean myUnitTestMode;
+	private PipeParser myParser;
 
 
 	public Listener() throws JAXBException {
@@ -88,8 +89,9 @@ public class Listener extends HttpServlet {
 		myUnitTestMode = theUnitTestMode;
 		myContributorConfig = ContributorConfigFactory.getInstance();
 
-		myParser = new MyPipeParser();
-		myParser.setValidationContext(new ValidationContextImpl());
+		DefaultHapiContext ctx = new DefaultHapiContext();
+		ctx.setValidationContext(new ValidationContextImpl());
+		myParser = ctx.getPipeParser();
 	}
 
 
@@ -130,7 +132,14 @@ public class Listener extends HttpServlet {
 				ourLog.info("Starting server on port {} for org {}", nextPort, contributor.getName());
 
 				SocketFactory socketFactory = new MySocketFactory();
-				SimpleServer nextServer = new SimpleServer(socketFactory, nextPort, new MinLowerLayerProtocol(), myParser);
+				DefaultHapiContext ctx = new DefaultHapiContext();
+				ctx.setValidationContext(new ValidationContextImpl());
+				ctx.setSocketFactory(socketFactory);
+				ctx.setLowerLayerProtocol(new MinLowerLayerProtocol());
+				
+				// socketFactory, nextPort, new MinLowerLayerProtocol(), myParser
+				
+				SimpleServer nextServer = new SimpleServer(ctx, nextPort, false);
 				MyApplication application = new MyApplication(contributor, nextPort, constributorLock);
 
 				nextServer.registerApplication("*", "*", application);

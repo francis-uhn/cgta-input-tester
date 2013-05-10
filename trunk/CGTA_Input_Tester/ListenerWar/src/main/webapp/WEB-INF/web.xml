@@ -11,4 +11,15 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
+	<servlet>
+		<servlet-name>HoHListener</servlet-name>
+		<servlet-class>ca.cgta.input.listener.CgtaHohServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>HoHListener</servlet-name>
+		<url-pattern>/CGTA</url-pattern>
+	</servlet-mapping>
+
 </web-app>

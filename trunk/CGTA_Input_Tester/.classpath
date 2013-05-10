@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="ConverterLibrary/src/main/java"/>
+	<classpathentry kind="src" path="ListenerWar/src/test/java"/>
+	<classpathentry kind="src" path="ListenerWar/src/main/java"/>
 	<classpathentry kind="src" path="ConverterLibrary/src/main/resources"/>
 	<classpathentry kind="src" path="ConverterLibrary/src/test/java"/>
 	<classpathentry kind="src" path="ViewsUploader/src/main/java"/>
@@ -14,8 +16,8 @@
 	<classpathentry kind="var" path="M2_REPO/commons-lang/commons-lang/2.6/commons-lang-2.6.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/google/code/gson/gson/2.1/gson-2.1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/ca/uhn/hapi/hapi-base/2.1-alpha1/hapi-base-2.1-alpha1.jar" sourcepath="M2_REPO/ca/uhn/hapi/hapi-base/2.0-beta1/hapi-base-2.0-beta1-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/ca/uhn/hapi/hapi-structures-v25/2.0/hapi-structures-v25-2.0.jar" sourcepath="M2_REPO/ca/uhn/hapi/hapi-structures-v25/2.0-beta1/hapi-structures-v25-2.0-beta1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/ca/uhn/hapi/hapi-base/2.1-beta1/hapi-base-2.1-beta1.jar" sourcepath="M2_REPO/ca/uhn/hapi/hapi-base/2.0-beta1/hapi-base-2.0-beta1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/ca/uhn/hapi/hapi-structures-v25/2.1-beta1/hapi-structures-v25-2.1-beta1.jar" sourcepath="M2_REPO/ca/uhn/hapi/hapi-structures-v25/2.0-beta1/hapi-structures-v25-2.0-beta1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/httpcomponents/httpclient/4.1.1/httpclient-4.1.1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/httpcomponents/httpclient-cache/4.1.1/httpclient-cache-4.1.1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1.jar"/>
@@ -27,5 +29,8 @@
 	<classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.jar" sourcepath="M2_REPO/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-jdk14/1.6.4/slf4j-jdk14-1.6.4.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
+	<classpathentry kind="var" path="M2_REPO/ca/uhn/hapi/hapi-hl7overhttp/2.1-beta1/hapi-hl7overhttp-2.1-beta1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/ca/uhn/sail/integration/SAIL_Integration_Base/2.0.2/SAIL_Integration_Base-2.0.2.jar"/>
+	<classpathentry kind="var" path="M2_REPO/ca/uhn/sail/services/ServicesClient_JAR/2.0.3/ServicesClient_JAR-2.0.3.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

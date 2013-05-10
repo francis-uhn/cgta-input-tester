@@ -29,11 +29,6 @@ public class UploadContributorConfig {
 		for (Contributor nextContributor : ContributorConfigFactory.getInstance().getContributorConfig().getContributors()) {
 
 			String orgId = nextContributor.getManagementConsoleOrgId();
-			// LookupAllInterfaceInformationRequest allInterfaceReq = new
-			// LookupAllInterfaceInformationRequest();
-			// allInterfaceReq.getInterestedInOrg().add(orgId);
-			// LookupAllInterfaceInformationResponse allInterface =
-			// sr.getAllInterfaceInformation(allInterfaceReq);
 
 			// Add Org if needed
 			if (orgId != null) {
@@ -48,9 +43,13 @@ public class UploadContributorConfig {
 
 			// Loop through systems
 			for (SendingSystem nextSendingSystem : nextContributor.getSendingSystem()) {
+				ourLog.info("Adding/Updating system: " + nextSendingSystem.getManagementConsoleSystemId());
 
 				if (StringUtils.isNotBlank(nextSendingSystem.getManagementConsoleOrgId())) {
+					ourLog.info(" * With org id: " + nextSendingSystem.getManagementConsoleOrgId());
 					orgId = nextSendingSystem.getManagementConsoleOrgId();
+				} else {
+					ourLog.info(" * With org id: " + orgId);
 				}
 
 				String systemId = nextSendingSystem.getManagementConsoleSystemId();

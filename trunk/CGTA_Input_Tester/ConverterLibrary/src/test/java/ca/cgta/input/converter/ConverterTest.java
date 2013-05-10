@@ -25,6 +25,7 @@ public class ConverterTest {
 
 	private static final Logger ourLog = LoggerFactory.getLogger(ConverterTest.class);
 	
+	
 	@Test
 	public void testValidateTsUpToMinute() throws JAXBException {
 		
@@ -53,9 +54,9 @@ public class ConverterTest {
 
 	@Test
 	public void testToNumber() throws Exception {
-		
+			
 		Converter c = new Converter();
-		int value = c.toNumber("TP", "1");
+		long value = c.toNumber("TP", "1");
 		assertEquals(1, value);
 		assertTrue(c.getFailures().isEmpty());
 		
@@ -74,7 +75,23 @@ public class ConverterTest {
 		assertEquals(0, value);
 		assertTrue(c.getFailures().size() == 1);
 		assertTrue(c.getFailures().get(0).getFailureCode() == FailureCode.F019);
+
+		c = new Converter();
+		value = c.toNumber("TP", "010077131300");
+		assertTrue(c.getFailures().size() == 1);
+		assertTrue(c.getFailures().get(0).getFailureCode() == FailureCode.F132);
 		
+	}
+
+	public void testToNumberLong() throws JAXBException {
+		
+		
+		Converter c = new Converter();
+		long value = c.toNumberLong("TP", "010077131300");
+		assertEquals(10077131300L, value);
+		assertTrue(c.getFailures().isEmpty());
+
+
 	}
 	
 	@Test

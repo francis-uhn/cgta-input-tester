@@ -40,6 +40,7 @@ import ca.uhn.hl7v2.model.v25.message.RAS_O17;
 import ca.uhn.hl7v2.model.v25.message.RDE_O11;
 import ca.uhn.hl7v2.model.v25.segment.ERR;
 import ca.uhn.hl7v2.model.v25.segment.MSH;
+import ca.uhn.hl7v2.parser.CanonicalModelClassFactory;
 import ca.uhn.hl7v2.parser.PipeParser;
 import ca.uhn.hl7v2.protocol.ReceivingApplication;
 import ca.uhn.hl7v2.protocol.impl.AppRoutingDataImpl;
@@ -66,6 +67,7 @@ public class CgtaHohServlet extends HohServlet {
 
 		DefaultHapiContext ctx = new DefaultHapiContext();
 		ctx.setValidationContext(new ValidationContextImpl());
+		ctx.setModelClassFactory(new CanonicalModelClassFactory("2.5"));
 		myParser = ctx.getPipeParser();
 		ApplicationRouterImpl router = new ApplicationRouterImpl(myParser);
 		router.bindApplication(new AppRoutingDataImpl("*", "*", "*", "*"), new MyApplication());

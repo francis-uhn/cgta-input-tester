@@ -35,6 +35,22 @@ function(doc) {
 	if ("2.16.840.1.113883.3.239.23.11" == siteId) // William Osler Health Centre
 		formatedSiteId = "16840111388332392311";
 	
+	// Hot fix for OACCAC
+	if(siteId==="2.16.840.1.113883.3.239.23.1.100.1"||
+	siteId==="2.16.840.1.113883.3.239.23.1.100.2"||
+	siteId==="2.16.840.1.113883.3.239.23.1.100.3"||
+	siteId==="2.16.840.1.113883.3.239.23.1.100.4"||
+	siteId==="2.16.840.1.113883.3.239.23.1.100.5")
+		formatedSiteId = "21684011138833239231";
+	
+	// Hot fix for OACCAC QA
+	if(siteId==="2.16.840.1.113883.3.239.22.7.100.1"||
+	siteId==="2.16.840.1.113883.3.239.22.7.100.2"||
+	siteId==="2.16.840.1.113883.3.239.22.7.100.3"||
+	siteId==="2.16.840.1.113883.3.239.22.7.100.4"||
+	siteId==="2.16.840.1.113883.3.239.22.7.100.5")
+		formatedSiteId = "21684011138833239227";	
+
 	// Patient with visits (each PRO row will be one visit)
 	if (doc.document.myType == "PATIENT_WITH_VISITS") {
 		

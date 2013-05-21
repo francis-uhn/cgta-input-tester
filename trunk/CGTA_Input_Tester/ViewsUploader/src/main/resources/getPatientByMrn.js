@@ -20,6 +20,22 @@ function (doc)
 			if(patientsArray[pNumber].myIdTypeCode==="MR") {
 				mrnKey = patientsArray[pNumber].myIdNumber;
 				siteId = patientsArray[pNumber].myAssigningAuthorityHspId;
+
+				// Hot fix for OACCAC
+				if(siteId==="2.16.840.1.113883.3.239.23.1.100.1"||
+					siteId==="2.16.840.1.113883.3.239.23.1.100.2"||
+					siteId==="2.16.840.1.113883.3.239.23.1.100.3"||
+					siteId==="2.16.840.1.113883.3.239.23.1.100.4"||
+				   	siteId==="2.16.840.1.113883.3.239.23.1.100.5")
+					siteId = "2.16.840.1.113883.3.239.23.1";
+
+				// Hot fix for OACCAC QA
+				if(siteId==="2.16.840.1.113883.3.239.22.7.100.1"||
+					siteId==="2.16.840.1.113883.3.239.22.7.100.2"||
+					siteId==="2.16.840.1.113883.3.239.22.7.100.3"||
+					siteId==="2.16.840.1.113883.3.239.22.7.100.4"||
+				   	siteId==="2.16.840.1.113883.3.239.22.7.100.5")
+					siteId = "2.16.840.1.113883.3.239.22.7";
 			}
 		}
 		// iterate over patient Names, use only leagl name

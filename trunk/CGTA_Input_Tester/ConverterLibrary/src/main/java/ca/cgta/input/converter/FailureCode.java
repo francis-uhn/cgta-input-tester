@@ -428,8 +428,14 @@ public enum FailureCode {
 	F131("This field must contain a number (whole integer or decimal), but text was found or it was blank", "This field must contain a whole or decimal number. In other words," +
 			"it must only contain characters 0-9 or '.'", MED), //- 
 			
-	F132("This field must contain a number that is below maximum value " + Integer.MAX_VALUE, HIGH) // -
-
+	F132("This field must contain a number that is below maximum value " + Integer.MAX_VALUE, HIGH), // -
+        
+        F133("Not authorized: MSH-4-1 must contain an identifier which identifies the sending HSP. This identifier must be drawn from Table 0362, and is provided by MoHLTC", 
+			Constants.SEE_HERE_HTML + "for a list of acceptable values in Table 0362",
+			HIGH), // -
+	
+        F134("Not authorized: Either MSH-3-1 or MSH-4-1 must contain an identifier which identifies the sending HSP. This identifier must be drawn from Table 9004 or 0362 respectively, and is provided by ConnectingGTA or the MoHLTC respectively.", 
+			HIGH), // -        
 			;
 	
 	private String myDesc;

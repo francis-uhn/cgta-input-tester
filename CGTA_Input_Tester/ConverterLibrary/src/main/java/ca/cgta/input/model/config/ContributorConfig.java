@@ -43,6 +43,9 @@ public class ContributorConfig {
 
 	@XmlTransient
 	private Map<String, Contributor> myHspIdToContributor = new HashMap<String, Contributor>();
+        
+        @XmlTransient
+	private Map<String, Contributor> myHrmIdToContributor = new HashMap<String, Contributor>();        
 
 	@XmlTransient
 	private HashMap<String, Contributor> myMrnPoolIdToContributor;
@@ -94,6 +97,15 @@ public class ContributorConfig {
 			}
 		}
 		return myHspIdToContributor;
+	}
+        
+        public Map<String, Contributor> getHrmId0362ToContributor() {
+		if (myHrmIdToContributor.isEmpty()) {
+			for (Contributor next : myContributors) {
+				myHrmIdToContributor.put(next.getHrmSendingFacility(), next);
+			}
+		}
+		return myHrmIdToContributor;
 	}
 
 
@@ -1320,6 +1332,7 @@ public class ContributorConfig {
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.11");
 			contributor.setHospitalFacilityNumber("0951");
 			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.150", contributor.getName() + " MRNs"));
+                        contributor.setHrmSendingFacility("4052");
 
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.11.100.1", "Etobicoke General Hospital"));
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.11.100.2", "Peel Memorial Centre"));
@@ -1456,6 +1469,7 @@ public class ContributorConfig {
 			contributor.setName("Hospital for Sick Children");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.18");
+                        contributor.setHrmSendingFacility("3969");
 		}
 		// *******************************************************
 		// Humber River Regional Hospital
@@ -1529,7 +1543,8 @@ public class ContributorConfig {
             // what is this? the MOHLTC number?
             contributor.setHospitalFacilityNumber("0898");
             contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.140", contributor.getName() + " MRNs"));
-			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.23.100.1", "St Joseph's Health Centre"));
+            contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.23.100.1", "St Joseph's Health Centre"));
+            contributor.setHrmSendingFacility("4056");
 
 
             // Crescendo
@@ -1591,6 +1606,7 @@ public class ContributorConfig {
 			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.145", contributor.getName() + " MRNs"));
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.25.100.1", "The Toronto East General Hospital"));
 			contributor.setHospitalFacilityNumber("0858");
+                        contributor.setHrmSendingFacility("4209");
 			
 			// Cerner
 			SendingSystem cerner = new SendingSystem();
@@ -1632,14 +1648,16 @@ public class ContributorConfig {
 
 		cfg.validate();
 
-		File cfgFile = new File("ConverterLibrary/src/main/resources/ca/cgta/input/sending_systems.xml");
+		//removed ConverterLibrary folder from file path for use with Netbeans.
+                //File cfgFile = new File("ConverterLibrary/src/main/resources/ca/cgta/input/sending_systems.xml");
+                File cfgFile = new File("src/main/resources/ca/cgta/input/sending_systems.xml");
 		if (!cfgFile.exists()) {
 			throw new ValidationException("Could not find file " + cfgFile.getAbsolutePath());
 		}
 
 		String existing = IOUtils.toString(new FileReader(cfgFile));
 		if (existing.equals(w.toString())) {
-			ourLog.info("Existing config file matches, so I don't neew to update it");
+			ourLog.info("Existing config file matches, so I don't need to update it");
 		} else {
 			FileWriter fw = new FileWriter(cfgFile, false);
 			fw.append(w.toString());

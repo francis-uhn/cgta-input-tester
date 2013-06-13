@@ -55,6 +55,9 @@ public class Contributor {
 	@XmlElement(name = "hsp_sending_system_9008")
 	private List<SendingSystem> mySendingSystem9008;
 
+	@XmlElement(name = "hrm_sending_facility_0362")
+	private String myHrmSendingFacility0362;        
+        
 	/**
 	 * {@inheritDoc}
 	 */
@@ -63,7 +66,7 @@ public class Contributor {
 		if (!(theObj instanceof Contributor)) {
 			return false;
 		}
-		return StringUtils.equals(myHspId9004, ((Contributor) theObj).myHspId9004);
+                return StringUtils.equals(myHspId9004, ((Contributor) theObj).myHspId9004);
 	}
 
 	/**
@@ -192,7 +195,13 @@ public class Contributor {
 		return null;
 	}
 
-
+	/**
+	 * @return the HRM Sending Facility ID
+	 */	
+        public String getHrmSendingFacility() {
+		return myHrmSendingFacility0362;
+	}
+        
 	/**
 	 * {@inheritDoc}
 	 */
@@ -264,4 +273,11 @@ public class Contributor {
 		}
 	    return myVisitNumberPoolOids;
     }
+
+     /**
+     * @param theHrmSendingFacility the HRM Sending Facility to set
+     */
+    public void setHrmSendingFacility(String theHrmSendingFacility) {
+    	myHrmSendingFacility0362 = theHrmSendingFacility;
+    }        
 }

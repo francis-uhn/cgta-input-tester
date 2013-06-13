@@ -233,8 +233,8 @@ public class Listener extends HttpServlet {
 
 			try {
 				String msgSourceOrg = terser.get("/MSH-3-1");
-				String sourceOrg = myContributorConfig.getContributorConfig().getNameOfHspId9004(msgSourceOrg);
-				ourLog.info("Sending organization from message is {} - {}", msgSourceOrg, sourceOrg);
+                                String sourceOrg = myContributorConfig.getContributorConfig().getNameOfHspId9004(msgSourceOrg);
+                                ourLog.info("Sending organization from message is {} - {}", msgSourceOrg, sourceOrg);
 			} catch (Exception e) {
 				// ignore
 			}
@@ -308,21 +308,27 @@ public class Listener extends HttpServlet {
 			}
 
 			// These are determined from the IDs in the message
+                        // Currently only checking HRM sending facility IDs 4056 and 4209. Will need to check these IDs better when more HRM sites come onboard.
 			SendingSystem sendingSystem = converter.getSendingSystem();
 			Contributor contributor = converter.getContributorConfig();
 
-			if (contributor == null) {
-				contributor = myContributor;
-			} else if (contributor != myContributor) {
-				converter.addFailure("MSH-3-1", FailureCode.F112, msh.getMsh3_SendingApplication().getHd1_NamespaceID().getValue());
-				contributor = myContributor;
-			}
+                            if (contributor == null) {
+                                    contributor = myContributor;
+                            } else if (contributor != myContributor) {
+                                    if (!("4056".equals(contributor.getHrmSendingFacility()) || "4209".equals(contributor.getHrmSendingFacility()))) {
+                                        converter.addFailure("MSH-3-1", FailureCode.F112, msh.getMsh3_SendingApplication().getHd1_NamespaceID().getValue());
+                                    }
+                                    contributor = myContributor;
+                                    
+                            }
 
-			if (sendingSystem == null || contributor.getSendingSystem9008WithOid(sendingSystem.getCode()) == null) {
-				converter.addFailure("MSH-3-2", FailureCode.F113, msh.getMsh3_SendingApplication().getHd2_UniversalID().getValue());
-				sendingSystem = contributor.getSendingSystem().get(0);
-				ourLog.info("Defaulting to first sending system {} because MSH-3-2 was {}", sendingSystem.getDescription(), msh.getMsh3_SendingApplication().getHd2_UniversalID().getValue());
-			}
+                            if (sendingSystem == null || contributor.getSendingSystem9008WithOid(sendingSystem.getCode()) == null) {
+                                    if (!("4056".equals(contributor.getHrmSendingFacility()) || "4209".equals(contributor.getHrmSendingFacility()))) {
+                                        converter.addFailure("MSH-3-2", FailureCode.F113, msh.getMsh3_SendingApplication().getHd2_UniversalID().getValue());
+                                    }
+                                    sendingSystem = contributor.getSendingSystem().get(0);
+                                    ourLog.info("Defaulting to first sending system {} because MSH-3-2 was {}", sendingSystem.getDescription(), msh.getMsh3_SendingApplication().getHd2_UniversalID().getValue());
+                            }
 
 			ourLog.info("Converted message from {} - {}", contributor.getName(), sendingSystem.getDescription());
 

@@ -1,5 +1,6 @@
 package ca.cgta.input.converter;
 
+import java.util.logging.Level;
 import static org.apache.commons.lang.StringUtils.*;
 
 import java.text.DateFormat;
@@ -158,7 +159,44 @@ public class Converter {
 		myEnforceUnsupported = theEnforceUnsupported;
 	}
 	
-	
+        //Hashsets for orgs that contribute to cGTA and/or HRM. Orgs that contribute to both must be in both sets.
+        public static Set<String> cgtaContributor = new HashSet<String>();
+        public static Set<String> hrmContributor = new HashSet<String>();
+        
+        static { 
+            hrmContributor.add("4056"); //SJHC
+            hrmContributor.add("4209"); //TEGH
+            hrmContributor.add("3969"); //HSC
+            
+//            cgtaContributor.add("2.16.840.1.113883.3.239.23.11");
+        }
+        
+        public boolean isHrm = false;
+        public boolean isCgta  = true;
+        
+        public void getMessageDestination(ORU_R01 theDocument) throws HL7Exception {
+
+            isHrm = false;
+            isCgta = true;
+
+            String sendingApplication = theDocument.getMSH().getMsh3_SendingApplication().getHd1_NamespaceID().getValue();
+            String sendingFacility = theDocument.getMSH().getMsh4_SendingFacility().getHd1_NamespaceID().encode();
+
+            if (isEmpty(sendingFacility)) {
+                    sendingFacility = theDocument.getMSH().getMsh4_SendingFacility().getHd2_UniversalID().encode();
+            }
+//            if (cgtaContributor.contains(sendingApplication)) {
+//                isCgta = true;
+//                return;
+//            }
+
+            if (hrmContributor.contains(sendingFacility)) {
+                isHrm = true;
+                isCgta = false;
+                return;
+            }        
+        }
+    
     public PatientWithVisits convertPatientWithVisits(ADT_A01 theAdt) throws HL7Exception {
         if (!validateMsh(theAdt.getMSH())) {
             return null;
@@ -457,6 +495,8 @@ public class Converter {
 
 	public List<ClinicalDocumentGroup> convertClinicalDocument(ORU_R01 theDocument) throws HL7Exception {
 
+        getMessageDestination(theDocument);    
+            
         if (!validateMsh(theDocument.getMSH())) {
             return Collections.emptyList();
         }
@@ -760,13 +800,15 @@ public class Converter {
 			}
 
 			// OBR-8
-			if (!nextOrderObservation.getOBR().getObr8_ObservationEndDateTime().encode().isEmpty()) {
-				String dt = nextOrderObservation.getOBR().getObr8_ObservationEndDateTime().getTime().getValue();
-				if (validateTsWithAtLeastSecondPrecisionAndAddFailure(theTerserPath + "/ORDER_OBSERVATION(" + orderObservationIndex + ")/OBR-8", dt)) {
-					section.myEndDate = nextOrderObservation.getOBR().getObr8_ObservationEndDateTime().getTime().getValueAsDate();
-					section.myEndDateFormatted = DateFormatter.formatDate(nextOrderObservation.getOBR().getObr8_ObservationEndDateTime().getTime().getValue());
-				}
-			}
+                        if (isCgta) {
+                                if (!nextOrderObservation.getOBR().getObr8_ObservationEndDateTime().encode().isEmpty()) {
+                                        String dt = nextOrderObservation.getOBR().getObr8_ObservationEndDateTime().getTime().getValue();
+                                        if (validateTsWithAtLeastSecondPrecisionAndAddFailure(theTerserPath + "/ORDER_OBSERVATION(" + orderObservationIndex + ")/OBR-8", dt)) {
+                                                section.myEndDate = nextOrderObservation.getOBR().getObr8_ObservationEndDateTime().getTime().getValueAsDate();
+                                                section.myEndDateFormatted = DateFormatter.formatDate(nextOrderObservation.getOBR().getObr8_ObservationEndDateTime().getTime().getValue());
+                                        }
+                                }
+                        }
 
 			section.myOrderingProviders = new ArrayList<Xcn>();
 			for (int j = 1; j <= nextOrderObservation.getOBR().getObr16_OrderingProviderReps(); j++) {
@@ -776,22 +818,26 @@ public class Converter {
 				addFailure(theTerserPath + "/ORDER_OBSERVATION(" + orderObservationIndex + ")/OBR-16", FailureCode.F071, null);
 			}
 
-			String resultConfidentiality = nextOrderObservation.getOBR().getObr18_PlacerField1().getValue();
-			if (StringUtils.isBlank(resultConfidentiality)) {
-				section.myConfidentiality = ConfidentialityStatusEnum.NORMAL;
-			} else {
-				section.myConfidentiality = ConfidentialityStatusEnum.fromHl7Code(resultConfidentiality);
-				if (section.myConfidentiality == null) {
-					addFailure(theTerserPath + "/ORDER_OBSERVATION(" + orderObservationIndex + ")/OBR-18", FailureCode.F005, resultConfidentiality);
-				}
-			}
+                        if (isCgta) {
+                                String resultConfidentiality = nextOrderObservation.getOBR().getObr18_PlacerField1().getValue();
+                                if (StringUtils.isBlank(resultConfidentiality)) {
+                                        section.myConfidentiality = ConfidentialityStatusEnum.NORMAL;
+                                } else {
+                                        section.myConfidentiality = ConfidentialityStatusEnum.fromHl7Code(resultConfidentiality);
+                                        if (section.myConfidentiality == null) {
+                                                addFailure(theTerserPath + "/ORDER_OBSERVATION(" + orderObservationIndex + ")/OBR-18", FailureCode.F005, resultConfidentiality);
+                                        }
+                                }
+                        }
 
 			// OBR-20
-			if (StringUtils.isNotBlank(nextOrderObservation.getOBR().getObr20_FillerField1().getValue())) {
-				if (Tables.lookupHl7Code("9006", nextOrderObservation.getOBR().getObr20_FillerField1().getValue()) == null) {
-					addFailure(theTerserPath + "/ORDER_OBSERVATION(" + orderObservationIndex + ")/OBR-20", FailureCode.F006, nextOrderObservation.getOBR().getObr20_FillerField1().getValue());
-				}
-			}
+                        if (isHrm) {
+                                if (StringUtils.isNotBlank(nextOrderObservation.getOBR().getObr20_FillerField1().getValue())) {
+                                        if (Tables.lookupHl7Code("9006", nextOrderObservation.getOBR().getObr20_FillerField1().getValue()) == null) {
+                                                addFailure(theTerserPath + "/ORDER_OBSERVATION(" + orderObservationIndex + ")/OBR-20", FailureCode.F006, nextOrderObservation.getOBR().getObr20_FillerField1().getValue());
+                                        }
+                                }
+                        }
 
 			String resultStatus = nextOrderObservation.getOBR().getObr25_ResultStatus().getValue();
 			section.myStatusCode = resultStatus;
@@ -801,17 +847,21 @@ public class Converter {
 			}
 
 			section.myCopyToProviders = new ArrayList<Xcn>();
-			for (int j = 1; j <= nextOrderObservation.getOBR().getObr28_ResultCopiesToReps(); j++) {
-				section.myCopyToProviders.add(convertXcn(theTerserPath + "/ORDER_OBSERVATION(" + orderObservationIndex + ")/OBR-28(" + j + ")", nextOrderObservation.getOBR().getObr28_ResultCopiesTo(j - 1)));
-			}
-			if (section.myCopyToProviders.size() > 10) {
-				addFailure(theTerserPath + "/ORDER_OBSERVATION(" + orderObservationIndex + ")/OBR-28", FailureCode.F071, null);
-			}
-
-			if (isNotBlank(nextOrderObservation.getOBR().getObr26_ParentResult().encode())) {
-				section.myParentSectionId = convertPrlDocumentNumber(theTerserPath + "/ORDER_OBSERVATION(" + orderObservationIndex + ")/OBR-26", nextOrderObservation.getOBR().getObr26_ParentResult());
-			}
-
+                        if (isCgta) {
+                                for (int j = 1; j <= nextOrderObservation.getOBR().getObr28_ResultCopiesToReps(); j++) {
+                                        section.myCopyToProviders.add(convertXcn(theTerserPath + "/ORDER_OBSERVATION(" + orderObservationIndex + ")/OBR-28(" + j + ")", nextOrderObservation.getOBR().getObr28_ResultCopiesTo(j - 1)));
+                                }
+                        }
+                        if (isCgta) {
+                                if (section.myCopyToProviders.size() > 10) {
+                                        addFailure(theTerserPath + "/ORDER_OBSERVATION(" + orderObservationIndex + ")/OBR-28", FailureCode.F071, null);
+                                }
+                        }
+                        if (isCgta) {
+                                if (isNotBlank(nextOrderObservation.getOBR().getObr26_ParentResult().encode())) {
+                                        section.myParentSectionId = convertPrlDocumentNumber(theTerserPath + "/ORDER_OBSERVATION(" + orderObservationIndex + ")/OBR-26", nextOrderObservation.getOBR().getObr26_ParentResult());
+                                }
+                        }
 			if (isNotBlank(nextOrderObservation.getOBR().getObr32_PrincipalResultInterpreter().encode())) {
 				section.myPrincipalInterpreter = convertNdl(theTerserPath + "/ORDER_OBSERVATION(" + orderObservationIndex + ")/OBR-32", nextOrderObservation.getOBR().getObr32_PrincipalResultInterpreter());
 			}
@@ -1511,16 +1561,21 @@ public class Converter {
 		retVal.myDataType = theGroup.getOBX().getObx2_ValueType().getValue();
 
 		retVal.myCode = convertCe(theTerserPath + "/OBX-3", theGroup.getOBX().getObx3_ObservationIdentifier());
-		if (retVal.myCode == null || isBlank(retVal.myCode.myText) || isBlank(retVal.myCode.myCode)) {
-			addFailure(theTerserPath + "/OBX-3", FailureCode.F009, theGroup.getOBX().getObx3_ObservationIdentifier().encode());
-		}
-		if (retVal.myCode != null && !mySendingSystem.getResultCodeSystemSystemObx3().contains((retVal.myCode.myCodeSystem))) {
-			addFailure(theTerserPath + "/OBX-3-3", FailureCode.F010, theGroup.getOBX().getObx3_ObservationIdentifier().encode());
-		}
-		
-		if (isNotBlank(theGroup.getOBX().getObx4_ObservationSubID().getValue())) {
-			retVal.mySubId = toNumber(theTerserPath + "/OBX-4", theGroup.getOBX().getObx4_ObservationSubID().getValue());
-		}
+		if (isCgta) {
+                        if (retVal.myCode == null || isBlank(retVal.myCode.myText) || isBlank(retVal.myCode.myCode)) {
+                                addFailure(theTerserPath + "/OBX-3", FailureCode.F009, theGroup.getOBX().getObx3_ObservationIdentifier().encode());
+                        }
+                }
+                if (isCgta) {
+                        if (retVal.myCode != null && !mySendingSystem.getResultCodeSystemSystemObx3().contains((retVal.myCode.myCodeSystem))) {
+                                addFailure(theTerserPath + "/OBX-3-3", FailureCode.F010, theGroup.getOBX().getObx3_ObservationIdentifier().encode());
+                        }
+                }
+                if (isCgta) {
+                        if (isNotBlank(theGroup.getOBX().getObx4_ObservationSubID().getValue())) {
+                                retVal.mySubId = toNumber(theTerserPath + "/OBX-4", theGroup.getOBX().getObx4_ObservationSubID().getValue());
+                        }
+                }
 
 		boolean isTextType = false;
 		if ("FT".equals(retVal.myDataType) || "ST".equals(retVal.myDataType) || "TX".equals(retVal.myDataType)) {
@@ -1628,27 +1683,33 @@ public class Converter {
 
 		}
 
-		if (isNotBlank(theGroup.getOBX().getObx6_Units().encode())) {
-			retVal.myUnits = convertCe(theTerserPath + "/OBX-6", theGroup.getOBX().getObx6_Units());
-		}
-
-		if (isNotBlank(theGroup.getOBX().getObx7_ReferencesRange().encode())) {
-			retVal.myRefRange = theGroup.getOBX().getObx7_ReferencesRange().getValue();
-		}
-
-		if (isNotBlank(theGroup.getOBX().getObx8_AbnormalFlags(0).encode())) {
-			retVal.myAbnormalFlagCode = theGroup.getOBX().getObx8_AbnormalFlags(0).getValue();
-			retVal.myAbnormalFlagName = Tables.lookupHl7Code("0078", retVal.myAbnormalFlagCode);
-			if (retVal.myAbnormalFlagName == null) {
-				addFailure(theTerserPath + "/OBX-8", FailureCode.F014, theGroup.getOBX().getObx8_AbnormalFlags(0).encode());
-			}
-		}
+		if (isCgta) {
+                        if (isNotBlank(theGroup.getOBX().getObx6_Units().encode())) {
+                                retVal.myUnits = convertCe(theTerserPath + "/OBX-6", theGroup.getOBX().getObx6_Units());
+                        }
+                }
+                if (isCgta) {
+                        if (isNotBlank(theGroup.getOBX().getObx7_ReferencesRange().encode())) {
+                                retVal.myRefRange = theGroup.getOBX().getObx7_ReferencesRange().getValue();
+                        }
+                }
+                if (isCgta) {
+                        if (isNotBlank(theGroup.getOBX().getObx8_AbnormalFlags(0).encode())) {
+                                retVal.myAbnormalFlagCode = theGroup.getOBX().getObx8_AbnormalFlags(0).getValue();
+                                retVal.myAbnormalFlagName = Tables.lookupHl7Code("0078", retVal.myAbnormalFlagCode);
+                                if (retVal.myAbnormalFlagName == null) {
+                                        addFailure(theTerserPath + "/OBX-8", FailureCode.F014, theGroup.getOBX().getObx8_AbnormalFlags(0).encode());
+                                }
+                        }
+                }
 
 		retVal.myDataStatusCode = theGroup.getOBX().getObx11_ObservationResultStatus().getValue();
 		retVal.myDataStatus = Tables.lookupHl7Code("0085", retVal.myDataStatusCode);
-		if (retVal.myDataStatus == null) {
-			addFailure(theTerserPath + "/OBX-11", FailureCode.F015, theGroup.getOBX().getObx11_ObservationResultStatus().encode());
-		}
+		if (isCgta) {
+                        if (retVal.myDataStatus == null) {
+                                addFailure(theTerserPath + "/OBX-11", FailureCode.F015, theGroup.getOBX().getObx11_ObservationResultStatus().encode());
+                        }
+                }
 
 		if (thePrevSection != null && retVal.myCode != null && retVal.myCode.equals(thePrevSection.myCode)) {
 //			if (thePrevSection.mySubId != (retVal.mySubId - 1)) {
@@ -1663,12 +1724,14 @@ public class Converter {
 		}
 
 		String obx14 = theGroup.getOBX().getObx14_DateTimeOfTheObservation().encode();
-		if (isNotBlank(obx14)) {
-			if (validateTsWithAtLeastSecondPrecisionAndAddFailure(theTerserPath + "-14", theGroup.getOBX().getObx14_DateTimeOfTheObservation().getTs1_Time().getValue())) {
-				retVal.myDateTimeOfObservation = theGroup.getOBX().getObx14_DateTimeOfTheObservation().getTs1_Time().getValueAsDate();
-			}
-		}		
-
+		if (isCgta) {
+                        if (isNotBlank(obx14)) {
+                                if (validateTsWithAtLeastSecondPrecisionAndAddFailure(theTerserPath + "-14", theGroup.getOBX().getObx14_DateTimeOfTheObservation().getTs1_Time().getValue())) {
+                                        retVal.myDateTimeOfObservation = theGroup.getOBX().getObx14_DateTimeOfTheObservation().getTs1_Time().getValueAsDate();
+                                }
+                        }		
+                }
+                        
 		return retVal;
 	}
 
@@ -1742,10 +1805,12 @@ public class Converter {
 			addFailure(theTerserPath + "-5", FailureCode.F071, null);
 		}
 
-		if (thePID.getPid6_MotherSMaidenNameReps() > 1) {
-			addFailure(theTerserPath + "-6", FailureCode.F031, null);
-		}
-		for (int i = 1; i <= thePID.getPid6_MotherSMaidenNameReps(); i++) {
+                if (isCgta) {
+                        if (thePID.getPid6_MotherSMaidenNameReps() > 1) {
+                                addFailure(theTerserPath + "-6", FailureCode.F031, null);
+                        }
+                }
+                for (int i = 1; i <= thePID.getPid6_MotherSMaidenNameReps(); i++) {
 			XPN nextRep = thePID.getPid6_MotherSMaidenName(i - 1);
 			Xpn nextRepConv = convertXpn(theTerserPath + "-6(" + i + ")", nextRep);
 			retVal.myMothersMaidenName = (nextRepConv);
@@ -1799,13 +1864,15 @@ public class Converter {
 		if (retVal.myPhoneNumbers.size() > 10) {
 			addFailure(theTerserPath + "-13", FailureCode.F071, null);
 		}
-
-		if (isNotBlank(thePID.getPid15_PrimaryLanguage().encode())) {
-			if (!"HL70296".equals(thePID.getPrimaryLanguage().getCe3_NameOfCodingSystem().getValue())) {
-				addFailure(theTerserPath, FailureCode.F032, thePID.getPrimaryLanguage().encode());
-			}
-			retVal.myPrimaryLanguage = convertCe(theTerserPath + "-15", thePID.getPid15_PrimaryLanguage());
-		}
+                
+                if (isCgta) {
+                        if (isNotBlank(thePID.getPid15_PrimaryLanguage().encode())) {
+                                if (!"HL70296".equals(thePID.getPrimaryLanguage().getCe3_NameOfCodingSystem().getValue())) {
+                                        addFailure(theTerserPath, FailureCode.F032, thePID.getPrimaryLanguage().encode());
+                                }
+                                retVal.myPrimaryLanguage = convertCe(theTerserPath + "-15", thePID.getPid15_PrimaryLanguage());
+                        }
+                }
 
 		// if (isNotBlank(thePID.getPid17_Religion().encode())) {
 		// if
@@ -2539,7 +2606,7 @@ public class Converter {
 	}
 
 
-	public boolean validateMsh(MSH theMsh) {
+	public boolean validateMsh(MSH theMsh) throws HL7Exception {
 
 		// Only validate once
 		if (myValidatedMsh != null) {
@@ -2554,35 +2621,72 @@ public class Converter {
 			addFailure("MSH-2", FailureCode.F066, theMsh.getMsh2_EncodingCharacters().getValue());
 		}
 
-		String sendingOrg = theMsh.getMsh3_SendingApplication().getHd1_NamespaceID().getValue();
-		myContributorConfig = myAuthorization.getContributorConfig().getHspId9004ToContributor().get(StringUtils.defaultString(sendingOrg));
-		if (myContributorConfig == null) {
+                String sendingOrg = theMsh.getMsh3_SendingApplication().getHd1_NamespaceID().getValue();
+                
+                String sendingFacility = theMsh.getMsh4_SendingFacility().getHd1_NamespaceID().encode();
+                        
+                if (isEmpty(sendingOrg) && isEmpty(sendingFacility)) {
 
-			addFailure("MSH-3-1", FailureCode.F112, theMsh.getMsh3_SendingApplication().getHd1_NamespaceID().getValue());
-			myValidatedMsh = false;
-			return false;
+                            addFailure("MSH-3/4-1", FailureCode.F134, theMsh.getMsh3_SendingApplication().getHd1_NamespaceID().encode());
+                            myValidatedMsh = false;
+                            return false;    
+                }
+                
+                if (isCgta) {
+                        myContributorConfig = myAuthorization.getContributorConfig().getHspId9004ToContributor().get(StringUtils.defaultString(sendingOrg));
+                        if (myContributorConfig == null) {
 
-		} else {
+                            addFailure("MSH-3-1", FailureCode.F112, theMsh.getMsh3_SendingApplication().getHd1_NamespaceID().getValue());
+                            myValidatedMsh = false;
+                            return false;
 
-			String sendingSystemId = theMsh.getMsh3_SendingApplication().getHd2_UniversalID().getValue();
-			mySendingSystem = myContributorConfig.getSendingSystem9008WithOid(sendingSystemId);
-			if (mySendingSystem == null) {
-				addFailure("MSH-3-2", FailureCode.F113, sendingSystemId);
-				myValidatedMsh = false;
-				return false;
-			}
+                        } else {
 
-			String securityToken = theMsh.getMsh8_Security().getValue();
-			if (myCheckSecurity) {
-				if (!myContributorConfig.getDevSecurityToken().equals(securityToken)) {
-					addFailure("MSH-8", FailureCode.F114, securityToken);
-					myValidatedMsh = false;
-					return false;
+                            String sendingSystemId = theMsh.getMsh3_SendingApplication().getHd2_UniversalID().getValue();
+                            mySendingSystem = myContributorConfig.getSendingSystem9008WithOid(sendingSystemId);
+                            if (mySendingSystem == null) {
+                                    addFailure("MSH-3-2", FailureCode.F113, sendingSystemId);
+                                    myValidatedMsh = false;
+                                    return false;
+                            }
+
+                            String securityToken = theMsh.getMsh8_Security().getValue();
+                            if (myCheckSecurity) {
+                                    if (!myContributorConfig.getDevSecurityToken().equals(securityToken)) {
+                                            addFailure("MSH-8", FailureCode.F114, securityToken);
+                                            myValidatedMsh = false;
+                                            return false;
 				}
-			}
+                            }
+                    }
+                }
+                
+                if (isHrm) {
+                    myContributorConfig = myAuthorization.getContributorConfig().getHrmId0362ToContributor().get(StringUtils.defaultString(sendingFacility));
 
-		}
+//                        if (!hrmContributor.contains(sendingFacility)) {
+                    if (myContributorConfig == null) {
 
+                            addFailure("MSH-4", FailureCode.F133, sendingFacility);
+                            myValidatedMsh = false;
+                            return false;
+                    }
+                }
+
+                if (isCgta) {
+                    String receivingFacility = theMsh.getMsh5_ReceivingApplication().getHd1_NamespaceID().getValue();
+                    if (!"ConnectingGTA".equals(receivingFacility)) {
+			addFailure("MSH-5", FailureCode.F066, null);
+                    }
+                }
+                
+                if (isHrm) {
+                    String receivingFacility = theMsh.getMsh6_ReceivingFacility().getHd1_NamespaceID().getValue();
+                    if (!"ConnectingGTA".equals(receivingFacility)) {
+			addFailure("MSH-6", FailureCode.F066, null);
+                    }
+                }
+                
 		validateTsWithAtLeastSecondPrecisionAndAddFailure("MSH-7", theMsh.getMsh7_DateTimeOfMessage().getTs1_Time().getValue());
 
 		String controlId = theMsh.getMsh10_MessageControlID().getValue();
@@ -2599,32 +2703,36 @@ public class Converter {
 		if (!"2.5".equals(vid)) {
 			addFailure("MSH-12", FailureCode.F066, vid);
 		}
-
-		String aa = theMsh.getMsh15_AcceptAcknowledgmentType().getValue();
-		if (!"NE".equals(aa)) {
-			addFailure("MSH-15", FailureCode.F066, aa);
-		}
-
-		aa = theMsh.getMsh16_ApplicationAcknowledgmentType().getValue();
-		if (!"AL".equals(aa)) {
-			addFailure("MSH-16", FailureCode.F066, aa);
-		}
-
-		String country = theMsh.getMsh17_CountryCode().getValue();
-		if (!"CAN".equals(country)) {
-			addFailure("MSH-17", FailureCode.F066, country);
-		}
-
-		String charset = theMsh.getMsh18_CharacterSet(0).getValue();
-		if (!"8859/1".equals(charset)) {
-			addFailure("MSH-18", FailureCode.F066, charset);
-		}
-
-		String profile = theMsh.getMsh21_MessageProfileIdentifier(0).getEi1_EntityIdentifier().getValue();
-		if (!INPUT_PROFILE_2_0.equals(profile)) {
-			addFailure("MSH-21(1)-1", FailureCode.F115, profile);
-		}
-
+                if (isCgta) {
+                        String accAck = theMsh.getMsh15_AcceptAcknowledgmentType().getValue();
+                        if (!"NE".equals(accAck)) {
+                                addFailure("MSH-15", FailureCode.F066, accAck);
+                        }
+                }
+                if (isCgta) {
+                        String appAck = theMsh.getMsh16_ApplicationAcknowledgmentType().getValue();
+                        if (!"AL".equals(appAck)) {
+                                addFailure("MSH-16", FailureCode.F066, appAck);
+                        }
+                }
+                if (isCgta) {
+                        String country = theMsh.getMsh17_CountryCode().getValue();
+                        if (!"CAN".equals(country)) {
+                                addFailure("MSH-17", FailureCode.F066, country);
+                        }
+                }
+                if (isCgta) {                        
+                        String charset = theMsh.getMsh18_CharacterSet(0).getValue();
+                        if (!"8859/1".equals(charset)) {
+                                addFailure("MSH-18", FailureCode.F066, charset);
+                        }
+                }
+                if (isCgta) {                        
+                        String profile = theMsh.getMsh21_MessageProfileIdentifier(0).getEi1_EntityIdentifier().getValue();
+                        if (!INPUT_PROFILE_2_0.equals(profile)) {
+                                addFailure("MSH-21(1)-1", FailureCode.F115, profile);
+                        }
+                }
 		myValidatedMsh = true;
 		return true;
 	}

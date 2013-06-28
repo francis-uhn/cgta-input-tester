@@ -9,6 +9,7 @@
 	<classpathentry kind="src" path="ViewsUploader/src/main/resources"/>
 	<classpathentry kind="src" path="TestDataUploader/src/test/java"/>
 	<classpathentry kind="src" path="TestDataUploader/src/test/resources"/>
+	<classpathentry kind="src" path="HapiMessageLibrary/src/main/profiles"/>
 	<classpathentry kind="var" path="M2_REPO/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar" sourcepath="M2_REPO/javax/servlet/servlet-api/2.5/servlet-api-2.5-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/commons-cli/commons-cli/1.2/commons-cli-1.2.jar"/>
 	<classpathentry kind="var" path="M2_REPO/commons-codec/commons-codec/1.4/commons-codec-1.4.jar"/>

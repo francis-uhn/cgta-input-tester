@@ -3,12 +3,12 @@
     <contributor name="Testing Organization">
         <dev_listen_port>13999</dev_listen_port>
         <dev_security_token>383525aaa</dev_security_token>
-        <hsp_facility_9005 code="1.3.6.1.4.1.12201.999.100.1" description="Testing Hospital - North Campus"/>
-        <hsp_facility_9005 code="1.3.6.1.4.1.12201.999.100.2" description="Testing Hospital - South Campus"/>
+        <hsp_facility_9005 description="Testing Hospital - North Campus" code="1.3.6.1.4.1.12201.999.100.1"/>
+        <hsp_facility_9005 description="Testing Hospital - South Campus" code="1.3.6.1.4.1.12201.999.100.2"/>
         <hsp_id_9004>1.3.6.1.4.1.12201.999</hsp_id_9004>
-        <provider_pool_oid code="1.3.6.1.4.1.12201.999.1" description="Testing Organization Provider IDs"/>
-        <visit_number_pool_oid code="1.3.6.1.4.1.12201.999.2" description="Testing Organization Visit/Encounter Number/IDs"/>
-        <hsp_sending_system_9008 code="1.3.6.1.4.1.12201.999.101.1" description="Testing Medical Record Software">
+        <provider_pool_oid description="Testing Organization Provider IDs" code="1.3.6.1.4.1.12201.999.1"/>
+        <visit_number_pool_oid description="Testing Organization Visit/Encounter Number/IDs" code="1.3.6.1.4.1.12201.999.2"/>
+        <hsp_sending_system_9008 description="Testing Medical Record Software" code="1.3.6.1.4.1.12201.999.101.1">
             <management_console_org_id>Test</management_console_org_id>
             <drug_administration_codesystem_rxa5_9007>1.3.6.1.4.1.12201.999.102.2</drug_administration_codesystem_rxa5_9007>
             <drug_component_codesystem_rxc2_9007>1.3.6.1.4.1.12201.999.102.3</drug_component_codesystem_rxc2_9007>
@@ -19,17 +19,17 @@
             <management_console_system_id>TestMRS</management_console_system_id>
         </hsp_sending_system_9008>
     </contributor>
-    <contributor hospital_facility_number="0947" name="University Health Network">
+    <contributor name="University Health Network" hospital_facility_number="0947">
         <dev_listen_port>14018</dev_listen_port>
         <dev_security_token>2954864636aaa</dev_security_token>
-        <hsp_facility_9005 code="1.3.6.1.4.1.12201.100.1" description="Toronto General Hospital"/>
-        <hsp_facility_9005 code="1.3.6.1.4.1.12201.100.2" description="Toronto Western Hospital"/>
-        <hsp_facility_9005 code="1.3.6.1.4.1.12201.100.3" description="Princess Margaret Hospital"/>
+        <hsp_facility_9005 description="Toronto General Hospital" code="1.3.6.1.4.1.12201.100.1"/>
+        <hsp_facility_9005 description="Toronto Western Hospital" code="1.3.6.1.4.1.12201.100.2"/>
+        <hsp_facility_9005 description="Princess Margaret Hospital" code="1.3.6.1.4.1.12201.100.3"/>
         <hsp_id_9004>1.3.6.1.4.1.12201</hsp_id_9004>
-        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.148" description="University Health Network MRNs"/>
-        <provider_pool_oid code="1.3.6.1.4.1.12201.1" description="University Health Network Provider IDs"/>
-        <visit_number_pool_oid code="1.3.6.1.4.1.12201.2" description="University Health Network Visit/Encounter Number/IDs"/>
-        <hsp_sending_system_9008 code="1.3.6.1.4.1.12201.101.1" description="Quadramed CPR HIS">
+        <mrn_pool_oid description="University Health Network MRNs" code="2.16.840.1.113883.3.239.18.148"/>
+        <provider_pool_oid description="University Health Network Provider IDs" code="1.3.6.1.4.1.12201.1"/>
+        <visit_number_pool_oid description="University Health Network Visit/Encounter Number/IDs" code="1.3.6.1.4.1.12201.2"/>
+        <hsp_sending_system_9008 description="Quadramed CPR HIS" code="1.3.6.1.4.1.12201.101.1">
             <management_console_org_id>SIMS</management_console_org_id>
             <drug_administration_codesystem_rxa5_9007>1.3.6.1.4.1.12201.102.2</drug_administration_codesystem_rxa5_9007>
             <drug_component_codesystem_rxc2_9007>1.3.6.1.4.1.12201.102.3</drug_component_codesystem_rxc2_9007>
@@ -39,35 +39,35 @@
             <allergen_codesystem_iam3_9007>1.3.6.1.4.1.12201.102.1</allergen_codesystem_iam3_9007>
             <management_console_system_id>EPR</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="1.3.6.1.4.1.12201.101.2" description="CAPS (Cardiology)">
+        <hsp_sending_system_9008 description="CAPS (Cardiology)" code="1.3.6.1.4.1.12201.101.2">
             <management_console_org_id>SIMS</management_console_org_id>
             <request_codesystem_obr4_9007>1.3.6.1.4.1.12201.102.7</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>1.3.6.1.4.1.12201.102.8</result_codesystem_obx3_9007>
             <management_console_system_id>CAPS</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="1.3.6.1.4.1.12201.101.3" description="HPF (Scanned Documents)">
+        <hsp_sending_system_9008 description="HPF (Scanned Documents)" code="1.3.6.1.4.1.12201.101.3">
             <management_console_org_id>SIMS</management_console_org_id>
             <request_codesystem_obr4_9007>1.3.6.1.4.1.12201.102.9</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>1.3.6.1.4.1.12201.102.10</result_codesystem_obx3_9007>
             <management_console_system_id>HPF</management_console_system_id>
         </hsp_sending_system_9008>
     </contributor>
-    <contributor hospital_facility_number="0632" name="North York General Hospital">
+    <contributor name="North York General Hospital" hospital_facility_number="0632">
         <dev_listen_port>14010</dev_listen_port>
         <dev_security_token>38272347521144bbb</dev_security_token>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.8.100.1" description="North York General Hospital"/>
+        <hsp_facility_9005 description="North York General Hospital" code="2.16.840.1.113883.3.239.23.8.100.1"/>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.8</hsp_id_9004>
         <management_console_org_id>NYGH</management_console_org_id>
-        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.115" description="North York General Hospital MRNs"/>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.8.1" description="North York General Hospital Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.8.2" description="North York General Hospital Visit/Encounter Number/IDs"/>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.8.101.1" description="Cerner HIS">
+        <mrn_pool_oid description="North York General Hospital MRNs" code="2.16.840.1.113883.3.239.18.115"/>
+        <provider_pool_oid description="North York General Hospital Provider IDs" code="2.16.840.1.113883.3.239.23.8.1"/>
+        <visit_number_pool_oid description="North York General Hospital Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.8.2"/>
+        <hsp_sending_system_9008 description="Cerner HIS" code="2.16.840.1.113883.3.239.23.8.101.1">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.8.102.2</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.8.102.3</result_codesystem_obx3_9007>
             <allergen_codesystem_iam3_9007>2.16.840.1.113883.3.239.23.8.102.1</allergen_codesystem_iam3_9007>
             <management_console_system_id>Cerner</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.8.101.2" description="Dictaphone">
+        <hsp_sending_system_9008 description="Dictaphone" code="2.16.840.1.113883.3.239.23.8.101.2">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.8.102.4</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.8.102.5</result_codesystem_obx3_9007>
             <management_console_system_id>Dictaphone</management_console_system_id>
@@ -81,16 +81,16 @@
         <dev_listen_port>14005</dev_listen_port>
         <dev_listen_port>14006</dev_listen_port>
         <dev_security_token>3498749864ccc</dev_security_token>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.1.100.1" description="Central West CCAC"/>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.1.100.2" description="Mississauga Halton CCAC"/>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.1.100.3" description="Toronto Central CCAC"/>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.1.100.4" description="Central CCAC"/>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.1.100.5" description="Central East CCAC"/>
+        <hsp_facility_9005 description="Central West CCAC" code="2.16.840.1.113883.3.239.23.1.100.1"/>
+        <hsp_facility_9005 description="Mississauga Halton CCAC" code="2.16.840.1.113883.3.239.23.1.100.2"/>
+        <hsp_facility_9005 description="Toronto Central CCAC" code="2.16.840.1.113883.3.239.23.1.100.3"/>
+        <hsp_facility_9005 description="Central CCAC" code="2.16.840.1.113883.3.239.23.1.100.4"/>
+        <hsp_facility_9005 description="Central East CCAC" code="2.16.840.1.113883.3.239.23.1.100.5"/>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.1</hsp_id_9004>
         <management_console_org_id>OACCAC</management_console_org_id>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.1.1" description="Ontario Association of Community Care Access Centres (OACCAC) Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.1.2" description="Ontario Association of Community Care Access Centres (OACCAC) Visit/Encounter Number/IDs"/>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.1.101.1" description="CHRIS">
+        <provider_pool_oid description="Ontario Association of Community Care Access Centres (OACCAC) Provider IDs" code="2.16.840.1.113883.3.239.23.1.1"/>
+        <visit_number_pool_oid description="Ontario Association of Community Care Access Centres (OACCAC) Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.1.2"/>
+        <hsp_sending_system_9008 description="CHRIS" code="2.16.840.1.113883.3.239.23.1.101.1">
             <drug_administration_codesystem_rxa5_9007>2.16.840.1.113883.3.239.23.1.102.2</drug_administration_codesystem_rxa5_9007>
             <drug_component_codesystem_rxc2_9007>2.16.840.1.113883.3.239.23.1.102.3</drug_component_codesystem_rxc2_9007>
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.1.102.4</request_codesystem_obr4_9007>
@@ -98,12 +98,12 @@
             <allergen_codesystem_iam3_9007>2.16.840.1.113883.3.239.23.1.102.1</allergen_codesystem_iam3_9007>
             <management_console_system_id>CHRIS</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.1.101.2" description="Point Click Care">
+        <hsp_sending_system_9008 description="Point Click Care" code="2.16.840.1.113883.3.239.23.1.101.2">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.1.102.6</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.1.102.7</result_codesystem_obx3_9007>
             <management_console_system_id>PCC</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.1.101.3" description="Strata Health Pathways">
+        <hsp_sending_system_9008 description="Strata Health Pathways" code="2.16.840.1.113883.3.239.23.1.101.3">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.1.102.8</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.1.102.9</result_codesystem_obx3_9007>
             <management_console_system_id>Strata</management_console_system_id>
@@ -114,16 +114,16 @@
         <dev_listen_port>14040</dev_listen_port>
         <dev_listen_port>14041</dev_listen_port>
         <dev_security_token>2385472197mmm</dev_security_token>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.22.7.100.1" description="Central West CCAC"/>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.22.7.100.2" description="Mississauga Halton CCAC"/>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.22.7.100.3" description="Toronto Central CCAC"/>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.22.7.100.4" description="Central CCAC"/>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.22.7.100.5" description="Central East CCAC"/>
+        <hsp_facility_9005 description="Central West CCAC" code="2.16.840.1.113883.3.239.22.7.100.1"/>
+        <hsp_facility_9005 description="Mississauga Halton CCAC" code="2.16.840.1.113883.3.239.22.7.100.2"/>
+        <hsp_facility_9005 description="Toronto Central CCAC" code="2.16.840.1.113883.3.239.22.7.100.3"/>
+        <hsp_facility_9005 description="Central CCAC" code="2.16.840.1.113883.3.239.22.7.100.4"/>
+        <hsp_facility_9005 description="Central East CCAC" code="2.16.840.1.113883.3.239.22.7.100.5"/>
         <hsp_id_9004>2.16.840.1.113883.3.239.22.7</hsp_id_9004>
         <management_console_org_id>OACCAC_QA</management_console_org_id>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.22.7.1" description="Ontario Association of Community Care Access Centres (OACCAC) - QA Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.22.7.2" description="Ontario Association of Community Care Access Centres (OACCAC) - QA Visit/Encounter Number/IDs"/>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.22.7.101.1" description="CHRIS">
+        <provider_pool_oid description="Ontario Association of Community Care Access Centres (OACCAC) - QA Provider IDs" code="2.16.840.1.113883.3.239.22.7.1"/>
+        <visit_number_pool_oid description="Ontario Association of Community Care Access Centres (OACCAC) - QA Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.22.7.2"/>
+        <hsp_sending_system_9008 description="CHRIS" code="2.16.840.1.113883.3.239.22.7.101.1">
             <drug_administration_codesystem_rxa5_9007>2.16.840.1.113883.3.239.22.7.102.2</drug_administration_codesystem_rxa5_9007>
             <drug_component_codesystem_rxc2_9007>2.16.840.1.113883.3.239.22.7.102.3</drug_component_codesystem_rxc2_9007>
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.22.7.102.4</request_codesystem_obr4_9007>
@@ -132,21 +132,21 @@
             <management_console_system_id>CHRIS</management_console_system_id>
         </hsp_sending_system_9008>
     </contributor>
-    <contributor hospital_facility_number="0952" name="Lakeridge Health">
+    <contributor name="Lakeridge Health" hospital_facility_number="0952">
         <dev_listen_port>14011</dev_listen_port>
         <dev_security_token>3498742963125ddd</dev_security_token>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.2.100.1" description="Lakeridge Health Oshawa"/>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.2.100.2" description="Lakeridge Health Bowmanville"/>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.2.100.3" description="Lakeridge Health Port Perry"/>
+        <hsp_facility_9005 description="Lakeridge Health Oshawa" code="2.16.840.1.113883.3.239.23.2.100.1"/>
+        <hsp_facility_9005 description="Lakeridge Health Bowmanville" code="2.16.840.1.113883.3.239.23.2.100.2"/>
+        <hsp_facility_9005 description="Lakeridge Health Port Perry" code="2.16.840.1.113883.3.239.23.2.100.3"/>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.2</hsp_id_9004>
         <management_console_org_id>LHC</management_console_org_id>
-        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.90" description="Lakeridge Port Perry MRNs"/>
-        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.91" description="Lakeridge Whitby MRNs"/>
-        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.92" description="Lakeridge Bowmanville MRNs"/>
-        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.93" description="Lakeridge Oshawa MRNs"/>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.2.1" description="Lakeridge Health Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.2.2" description="Lakeridge Health Visit/Encounter Number/IDs"/>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.2.101.1" description="MEDITECH Magic">
+        <mrn_pool_oid description="Lakeridge Port Perry MRNs" code="2.16.840.1.113883.3.239.18.90"/>
+        <mrn_pool_oid description="Lakeridge Whitby MRNs" code="2.16.840.1.113883.3.239.18.91"/>
+        <mrn_pool_oid description="Lakeridge Bowmanville MRNs" code="2.16.840.1.113883.3.239.18.92"/>
+        <mrn_pool_oid description="Lakeridge Oshawa MRNs" code="2.16.840.1.113883.3.239.18.93"/>
+        <provider_pool_oid description="Lakeridge Health Provider IDs" code="2.16.840.1.113883.3.239.23.2.1"/>
+        <visit_number_pool_oid description="Lakeridge Health Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.2.2"/>
+        <hsp_sending_system_9008 description="MEDITECH Magic" code="2.16.840.1.113883.3.239.23.2.101.1">
             <drug_administration_codesystem_rxa5_9007>2.16.840.1.113883.3.239.23.2.102.2</drug_administration_codesystem_rxa5_9007>
             <drug_component_codesystem_rxc2_9007>2.16.840.1.113883.3.239.23.2.102.3</drug_component_codesystem_rxc2_9007>
             <drug_give_codesystem_rxe2_9007>2.16.840.1.113883.3.239.23.2.102.8</drug_give_codesystem_rxe2_9007>
@@ -155,28 +155,28 @@
             <allergen_codesystem_iam3_9007>2.16.840.1.113883.3.239.23.2.102.1</allergen_codesystem_iam3_9007>
             <management_console_system_id>MeditechMagic</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.2.101.2" description="MEDITECH Client/Server">
+        <hsp_sending_system_9008 description="MEDITECH Client/Server" code="2.16.840.1.113883.3.239.23.2.101.2">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.2.102.6</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.2.102.7</result_codesystem_obx3_9007>
             <management_console_system_id>MeditechCS</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.2.101.3" description="Onbase">
+        <hsp_sending_system_9008 description="Onbase" code="2.16.840.1.113883.3.239.23.2.101.3">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.2.102.9</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.2.102.10</result_codesystem_obx3_9007>
             <management_console_system_id>Onbase</management_console_system_id>
         </hsp_sending_system_9008>
     </contributor>
-    <contributor hospital_facility_number="0960" name="The Scarborough Hospital">
+    <contributor name="The Scarborough Hospital" hospital_facility_number="0960">
         <dev_listen_port>14013</dev_listen_port>
         <dev_security_token>38731785345ddd</dev_security_token>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.3.100.1" description="The Scarborough Hospital - Birchmount Campus"/>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.3.100.2" description="The Scarborough Hospital - General Campus"/>
+        <hsp_facility_9005 description="The Scarborough Hospital - Birchmount Campus" code="2.16.840.1.113883.3.239.23.3.100.1"/>
+        <hsp_facility_9005 description="The Scarborough Hospital - General Campus" code="2.16.840.1.113883.3.239.23.3.100.2"/>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.3</hsp_id_9004>
         <management_console_org_id>TSH</management_console_org_id>
-        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.135" description="The Scarborough Hospital MRNs"/>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.3.1" description="The Scarborough Hospital Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.3.2" description="The Scarborough Hospital Visit/Encounter Number/IDs"/>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.3.101.1" description="MEDITECH Magic">
+        <mrn_pool_oid description="The Scarborough Hospital MRNs" code="2.16.840.1.113883.3.239.18.135"/>
+        <provider_pool_oid description="The Scarborough Hospital Provider IDs" code="2.16.840.1.113883.3.239.23.3.1"/>
+        <visit_number_pool_oid description="The Scarborough Hospital Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.3.2"/>
+        <hsp_sending_system_9008 description="MEDITECH Magic" code="2.16.840.1.113883.3.239.23.3.101.1">
             <drug_administration_codesystem_rxa5_9007>2.16.840.1.113883.3.239.23.3.102.2</drug_administration_codesystem_rxa5_9007>
             <drug_component_codesystem_rxc2_9007>2.16.840.1.113883.3.239.23.3.102.3</drug_component_codesystem_rxc2_9007>
             <drug_give_codesystem_rxe2_9007>2.16.840.1.113883.3.239.23.3.102.12</drug_give_codesystem_rxe2_9007>
@@ -185,35 +185,35 @@
             <allergen_codesystem_iam3_9007>2.16.840.1.113883.3.239.23.3.102.1</allergen_codesystem_iam3_9007>
             <management_console_system_id>MeditechMagic</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.3.101.2" description="Accentus">
+        <hsp_sending_system_9008 description="Accentus" code="2.16.840.1.113883.3.239.23.3.101.2">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.3.102.6</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.3.102.7</result_codesystem_obx3_9007>
             <management_console_system_id>Accentus</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.3.101.3" description="Onbase">
+        <hsp_sending_system_9008 description="Onbase" code="2.16.840.1.113883.3.239.23.3.101.3">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.3.102.8</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.3.102.9</result_codesystem_obx3_9007>
             <management_console_system_id>Onbase</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.3.101.4" description="Powerscribe">
+        <hsp_sending_system_9008 description="Powerscribe" code="2.16.840.1.113883.3.239.23.3.101.4">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.3.102.10</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.3.102.11</result_codesystem_obx3_9007>
             <management_console_system_id>Powerscribe</management_console_system_id>
         </hsp_sending_system_9008>
     </contributor>
-    <contributor hospital_facility_number="0954" name="The Rouge Valley Health System">
+    <contributor name="The Rouge Valley Health System" hospital_facility_number="0954">
         <dev_listen_port>14012</dev_listen_port>
         <dev_listen_port>14035</dev_listen_port>
         <dev_security_token>32986342953eee</dev_security_token>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.4.100.1" description="Rouge Valley Health System - Ajax and Pickering"/>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.4.100.2" description="Rouge Valley Health System - Centenary Site"/>
+        <hsp_facility_9005 description="Rouge Valley Health System - Ajax and Pickering" code="2.16.840.1.113883.3.239.23.4.100.1"/>
+        <hsp_facility_9005 description="Rouge Valley Health System - Centenary Site" code="2.16.840.1.113883.3.239.23.4.100.2"/>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.4</hsp_id_9004>
         <management_console_org_id>RVHS</management_console_org_id>
-        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.131" description="Rouge Valley Ajax MRNs"/>
-        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.132" description="Rouge Valley Centenary MRNs"/>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.4.1" description="The Rouge Valley Health System Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.4.2" description="The Rouge Valley Health System Visit/Encounter Number/IDs"/>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.4.101.1" description="MEDITECH Magic">
+        <mrn_pool_oid description="Rouge Valley Ajax MRNs" code="2.16.840.1.113883.3.239.18.131"/>
+        <mrn_pool_oid description="Rouge Valley Centenary MRNs" code="2.16.840.1.113883.3.239.18.132"/>
+        <provider_pool_oid description="The Rouge Valley Health System Provider IDs" code="2.16.840.1.113883.3.239.23.4.1"/>
+        <visit_number_pool_oid description="The Rouge Valley Health System Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.4.2"/>
+        <hsp_sending_system_9008 description="MEDITECH Magic" code="2.16.840.1.113883.3.239.23.4.101.1">
             <drug_administration_codesystem_rxa5_9007>2.16.840.1.113883.3.239.23.4.102.2</drug_administration_codesystem_rxa5_9007>
             <drug_component_codesystem_rxc2_9007>2.16.840.1.113883.3.239.23.4.102.3</drug_component_codesystem_rxc2_9007>
             <drug_give_codesystem_rxe2_9007>2.16.840.1.113883.3.239.23.4.102.8</drug_give_codesystem_rxe2_9007>
@@ -222,32 +222,32 @@
             <allergen_codesystem_iam3_9007>2.16.840.1.113883.3.239.23.4.102.1</allergen_codesystem_iam3_9007>
             <management_console_system_id>MeditechMagic</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.4.101.2" description="MEDITECH Client/Server">
+        <hsp_sending_system_9008 description="MEDITECH Client/Server" code="2.16.840.1.113883.3.239.23.4.101.2">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.4.102.6</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.4.102.7</result_codesystem_obx3_9007>
             <management_console_system_id>MeditechCS</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.4.101.3" description="CKM">
+        <hsp_sending_system_9008 description="CKM" code="2.16.840.1.113883.3.239.23.4.101.3">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.4.102.9</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.4.102.10</result_codesystem_obx3_9007>
             <management_console_system_id>CKM</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.4.101.4" description="Cardio Vascular Information System">
+        <hsp_sending_system_9008 description="Cardio Vascular Information System" code="2.16.840.1.113883.3.239.23.4.101.4">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.4.102.11</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.4.102.12</result_codesystem_obx3_9007>
             <management_console_system_id>CVIS</management_console_system_id>
         </hsp_sending_system_9008>
     </contributor>
-    <contributor hospital_facility_number="0852" name="Saint Michael's Hospital">
+    <contributor name="Saint Michael's Hospital" hospital_facility_number="0852">
         <dev_listen_port>14019</dev_listen_port>
         <dev_security_token>1238973875fff</dev_security_token>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.5.100.1" description="St. Michael's Hospital"/>
+        <hsp_facility_9005 description="St. Michael's Hospital" code="2.16.840.1.113883.3.239.23.5.100.1"/>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.5</hsp_id_9004>
         <management_console_org_id>SMH</management_console_org_id>
-        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.142" description="Saint Michael's Hospital MRNs"/>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.5.1" description="Saint Michael's Hospital Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.5.2" description="Saint Michael's Hospital Visit/Encounter Number/IDs"/>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.5.101.1" description="Soarian Clinicals">
+        <mrn_pool_oid description="Saint Michael's Hospital MRNs" code="2.16.840.1.113883.3.239.18.142"/>
+        <provider_pool_oid description="Saint Michael's Hospital Provider IDs" code="2.16.840.1.113883.3.239.23.5.1"/>
+        <visit_number_pool_oid description="Saint Michael's Hospital Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.5.2"/>
+        <hsp_sending_system_9008 description="Soarian Clinicals" code="2.16.840.1.113883.3.239.23.5.101.1">
             <drug_administration_codesystem_rxa5_9007>2.16.840.1.113883.3.239.23.5.102.17</drug_administration_codesystem_rxa5_9007>
             <drug_component_codesystem_rxc2_9007>2.16.840.1.113883.3.239.23.5.102.18</drug_component_codesystem_rxc2_9007>
             <drug_give_codesystem_rxe2_9007>2.16.840.1.113883.3.239.23.5.102.19</drug_give_codesystem_rxe2_9007>
@@ -256,17 +256,17 @@
             <allergen_codesystem_iam3_9007>2.16.840.1.113883.3.239.23.5.102.9</allergen_codesystem_iam3_9007>
             <management_console_system_id>Soarian</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.5.101.2" description="Sovera">
+        <hsp_sending_system_9008 description="Sovera" code="2.16.840.1.113883.3.239.23.5.101.2">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.5.102.3</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.5.102.4</result_codesystem_obx3_9007>
             <management_console_system_id>Sovera</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.5.101.3" description="Syngo RIS">
+        <hsp_sending_system_9008 description="Syngo RIS" code="2.16.840.1.113883.3.239.23.5.101.3">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.5.102.5</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.5.102.6</result_codesystem_obx3_9007>
             <management_console_system_id>Syngo</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.5.101.4" description="SoftMed">
+        <hsp_sending_system_9008 description="SoftMed" code="2.16.840.1.113883.3.239.23.5.101.4">
             <drug_administration_codesystem_rxa5_9007>2.16.840.1.113883.3.239.23.5.102.10</drug_administration_codesystem_rxa5_9007>
             <drug_component_codesystem_rxc2_9007>2.16.840.1.113883.3.239.23.5.102.11</drug_component_codesystem_rxc2_9007>
             <drug_give_codesystem_rxe2_9007>2.16.840.1.113883.3.239.23.5.102.12</drug_give_codesystem_rxe2_9007>
@@ -274,20 +274,20 @@
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.5.102.8</result_codesystem_obx3_9007>
             <management_console_system_id>SoftMed</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.5.101.5" description="MS4">
+        <hsp_sending_system_9008 description="MS4" code="2.16.840.1.113883.3.239.23.5.101.5">
             <management_console_system_id>MS4</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.5.101.6" description="MUSE">
+        <hsp_sending_system_9008 description="MUSE" code="2.16.840.1.113883.3.239.23.5.101.6">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.5.102.13</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.5.102.14</result_codesystem_obx3_9007>
             <management_console_system_id>MUSE</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.5.101.7" description="XCelera">
+        <hsp_sending_system_9008 description="XCelera" code="2.16.840.1.113883.3.239.23.5.101.7">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.5.102.15</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.5.102.16</result_codesystem_obx3_9007>
             <management_console_system_id>XCelera</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.5.101.8" description="Pharmacy">
+        <hsp_sending_system_9008 description="Pharmacy" code="2.16.840.1.113883.3.239.23.5.101.8">
             <drug_administration_codesystem_rxa5_9007>2.16.840.1.113883.3.239.23.5.102.21</drug_administration_codesystem_rxa5_9007>
             <drug_component_codesystem_rxc2_9007>2.16.840.1.113883.3.239.23.5.102.22</drug_component_codesystem_rxc2_9007>
             <drug_give_codesystem_rxe2_9007>2.16.840.1.113883.3.239.23.5.102.23</drug_give_codesystem_rxe2_9007>
@@ -295,16 +295,16 @@
             <management_console_system_id>Pharmacy</management_console_system_id>
         </hsp_sending_system_9008>
     </contributor>
-    <contributor hospital_facility_number="0842" name="Mount Sinai Hospital Joseph and Wolf Lebovic Health Complex">
+    <contributor name="Mount Sinai Hospital Joseph and Wolf Lebovic Health Complex" hospital_facility_number="0842">
         <dev_listen_port>14017</dev_listen_port>
         <dev_security_token>35364554ggg</dev_security_token>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.6.100.1" description="Mount Sinai Hospital Joseph and Wolf Lebovic Health Complex"/>
+        <hsp_facility_9005 description="Mount Sinai Hospital Joseph and Wolf Lebovic Health Complex" code="2.16.840.1.113883.3.239.23.6.100.1"/>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.6</hsp_id_9004>
         <management_console_org_id>MSH</management_console_org_id>
-        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.97" description="Mount Sinai Hospital Joseph and Wolf Lebovic Health Complex MRNs"/>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.6.1" description="Mount Sinai Hospital Joseph and Wolf Lebovic Health Complex Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.6.2" description="Mount Sinai Hospital Joseph and Wolf Lebovic Health Complex Visit/Encounter Number/IDs"/>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.6.101.1" description="Cerner HIS">
+        <mrn_pool_oid description="Mount Sinai Hospital Joseph and Wolf Lebovic Health Complex MRNs" code="2.16.840.1.113883.3.239.18.97"/>
+        <provider_pool_oid description="Mount Sinai Hospital Joseph and Wolf Lebovic Health Complex Provider IDs" code="2.16.840.1.113883.3.239.23.6.1"/>
+        <visit_number_pool_oid description="Mount Sinai Hospital Joseph and Wolf Lebovic Health Complex Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.6.2"/>
+        <hsp_sending_system_9008 description="Cerner HIS" code="2.16.840.1.113883.3.239.23.6.101.1">
             <drug_administration_codesystem_rxa5_9007>2.16.840.1.113883.3.239.23.6.102.2</drug_administration_codesystem_rxa5_9007>
             <drug_component_codesystem_rxc2_9007>2.16.840.1.113883.3.239.23.6.102.3</drug_component_codesystem_rxc2_9007>
             <drug_give_codesystem_rxe2_9007>2.16.840.1.113883.3.239.23.6.102.10</drug_give_codesystem_rxe2_9007>
@@ -313,18 +313,18 @@
             <allergen_codesystem_iam3_9007>2.16.840.1.113883.3.239.23.6.102.1</allergen_codesystem_iam3_9007>
             <management_console_system_id>Cerner</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.6.101.2" description="Dictaphone">
+        <hsp_sending_system_9008 description="Dictaphone" code="2.16.840.1.113883.3.239.23.6.101.2">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.6.102.6</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.6.102.7</result_codesystem_obx3_9007>
             <management_console_system_id>Dictaphone</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.6.101.3" description="eFilm Medical">
+        <hsp_sending_system_9008 description="eFilm Medical" code="2.16.840.1.113883.3.239.23.6.101.3">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.6.102.8</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.6.102.9</result_codesystem_obx3_9007>
             <management_console_system_id>eFilm Medical</management_console_system_id>
         </hsp_sending_system_9008>
     </contributor>
-    <contributor hospital_facility_number="0857" name="Sunnybrook Health Sciences Centre">
+    <contributor name="Sunnybrook Health Sciences Centre" hospital_facility_number="0857">
         <dev_listen_port>14020</dev_listen_port>
         <dev_listen_port>14021</dev_listen_port>
         <dev_listen_port>14022</dev_listen_port>
@@ -341,78 +341,78 @@
         <dev_listen_port>14033</dev_listen_port>
         <dev_listen_port>14034</dev_listen_port>
         <dev_security_token>23498643698hhh</dev_security_token>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.7.100.1" description="Sunnybrook Health Sciences Centre"/>
+        <hsp_facility_9005 description="Sunnybrook Health Sciences Centre" code="2.16.840.1.113883.3.239.23.7.100.1"/>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.7</hsp_id_9004>
         <management_console_org_id>SHSC</management_console_org_id>
-        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.144" description="Sunnybrook Health Sciences Centre MRNs"/>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.7.1" description="Sunnybrook Health Sciences Centre Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.7.2" description="Sunnybrook Health Sciences Centre Visit/Encounter Number/IDs"/>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.7.101.11" description="PCS/ADS">
+        <mrn_pool_oid description="Sunnybrook Health Sciences Centre MRNs" code="2.16.840.1.113883.3.239.18.144"/>
+        <provider_pool_oid description="Sunnybrook Health Sciences Centre Provider IDs" code="2.16.840.1.113883.3.239.23.7.1"/>
+        <visit_number_pool_oid description="Sunnybrook Health Sciences Centre Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.7.2"/>
+        <hsp_sending_system_9008 description="PCS/ADS" code="2.16.840.1.113883.3.239.23.7.101.11">
             <management_console_system_id>PCS_ADS</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.7.101.1" description="WoRx">
+        <hsp_sending_system_9008 description="WoRx" code="2.16.840.1.113883.3.239.23.7.101.1">
             <drug_administration_codesystem_rxa5_9007>2.16.840.1.113883.3.239.23.7.102.2</drug_administration_codesystem_rxa5_9007>
             <drug_component_codesystem_rxc2_9007>2.16.840.1.113883.3.239.23.7.102.3</drug_component_codesystem_rxc2_9007>
             <drug_give_codesystem_rxe2_9007>2.16.840.1.113883.3.239.23.7.102.4</drug_give_codesystem_rxe2_9007>
             <allergen_codesystem_iam3_9007>2.16.840.1.113883.3.239.23.7.102.1</allergen_codesystem_iam3_9007>
             <management_console_system_id>WoRx</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.7.101.2" description="Dictaphone">
+        <hsp_sending_system_9008 description="Dictaphone" code="2.16.840.1.113883.3.239.23.7.101.2">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.7.102.5</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.7.102.6</result_codesystem_obx3_9007>
             <management_console_system_id>Dictaphone</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.7.101.3" description="Viasys">
+        <hsp_sending_system_9008 description="Viasys" code="2.16.840.1.113883.3.239.23.7.101.3">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.7.102.7</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.7.102.8</result_codesystem_obx3_9007>
             <management_console_system_id>Viasys</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.7.101.4" description="EDIS">
+        <hsp_sending_system_9008 description="EDIS" code="2.16.840.1.113883.3.239.23.7.101.4">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.7.102.9</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.7.102.10</result_codesystem_obx3_9007>
             <management_console_system_id>EDIS</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.7.101.5" description="Sovera">
+        <hsp_sending_system_9008 description="Sovera" code="2.16.840.1.113883.3.239.23.7.101.5">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.7.102.11</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.7.102.12</result_codesystem_obx3_9007>
             <management_console_system_id>Sovera</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.7.101.6" description="Tracemaster ECG">
+        <hsp_sending_system_9008 description="Tracemaster ECG" code="2.16.840.1.113883.3.239.23.7.101.6">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.7.102.13</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.7.102.14</result_codesystem_obx3_9007>
             <management_console_system_id>TracemasterECG</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.7.101.7" description="XCelera">
+        <hsp_sending_system_9008 description="XCelera" code="2.16.840.1.113883.3.239.23.7.101.7">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.7.102.15</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.7.102.16</result_codesystem_obx3_9007>
             <management_console_system_id>XCelera</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.7.101.8" description="AGFA Radiology">
+        <hsp_sending_system_9008 description="AGFA Radiology" code="2.16.840.1.113883.3.239.23.7.101.8">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.7.102.17</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.7.102.18</result_codesystem_obx3_9007>
             <management_console_system_id>AGFARadiology</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.7.101.9" description="eDischarge">
+        <hsp_sending_system_9008 description="eDischarge" code="2.16.840.1.113883.3.239.23.7.101.9">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.7.102.19</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.7.102.20</result_codesystem_obx3_9007>
             <management_console_system_id>eDischarge</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.7.101.10" description="ICNet">
+        <hsp_sending_system_9008 description="ICNet" code="2.16.840.1.113883.3.239.23.7.101.10">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.7.102.21</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.7.102.22</result_codesystem_obx3_9007>
             <management_console_system_id>ICNet</management_console_system_id>
         </hsp_sending_system_9008>
     </contributor>
-    <contributor hospital_facility_number="0731" name="Credit Valley Hospital">
+    <contributor name="Credit Valley Hospital" hospital_facility_number="0731">
         <dev_listen_port>14015</dev_listen_port>
         <dev_security_token>340975709474jjj</dev_security_token>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.9.100.1" description="Credit Valley Hospital and Trillium Health Centre -- Credit Valley Site"/>
+        <hsp_facility_9005 description="Credit Valley Hospital and Trillium Health Centre -- Credit Valley Site" code="2.16.840.1.113883.3.239.23.9.100.1"/>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.9</hsp_id_9004>
         <management_console_org_id>CVH</management_console_org_id>
-        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.26" description="Credit Valley Hospital MRNs"/>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.9.1" description="Credit Valley Hospital Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.9.2" description="Credit Valley Hospital Visit/Encounter Number/IDs"/>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.9.101.1" description="Meditech">
+        <mrn_pool_oid description="Credit Valley Hospital MRNs" code="2.16.840.1.113883.3.239.18.26"/>
+        <provider_pool_oid description="Credit Valley Hospital Provider IDs" code="2.16.840.1.113883.3.239.23.9.1"/>
+        <visit_number_pool_oid description="Credit Valley Hospital Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.9.2"/>
+        <hsp_sending_system_9008 description="Meditech" code="2.16.840.1.113883.3.239.23.9.101.1">
             <drug_administration_codesystem_rxa5_9007>2.16.840.1.113883.3.239.23.9.102.2</drug_administration_codesystem_rxa5_9007>
             <drug_component_codesystem_rxc2_9007>2.16.840.1.113883.3.239.23.9.102.3</drug_component_codesystem_rxc2_9007>
             <drug_give_codesystem_rxe2_9007>2.16.840.1.113883.3.239.23.9.102.22</drug_give_codesystem_rxe2_9007>
@@ -421,47 +421,47 @@
             <allergen_codesystem_iam3_9007>2.16.840.1.113883.3.239.23.9.102.1</allergen_codesystem_iam3_9007>
             <management_console_system_id>Meditech</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.9.101.2" description="MUSE">
+        <hsp_sending_system_9008 description="MUSE" code="2.16.840.1.113883.3.239.23.9.101.2">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.9.102.6</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.9.102.7</result_codesystem_obx3_9007>
             <management_console_system_id>MUSE</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.9.101.3" description="Heartlab">
+        <hsp_sending_system_9008 description="Heartlab" code="2.16.840.1.113883.3.239.23.9.101.3">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.9.102.8</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.9.102.9</result_codesystem_obx3_9007>
             <management_console_system_id>Heartlab</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.9.101.4" description="AGFA">
+        <hsp_sending_system_9008 description="AGFA" code="2.16.840.1.113883.3.239.23.9.101.4">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.9.102.10</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.9.102.11</result_codesystem_obx3_9007>
             <management_console_system_id>AGFA</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.9.101.5" description="Varian">
+        <hsp_sending_system_9008 description="Varian" code="2.16.840.1.113883.3.239.23.9.101.5">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.9.102.12</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.9.102.13</result_codesystem_obx3_9007>
             <management_console_system_id>Varian</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.9.101.6" description="Endoworks">
+        <hsp_sending_system_9008 description="Endoworks" code="2.16.840.1.113883.3.239.23.9.101.6">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.9.102.14</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.9.102.15</result_codesystem_obx3_9007>
             <management_console_system_id>Endoworks</management_console_system_id>
         </hsp_sending_system_9008>
     </contributor>
-    <contributor hospital_facility_number="0975" name="Trillium Health Centre">
+    <contributor name="Trillium Health Centre" hospital_facility_number="0975">
         <dev_listen_port>14016</dev_listen_port>
         <dev_listen_port>14036</dev_listen_port>
         <dev_listen_port>14037</dev_listen_port>
         <dev_listen_port>14038</dev_listen_port>
         <dev_security_token>2387527832459kkk</dev_security_token>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.10.100.1" description="Credit Valley Hospital and Trillium Health Centre -- Mississauga Site"/>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.10.100.2" description="Credit Valley Hospital and Trillium Health Centre -- West Toronto Site"/>
+        <hsp_facility_9005 description="Credit Valley Hospital and Trillium Health Centre -- Mississauga Site" code="2.16.840.1.113883.3.239.23.10.100.1"/>
+        <hsp_facility_9005 description="Credit Valley Hospital and Trillium Health Centre -- West Toronto Site" code="2.16.840.1.113883.3.239.23.10.100.2"/>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.10</hsp_id_9004>
         <management_console_org_id>THC</management_console_org_id>
-        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.146" description="Trillium Mississauga MRNs"/>
-        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.147" description="Trillium Queensway MRNs"/>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.10.1" description="Trillium Health Centre Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.10.2" description="Trillium Health Centre Visit/Encounter Number/IDs"/>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.10.101.1" description="Meditech">
+        <mrn_pool_oid description="Trillium Mississauga MRNs" code="2.16.840.1.113883.3.239.18.146"/>
+        <mrn_pool_oid description="Trillium Queensway MRNs" code="2.16.840.1.113883.3.239.18.147"/>
+        <provider_pool_oid description="Trillium Health Centre Provider IDs" code="2.16.840.1.113883.3.239.23.10.1"/>
+        <visit_number_pool_oid description="Trillium Health Centre Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.10.2"/>
+        <hsp_sending_system_9008 description="Meditech" code="2.16.840.1.113883.3.239.23.10.101.1">
             <drug_administration_codesystem_rxa5_9007>2.16.840.1.113883.3.239.23.10.102.2</drug_administration_codesystem_rxa5_9007>
             <drug_component_codesystem_rxc2_9007>2.16.840.1.113883.3.239.23.10.102.3</drug_component_codesystem_rxc2_9007>
             <drug_give_codesystem_rxe2_9007>2.16.840.1.113883.3.239.23.10.102.12</drug_give_codesystem_rxe2_9007>
@@ -470,34 +470,34 @@
             <allergen_codesystem_iam3_9007>2.16.840.1.113883.3.239.23.10.102.1</allergen_codesystem_iam3_9007>
             <management_console_system_id>Meditech</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.10.101.2" description="Medquist">
+        <hsp_sending_system_9008 description="Medquist" code="2.16.840.1.113883.3.239.23.10.101.2">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.10.102.6</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.10.102.7</result_codesystem_obx3_9007>
             <management_console_system_id>Medquist</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.10.101.3" description="MUSE">
+        <hsp_sending_system_9008 description="MUSE" code="2.16.840.1.113883.3.239.23.10.101.3">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.10.102.8</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.10.102.9</result_codesystem_obx3_9007>
             <management_console_system_id>MUSE</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.10.101.4" description="VMax">
+        <hsp_sending_system_9008 description="VMax" code="2.16.840.1.113883.3.239.23.10.101.4">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.10.102.10</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.10.102.11</result_codesystem_obx3_9007>
             <management_console_system_id>VMax</management_console_system_id>
         </hsp_sending_system_9008>
     </contributor>
-    <contributor hospital_facility_number="0951" name="William Osler Health Centre">
+    <contributor name="William Osler Health Centre" hospital_facility_number="0951">
         <dev_listen_port>14014</dev_listen_port>
         <dev_security_token>3240956904lll</dev_security_token>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.11.100.1" description="Etobicoke General Hospital"/>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.11.100.2" description="Peel Memorial Centre"/>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.11.100.3" description="Brampton Civic Hospital"/>
+        <hsp_facility_9005 description="Etobicoke General Hospital" code="2.16.840.1.113883.3.239.23.11.100.1"/>
+        <hsp_facility_9005 description="Peel Memorial Centre" code="2.16.840.1.113883.3.239.23.11.100.2"/>
+        <hsp_facility_9005 description="Brampton Civic Hospital" code="2.16.840.1.113883.3.239.23.11.100.3"/>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.11</hsp_id_9004>
         <management_console_org_id>WOHC</management_console_org_id>
-        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.150" description="William Osler Health Centre MRNs"/>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.11.1" description="William Osler Health Centre Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.11.2" description="William Osler Health Centre Visit/Encounter Number/IDs"/>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.11.101.1" description="Meditech">
+        <mrn_pool_oid description="William Osler Health Centre MRNs" code="2.16.840.1.113883.3.239.18.150"/>
+        <provider_pool_oid description="William Osler Health Centre Provider IDs" code="2.16.840.1.113883.3.239.23.11.1"/>
+        <visit_number_pool_oid description="William Osler Health Centre Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.11.2"/>
+        <hsp_sending_system_9008 description="Meditech" code="2.16.840.1.113883.3.239.23.11.101.1">
             <drug_administration_codesystem_rxa5_9007>2.16.840.1.113883.3.239.23.11.102.2</drug_administration_codesystem_rxa5_9007>
             <drug_component_codesystem_rxc2_9007>2.16.840.1.113883.3.239.23.11.102.3</drug_component_codesystem_rxc2_9007>
             <drug_give_codesystem_rxe2_9007>2.16.840.1.113883.3.239.23.11.102.10</drug_give_codesystem_rxe2_9007>
@@ -506,165 +506,169 @@
             <allergen_codesystem_iam3_9007>2.16.840.1.113883.3.239.23.11.102.1</allergen_codesystem_iam3_9007>
             <management_console_system_id>Meditech</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.11.101.2" description="Syngo">
+        <hsp_sending_system_9008 description="Syngo" code="2.16.840.1.113883.3.239.23.11.101.2">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.11.102.6</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.11.102.7</result_codesystem_obx3_9007>
             <management_console_system_id>Syngo</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.11.101.3" description="Pulsecheck">
+        <hsp_sending_system_9008 description="Pulsecheck" code="2.16.840.1.113883.3.239.23.11.101.3">
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.11.102.8</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.11.102.9</result_codesystem_obx3_9007>
             <management_console_system_id>Pulsecheck</management_console_system_id>
         </hsp_sending_system_9008>
+        <hrm_sending_facility_0362>4052</hrm_sending_facility_0362>
     </contributor>
-    <contributor hospital_facility_number="0736" name="South Lake Regional Hospital">
+    <contributor name="South Lake Regional Hospital" hospital_facility_number="0736">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.59</hsp_id_9004>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.59.1" description="South Lake Regional Hospital Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.59.2" description="South Lake Regional Hospital Visit/Encounter Number/IDs"/>
+        <provider_pool_oid description="South Lake Regional Hospital Provider IDs" code="2.16.840.1.113883.3.239.23.59.1"/>
+        <visit_number_pool_oid description="South Lake Regional Hospital Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.59.2"/>
     </contributor>
     <contributor name="Baycrest Centre for Geriatric Care">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.13</hsp_id_9004>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.13.1" description="Baycrest Centre for Geriatric Care Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.13.2" description="Baycrest Centre for Geriatric Care Visit/Encounter Number/IDs"/>
+        <provider_pool_oid description="Baycrest Centre for Geriatric Care Provider IDs" code="2.16.840.1.113883.3.239.23.13.1"/>
+        <visit_number_pool_oid description="Baycrest Centre for Geriatric Care Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.13.2"/>
     </contributor>
     <contributor name="Campbellford Memorial Hospital">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.14</hsp_id_9004>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.14.1" description="Campbellford Memorial Hospital Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.14.2" description="Campbellford Memorial Hospital Visit/Encounter Number/IDs"/>
+        <provider_pool_oid description="Campbellford Memorial Hospital Provider IDs" code="2.16.840.1.113883.3.239.23.14.1"/>
+        <visit_number_pool_oid description="Campbellford Memorial Hospital Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.14.2"/>
     </contributor>
-    <contributor hospital_facility_number="0948" name="Centre for Addiction and Mental Health">
+    <contributor name="Centre for Addiction and Mental Health" hospital_facility_number="0948">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.15</hsp_id_9004>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.15.1" description="Centre for Addiction and Mental Health Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.15.2" description="Centre for Addiction and Mental Health Visit/Encounter Number/IDs"/>
+        <provider_pool_oid description="Centre for Addiction and Mental Health Provider IDs" code="2.16.840.1.113883.3.239.23.15.1"/>
+        <visit_number_pool_oid description="Centre for Addiction and Mental Health Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.15.2"/>
     </contributor>
     <contributor name="Halton Healthcare Services Corporation">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.16</hsp_id_9004>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.16.1" description="Halton Healthcare Services Corporation Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.16.2" description="Halton Healthcare Services Corporation Visit/Encounter Number/IDs"/>
+        <provider_pool_oid description="Halton Healthcare Services Corporation Provider IDs" code="2.16.840.1.113883.3.239.23.16.1"/>
+        <visit_number_pool_oid description="Halton Healthcare Services Corporation Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.16.2"/>
     </contributor>
     <contributor name="Headwaters Health Care Centre">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.17</hsp_id_9004>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.17.1" description="Headwaters Health Care Centre Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.17.2" description="Headwaters Health Care Centre Visit/Encounter Number/IDs"/>
+        <provider_pool_oid description="Headwaters Health Care Centre Provider IDs" code="2.16.840.1.113883.3.239.23.17.1"/>
+        <visit_number_pool_oid description="Headwaters Health Care Centre Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.17.2"/>
     </contributor>
     <contributor name="Hospital for Sick Children">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.18</hsp_id_9004>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.18.1" description="Hospital for Sick Children Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.18.2" description="Hospital for Sick Children Visit/Encounter Number/IDs"/>
+        <provider_pool_oid description="Hospital for Sick Children Provider IDs" code="2.16.840.1.113883.3.239.23.18.1"/>
+        <visit_number_pool_oid description="Hospital for Sick Children Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.18.2"/>
+        <hrm_sending_facility_0362>3969</hrm_sending_facility_0362>
     </contributor>
     <contributor name="Humber River Regional Hospital">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.19</hsp_id_9004>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.19.1" description="Humber River Regional Hospital Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.19.2" description="Humber River Regional Hospital Visit/Encounter Number/IDs"/>
+        <provider_pool_oid description="Humber River Regional Hospital Provider IDs" code="2.16.840.1.113883.3.239.23.19.1"/>
+        <visit_number_pool_oid description="Humber River Regional Hospital Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.19.2"/>
     </contributor>
     <contributor name="Northumberland Hills Hospital">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.20</hsp_id_9004>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.20.1" description="Northumberland Hills Hospital Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.20.2" description="Northumberland Hills Hospital Visit/Encounter Number/IDs"/>
+        <provider_pool_oid description="Northumberland Hills Hospital Provider IDs" code="2.16.840.1.113883.3.239.23.20.1"/>
+        <visit_number_pool_oid description="Northumberland Hills Hospital Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.20.2"/>
     </contributor>
     <contributor name="Peterborough Regional Health Centre">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.21</hsp_id_9004>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.21.1" description="Peterborough Regional Health Centre Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.21.2" description="Peterborough Regional Health Centre Visit/Encounter Number/IDs"/>
+        <provider_pool_oid description="Peterborough Regional Health Centre Provider IDs" code="2.16.840.1.113883.3.239.23.21.1"/>
+        <visit_number_pool_oid description="Peterborough Regional Health Centre Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.21.2"/>
     </contributor>
     <contributor name="Ross Memorial Hospital">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.22</hsp_id_9004>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.22.1" description="Ross Memorial Hospital Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.22.2" description="Ross Memorial Hospital Visit/Encounter Number/IDs"/>
+        <provider_pool_oid description="Ross Memorial Hospital Provider IDs" code="2.16.840.1.113883.3.239.23.22.1"/>
+        <visit_number_pool_oid description="Ross Memorial Hospital Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.22.2"/>
     </contributor>
-    <contributor hospital_facility_number="0898" name="St Joseph's Health Centre (Toronto)">
+    <contributor name="St Joseph's Health Centre (Toronto)" hospital_facility_number="0898">
         <dev_listen_port>14045</dev_listen_port>
         <dev_listen_port>14046</dev_listen_port>
         <dev_listen_port>14047</dev_listen_port>
         <dev_security_token>1957395332368kkk</dev_security_token>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.23.100.1" description="St Joseph's Health Centre"/>
+        <hsp_facility_9005 description="St Joseph's Health Centre" code="2.16.840.1.113883.3.239.23.23.100.1"/>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.23</hsp_id_9004>
         <management_console_org_id>SJHC</management_console_org_id>
-        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.140" description="St Joseph's Health Centre (Toronto) MRNs"/>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.23.1" description="St Joseph's Health Centre (Toronto) Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.23.2" description="St Joseph's Health Centre (Toronto) Visit/Encounter Number/IDs"/>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.23.101.1" description="Crescendo">
+        <mrn_pool_oid description="St Joseph's Health Centre (Toronto) MRNs" code="2.16.840.1.113883.3.239.18.140"/>
+        <provider_pool_oid description="St Joseph's Health Centre (Toronto) Provider IDs" code="2.16.840.1.113883.3.239.23.23.1"/>
+        <visit_number_pool_oid description="St Joseph's Health Centre (Toronto) Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.23.2"/>
+        <hsp_sending_system_9008 description="Crescendo" code="2.16.840.1.113883.3.239.23.23.101.1">
             <management_console_system_id>Crescendo</management_console_system_id>
         </hsp_sending_system_9008>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.23.101.2" description="Sectra">
+        <hsp_sending_system_9008 description="Sectra" code="2.16.840.1.113883.3.239.23.23.101.2">
             <management_console_system_id>Sectra</management_console_system_id>
         </hsp_sending_system_9008>
+        <hrm_sending_facility_0362>4056</hrm_sending_facility_0362>
     </contributor>
     <contributor name="The Stevenson Memorial Hospital">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.24</hsp_id_9004>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.24.1" description="The Stevenson Memorial Hospital Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.24.2" description="The Stevenson Memorial Hospital Visit/Encounter Number/IDs"/>
+        <provider_pool_oid description="The Stevenson Memorial Hospital Provider IDs" code="2.16.840.1.113883.3.239.23.24.1"/>
+        <visit_number_pool_oid description="The Stevenson Memorial Hospital Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.24.2"/>
     </contributor>
-    <contributor hospital_facility_number="0858" name="The Toronto East General Hospital">
+    <contributor name="The Toronto East General Hospital" hospital_facility_number="0858">
         <dev_listen_port>14042</dev_listen_port>
         <dev_listen_port>14043</dev_listen_port>
         <dev_listen_port>14044</dev_listen_port>
         <dev_security_token>24591738492ppp</dev_security_token>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.25.100.1" description="The Toronto East General Hospital"/>
+        <hsp_facility_9005 description="The Toronto East General Hospital" code="2.16.840.1.113883.3.239.23.25.100.1"/>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.25</hsp_id_9004>
         <management_console_org_id>TEGH</management_console_org_id>
-        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.145" description="The Toronto East General Hospital MRNs"/>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.25.1" description="The Toronto East General Hospital Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.25.2" description="The Toronto East General Hospital Visit/Encounter Number/IDs"/>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.25.101.1" description="Cerner HIS">
+        <mrn_pool_oid description="The Toronto East General Hospital MRNs" code="2.16.840.1.113883.3.239.18.145"/>
+        <provider_pool_oid description="The Toronto East General Hospital Provider IDs" code="2.16.840.1.113883.3.239.23.25.1"/>
+        <visit_number_pool_oid description="The Toronto East General Hospital Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.25.2"/>
+        <hsp_sending_system_9008 description="Cerner HIS" code="2.16.840.1.113883.3.239.23.25.101.1">
             <management_console_system_id>Cerner</management_console_system_id>
         </hsp_sending_system_9008>
+        <hrm_sending_facility_0362>4209</hrm_sending_facility_0362>
     </contributor>
-    <contributor hospital_facility_number="0701" name="York Central Hospital">
+    <contributor name="York Central Hospital" hospital_facility_number="0701">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.26</hsp_id_9004>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.26.1" description="York Central Hospital Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.26.2" description="York Central Hospital Visit/Encounter Number/IDs"/>
+        <provider_pool_oid description="York Central Hospital Provider IDs" code="2.16.840.1.113883.3.239.23.26.1"/>
+        <visit_number_pool_oid description="York Central Hospital Visit/Encounter Number/IDs" code="2.16.840.1.113883.3.239.23.26.2"/>
     </contributor>
-    <other_oid code="2.16.840.1.113883.3.239.22.1" description="ConnectingGTA HIAL (System) - Also Root OID for HIAL derived OIDs"/>
-    <other_oid code="2.16.840.1.113883.3.239.22.2" description="ConnectingGTA CDR (System)"/>
-    <other_oid code="2.16.840.1.113883.3.239.22.3" description="UHN eMPI eCID (Client ID Namespace)"/>
-    <other_oid code="2.16.840.1.113883.3.239.22.4" description="UHN Provider Registry ePID (Provider ID Namespace)"/>
-    <other_oid code="2.16.840.1.113883.3.239.22.5" description="(Reserved)"/>
-    <other_oid code="2.16.840.1.113883.3.239.22.6" description="Base OID for CDR Input Specification HL7 v2 Tables"/>
-    <other_oid code="2.16.840.1.113883.3.239.22.8" description="UHN PR"/>
-    <other_oid code="2.16.840.1.113883.3.239.22.1.2" description="HIAL LDAP"/>
-    <other_oid code="2.16.840.1.113883.3.239.22.9" description="HRM"/>
-    <other_oid code="2.16.840.1.113883.3.239.22.10" description="CGTA_CONSENT_MANAGEMENT_REGISTRY"/>
-    <other_oid code="2.16.840.1.113883.3.239.22.11" description="HIPAAT"/>
-    <provider_oid_9001 code="1.3.6.1.4.1.12201.1.2.1.5" description="Site Specific Provider ID (Deprocated)"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.6" description="College of Audiologist and Speech-Language Pathologists of Ontario Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.17" description="College of Chiropodists of Ontario Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.4.394" description="College of Chiropractors of Ontario Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.7" description="College of Dental Hygienists of Ontario Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.52" description="Royal College of Dental Surgeons of Ontario Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.10" description="College of Dental Technologists of Ontario Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.8" description="College of Denturists of Ontario Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.9" description="College of Dieticians of Ontario Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.14" description="College of Massage Therapist of Ontario Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.11" description="College of Medical Laboratory Technologists of Ontario"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.13" description="College of Radiation Technologists of Ontario Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.12" description="College of Midwives of Ontario Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.4" description="Board of Regents, Board of Directors of Drugless Therapy-Naturopathy Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.15" description="College of Nurses of Ontario Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.18" description="College of Occupational Therapists of Ontario Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.4.390" description="College of Opticians of Ontario Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.4.395" description="College of Optometrists of Ontario Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.43" description="Ontario College of Pharmacists Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.4.347" description="College of Physicians and Surgeons of Ontario Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.4.388" description="College of Physiotherapists of Ontario Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.71" description="College of Psychologists of Ontario Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.19" description="College of Respiratory Therapists in Ontario Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.44" description="Ontario College of Social Workers and Social Service Workers  Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.20" description="College of Traditional Chinese Medicine Practitioners and Acupuncturists of Ontario Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.54" description="Unregulated - Transitional Council of the College of Homeopaths Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.55" description="Unregulated - Transitional council for the College of Kinesiologists of Ontario Licence Number"/>
-    <provider_oid_9001 code="2.16.840.1.113883.3.239.13.56" description="Unregulated - Transitional Council of the College of Psychotherapists Licence Number"/>
+    <other_oid description="ConnectingGTA HIAL (System) - Also Root OID for HIAL derived OIDs" code="2.16.840.1.113883.3.239.22.1"/>
+    <other_oid description="ConnectingGTA CDR (System)" code="2.16.840.1.113883.3.239.22.2"/>
+    <other_oid description="UHN eMPI eCID (Client ID Namespace)" code="2.16.840.1.113883.3.239.22.3"/>
+    <other_oid description="UHN Provider Registry ePID (Provider ID Namespace)" code="2.16.840.1.113883.3.239.22.4"/>
+    <other_oid description="(Reserved)" code="2.16.840.1.113883.3.239.22.5"/>
+    <other_oid description="Base OID for CDR Input Specification HL7 v2 Tables" code="2.16.840.1.113883.3.239.22.6"/>
+    <other_oid description="UHN PR" code="2.16.840.1.113883.3.239.22.8"/>
+    <other_oid description="HIAL LDAP" code="2.16.840.1.113883.3.239.22.1.2"/>
+    <other_oid description="HRM" code="2.16.840.1.113883.3.239.22.9"/>
+    <other_oid description="CGTA_CONSENT_MANAGEMENT_REGISTRY" code="2.16.840.1.113883.3.239.22.10"/>
+    <other_oid description="HIPAAT" code="2.16.840.1.113883.3.239.22.11"/>
+    <provider_oid_9001 description="Site Specific Provider ID (Deprocated)" code="1.3.6.1.4.1.12201.1.2.1.5"/>
+    <provider_oid_9001 description="College of Audiologist and Speech-Language Pathologists of Ontario Licence Number" code="2.16.840.1.113883.3.239.13.6"/>
+    <provider_oid_9001 description="College of Chiropodists of Ontario Licence Number" code="2.16.840.1.113883.3.239.13.17"/>
+    <provider_oid_9001 description="College of Chiropractors of Ontario Licence Number" code="2.16.840.1.113883.4.394"/>
+    <provider_oid_9001 description="College of Dental Hygienists of Ontario Licence Number" code="2.16.840.1.113883.3.239.13.7"/>
+    <provider_oid_9001 description="Royal College of Dental Surgeons of Ontario Licence Number" code="2.16.840.1.113883.3.239.13.52"/>
+    <provider_oid_9001 description="College of Dental Technologists of Ontario Licence Number" code="2.16.840.1.113883.3.239.13.10"/>
+    <provider_oid_9001 description="College of Denturists of Ontario Licence Number" code="2.16.840.1.113883.3.239.13.8"/>
+    <provider_oid_9001 description="College of Dieticians of Ontario Licence Number" code="2.16.840.1.113883.3.239.13.9"/>
+    <provider_oid_9001 description="College of Massage Therapist of Ontario Licence Number" code="2.16.840.1.113883.3.239.13.14"/>
+    <provider_oid_9001 description="College of Medical Laboratory Technologists of Ontario" code="2.16.840.1.113883.3.239.13.11"/>
+    <provider_oid_9001 description="College of Radiation Technologists of Ontario Licence Number" code="2.16.840.1.113883.3.239.13.13"/>
+    <provider_oid_9001 description="College of Midwives of Ontario Licence Number" code="2.16.840.1.113883.3.239.13.12"/>
+    <provider_oid_9001 description="Board of Regents, Board of Directors of Drugless Therapy-Naturopathy Licence Number" code="2.16.840.1.113883.3.239.13.4"/>
+    <provider_oid_9001 description="College of Nurses of Ontario Licence Number" code="2.16.840.1.113883.3.239.13.15"/>
+    <provider_oid_9001 description="College of Occupational Therapists of Ontario Licence Number" code="2.16.840.1.113883.3.239.13.18"/>
+    <provider_oid_9001 description="College of Opticians of Ontario Licence Number" code="2.16.840.1.113883.4.390"/>
+    <provider_oid_9001 description="College of Optometrists of Ontario Licence Number" code="2.16.840.1.113883.4.395"/>
+    <provider_oid_9001 description="Ontario College of Pharmacists Licence Number" code="2.16.840.1.113883.3.239.13.43"/>
+    <provider_oid_9001 description="College of Physicians and Surgeons of Ontario Licence Number" code="2.16.840.1.113883.4.347"/>
+    <provider_oid_9001 description="College of Physiotherapists of Ontario Licence Number" code="2.16.840.1.113883.4.388"/>
+    <provider_oid_9001 description="College of Psychologists of Ontario Licence Number" code="2.16.840.1.113883.3.239.13.71"/>
+    <provider_oid_9001 description="College of Respiratory Therapists in Ontario Licence Number" code="2.16.840.1.113883.3.239.13.19"/>
+    <provider_oid_9001 description="Ontario College of Social Workers and Social Service Workers  Licence Number" code="2.16.840.1.113883.3.239.13.44"/>
+    <provider_oid_9001 description="College of Traditional Chinese Medicine Practitioners and Acupuncturists of Ontario Licence Number" code="2.16.840.1.113883.3.239.13.20"/>
+    <provider_oid_9001 description="Unregulated - Transitional Council of the College of Homeopaths Licence Number" code="2.16.840.1.113883.3.239.13.54"/>
+    <provider_oid_9001 description="Unregulated - Transitional council for the College of Kinesiologists of Ontario Licence Number" code="2.16.840.1.113883.3.239.13.55"/>
+    <provider_oid_9001 description="Unregulated - Transitional Council of the College of Psychotherapists Licence Number" code="2.16.840.1.113883.3.239.13.56"/>
 </contributor_config>

@@ -416,6 +416,7 @@ public class ContributorConfig {
 			contributor.setDevSecurityToken("383525aaa");
 			contributor.setHspId9004AndSubIds("1.3.6.1.4.1.12201.999");
 			contributor.getDevListenPort().add(13999);
+			
 
 			contributor.getHspFacility().add(new Code("1.3.6.1.4.1.12201.999.100.1", "Testing Hospital - North Campus"));
 			contributor.getHspFacility().add(new Code("1.3.6.1.4.1.12201.999.100.2", "Testing Hospital - South Campus"));
@@ -1403,6 +1404,8 @@ public class ContributorConfig {
 			contributor.setName("Baycrest Centre for Geriatric Care");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.13");
+			contributor.setHospitalFacilityNumber("0827");
+
 		}
 		// *******************************************************
 		// Campbellford Memorial Hospital
@@ -1416,6 +1419,8 @@ public class ContributorConfig {
 			contributor.setName("Campbellford Memorial Hospital");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.14");
+			contributor.setHospitalFacilityNumber("0624");
+
 		}
 		// *******************************************************
 		// Centre for Addiction and Mental Health
@@ -1443,6 +1448,8 @@ public class ContributorConfig {
 			contributor.setName("Halton Healthcare Services Corporation");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.16");
+			contributor.setHospitalFacilityNumber("0950");
+
 		}
 		// *******************************************************
 		// Headwaters Health Care Centre
@@ -1456,6 +1463,8 @@ public class ContributorConfig {
 			contributor.setName("Headwaters Health Care Centre");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.17");
+			contributor.setHospitalFacilityNumber("0916");
+
 		}
 		// *******************************************************
 		// Hospital for Sick Children
@@ -1469,7 +1478,9 @@ public class ContributorConfig {
 			contributor.setName("Hospital for Sick Children");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.18");
-                        contributor.setHrmSendingFacility("3969");
+            contributor.setHrmSendingFacility("3969");
+			contributor.setHospitalFacilityNumber("0837");
+
 		}
 		// *******************************************************
 		// Humber River Regional Hospital
@@ -1483,6 +1494,8 @@ public class ContributorConfig {
 			contributor.setName("Humber River Regional Hospital");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.19");
+			contributor.setHospitalFacilityNumber("0941");
+
 		}
 		// *******************************************************
 		// Northumberland Hills Hospital
@@ -1496,6 +1509,8 @@ public class ContributorConfig {
 			contributor.setName("Northumberland Hills Hospital");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.20");
+			contributor.setHospitalFacilityNumber("0940");
+
 		}
 		// *******************************************************
 		// Peterborough Regional Health Centre
@@ -1509,6 +1524,7 @@ public class ContributorConfig {
 			contributor.setName("Peterborough Regional Health Centre");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.21");
+			contributor.setHospitalFacilityNumber("0771");
 		}
 		// *******************************************************
 		// Ross Memorial Hospital
@@ -1522,6 +1538,7 @@ public class ContributorConfig {
 			contributor.setName("Ross Memorial Hospital");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.22");
+			contributor.setHospitalFacilityNumber("0707");
 		}
 		// *******************************************************
 		// St Joseph's Health Centre (Toronto)
@@ -1587,6 +1604,7 @@ public class ContributorConfig {
 			contributor.setName("The Stevenson Memorial Hospital");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.24");
+			contributor.setHospitalFacilityNumber("0596");
 		}
 		// *******************************************************
 		// The Toronto East General Hospital
@@ -1623,6 +1641,9 @@ public class ContributorConfig {
 			contributor.getSendingSystem().add(cerner);
 
 		}
+		
+		
+		
 		// *******************************************************
 		// York Central Hospital
 		// *******************************************************
@@ -1649,8 +1670,8 @@ public class ContributorConfig {
 		cfg.validate();
 
 		//removed ConverterLibrary folder from file path for use with Netbeans.
-                //File cfgFile = new File("ConverterLibrary/src/main/resources/ca/cgta/input/sending_systems.xml");
-                File cfgFile = new File("src/main/resources/ca/cgta/input/sending_systems.xml");
+                File cfgFile = new File("ConverterLibrary/src/main/resources/ca/cgta/input/sending_systems.xml");
+//                File cfgFile = new File("src/main/resources/ca/cgta/input/sending_systems.xml");
 		if (!cfgFile.exists()) {
 			throw new ValidationException("Could not find file " + cfgFile.getAbsolutePath());
 		}

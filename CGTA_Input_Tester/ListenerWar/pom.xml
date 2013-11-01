@@ -63,7 +63,7 @@
 		<dependency>
 			<groupId>ca.uhn.hapi</groupId>
 			<artifactId>hapi-hl7overhttp</artifactId>
-			<version>2.2-alpha2</version>
+			<version>2.2-alpha1-uhn2</version>
 		</dependency>
 		<dependency>
 			<groupId>ca.uhn.hapi</groupId>

@@ -488,6 +488,27 @@ public class ContributorConfig {
 		}
 
 		// *******************************************************
+		// Women's College Hospital
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Women's College Hospital");
+			contributor.setDevSecurityToken("323452erwettw");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.57");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.157", contributor.getName() + " MRNs"));
+			contributor.getDevListenPort().add(14048);
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.57.100.1", "Women's College Hospital"));
+
+			SendingSystem epic = new SendingSystem();
+			epic.setCode("2.16.840.1.113883.3.239.23.57.101.1");
+			epic.setDescription("EPIC");
+			epic.setManagementConsoleOrgId("WCH");
+			epic.setManagementConsoleSystemId("EPIC");
+			contributor.getSendingSystem().add(epic);
+		}
+		// *******************************************************
 		// NYGH
 		// *******************************************************
 		{

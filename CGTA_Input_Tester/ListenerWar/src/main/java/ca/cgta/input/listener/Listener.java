@@ -2,8 +2,10 @@ package ca.cgta.input.listener;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +40,8 @@ import ca.uhn.hl7v2.HL7Exception;
 import ca.uhn.hl7v2.app.Application;
 import ca.uhn.hl7v2.app.ApplicationException;
 import ca.uhn.hl7v2.app.SimpleServer;
+import ca.uhn.hl7v2.hoh.raw.api.RawSendable;
+import ca.uhn.hl7v2.hoh.raw.client.HohRawClientSimple;
 import ca.uhn.hl7v2.llp.MinLowerLayerProtocol;
 import ca.uhn.hl7v2.model.Message;
 import ca.uhn.hl7v2.model.Varies;
@@ -231,6 +235,18 @@ public class Listener extends HttpServlet {
 			ourLog.info("Message is of type " + msgType + "^" + msgTrigger);
 			List<Failure> failures;
 
+			ourLog.info("Relaying message to HIAL");
+
+			HohRawClientSimple client;
+			try {
+				client = new HohRawClientSimple(new URL("http://uhnvesb01d.uhn.on.ca:26080/cGTA/AdtToHialUat/1.0"));
+				client.sendAndReceive(new RawSendable(encodedMessage));
+			} catch (Exception e3) {
+				ourLog.error("Failed to relay message to HIAL (not aborting processing)",e3);
+			}
+			
+			ourLog.info("Done relaying message to HIAL");
+			
 			try {
 				String msgSourceOrg = terser.get("/MSH-3-1");
                                 String sourceOrg = myContributorConfig.getContributorConfig().getNameOfHspId9004(msgSourceOrg);

@@ -30,7 +30,6 @@ public class ListenerTest {
 		myListener.destroy();
 	}
 	
-	@Test
 	public void testMessageWithReturnsInBadPlaces() throws Exception {
 		
 		Socket socket = new Socket();

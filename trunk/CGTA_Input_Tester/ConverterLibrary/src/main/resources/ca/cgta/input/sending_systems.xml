@@ -52,6 +52,19 @@
             <management_console_system_id>HPF</management_console_system_id>
         </hsp_sending_system_9008>
     </contributor>
+    <contributor name="Women's College Hospital">
+        <dev_listen_port>14048</dev_listen_port>
+        <dev_security_token>323452erwettw</dev_security_token>
+        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.57.100.1" description="Women's College Hospital"/>
+        <hsp_id_9004>2.16.840.1.113883.3.239.23.57</hsp_id_9004>
+        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.157" description="Women's College Hospital MRNs"/>
+        <provider_pool_oid code="2.16.840.1.113883.3.239.23.57.1" description="Women's College Hospital Provider IDs"/>
+        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.57.2" description="Women's College Hospital Visit/Encounter Number/IDs"/>
+        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.57.101.1" description="EPIC">
+            <management_console_org_id>WCH</management_console_org_id>
+            <management_console_system_id>EPIC</management_console_system_id>
+        </hsp_sending_system_9008>
+    </contributor>
     <contributor hospital_facility_number="0632" name="North York General Hospital">
         <dev_listen_port>14010</dev_listen_port>
         <dev_security_token>38272347521144bbb</dev_security_token>
@@ -631,6 +644,12 @@
         <hsp_id_9004>2.16.840.1.113883.3.239.23.26</hsp_id_9004>
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.26.1" description="York Central Hospital Provider IDs"/>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.26.2" description="York Central Hospital Visit/Encounter Number/IDs"/>
+    </contributor>
+    <contributor hospital_facility_number="0613" name="West Park Health Centre">
+        <dev_security_token></dev_security_token>
+        <hsp_id_9004>2.16.840.1.113883.3.239.23.58</hsp_id_9004>
+        <provider_pool_oid code="2.16.840.1.113883.3.239.23.58.1" description="West Park Health Centre Provider IDs"/>
+        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.58.2" description="West Park Health Centre Visit/Encounter Number/IDs"/>
     </contributor>
     <other_oid code="2.16.840.1.113883.3.239.22.1" description="ConnectingGTA HIAL (System) - Also Root OID for HIAL derived OIDs"/>
     <other_oid code="2.16.840.1.113883.3.239.22.2" description="ConnectingGTA CDR (System)"/>

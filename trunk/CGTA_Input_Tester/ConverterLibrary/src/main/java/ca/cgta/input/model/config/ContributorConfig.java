@@ -1679,6 +1679,22 @@ public class ContributorConfig {
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.26");
 			contributor.setHospitalFacilityNumber("0701");
 		}
+                
+                // *******************************************************
+		// West Park Health Centre
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			// contributor.getDevListenPort().add(14014);
+
+			contributor.setName("West Park Health Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.58");
+			contributor.setHospitalFacilityNumber("0613");
+
+		}
 
 		StringWriter w = new StringWriter();
 		Marshaller marshaller = JAXBContext.newInstance(ContributorConfig.class).createMarshaller();
@@ -1691,8 +1707,8 @@ public class ContributorConfig {
 		cfg.validate();
 
 		//removed ConverterLibrary folder from file path for use with Netbeans.
-                File cfgFile = new File("ConverterLibrary/src/main/resources/ca/cgta/input/sending_systems.xml");
-//                File cfgFile = new File("src/main/resources/ca/cgta/input/sending_systems.xml");
+//                File cfgFile = new File("ConverterLibrary/src/main/resources/ca/cgta/input/sending_systems.xml");
+                File cfgFile = new File("src/main/resources/ca/cgta/input/sending_systems.xml");
 		if (!cfgFile.exists()) {
 			throw new ValidationException("Could not find file " + cfgFile.getAbsolutePath());
 		}

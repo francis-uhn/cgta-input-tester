@@ -539,9 +539,14 @@
     </contributor>
     <contributor hospital_facility_number="0827" name="Baycrest Centre for Geriatric Care">
         <dev_security_token></dev_security_token>
+        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.13.100.1" description="Baycrest Centre for Geriatric Care"/>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.13</hsp_id_9004>
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.13.1" description="Baycrest Centre for Geriatric Care Provider IDs"/>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.13.2" description="Baycrest Centre for Geriatric Care Visit/Encounter Number/IDs"/>
+        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.13.101.1" description="Meditech">
+            <management_console_org_id>Baycrest</management_console_org_id>
+            <management_console_system_id>Meditech</management_console_system_id>
+        </hsp_sending_system_9008>
     </contributor>
     <contributor hospital_facility_number="0624" name="Campbellford Memorial Hospital">
         <dev_security_token></dev_security_token>

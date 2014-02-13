@@ -1426,6 +1426,14 @@ public class ContributorConfig {
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.13");
 			contributor.setHospitalFacilityNumber("0827");
+                        contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.13.100.1", "Baycrest Centre for Geriatric Care"));
+                        
+                        SendingSystem meditech = new SendingSystem();
+			meditech.setCode("2.16.840.1.113883.3.239.23.13.101.1");
+			meditech.setDescription("Meditech");
+			meditech.setManagementConsoleOrgId("Baycrest");
+			meditech.setManagementConsoleSystemId("Meditech");
+			contributor.getSendingSystem().add(meditech);
 
 		}
 		// *******************************************************

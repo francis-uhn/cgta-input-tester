@@ -1,0 +1,2 @@
+serviceClass: ca.cgta.dataviewer.client.GreetingService
+path: FBACDF2DC2CBE68AFACB8C20FBC800A8.gwt.rpc

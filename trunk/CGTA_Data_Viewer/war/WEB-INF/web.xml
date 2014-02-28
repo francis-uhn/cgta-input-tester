@@ -16,6 +16,29 @@
     <url-pattern>/cgta_dataviewer/greet</url-pattern>
   </servlet-mapping>
   
+  
+   <servlet>
+    <servlet-name>searchDocumentIDServlet</servlet-name>
+    <servlet-class>ca.cgta.dataviewer.server.SearchDocumentIDServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>searchDocumentIDServlet</servlet-name>
+    <url-pattern>/cgta_dataviewer/searchDocumentID</url-pattern>
+  </servlet-mapping>
+
+  
+  <servlet>
+    <servlet-name>searchMessageControlIDServlet</servlet-name>
+    <servlet-class>ca.cgta.dataviewer.server.SearchMessageControlIDServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>searchMessageControlIDServlet</servlet-name>
+    <url-pattern>/cgta_dataviewer/searchMessageControlID</url-pattern>
+  </servlet-mapping>
+  
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>CGTA_DataViewer.html</welcome-file>

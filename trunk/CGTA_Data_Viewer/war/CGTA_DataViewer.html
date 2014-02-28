@@ -34,7 +34,7 @@
   <body>
 
 	<div class="cgta_header">
-	<img id="cgta-logo" src="cgta_dataviewer/cgta-logo.jpg">
+	<img id="cgta-logo" src="cgta_dataviewer/cgta-logo.jpg" width="40%" height="50%">
 	</div>
 	
     <!-- OPTIONAL: include this if you want history support -->
@@ -48,9 +48,7 @@
       </div>
     </noscript>
 
-	<div class="cgta_main">
-    <h1>cGTA DataViewer</h1>
-
+	<div style="float: right;">
     <table id="login" align="center">
       <tr>
         <td colspan="2" style="font-weight:bold;">Please login to access the DataViewer:</td>        
@@ -63,21 +61,44 @@
         <td colspan="2" style="color:red;" id="errorLabelContainer"></td>
       </tr>
     </table>
-    
     </div>
-    
+
     <div class="cgta_viewer_grid">
-    	<h2>Search Results</h2>
+    <h2>cGTA Conformance Search - DataViewer</h2>
+    	<table id="Search" border="0" width="100%">
+	    	<tr>
+	    		<td class="searchbox">
+	    			
+	    			<table class="cgta_search">
+	    			<tr><th colspan="2">Search by Document ID</th></tr>
+	    			<tr><td>OID:</td><td id="td_search1"></td></tr>
+	    			<tr><td>Document&nbsp;ID:</td><td id="id_search1_id"></td></tr>
+	    			<tr><td colspan="2" id="search1FieldContainer"></td></tr>
+	    			</table>
+	    			
+	    		</td>
+	    		<td>OR</td>
+	    		<td class="searchbox">
+	    			
+	    			<table class="cgta_search">
+	    			<tr><th colspan="2">Search by Message Control ID</th></tr>
+	    			<tr><td>OID:</td><td id="td_search2"></td></tr>
+	    			<tr><td>Message&nbsp;Control&nbsp;ID:</td><td id="id_search2_id"></td></tr>
+	    			<tr><td colspan="2" id="search2FieldContainer"></td></tr>
+	    			</table>
+	    			
+	    		</td>
+	    	</tr>
+    	</table>
+    	
 	    <table id="results" border="1" align="center">
-		    <tr>
-	        	<td colspan="4" id="searchFieldContainer"></td>
-	      	</tr>
-	      <tr>
-	        <th>Search Header 1</th><th>Search Header 2</th><th>Search Header 3</th><th>Search Header 4</th>
-	      </tr>
-	      <tr>
-	        <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
-	      </tr>
+			<tr><th>Search Results</th></tr>
+			<tr>
+			  <th>Search Header 1</th><th>Search Header 2</th><th>Search Header 3</th><th>Search Header 4</th>
+			</tr>
+			<tr>
+			  <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+			</tr>
 	    </table>
     </div>
     

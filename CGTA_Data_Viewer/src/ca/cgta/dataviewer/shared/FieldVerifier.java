@@ -39,4 +39,13 @@ public class FieldVerifier {
 		}
 		return name.length() > 3;
 	}
+	
+	// TODO: Proper OID validation
+	public static boolean isValidOID(String oid) {
+		if (oid == null) {
+			return false;
+		}
+		return oid.length() > 14;
+	}
+	
 }

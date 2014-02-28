@@ -34,6 +34,23 @@ div.cgta_main {
   	margin-right: auto ;
 }
 
+table.cgta_search {
+	border: 1px solid #ccc;
+	margin-left: auto ;
+  	margin-right: auto ;
+  	padding: 25px;
+  	background-color: #eee;
+}
+
+table.cgta_search tr td {
+	font-weight: bold;
+}
+
+table.cgta_search tr th {
+	font-size: 16px;
+}
+
+
 /** Example rules used by the template application (remove for your app) */
 h1 {
   font-size: 2em;

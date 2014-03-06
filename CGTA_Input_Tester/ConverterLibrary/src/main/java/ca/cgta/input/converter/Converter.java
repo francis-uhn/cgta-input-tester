@@ -167,6 +167,9 @@ public class Converter {
             hrmContributor.add("4056"); //SJHC
             hrmContributor.add("4209"); //TEGH
             hrmContributor.add("3969"); //HSC
+            hrmContributor.add("1471"); //WPH
+            hrmContributor.add("4052"); //WOHS
+            hrmContributor.add("4263"); //Baycrest
             
 //            cgtaContributor.add("2.16.840.1.113883.3.239.23.11");
         }
@@ -721,20 +724,20 @@ public class Converter {
 		for (ORU_R01_ORDER_OBSERVATION nextOrderObservation : thePatientResult.getORDER_OBSERVATIONAll()) {
 			orderObservationIndex++;
 
-			Ei placerGroupNumber = null;
-			if (isNotBlank(nextOrderObservation.getORC().getPlacerGroupNumber().getEi1_EntityIdentifier().getValue())) {
-				placerGroupNumber = convertEiDocumentNumber(theTerserPath + "/ORDER_OBSERVATION(" + orderObservationIndex + ")/ORC-4", nextOrderObservation.getORC().getPlacerGroupNumber());
-			}
-			if (placerGroupNumber != null && !placerGroupNumber.isValid()) {
-				continue;
-			}
-			
-			Ei placerOrderNumber = convertEiDocumentNumber(theTerserPath + "/ORDER_OBSERVATION(" + orderObservationIndex + ")/OBR-2", nextOrderObservation.getOBR().getObr2_PlacerOrderNumber());
-			if (placerOrderNumber == null || !placerOrderNumber.isValid()) {
-				continue;
-			}
+                        Ei placerGroupNumber = null;
+                        if (isNotBlank(nextOrderObservation.getORC().getPlacerGroupNumber().getEi1_EntityIdentifier().getValue())) {
+                                placerGroupNumber = convertEiDocumentNumber(theTerserPath + "/ORDER_OBSERVATION(" + orderObservationIndex + ")/ORC-4", nextOrderObservation.getORC().getPlacerGroupNumber());
+                        }
+                        if (placerGroupNumber != null && !placerGroupNumber.isValid()) {
+                            continue;
+                        }
 
-			/*
+                        Ei placerOrderNumber = convertEiDocumentNumber(theTerserPath + "/ORDER_OBSERVATION(" + orderObservationIndex + ")/OBR-2", nextOrderObservation.getOBR().getObr2_PlacerOrderNumber());
+                        if (placerOrderNumber == null || !placerOrderNumber.isValid()) {
+                                continue;
+                        }
+
+                        /*
 			 * More than one ORDER_OBSERVATION can be stored in a single group using a placer group number,
 			 * but the default behaviour is for the placer order number in OBR-2 to be used as the document ID.
 			 * 
@@ -757,14 +760,14 @@ public class Converter {
 			document.myPatient = convertPid(theTerserPath + "/PATIENT/PID", thePatientResult.getPATIENT().getPID());
             
 			
-            if (thePatientResult.getPATIENT().getVISIT().getPV1().encode().length() >= 5 ) {
-                document.myVisit = convertPv1(theTerserPath + "/PATIENT/VISIT/PV1", thePatientResult.getPATIENT().getVISIT().getPV1());
-                
-                if (thePatientResult.getPATIENT().getVISIT().getPV2().encode().length() >= 5 ) {
-                    convertPv2(theTerserPath + "/PATIENT/VISIT/PV2", thePatientResult.getPATIENT().getVISIT().getPV2(), document.myVisit);
-                }
-                
-            }
+                        if (thePatientResult.getPATIENT().getVISIT().getPV1().encode().length() >= 5 ) {
+                            document.myVisit = convertPv1(theTerserPath + "/PATIENT/VISIT/PV1", thePatientResult.getPATIENT().getVISIT().getPV1());
+
+                            if (thePatientResult.getPATIENT().getVISIT().getPV2().encode().length() >= 5 ) {
+                                convertPv2(theTerserPath + "/PATIENT/VISIT/PV2", thePatientResult.getPATIENT().getVISIT().getPV2(), document.myVisit);
+                            }
+
+                        }
 
 			ClinicalDocumentSection section = new ClinicalDocumentSection();
 			section.myData = new ArrayList<ClinicalDocumentData>();
@@ -777,9 +780,11 @@ public class Converter {
 				addFailure(theTerserPath + "/ORDER_OBSERVATION(" + orderObservationIndex + ")/OBR-4", FailureCode.F011, usi.encode());
 			}
 			
-			if (section.mySectionCode != null && (isBlank(section.mySectionCode.myCodeSystem) || !mySendingSystem.getRequestCodeSystemSystemObr4().contains(section.mySectionCode.myCodeSystem))) {
+			if (isCgta) {
+                            if (section.mySectionCode != null && (isBlank(section.mySectionCode.myCodeSystem) || !mySendingSystem.getRequestCodeSystemSystemObr4().contains(section.mySectionCode.myCodeSystem))) {
 				addFailure(theTerserPath + "/ORDER_OBSERVATION(" + orderObservationIndex + ")/OBR-4", FailureCode.F012, usi.encode());
-			}
+                            }
+                        }
 
 			section.mySectionName = usi.getCe2_Text().getValue();
 

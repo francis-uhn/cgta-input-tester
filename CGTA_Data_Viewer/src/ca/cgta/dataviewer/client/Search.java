@@ -16,8 +16,9 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import ca.cgta.dataviewer.client.SearchDocumentIDServiceAsync;
-import ca.cgta.dataviewer.client.SearchMessageControlIDServiceAsync;
+
+// import ca.cgta.dataviewer.client.SearchDocumentIDService;
+import ca.cgta.dataviewer.client.SearchOIDServiceAsync;
 
 public class Search implements EntryPoint {
 
@@ -34,16 +35,19 @@ public class Search implements EntryPoint {
 	private final SearchMessageControlIDServiceAsync searchMessageControlIDService = GWT
 			.create(SearchMessageControlIDService.class);
 	
+	private final SearchOIDServiceAsync searchOIDService = GWT
+			.create(SearchOIDService.class);
+	
 	@Override
 	public void onModuleLoad() {
+		
+		
 		
 		/** Select drop-downs for OID selection **/
 		final ListBox lb1 = new ListBox();
 		lb1.setName("search1_oid");
-		lb1.addItem("Please select an OID", "");
-		lb1.addItem("UHN", "1.3.6.1.4.1.12201");
-		lb1.addItem("North York General Hospital", "2.16.840.1.113883.3.239.23.8");
-		lb1.addItem("The Scarborough Hospital", "2.16.840.1.113883.3.239.23.3");
+		
+		lb1.addItem("Please select a hospital", "");
 		RootPanel.get("td_search1").add(lb1);
 		
 		final Button searchButton_DocumentID = new Button("Search by DocumentID");
@@ -59,10 +63,7 @@ public class Search implements EntryPoint {
 		
 		final ListBox lb2 = new ListBox();
 		lb2.setName("search2_oid");
-		lb2.addItem("Please select an OID", "");
-		lb2.addItem("UHN", "1.3.6.1.4.1.12201");
-		lb2.addItem("North York General Hospital", "2.16.840.1.113883.3.239.23.8");
-		lb2.addItem("The Scarborough Hospital", "2.16.840.1.113883.3.239.23.3");
+		lb2.addItem("Please select a hospital", "");
 		RootPanel.get("td_search2").add(lb2);
 		
 		final Button searchButton_MessageControlID = new Button("Search by MessageControlID");
@@ -96,6 +97,36 @@ public class Search implements EntryPoint {
 
 
 
+
+		/** Get the OID list from the CSV file on the server, via RPC (rather than just loading a remote file in JS?)
+		 */
+		
+		// Modify this
+		String textToServer = "getOIDs";
+		
+		searchOIDService.searchOIDServer(textToServer,
+				new AsyncCallback<String>() {
+					public void onFailure(Throwable caught) {
+						// Show the RPC error message to the user
+						dialogBox
+								.setText("Remote Procedure Call - Failure");
+						serverResponseLabel
+								.addStyleName("serverResponseLabelError");
+						serverResponseLabel.setHTML(SERVER_ERROR);
+						dialogBox.center();
+						closeButton.setFocus(true);
+					}
+
+					public void onSuccess(String result) {
+						String[] OIDS = result.split(":");
+						for(int x = 0; x<OIDS.length; x++) {
+							String[] items = OIDS[x].split("@");
+							lb1.addItem(items[1], items[0]);
+							lb2.addItem(items[1], items[0]);
+						}
+					}
+				});		
+		
 		
 		// Create a handler for DocumentID search
 		class DocumentID_SearchHandler implements ClickHandler /*, KeyUpHandler */ {

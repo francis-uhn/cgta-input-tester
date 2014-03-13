@@ -1,7 +1,9 @@
 package ca.cgta.dataviewer.server;
 
 import ca.cgta.dataviewer.client.SearchDocumentIDService;
+import ca.cgta.dataviewer.server.AuditLogger;
 import ca.cgta.dataviewer.shared.FieldVerifier;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 
@@ -24,7 +26,18 @@ public class SearchDocumentIDServiceImpl extends RemoteServiceServlet implements
 		// Escape data from the client to avoid cross-site script vulnerabilities.
 		input = escapeHtml(input);
 		
-		return "Will be returning DocumentID search results for '" + input + "'!";
+		String clientIP   = getThreadLocalRequest().getRemoteAddr();
+		
+		// Log the search.  If the Audit log fails, do not perform the search. 
+		if(AuditLogger.logString(clientIP + " SearchDocumentID: " + input)) {
+			// Successfully logged - perform the search:
+			
+			return "Will be returning SearchDocumentID search results for '" + input + "'!";
+		} else {
+			// Unsuccessfully logged - do not perform the search:
+			return "Unable to log SearchDocumentID search, thus unable to perform search";
+		}
+		
 	}
 
 	/**

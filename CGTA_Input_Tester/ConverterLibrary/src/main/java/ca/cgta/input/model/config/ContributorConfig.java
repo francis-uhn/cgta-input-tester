@@ -28,6 +28,8 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ca.cgta.input.model.config.Contributor.HspType;
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {})
 @XmlRootElement(name = "contributor_config")
@@ -444,6 +446,13 @@ public class ContributorConfig {
 			cfg.getContributors().add(contributor);
 
 			contributor.setName("University Health Network");
+			contributor.setAddressLine1("R. Fraser Elliott Building, 1st Floor");
+			contributor.setAddressLine2("190 Elizabeth St.");
+			contributor.setCity("Toronto");
+			contributor.setProvince("ON"); 
+			contributor.setPostalCode("M5G 2C4");
+			contributor.setHspType(HspType.HOSPITAL);
+			
 			contributor.setDevSecurityToken("2954864636aaa");
 			contributor.setHspId9004AndSubIds("1.3.6.1.4.1.12201");
 			contributor.setHospitalFacilityNumber("0947");

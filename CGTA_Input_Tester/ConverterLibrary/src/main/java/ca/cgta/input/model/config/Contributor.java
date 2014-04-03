@@ -386,7 +386,9 @@ public class Contributor {
 	@XmlType(name = "HspTypeEnum")
 	public enum HspType {
 
-		HOSPITAL, LONG_TERM_CARE, REHAB_HOSPITAL
+		HOSPITAL, 
+		LONG_TERM_CARE, 
+		REHAB_HOSPITAL
 
 	}
 }

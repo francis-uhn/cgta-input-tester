@@ -288,7 +288,9 @@ public class ContributorConfig {
 
 			} // sending system
 
-			if (nextContributor.getSendingSystem().size() > 0 && nextContributor.getHspFacility().size() == 0) {
+			if ("2.16.840.1.113883.3.239.23.1".equals(nextContributor.getHspId9004())) {
+				// OACCAC has no facilities
+			}else if (nextContributor.getSendingSystem().size() > 0 && nextContributor.getHspFacility().size() == 0) {
 				throw new ValidationException("Contributor \"" + nextContributor.getName() + "\" does not have any facilities defined");
 			}
 
@@ -565,6 +567,38 @@ public class ContributorConfig {
 			contributor.getSendingSystem().add(dictaphone);
 
 		}
+
+		// Individual CCACs
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+			contributor.setName("Central West CCAC");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1.100.1");
+		}
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+			contributor.setName("Mississauga Halton CCAC");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1.100.2");
+		}
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+			contributor.setName("Toronto Central CCAC");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1.100.3");
+		}
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+			contributor.setName("Central CCAC");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1.100.4");
+		}
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+			contributor.setName("Central East CCAC");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1.100.5");
+		}
 		
 		// *******************************************************
 		// OACCAC
@@ -584,13 +618,6 @@ public class ContributorConfig {
 			contributor.setDevSecurityToken("3498749864ccc");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1");
 			contributor.setManagementConsoleOrgId("OACCAC");
-
-			// Should be the value from table 9005 with ".100.x" at the end
-			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.1.100.1", "Central West CCAC"));
-			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.1.100.2", "Mississauga Halton CCAC"));
-			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.1.100.3", "Toronto Central CCAC"));
-			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.1.100.4", "Central CCAC"));
-			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.1.100.5", "Central East CCAC"));
 
 			// CHRIS - DEV testing environment
 			SendingSystem chris = new SendingSystem();
@@ -1724,8 +1751,8 @@ public class ContributorConfig {
 		cfg.validate();
 
 		//removed ConverterLibrary folder from file path for use with Netbeans.
-//                File cfgFile = new File("ConverterLibrary/src/main/resources/ca/cgta/input/sending_systems.xml");
-                File cfgFile = new File("src/main/resources/ca/cgta/input/sending_systems.xml");
+                File cfgFile = new File("ConverterLibrary/src/main/resources/ca/cgta/input/sending_systems.xml");
+//                File cfgFile = new File("src/main/resources/ca/cgta/input/sending_systems.xml");
 		if (!cfgFile.exists()) {
 			throw new ValidationException("Could not find file " + cfgFile.getAbsolutePath());
 		}

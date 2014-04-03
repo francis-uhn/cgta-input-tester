@@ -92,6 +92,31 @@
         </hsp_sending_system_9008>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.8.2" description="North York General Hospital Visit/Encounter Number/IDs"/>
     </contributor>
+    <contributor name="Central West CCAC">
+        <hsp_id_9004>2.16.840.1.113883.3.239.23.1.100.1</hsp_id_9004>
+        <provider_pool_oid code="2.16.840.1.113883.3.239.23.1.100.1.1" description="Central West CCAC Provider IDs"/>
+        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.1.100.1.2" description="Central West CCAC Visit/Encounter Number/IDs"/>
+    </contributor>
+    <contributor name="Mississauga Halton CCAC">
+        <hsp_id_9004>2.16.840.1.113883.3.239.23.1.100.2</hsp_id_9004>
+        <provider_pool_oid code="2.16.840.1.113883.3.239.23.1.100.2.1" description="Mississauga Halton CCAC Provider IDs"/>
+        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.1.100.2.2" description="Mississauga Halton CCAC Visit/Encounter Number/IDs"/>
+    </contributor>
+    <contributor name="Toronto Central CCAC">
+        <hsp_id_9004>2.16.840.1.113883.3.239.23.1.100.3</hsp_id_9004>
+        <provider_pool_oid code="2.16.840.1.113883.3.239.23.1.100.3.1" description="Toronto Central CCAC Provider IDs"/>
+        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.1.100.3.2" description="Toronto Central CCAC Visit/Encounter Number/IDs"/>
+    </contributor>
+    <contributor name="Central CCAC">
+        <hsp_id_9004>2.16.840.1.113883.3.239.23.1.100.4</hsp_id_9004>
+        <provider_pool_oid code="2.16.840.1.113883.3.239.23.1.100.4.1" description="Central CCAC Provider IDs"/>
+        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.1.100.4.2" description="Central CCAC Visit/Encounter Number/IDs"/>
+    </contributor>
+    <contributor name="Central East CCAC">
+        <hsp_id_9004>2.16.840.1.113883.3.239.23.1.100.5</hsp_id_9004>
+        <provider_pool_oid code="2.16.840.1.113883.3.239.23.1.100.5.1" description="Central East CCAC Provider IDs"/>
+        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.1.100.5.2" description="Central East CCAC Visit/Encounter Number/IDs"/>
+    </contributor>
     <contributor name="Ontario Association of Community Care Access Centres (OACCAC)">
         <dev_listen_port>14001</dev_listen_port>
         <dev_listen_port>14002</dev_listen_port>
@@ -100,11 +125,6 @@
         <dev_listen_port>14005</dev_listen_port>
         <dev_listen_port>14006</dev_listen_port>
         <dev_security_token>3498749864ccc</dev_security_token>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.1.100.1" description="Central West CCAC"/>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.1.100.2" description="Mississauga Halton CCAC"/>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.1.100.3" description="Toronto Central CCAC"/>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.1.100.4" description="Central CCAC"/>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.1.100.5" description="Central East CCAC"/>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.1</hsp_id_9004>
         <management_console_org_id>OACCAC</management_console_org_id>
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.1.1" description="Ontario Association of Community Care Access Centres (OACCAC) Provider IDs"/>

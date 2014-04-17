@@ -475,7 +475,8 @@ public class ContributorConfig {
 			epr.getDrugComponentCodeSystemRxc2().add("1.3.6.1.4.1.12201.102.3");
 			epr.getDrugGiveCodeSystemRxe2().add("1.3.6.1.4.1.12201.102.4");
 			epr.getRequestCodeSystemSystemObr4().add("1.3.6.1.4.1.12201.102.5");
-			epr.getResultCodeSystemSystemObx3().add("1.3.6.1.4.1.12201.102.6");
+			epr.getResultCodeSystemSystemObx3().add("1.3.6.1.4.1.12201.102.6"); // for result codes
+			epr.getResultCodeSystemSystemObx3().add("1.3.6.1.4.1.12201.102.11"); // for assessment codes
 			contributor.getSendingSystem().add(epr);
 
 			SendingSystem caps = new SendingSystem();

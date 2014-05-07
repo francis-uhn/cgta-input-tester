@@ -10,9 +10,12 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
+//import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -37,6 +40,10 @@ public class Search implements EntryPoint {
 	
 	private final SearchOIDServiceAsync searchOIDService = GWT
 			.create(SearchOIDService.class);
+	
+	//private VerticalPanel mainPanel = new VerticalPanel();
+	//private TextArea outputReport = new TextArea();
+	private ScrollPanel mainScrollPanel = new ScrollPanel();
 	
 	@Override
 	public void onModuleLoad() {
@@ -73,6 +80,10 @@ public class Search implements EntryPoint {
 		
 		final Label errorLabel2 = new Label();
 		RootPanel.get("search2FieldContainer").add(errorLabel2);
+		
+		
+		//mainPanel.add(outputReport);
+		
 		
 		
 		/** Dialog box with close button for displaying async results (right from sample code) **/
@@ -174,12 +185,21 @@ public class Search implements EntryPoint {
 							}
 
 							public void onSuccess(String result) {
-								dialogBox.setText("Remote Procedure Call");
+								dialogBox.setText("Call HL7Translator");
 								serverResponseLabel
 										.removeStyleName("serverResponseLabelError");
-								serverResponseLabel.setHTML(result);
+								serverResponseLabel.setHTML("Report Fetch Success!!");
+								//outputReport.setText("Hi cGTAViewer");
 								dialogBox.center();
 								closeButton.setFocus(true);
+								
+								// Add data in text area
+								//outputReport.setText(result);
+								HTMLPanel htmlPanel = new HTMLPanel( result );
+								mainScrollPanel.add( htmlPanel );
+								//RootPanel.get("htmlReport").add(mainScrollPanel);
+								RootPanel.get("htmlReportDisplay").add(mainScrollPanel);
+								
 							}
 						});
 			}

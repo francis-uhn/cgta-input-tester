@@ -2,7 +2,7 @@
 
 #results {
 	border: 1px solid grey;
-	width: 80%;
+	width: 100%;
 }
 
 #login {
@@ -34,6 +34,14 @@ div.cgta_main {
 }
 
 table.cgta_search {
+	border: 1px solid #ccc;
+	margin-left: auto ;
+  	margin-right: auto ;
+  	padding: 25px;
+  	background-color: #eee;
+}
+
+table.cgta_results {
 	border: 1px solid #ccc;
 	margin-left: auto ;
   	margin-right: auto ;

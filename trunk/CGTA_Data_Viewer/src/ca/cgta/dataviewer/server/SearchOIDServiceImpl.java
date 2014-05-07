@@ -35,16 +35,20 @@ public class SearchOIDServiceImpl extends RemoteServiceServlet implements
 	    
 		File f = new File(SearchOIDServiceImpl.class.getClassLoader().getResource("").getPath());
 		String path = f.getParent();
-		fileName = path.substring(path.lastIndexOf("\\")+1,path.length()) + File.separator + "table_9004.csv";
+		fileName = path.substring(path.lastIndexOf("\\")+1,path.length()) + File.separator + "table_9008.csv";
 		System.out.println(fileName);  
 		
 		// CSVReader will be closed after end of processing
         // Less code to process CSV content -> less bugs
+		
         csv.read(fileName, new CSVReadProc() {
                 public void procRow(int rowIndex, String... values) {
                 	//	returnOIDs.concat(values[0] + ":");
                 	String[] csvSplit = values[0].split(",");
                 	returnOIDs = returnOIDs + csvSplit[0] + "@" + csvSplit[1] + ":";
+                	System.out.println(returnOIDs);
+                	System.out.println(rowIndex);
+                	
                 	//	System.out.println(rowIndex + "# " + Arrays.asList(values));    
                 }
         });

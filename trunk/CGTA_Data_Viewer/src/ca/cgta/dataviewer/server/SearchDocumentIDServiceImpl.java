@@ -31,8 +31,11 @@ public class SearchDocumentIDServiceImpl extends RemoteServiceServlet implements
 		// Log the search.  If the Audit log fails, do not perform the search. 
 		if(AuditLogger.logString(clientIP + " SearchDocumentID: " + input)) {
 			// Successfully logged - perform the search:
-			DatabaseService.main();
-			return "Will be returning SearchDocumentID search results for '" + input + "'!";
+			String outV3String = DatabaseService.main();
+			String outputString = HL7V3Translator.v3Translator(outV3String);
+			
+			return "<h2>Clinical Data search results for '" + input + "':</h2><br>" + outputString;
+			
 		} else {
 			// Unsuccessfully logged - do not perform the search:
 			return "Unable to log SearchDocumentID search, thus unable to perform search";

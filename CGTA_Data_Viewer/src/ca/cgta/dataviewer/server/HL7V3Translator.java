@@ -1,12 +1,11 @@
 package ca.cgta.dataviewer.server;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
+
 import java.io.StringReader;
-//import java.sql.*;
+import java.io.StringWriter;
+
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -90,18 +89,7 @@ public class HL7V3Translator {
 				}//end main
 	
 	
-	/**
-	 * Save a line item to the audit configuration specified in audit_log_settings.xml
-	 * 
-	 * @param the string to log
-	 * @return true if log to audit file was successful, false if not
-	 */
-	public static void testDatabase() {
-		
-		
-		
-	}
-	
+
 	
 	private static String hl7Translate(String outV3String) {
 		// TODO Auto-generated method stub
@@ -114,21 +102,26 @@ public class HL7V3Translator {
 	        try {
 	            
 
-	            File stylesheet = new File("C:/Workplace/Test/data/result_and_document_transform_v4.1.xsl");
-	            //File datafile = new File("C:/Workplace/Test/data/ecg_14.xml");
-	            //File outdatafile = new File("data/outdata.html");
+	            //File stylesheet = new File("C:/Workplace/Test/data/result_and_document_transform_v4.1.xsl");
+	            	            
 	        	
-	            //File stylesheet = new File("C:/Workplace/StockWatcher/data/testxsl.xsl");
-	            //File datafile = new File("C:/Workplace/StockWatcher/data/testxml.xml");
-	            File outdatafile = new File("C:/Workplace/Test/data/outdata.html");
+	        	File f = new File(HL7V3Translator.class.getClassLoader().getResource("").getPath());
+	    		String path = f.getParent();
+	    		String fileName = path.substring(path.lastIndexOf("\\")+1,path.length()) + File.separator + "result_and_document_transform_v4.xsl";
+	    		System.out.println("fileName value is:" + fileName); 
+	    		File stylesheet = new File(fileName);
+	    		System.out.println("Absolute path of stylesheet1: " + stylesheet.getAbsolutePath());
+	  
+	            //File datafile = new File("C:/Workplace/Test/data/ecg_14.xml");
+	            
 
-	           // InputStream is = outV3String
+	          
 	            InputSource is = new InputSource(new StringReader(outV3String));
 	            DocumentBuilder builder = factory.newDocumentBuilder();
 	            
 	            //document = builder.parse(datafile);
 	            document = builder.parse(is);
-	            //document = builder.parse(outV3String);
+	            
 	            
 	            // Use a Transformer for output
 	            TransformerFactory tFactory = TransformerFactory.newInstance();
@@ -137,9 +130,21 @@ public class HL7V3Translator {
 
 	            DOMSource source = new DOMSource(document);
 	            //StreamResult result = new StreamResult(System.out);
-	            StreamResult result = new StreamResult(outdatafile);
-	           // StreamResult result = new StreamResult(OutputStream outhtmlstream);
+	            //StreamResult result = new StreamResult(outdatafile);
+	            
+	            StringWriter outWriter = new StringWriter();
+	            StreamResult result = new StreamResult( outWriter );
 	            transformer.transform(source, result);
+	            
+	            
+	            StringBuffer sbuf = outWriter.getBuffer(); 
+	            String outhtmlstream = sbuf.toString();
+	            
+	            return outhtmlstream;
+	           
+	           
+	            
+	            /*
 	           // result.getOutputStream();
 	            FileInputStream fis = new FileInputStream(outdatafile);
 	            StringBuilder sbuilder = new StringBuilder();
@@ -147,10 +152,11 @@ public class HL7V3Translator {
 	            while((ch = fis.read()) != -1){
 	                sbuilder.append((char)ch);
 	            }
-	            fis.close();
+	            fis.close();*/
 	            //System.out.println(sbuilder.toString());
 	           
-	            return sbuilder.toString();
+	            //return sbuilder.toString();
+	            
 	            //String stringhtml = result.toString();
 	            //System.out.print(outhtmlstream);
 	        } catch (TransformerConfigurationException tce) {

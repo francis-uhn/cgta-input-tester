@@ -3,7 +3,7 @@ package ca.cgta.dataviewer.server;
 import java.io.BufferedReader;
 import java.io.Reader;
 import java.sql.*;
-import oracle.jdbc.driver.OracleDriver;
+//import oracle.jdbc.driver.OracleDriver;
 
 /**
  * <p>
@@ -30,7 +30,7 @@ public class DatabaseService {
 	
 	
 	
-	public static String main() {	// String[] args
+	public static String main(String oid, String id) {	// String[] args
 		   Connection conn = null;
 		   Statement stmt = null;
 		   Clob outClob = null;
@@ -90,8 +90,10 @@ public class DatabaseService {
 		      
 		      //cstmt = conn.prepareCall("call getoruxml_v2('2.16.840.1.113883.3.239.22.1.88.23.5.101.3','5809%','Y',outClob)");
 		      cstmt = conn.prepareCall("{ call getoruxml_v2(?,?,?,?) }");
-		      cstmt.setString(1, "2.16.840.1.113883.3.239.22.1.88.23.5.101.3");
-		      cstmt.setString(2, "5809%");
+		      //cstmt.setString(1, "2.16.840.1.113883.3.239.22.1.88.23.5.101.3");
+		      //cstmt.setString(2, "5809%");
+		      cstmt.setString(1, oid);
+		      cstmt.setString(2, id+"%");
 		      cstmt.setString(3, "Y");
 		      cstmt.registerOutParameter(4, Types.CLOB);
 		      cstmt.setClob(4, outClob);
@@ -115,7 +117,7 @@ public class DatabaseService {
 		        br.close();
 		        outV3String = sb.toString();
 		     
-		        System.out.print("Value of output V3 String: "+ outV3String);
+		        System.out.println("Value of output V3 String: "+ outV3String);
 		        
 		      //outClob = cstmt.getClob(outClob);
 		     // System.out.print("Value of output clob: "+ outputClob.toString());

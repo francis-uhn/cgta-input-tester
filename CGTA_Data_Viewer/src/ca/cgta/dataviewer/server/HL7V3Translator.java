@@ -33,7 +33,7 @@ public class HL7V3Translator {
 		
 	
 	//public static void main() {	
-	public static String v3Translator(String v3String){
+	public static String v3Translator(String argString){
 		
 		/*//test file read starts
 				String fileResult =null;
@@ -78,10 +78,21 @@ public class HL7V3Translator {
 				
 				*/
 		
-				//hl7 translate starts
+				//Split arguments
+				System.out.println("argString: " + argString);
+				//String arg1 = 
+				String[] argSplit = argString.split("\\|");
+				System.out.println("argSplit[0]: " + argSplit[0]+"  , argSplit[1]:  "+ argSplit[1]);
+				
+				//Pull data from database
+				String v3String = DatabaseService.main(argSplit[0],argSplit[1]);
+		
+				
+				
+				//Call hl7 translate 
 				
 				String hl7Result = hl7Translate(v3String);
-				//hl7 translate ends
+			
 				
 				return hl7Result;
 
@@ -108,9 +119,9 @@ public class HL7V3Translator {
 	        	File f = new File(HL7V3Translator.class.getClassLoader().getResource("").getPath());
 	    		String path = f.getParent();
 	    		String fileName = path.substring(path.lastIndexOf("\\")+1,path.length()) + File.separator + "result_and_document_transform_v4.xsl";
-	    		System.out.println("fileName value is:" + fileName); 
+	    		 
 	    		File stylesheet = new File(fileName);
-	    		System.out.println("Absolute path of stylesheet1: " + stylesheet.getAbsolutePath());
+	    		
 	  
 	            //File datafile = new File("C:/Workplace/Test/data/ecg_14.xml");
 	            

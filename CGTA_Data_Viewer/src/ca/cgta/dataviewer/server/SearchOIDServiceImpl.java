@@ -1,7 +1,6 @@
 package ca.cgta.dataviewer.server;
 
 import java.io.File;
-import java.io.InputStream;
 
 import au.com.bytecode.opencsv.CSV;
 import au.com.bytecode.opencsv.CSVReadProc;

@@ -196,6 +196,7 @@ public class Search implements EntryPoint {
 								// Add data in text area
 								//outputReport.setText(result);
 								HTMLPanel htmlPanel = new HTMLPanel( result );
+								mainScrollPanel.clear();
 								mainScrollPanel.add( htmlPanel );
 								//RootPanel.get("htmlReport").add(mainScrollPanel);
 								RootPanel.get("htmlReportDisplay").add(mainScrollPanel);
@@ -254,12 +255,22 @@ public class Search implements EntryPoint {
 							}
 
 							public void onSuccess(String result) {
-								dialogBox.setText("Remote Procedure Call");
+																
+								dialogBox.setText("Call HL7Translator");
 								serverResponseLabel
 										.removeStyleName("serverResponseLabelError");
-								serverResponseLabel.setHTML(result);
+								serverResponseLabel.setHTML("Report Fetch Success!!");
+								
 								dialogBox.center();
 								closeButton.setFocus(true);
+								
+								// Add data in text area
+								//outputReport.setText(result);
+								HTMLPanel htmlPanel = new HTMLPanel( result );
+								mainScrollPanel.clear();
+								mainScrollPanel.add( htmlPanel );
+								//RootPanel.get("htmlReport").add(mainScrollPanel);
+								RootPanel.get("htmlReportDisplay").add(mainScrollPanel);
 							}
 						});
 			}

@@ -30,8 +30,9 @@ public class SearchMessageControlIDServiceImpl extends RemoteServiceServlet impl
 		// Log the search.  If the Audit log fails, do not perform the search. 
 		if(AuditLogger.logString(clientIP + " MessageControlID: " + input)) {
 			// Successfully logged - perform the search:
+			String outputString = HL7V3Translator.v3Translator(input);
 			
-			return "Will be returning MessageControlID search results for '" + input + "'!";
+			return "<h2>Clinical Data search results for '" + input + "':</h2><br>" + outputString;
 		} else {
 			// Unsuccessfully logged - do not perform the search:
 			return "Unable to log MessageControlID search, thus unable to perform search";

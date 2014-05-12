@@ -27,8 +27,15 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		input = escapeHtml(input);
 		userAgent = escapeHtml(userAgent);
 
+		if(input.indexOf("cgtauser") >= 0) {
+			return "Hello, " + input + "!<br><br>I am running " + serverInfo
+					+ ".<br><br>It looks like you are using:<br>" + userAgent
+					+ "LOGIN_OK";
+		}
+		
 		return "Hello, " + input + "!<br><br>I am running " + serverInfo
-				+ ".<br><br>It looks like you are using:<br>" + userAgent;
+				+ ".<br><br>It looks like you are using:<br>" + userAgent
+				+ input.indexOf("cgtauser") + "was the found index";
 	}
 
 	/**

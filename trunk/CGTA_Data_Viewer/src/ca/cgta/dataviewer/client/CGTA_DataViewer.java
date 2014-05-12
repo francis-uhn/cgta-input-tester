@@ -4,11 +4,14 @@ import ca.cgta.dataviewer.shared.FieldVerifier;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -139,12 +142,24 @@ public class CGTA_DataViewer implements EntryPoint {
 							}
 
 							public void onSuccess(String result) {
-								dialogBox.setText("Remote Procedure Call");
-								serverResponseLabel
-										.removeStyleName("serverResponseLabelError");
-								serverResponseLabel.setHTML(result);
-								dialogBox.center();
-								closeButton.setFocus(true);
+								
+
+								if(result.indexOf("LOGIN_OK") > 0) {
+									/** Hide the login box, show the search panel **/
+									DOM.getElementById("cgta_viewer_login").getStyle().setDisplay(Display.NONE);
+									DOM.getElementById("cgta_viewer_grid").getStyle().setDisplay(Display.BLOCK);
+									Document.get().getElementById("cgta_viewer_grid").scrollIntoView();
+								} else {
+									
+									dialogBox.setText("Remote Procedure Call - Login Failed");
+									serverResponseLabel
+											.removeStyleName("serverResponseLabelError");
+									serverResponseLabel.setHTML(result);
+									dialogBox.center();
+									closeButton.setFocus(true);
+									
+								}
+								
 							}
 						});
 			}

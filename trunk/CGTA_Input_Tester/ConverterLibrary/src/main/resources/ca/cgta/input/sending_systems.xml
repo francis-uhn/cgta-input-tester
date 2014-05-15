@@ -28,6 +28,7 @@
         <hsp_facility_9005 code="1.3.6.1.4.1.12201.100.1" description="Toronto General Hospital"/>
         <hsp_facility_9005 code="1.3.6.1.4.1.12201.100.2" description="Toronto Western Hospital"/>
         <hsp_facility_9005 code="1.3.6.1.4.1.12201.100.3" description="Princess Margaret Hospital"/>
+        <hsp_facility_9005 code="1.3.6.1.4.1.12201.100.4" description="Toronto Rehab Institute"/>
         <hsp_id_9004>1.3.6.1.4.1.12201</hsp_id_9004>
         <hsp_type>HOSPITAL</hsp_type>
         <mrn_pool_oid code="2.16.840.1.113883.3.239.18.148" description="University Health Network MRNs"/>
@@ -41,6 +42,7 @@
             <drug_give_codesystem_rxe2_9007>1.3.6.1.4.1.12201.102.4</drug_give_codesystem_rxe2_9007>
             <request_codesystem_obr4_9007>1.3.6.1.4.1.12201.102.5</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>1.3.6.1.4.1.12201.102.6</result_codesystem_obx3_9007>
+            <result_codesystem_obx3_9007>1.3.6.1.4.1.12201.102.13</result_codesystem_obx3_9007>
             <allergen_codesystem_iam3_9007>1.3.6.1.4.1.12201.102.1</allergen_codesystem_iam3_9007>
             <management_console_system_id>EPR</management_console_system_id>
         </hsp_sending_system_9008>
@@ -55,6 +57,12 @@
             <request_codesystem_obr4_9007>1.3.6.1.4.1.12201.102.9</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>1.3.6.1.4.1.12201.102.10</result_codesystem_obx3_9007>
             <management_console_system_id>HPF</management_console_system_id>
+        </hsp_sending_system_9008>
+        <hsp_sending_system_9008 code="1.3.6.1.4.1.12201.101.4" description="MUSE">
+            <management_console_org_id>SIMS</management_console_org_id>
+            <request_codesystem_obr4_9007>1.3.6.1.4.1.12201.102.11</request_codesystem_obr4_9007>
+            <result_codesystem_obx3_9007>1.3.6.1.4.1.12201.102.12</result_codesystem_obx3_9007>
+            <management_console_system_id>MUSE</management_console_system_id>
         </hsp_sending_system_9008>
         <visit_number_pool_oid code="1.3.6.1.4.1.12201.2" description="University Health Network Visit/Encounter Number/IDs"/>
     </contributor>
@@ -177,6 +185,7 @@
         <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.2.100.1" description="Lakeridge Health Oshawa"/>
         <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.2.100.2" description="Lakeridge Health Bowmanville"/>
         <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.2.100.3" description="Lakeridge Health Port Perry"/>
+        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.2.100.4" description="Lakeridge Whitby"/>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.2</hsp_id_9004>
         <management_console_org_id>LHC</management_console_org_id>
         <mrn_pool_oid code="2.16.840.1.113883.3.239.18.90" description="Lakeridge Port Perry MRNs"/>
@@ -532,6 +541,7 @@
         <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.11.100.1" description="Etobicoke General Hospital"/>
         <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.11.100.2" description="Peel Memorial Centre"/>
         <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.11.100.3" description="Brampton Civic Hospital"/>
+        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.11.100.4" description="Withdrawal Management Centre"/>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.11</hsp_id_9004>
         <management_console_org_id>WOHC</management_console_org_id>
         <mrn_pool_oid code="2.16.840.1.113883.3.239.18.150" description="William Osler Health Centre MRNs"/>
@@ -693,6 +703,7 @@
     <other_oid code="2.16.840.1.113883.3.239.22.9" description="HRM"/>
     <other_oid code="2.16.840.1.113883.3.239.22.10" description="CGTA_CONSENT_MANAGEMENT_REGISTRY"/>
     <other_oid code="2.16.840.1.113883.3.239.22.11" description="HIPAAT"/>
+    <other_oid code="2.16.840.1.113883.3.239.22.12" description="ConnectingGTA ID ROOT"/>
     <provider_oid_9001 code="1.3.6.1.4.1.12201.1.2.1.5" description="Site Specific Provider ID (Deprocated)"/>
     <provider_oid_9001 code="2.16.840.1.113883.3.239.13.6" description="College of Audiologist and Speech-Language Pathologists of Ontario Licence Number"/>
     <provider_oid_9001 code="2.16.840.1.113883.3.239.13.17" description="College of Chiropodists of Ontario Licence Number"/>

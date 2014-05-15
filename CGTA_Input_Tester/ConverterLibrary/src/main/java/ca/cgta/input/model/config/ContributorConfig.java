@@ -372,6 +372,7 @@ public class ContributorConfig {
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.9", "HRM"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.10", "CGTA_CONSENT_MANAGEMENT_REGISTRY"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.11", "HIPAAT"));
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.12", "ConnectingGTA ID ROOT"));
 
 		
 		addProviderType(cfg, "1.3.6.1.4.1.12201.1.2.1.5", "Site Specific Provider ID (Deprocated)");
@@ -464,6 +465,7 @@ public class ContributorConfig {
 			contributor.getHspFacility().add(new Code("1.3.6.1.4.1.12201.100.1", "Toronto General Hospital"));
 			contributor.getHspFacility().add(new Code("1.3.6.1.4.1.12201.100.2", "Toronto Western Hospital"));
 			contributor.getHspFacility().add(new Code("1.3.6.1.4.1.12201.100.3", "Princess Margaret Hospital"));
+			contributor.getHspFacility().add(new Code("1.3.6.1.4.1.12201.100.4", "Toronto Rehab Institute"));
 
 			SendingSystem epr = new SendingSystem();
 			epr.setCode("1.3.6.1.4.1.12201.101.1");
@@ -476,7 +478,7 @@ public class ContributorConfig {
 			epr.getDrugGiveCodeSystemRxe2().add("1.3.6.1.4.1.12201.102.4");
 			epr.getRequestCodeSystemSystemObr4().add("1.3.6.1.4.1.12201.102.5");
 			epr.getResultCodeSystemSystemObx3().add("1.3.6.1.4.1.12201.102.6"); // for result codes
-			epr.getResultCodeSystemSystemObx3().add("1.3.6.1.4.1.12201.102.11"); // for assessment codes
+			epr.getResultCodeSystemSystemObx3().add("1.3.6.1.4.1.12201.102.13"); // for assessment codes
 			contributor.getSendingSystem().add(epr);
 
 			SendingSystem caps = new SendingSystem();
@@ -496,6 +498,17 @@ public class ContributorConfig {
 			hpf.getRequestCodeSystemSystemObr4().add("1.3.6.1.4.1.12201.102.9");
 			hpf.getResultCodeSystemSystemObx3().add("1.3.6.1.4.1.12201.102.10");
 			contributor.getSendingSystem().add(hpf);
+			
+			// MUSE
+			SendingSystem muse = new SendingSystem();
+			muse.setCode("1.3.6.1.4.1.12201.101.4");
+			muse.setDescription("MUSE");
+			muse.setManagementConsoleOrgId("SIMS");
+			muse.setManagementConsoleSystemId("MUSE");
+			muse.getRequestCodeSystemSystemObr4().add("1.3.6.1.4.1.12201.102.11");
+			muse.getResultCodeSystemSystemObx3().add("1.3.6.1.4.1.12201.102.12");
+			contributor.getSendingSystem().add(muse);
+
 			
 		}
 
@@ -717,6 +730,7 @@ public class ContributorConfig {
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.2.100.1", "Lakeridge Health Oshawa"));
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.2.100.2", "Lakeridge Health Bowmanville"));
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.2.100.3", "Lakeridge Health Port Perry"));
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.2.100.4", "Lakeridge Whitby"));
 
 			// MEDITECH Magic
 			SendingSystem meditech_m = new SendingSystem();
@@ -1391,11 +1405,12 @@ public class ContributorConfig {
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.11");
 			contributor.setHospitalFacilityNumber("0951");
 			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.150", contributor.getName() + " MRNs"));
-                        contributor.setHrmSendingFacility("4052");
+            contributor.setHrmSendingFacility("4052");
 
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.11.100.1", "Etobicoke General Hospital"));
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.11.100.2", "Peel Memorial Centre"));
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.11.100.3", "Brampton Civic Hospital"));
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.11.100.4", "Withdrawal Management Centre"));
 
 			// Meditech
 			SendingSystem meditech = new SendingSystem();

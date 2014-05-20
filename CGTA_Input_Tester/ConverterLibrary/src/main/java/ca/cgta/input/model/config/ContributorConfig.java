@@ -498,7 +498,7 @@ public class ContributorConfig {
 			hpf.getRequestCodeSystemSystemObr4().add("1.3.6.1.4.1.12201.102.9");
 			hpf.getResultCodeSystemSystemObx3().add("1.3.6.1.4.1.12201.102.10");
 			contributor.getSendingSystem().add(hpf);
-			
+
 			// MUSE
 			SendingSystem muse = new SendingSystem();
 			muse.setCode("1.3.6.1.4.1.12201.101.4");
@@ -509,6 +509,12 @@ public class ContributorConfig {
 			muse.getResultCodeSystemSystemObx3().add("1.3.6.1.4.1.12201.102.12");
 			contributor.getSendingSystem().add(muse);
 
+			SendingSystem centricity = new SendingSystem();
+			centricity.setCode("1.3.6.1.4.1.12201.101.4");
+			centricity.setDescription("Centricity Pharmacy");
+			centricity.setManagementConsoleOrgId("SIMS");
+			centricity.setManagementConsoleSystemId("RxTFC");
+			centricity.getDrugGiveCodeSystemRxe2().add("1.3.6.1.4.1.12201.102.14");
 			
 		}
 

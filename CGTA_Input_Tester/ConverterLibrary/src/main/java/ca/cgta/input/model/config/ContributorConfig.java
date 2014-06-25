@@ -372,7 +372,8 @@ public class ContributorConfig {
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.9", "HRM"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.10", "CGTA_CONSENT_MANAGEMENT_REGISTRY"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.11", "HIPAAT"));
-		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.12", "ConnectingGTA ID ROOT"));
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.12", "Admin Portal (System)"));
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.13", "ConnectingGTA ID ROOT"));
 
 		
 		addProviderType(cfg, "1.3.6.1.4.1.12201.1.2.1.5", "Site Specific Provider ID (Deprocated)");
@@ -515,6 +516,7 @@ public class ContributorConfig {
 			centricity.setManagementConsoleOrgId("SIMS");
 			centricity.setManagementConsoleSystemId("RxTFC");
 			centricity.getDrugGiveCodeSystemRxe2().add("1.3.6.1.4.1.12201.102.14");
+			contributor.getSendingSystem().add(centricity);
 			
 		}
 
@@ -638,11 +640,11 @@ public class ContributorConfig {
 			contributor.setDevSecurityToken("3498749864ccc");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1");
 			contributor.setManagementConsoleOrgId("OACCAC");
-                        contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.180", "Central West CCAC"));
-                        contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.181", "Mississauga Halton CCAC"));
-                        contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.182", "Toronto Central CCAC"));
-                        contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.183", "Central CCAC"));
-                        contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.184", "Central East CCAC"));
+            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.180", "Central West CCAC"));
+            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.181", "Mississauga Halton CCAC"));
+            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.182", "Toronto Central CCAC"));
+            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.183", "Central CCAC"));
+            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.184", "Central East CCAC"));
 
 			// CHRIS - DEV testing environment
 			SendingSystem chris = new SendingSystem();
@@ -1780,10 +1782,10 @@ public class ContributorConfig {
 		//removed ConverterLibrary folder from file path for use with Netbeans.
                 
                 //use this with Eclipse
-                //File cfgFile = new File("ConverterLibrary/src/main/resources/ca/cgta/input/sending_systems.xml");
+                File cfgFile = new File("C:/Users/t32317uhn/workspace/CGTA_Input_Tester/ConverterLibrary/src/main/resources/ca/cgta/input/sending_systems.xml");
                 
                 //use this with Netbeans
-                File cfgFile = new File("src/main/resources/ca/cgta/input/sending_systems.xml");
+                //File cfgFile = new File("src/main/resources/ca/cgta/input/sending_systems.xml");
 		if (!cfgFile.exists()) {
 			throw new ValidationException("Could not find file " + cfgFile.getAbsolutePath());
 		}

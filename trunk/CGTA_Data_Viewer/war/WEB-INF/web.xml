@@ -38,7 +38,19 @@
     <url-pattern>/cgta_dataviewer/searchMessageControlID</url-pattern>
   </servlet-mapping>
   
+
   
+  <servlet>
+    <servlet-name>securityServlet</servlet-name>
+    <servlet-class>ca.cgta.dataviewer.server.SecurityServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>securityServlet</servlet-name>
+    <url-pattern>/cgta_dataviewer/security</url-pattern>
+  </servlet-mapping>
+
+
   
    <servlet>
     <servlet-name>searchOIDServlet</servlet-name>

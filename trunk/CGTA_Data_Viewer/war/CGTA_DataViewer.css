@@ -1,5 +1,16 @@
 /** Add css rules here for your application. */
 
+#viewerSessionContainer {
+	float: left;
+}
+
+#cgta-logo {
+	/* Native: 905 x 160 */
+	width: 453px;
+	height: 80px;
+	float: right;
+}
+
 #results {
 	border: 1px solid grey;
 	width: 100%;
@@ -25,7 +36,6 @@ div.cgta_viewer_login {
 
 div.cgta_header {
 	width: 100%;
-	height: 160px; 
 }
 
 div.cgta_header img {
@@ -68,7 +78,7 @@ h1 {
   font-size: 2em;
   font-weight: bold;
   color: #777777;
-  margin: 40px 0px 50px;
+  margin: 0px 50px 00px;
   text-align: center;
 }
 

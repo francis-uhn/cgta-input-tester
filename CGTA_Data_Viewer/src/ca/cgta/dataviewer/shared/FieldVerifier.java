@@ -40,6 +40,26 @@ public class FieldVerifier {
 		return name.length() > 3;
 	}
 	
+	public static String isValidUserName(String userName) {
+		if (userName == null) {
+			return "Please enter a user name";
+		}
+		if(userName.length() < 5) {
+			return "Invalid user name";
+		}
+		return null;
+	}
+	
+	public static String isValidPassword(String password) {
+		if (password == null) {
+			return "Please enter a password";
+		}
+		if(password.length() < 5) {
+			return "Invalid password";
+		}
+		return null;
+	}
+	
 	// TODO: Proper OID validation
 	public static boolean isValidOID(String oid) {
 		if (oid == null) {

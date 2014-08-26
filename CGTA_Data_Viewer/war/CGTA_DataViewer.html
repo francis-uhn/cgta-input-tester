@@ -33,10 +33,14 @@
   <!--                                           -->
   <body>
 
+	<div id="viewerSessionContainer" class="cgta_viewer_session"></div>
+
+<img id="cgta-logo" src="cgta_dataviewer/cgta-logo.jpg">
 	<div class="cgta_header">
-	<img id="cgta-logo" src="cgta_dataviewer/cgta-logo.jpg" width="40%" height="50%">
+	
 	</div>
 	
+	<h1>ConnectingGTA Conformance DataViewer</h1>
     <!-- OPTIONAL: include this if you want history support -->
     <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
     
@@ -48,10 +52,15 @@
       </div>
     </noscript>
 
-	<div id="cgta_viewer_login" class="cgta_viewer_login">
+
+	<div id="cgta_viewer_loading" class="cgta_viewer_loading">
+		Loading... One moment please
+    </div>
+<br><br><br>
+	<div id="cgta_viewer_login" class="cgta_viewer_login" style="display:none;">
     <table id="login" align="center">
       <tr>
-        <td colspan="2" style="font-weight:bold;">Please login to access the DataViewer:</td>        
+        <td colspan="2" style="font-weight:bold;">Please login with your T-id to access the DataViewer:</td>        
       </tr>
       <tr>
         <td id="nameFieldContainer"></td>

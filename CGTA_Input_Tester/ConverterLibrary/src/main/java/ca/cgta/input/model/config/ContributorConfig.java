@@ -374,7 +374,8 @@ public class ContributorConfig {
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.11", "HIPAAT"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.12", "Admin Portal (System)"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.13", "ConnectingGTA ID ROOT"));
-
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22", "ConnectingGTA (HINP)"));
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.35.3.1", "eHealth Ontario ONE ID Identity Provider"));
 		
 		addProviderType(cfg, "1.3.6.1.4.1.12201.1.2.1.5", "Site Specific Provider ID (Deprocated)");
 		addProviderType(cfg, "2.16.840.1.113883.3.239.13.6", "College of Audiologist and Speech-Language Pathologists of Ontario Licence Number");
@@ -531,6 +532,7 @@ public class ContributorConfig {
 			contributor.setDevSecurityToken("323452erwettw");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.57");
 			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.157", contributor.getName() + " MRNs"));
+			contributor.setHospitalFacilityNumber("0862");
 			contributor.getDevListenPort().add(14048);
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.57.100.1", "Women's College Hospital"));
 
@@ -621,6 +623,12 @@ public class ContributorConfig {
 			contributor.setName("Central East CCAC");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1.100.5");
 		}
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+			contributor.setName("North Simcoe Muskoka");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1.100.6");
+		}
 		
 		// *******************************************************
 		// OACCAC
@@ -645,6 +653,7 @@ public class ContributorConfig {
             contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.182", "Toronto Central CCAC"));
             contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.183", "Central CCAC"));
             contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.184", "Central East CCAC"));
+            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.185", "North Simcoe Muskoka"));
 
 			// CHRIS - DEV testing environment
 			SendingSystem chris = new SendingSystem();
@@ -705,6 +714,7 @@ public class ContributorConfig {
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.22.7.100.3", "Toronto Central CCAC"));
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.22.7.100.4", "Central CCAC"));
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.22.7.100.5", "Central East CCAC"));
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.22.7.100.6", "North Simcoe Muskoka"));
 			
 			// CHRIS-QA testing environment
 			SendingSystem chris = new SendingSystem();
@@ -735,9 +745,9 @@ public class ContributorConfig {
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.2");
 			contributor.setHospitalFacilityNumber("0952");
 			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.90", "Lakeridge Health Port Perry MRNs"));
-			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.91", "Lakeridge Health Whitby MRNs"));
+			//contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.91", "Lakeridge Health Whitby MRNs"));
 			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.92", "Lakeridge Health Bowmanville MRNs"));
-			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.93", "Lakeridge Health Oshawa MRNs"));
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.93", "Lakeridge Health Whitby/Oshawa MRNs"));
 
 			contributor.setManagementConsoleOrgId("LHC");
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.2.100.1", "Lakeridge Health Oshawa"));
@@ -1254,7 +1264,7 @@ public class ContributorConfig {
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.9");
 			contributor.setHospitalFacilityNumber("0731");
 			contributor.setManagementConsoleOrgId("CVH");
-			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.26", contributor.getName() + " MRNs"));
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.26", "THP - Credit Valley Hospital MRNs"));
 
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.9.100.1", "Credit Valley Hospital and Trillium Health Centre -- Credit Valley Site"));
 
@@ -1347,8 +1357,8 @@ public class ContributorConfig {
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.10");
 			contributor.setManagementConsoleOrgId("THC");
 			contributor.setHospitalFacilityNumber("0975");
-			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.146", "Trillium Mississauga MRNs"));
-			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.147", "Trillium Queensway MRNs"));
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.146", "THP - Mississauga Hospital and Queensway Health Centre MRNs"));
+			//contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.147", "Trillium Queensway MRNs"));
 
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.10.100.1", "Credit Valley Hospital and Trillium Health Centre -- Mississauga Site"));
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.10.100.2", "Credit Valley Hospital and Trillium Health Centre -- West Toronto Site"));
@@ -1768,7 +1778,80 @@ public class ContributorConfig {
 			contributor.setHospitalFacilityNumber("0613");
 
 		}
+		
+		
+		// *******************************************************
+		// Georgian Bay General Hospital
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
 
+
+			contributor.setName("Georgian Bay General Hospital");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.241");
+            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.163", contributor.getName() + " MRNs"));
+		}
+
+		
+		// *******************************************************
+		// Markham Stouffville Hospital
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+
+			contributor.setName("Markham Stouffville Hospital");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.222");
+            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.96", contributor.getName() + " MRNs"));
+		}
+
+		// *******************************************************
+		// Muskoka Algonquin Healthcare
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+
+			contributor.setName("Muskoka Algonquin Healthcare");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.250");
+            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.98", contributor.getName() + " MRNs"));
+		}
+
+		// *******************************************************
+		// Orillia Soldier’s Memorial Hospital
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+
+			contributor.setName("Orillia Soldier’s Memorial Hospital");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.251");
+            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.121", contributor.getName() + " MRNs"));
+		}
+
+		// *******************************************************
+		// Royal Victoria Hospital
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+
+			contributor.setName("Royal Victoria Hospital");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.46");
+            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.133", contributor.getName() + " MRNs"));
+		}
+
+		
 		StringWriter w = new StringWriter();
 		Marshaller marshaller = JAXBContext.newInstance(ContributorConfig.class).createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);

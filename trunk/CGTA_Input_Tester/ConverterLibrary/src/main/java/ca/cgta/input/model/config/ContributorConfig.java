@@ -1831,7 +1831,7 @@ public class ContributorConfig {
 			cfg.getContributors().add(contributor);
 
 
-			contributor.setName("Orillia Soldier’s Memorial Hospital");
+			contributor.setName("Orillia Soldier's Memorial Hospital");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.251");
             contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.121", contributor.getName() + " MRNs"));

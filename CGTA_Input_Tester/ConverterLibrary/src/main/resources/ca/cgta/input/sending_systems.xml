@@ -728,12 +728,12 @@
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.250.1" description="Muskoka Algonquin Healthcare Provider IDs"/>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.250.2" description="Muskoka Algonquin Healthcare Visit/Encounter Number/IDs"/>
     </contributor>
-    <contributor name="Orillia Soldier’s Memorial Hospital">
+    <contributor name="Orillia Soldier's Memorial Hospital">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.251</hsp_id_9004>
-        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.121" description="Orillia Soldier’s Memorial Hospital MRNs"/>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.251.1" description="Orillia Soldier’s Memorial Hospital Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.251.2" description="Orillia Soldier’s Memorial Hospital Visit/Encounter Number/IDs"/>
+        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.121" description="Orillia Soldier's Memorial Hospital MRNs"/>
+        <provider_pool_oid code="2.16.840.1.113883.3.239.23.251.1" description="Orillia Soldier's Memorial Hospital Provider IDs"/>
+        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.251.2" description="Orillia Soldier's Memorial Hospital Visit/Encounter Number/IDs"/>
     </contributor>
     <contributor name="Royal Victoria Hospital">
         <dev_security_token></dev_security_token>

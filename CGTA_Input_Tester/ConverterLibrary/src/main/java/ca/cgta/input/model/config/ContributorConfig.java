@@ -1792,6 +1792,7 @@ public class ContributorConfig {
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.241");
             contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.163", contributor.getName() + " MRNs"));
+			contributor.setHospitalFacilityNumber("0726");
 		}
 
 		
@@ -1807,6 +1808,7 @@ public class ContributorConfig {
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.222");
             contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.96", contributor.getName() + " MRNs"));
+			contributor.setHospitalFacilityNumber("0905");
 		}
 
 		// *******************************************************
@@ -1821,6 +1823,7 @@ public class ContributorConfig {
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.250");
             contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.98", contributor.getName() + " MRNs"));
+			contributor.setHospitalFacilityNumber("0968");
 		}
 
 		// *******************************************************
@@ -1835,6 +1838,7 @@ public class ContributorConfig {
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.251");
             contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.121", contributor.getName() + " MRNs"));
+			contributor.setHospitalFacilityNumber("0745");
 		}
 
 		// *******************************************************
@@ -1849,6 +1853,7 @@ public class ContributorConfig {
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.46");
             contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.133", contributor.getName() + " MRNs"));
+			contributor.setHospitalFacilityNumber("0606");
 		}
 
 		

@@ -707,35 +707,35 @@
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.58.1" description="West Park Healthcare Centre Provider IDs"/>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.58.2" description="West Park Healthcare Centre Visit/Encounter Number/IDs"/>
     </contributor>
-    <contributor name="Georgian Bay General Hospital">
+    <contributor hospital_facility_number="0726" name="Georgian Bay General Hospital">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.241</hsp_id_9004>
         <mrn_pool_oid code="2.16.840.1.113883.3.239.18.163" description="Georgian Bay General Hospital MRNs"/>
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.241.1" description="Georgian Bay General Hospital Provider IDs"/>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.241.2" description="Georgian Bay General Hospital Visit/Encounter Number/IDs"/>
     </contributor>
-    <contributor name="Markham Stouffville Hospital">
+    <contributor hospital_facility_number="0905" name="Markham Stouffville Hospital">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.222</hsp_id_9004>
         <mrn_pool_oid code="2.16.840.1.113883.3.239.18.96" description="Markham Stouffville Hospital MRNs"/>
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.222.1" description="Markham Stouffville Hospital Provider IDs"/>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.222.2" description="Markham Stouffville Hospital Visit/Encounter Number/IDs"/>
     </contributor>
-    <contributor name="Muskoka Algonquin Healthcare">
+    <contributor hospital_facility_number="0968" name="Muskoka Algonquin Healthcare">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.250</hsp_id_9004>
         <mrn_pool_oid code="2.16.840.1.113883.3.239.18.98" description="Muskoka Algonquin Healthcare MRNs"/>
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.250.1" description="Muskoka Algonquin Healthcare Provider IDs"/>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.250.2" description="Muskoka Algonquin Healthcare Visit/Encounter Number/IDs"/>
     </contributor>
-    <contributor name="Orillia Soldier's Memorial Hospital">
+    <contributor hospital_facility_number="0745" name="Orillia Soldier's Memorial Hospital">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.251</hsp_id_9004>
         <mrn_pool_oid code="2.16.840.1.113883.3.239.18.121" description="Orillia Soldier's Memorial Hospital MRNs"/>
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.251.1" description="Orillia Soldier's Memorial Hospital Provider IDs"/>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.251.2" description="Orillia Soldier's Memorial Hospital Visit/Encounter Number/IDs"/>
     </contributor>
-    <contributor name="Royal Victoria Hospital">
+    <contributor hospital_facility_number="0606" name="Royal Victoria Hospital">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.46</hsp_id_9004>
         <mrn_pool_oid code="2.16.840.1.113883.3.239.18.133" description="Royal Victoria Hospital MRNs"/>

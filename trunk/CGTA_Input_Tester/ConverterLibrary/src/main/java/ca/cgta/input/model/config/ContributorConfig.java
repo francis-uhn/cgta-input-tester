@@ -573,6 +573,9 @@ public class ContributorConfig {
 			cerner.getAllergenCodeSystemIam3().add("2.16.840.1.113883.3.239.23.8.102.1");
 			cerner.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.8.102.2");
 			cerner.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.8.102.3");
+			cerner.getDrugAdministrationCodeSystemRxa5().add("2.16.840.1.113883.3.239.23.8.102.6");
+			cerner.getDrugComponentCodeSystemRxc2().add("2.16.840.1.113883.3.239.23.8.102.7");
+			cerner.getDrugGiveCodeSystemRxe2().add("2.16.840.1.113883.3.239.23.8.102.8");
 
 			contributor.getSendingSystem().add(cerner);
 

@@ -93,6 +93,9 @@
         <mrn_pool_oid code="2.16.840.1.113883.3.239.18.115" description="North York General Hospital MRNs"/>
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.8.1" description="North York General Hospital Provider IDs"/>
         <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.8.101.1" description="Cerner HIS">
+            <drug_administration_codesystem_rxa5_9007>2.16.840.1.113883.3.239.23.8.102.6</drug_administration_codesystem_rxa5_9007>
+            <drug_component_codesystem_rxc2_9007>2.16.840.1.113883.3.239.23.8.102.7</drug_component_codesystem_rxc2_9007>
+            <drug_give_codesystem_rxe2_9007>2.16.840.1.113883.3.239.23.8.102.8</drug_give_codesystem_rxe2_9007>
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.8.102.2</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.8.102.3</result_codesystem_obx3_9007>
             <allergen_codesystem_iam3_9007>2.16.840.1.113883.3.239.23.8.102.1</allergen_codesystem_iam3_9007>

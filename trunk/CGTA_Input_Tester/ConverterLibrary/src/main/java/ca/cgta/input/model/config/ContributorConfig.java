@@ -1098,6 +1098,17 @@ public class ContributorConfig {
 			efilm.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.6.102.9");
 			contributor.getSendingSystem().add(efilm);
 
+			// Coral RIS
+			SendingSystem coral = new SendingSystem();
+			// Should be the value from table 9004 with ".101.x" at the end
+			coral.setCode("2.16.840.1.113883.3.239.23.6.101.4");
+			coral.setDescription("Coral RIS");
+			coral.setManagementConsoleSystemId("Coral RIS");
+			// Should be the value from table 9004 with ".102.x" at the end
+			coral.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.6.102.11");
+			coral.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.6.102.12");
+			contributor.getSendingSystem().add(coral);
+
 		}
 		// *******************************************************
 		// Sunnybrook
@@ -1251,6 +1262,18 @@ public class ContributorConfig {
 			icnet.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.7.102.21");
 			icnet.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.7.102.22");
 			contributor.getSendingSystem().add(icnet);
+			
+			
+			// VMax
+			SendingSystem vmax = new SendingSystem();
+			// Should be the value from table 9004 with ".101.x" at the end
+			vmax.setCode("2.16.840.1.113883.3.239.23.7.101.12");
+			vmax.setDescription("VMax");
+			vmax.setManagementConsoleSystemId("VMax");
+			// Should be the value from table 9004 with ".102.x" at the end
+			vmax.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.7.102.23");
+			vmax.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.7.102.24");
+			contributor.getSendingSystem().add(vmax);
 
 		}
 		// *******************************************************

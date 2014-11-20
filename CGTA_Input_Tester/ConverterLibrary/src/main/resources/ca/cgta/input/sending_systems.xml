@@ -389,6 +389,11 @@
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.6.102.9</result_codesystem_obx3_9007>
             <management_console_system_id>eFilm Medical</management_console_system_id>
         </hsp_sending_system_9008>
+        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.6.101.4" description="Coral RIS">
+            <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.6.102.11</request_codesystem_obr4_9007>
+            <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.6.102.12</result_codesystem_obx3_9007>
+            <management_console_system_id>Coral RIS</management_console_system_id>
+        </hsp_sending_system_9008>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.6.2" description="Mount Sinai Hospital Visit/Encounter Number/IDs"/>
     </contributor>
     <contributor hospital_facility_number="0857" name="Sunnybrook Health Sciences Centre">
@@ -467,6 +472,11 @@
             <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.7.102.21</request_codesystem_obr4_9007>
             <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.7.102.22</result_codesystem_obx3_9007>
             <management_console_system_id>ICNet</management_console_system_id>
+        </hsp_sending_system_9008>
+        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.7.101.12" description="VMax">
+            <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.7.102.23</request_codesystem_obr4_9007>
+            <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.7.102.24</result_codesystem_obx3_9007>
+            <management_console_system_id>VMax</management_console_system_id>
         </hsp_sending_system_9008>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.7.2" description="Sunnybrook Health Sciences Centre Visit/Encounter Number/IDs"/>
     </contributor>

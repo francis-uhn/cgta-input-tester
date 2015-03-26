@@ -644,9 +644,55 @@
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.18.2" description="Hospital for Sick Children Visit/Encounter Number/IDs"/>
     </contributor>
     <contributor hospital_facility_number="0941" name="Humber River Regional Hospital">
-        <dev_security_token></dev_security_token>
+        <dev_listen_port>14049</dev_listen_port>
+        <dev_security_token>577457557300qqq</dev_security_token>
+        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.19.100.1" description="Humber River Regional Hospital - Keele Site"/>
+        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.19.100.2" description="Humber River Regional Hospital - Church Site"/>
+        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.19.100.3" description="Humber River Regional Hospital - Finch Site"/>
+        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.19.100.4" description="Humber River Regional Hospital - Wilson Site"/>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.19</hsp_id_9004>
+        <management_console_org_id>HRRH</management_console_org_id>
+        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.54" description="Humber River Regional Hospital MRNs"/>
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.19.1" description="Humber River Regional Hospital Provider IDs"/>
+        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.19.101.1" description="Meditech">
+            <drug_administration_codesystem_rxa5_9007>2.16.840.1.113883.3.239.23.19.102.2</drug_administration_codesystem_rxa5_9007>
+            <drug_component_codesystem_rxc2_9007>2.16.840.1.113883.3.239.23.19.102.3</drug_component_codesystem_rxc2_9007>
+            <drug_give_codesystem_rxe2_9007>2.16.840.1.113883.3.239.23.19.102.4</drug_give_codesystem_rxe2_9007>
+            <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.19.102.5</request_codesystem_obr4_9007>
+            <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.19.102.6</result_codesystem_obx3_9007>
+            <allergen_codesystem_iam3_9007>2.16.840.1.113883.3.239.23.19.102.1</allergen_codesystem_iam3_9007>
+            <management_console_system_id>Meditech</management_console_system_id>
+        </hsp_sending_system_9008>
+        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.19.101.2" description="Muse">
+            <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.19.102.7</request_codesystem_obr4_9007>
+            <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.19.102.8</result_codesystem_obx3_9007>
+            <management_console_system_id>Muse</management_console_system_id>
+        </hsp_sending_system_9008>
+        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.19.101.3" description="Mars">
+            <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.19.102.9</request_codesystem_obr4_9007>
+            <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.19.102.10</result_codesystem_obx3_9007>
+            <management_console_system_id>Mars</management_console_system_id>
+        </hsp_sending_system_9008>
+        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.19.101.4" description="Xcelera">
+            <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.19.102.11</request_codesystem_obr4_9007>
+            <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.19.102.12</result_codesystem_obx3_9007>
+            <management_console_system_id>Xcelera</management_console_system_id>
+        </hsp_sending_system_9008>
+        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.19.101.5" description="iSite">
+            <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.19.102.13</request_codesystem_obr4_9007>
+            <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.19.102.14</result_codesystem_obx3_9007>
+            <management_console_system_id>iSite</management_console_system_id>
+        </hsp_sending_system_9008>
+        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.19.101.6" description="eMon">
+            <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.19.102.15</request_codesystem_obr4_9007>
+            <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.19.102.16</result_codesystem_obx3_9007>
+            <management_console_system_id>eMon</management_console_system_id>
+        </hsp_sending_system_9008>
+        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.19.101.7" description="SpeechQ">
+            <request_codesystem_obr4_9007>2.16.840.1.113883.3.239.23.19.102.17</request_codesystem_obr4_9007>
+            <result_codesystem_obx3_9007>2.16.840.1.113883.3.239.23.19.102.18</result_codesystem_obx3_9007>
+            <management_console_system_id>SpeechQ</management_console_system_id>
+        </hsp_sending_system_9008>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.19.2" description="Humber River Regional Hospital Visit/Encounter Number/IDs"/>
     </contributor>
     <contributor hospital_facility_number="0940" name="Northumberland Hills Hospital">

@@ -1619,12 +1619,93 @@ public class ContributorConfig {
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
 
-			// contributor.getDevListenPort().add(14014);
+			contributor.getDevListenPort().add(14049);
 
 			contributor.setName("Humber River Regional Hospital");
-			contributor.setDevSecurityToken("");
+			contributor.setDevSecurityToken("577457557300qqq");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.19");
 			contributor.setHospitalFacilityNumber("0941");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.54", contributor.getName() + " MRNs"));
+            contributor.setManagementConsoleOrgId("HRRH");
+
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.19.100.1", "Humber River Regional Hospital - Keele Site"));
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.19.100.2", "Humber River Regional Hospital - Church Site"));
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.19.100.3", "Humber River Regional Hospital - Finch Site"));
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.19.100.4", "Humber River Regional Hospital - Wilson Site"));
+
+			// Meditech
+			SendingSystem meditech = new SendingSystem();
+			// Should be the value from table 9004 with ".101.x" at the end
+			meditech.setCode("2.16.840.1.113883.3.239.23.19.101.1");
+			meditech.setDescription("Meditech");
+			meditech.setManagementConsoleSystemId("Meditech");
+			meditech.getAllergenCodeSystemIam3().add("2.16.840.1.113883.3.239.23.19.102.1");
+			meditech.getDrugAdministrationCodeSystemRxa5().add("2.16.840.1.113883.3.239.23.19.102.2");
+			meditech.getDrugComponentCodeSystemRxc2().add("2.16.840.1.113883.3.239.23.19.102.3");
+			meditech.getDrugGiveCodeSystemRxe2().add("2.16.840.1.113883.3.239.23.19.102.4");
+			meditech.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.19.102.5");
+			meditech.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.19.102.6");
+			contributor.getSendingSystem().add(meditech);
+
+			// Muse
+			SendingSystem muse = new SendingSystem();
+			// Should be the value from table 9004 with ".101.x" at the end
+			muse.setCode("2.16.840.1.113883.3.239.23.19.101.2");
+			muse.setDescription("Muse");
+			muse.setManagementConsoleSystemId("Muse");
+			muse.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.19.102.7");
+			muse.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.19.102.8");
+			contributor.getSendingSystem().add(muse);
+
+			// Mars
+			SendingSystem mars = new SendingSystem();
+			// Should be the value from table 9004 with ".101.x" at the end
+			mars.setCode("2.16.840.1.113883.3.239.23.19.101.3");
+			mars.setDescription("Mars");
+			mars.setManagementConsoleSystemId("Mars");
+			mars.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.19.102.9");
+			mars.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.19.102.10");
+			contributor.getSendingSystem().add(mars);
+
+			// Xcelera
+			SendingSystem Xcelera = new SendingSystem();
+			// Should be the value from table 9004 with ".101.x" at the end
+			Xcelera.setCode("2.16.840.1.113883.3.239.23.19.101.4");
+			Xcelera.setDescription("Xcelera");
+			Xcelera.setManagementConsoleSystemId("Xcelera");
+			Xcelera.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.19.102.11");
+			Xcelera.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.19.102.12");
+			contributor.getSendingSystem().add(Xcelera);
+
+			// iSite
+			SendingSystem iSite = new SendingSystem();
+			// Should be the value from table 9004 with ".101.x" at the end
+			iSite.setCode("2.16.840.1.113883.3.239.23.19.101.5");
+			iSite.setDescription("iSite");
+			iSite.setManagementConsoleSystemId("iSite");
+			iSite.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.19.102.13");
+			iSite.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.19.102.14");
+			contributor.getSendingSystem().add(iSite);
+
+			// eMon
+			SendingSystem eMon = new SendingSystem();
+			// Should be the value from table 9004 with ".101.x" at the end
+			eMon.setCode("2.16.840.1.113883.3.239.23.19.101.6");
+			eMon.setDescription("eMon");
+			eMon.setManagementConsoleSystemId("eMon");
+			eMon.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.19.102.15");
+			eMon.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.19.102.16");
+			contributor.getSendingSystem().add(eMon);
+
+			// SpeechQ
+			SendingSystem SpeechQ = new SendingSystem();
+			// Should be the value from table 9004 with ".101.x" at the end
+			SpeechQ.setCode("2.16.840.1.113883.3.239.23.19.101.7");
+			SpeechQ.setDescription("SpeechQ");
+			SpeechQ.setManagementConsoleSystemId("SpeechQ");
+			SpeechQ.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.19.102.17");
+			SpeechQ.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.19.102.18");
+			contributor.getSendingSystem().add(SpeechQ);
 
 		}
 		// *******************************************************

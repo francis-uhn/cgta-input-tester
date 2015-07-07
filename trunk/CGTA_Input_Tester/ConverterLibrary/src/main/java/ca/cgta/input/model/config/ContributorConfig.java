@@ -1501,7 +1501,7 @@ public class ContributorConfig {
 
 		}
 		// *******************************************************
-		// Southlake
+		// Southlake Regional Health Centre
 		// *******************************************************
 		{
 			Contributor contributor = new Contributor();
@@ -1511,7 +1511,8 @@ public class ContributorConfig {
 
 			contributor.setName("Southlake Regional Health Centre");
 			contributor.setDevSecurityToken("");
-			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.59");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.231");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.138", contributor.getName() + " MRNs"));
 			contributor.setHospitalFacilityNumber("0736");
 		}
 		// *******************************************************
@@ -1525,17 +1526,9 @@ public class ContributorConfig {
 
 			contributor.setName("Baycrest Centre for Geriatric Care");
 			contributor.setDevSecurityToken("");
-			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.13");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.89");
 			contributor.setHospitalFacilityNumber("0827");
-                        contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.13.100.1", "Baycrest Centre for Geriatric Care"));
                         
-                        SendingSystem meditech = new SendingSystem();
-			meditech.setCode("2.16.840.1.113883.3.239.23.13.101.1");
-			meditech.setDescription("Meditech");
-			meditech.setManagementConsoleOrgId("Baycrest");
-			meditech.setManagementConsoleSystemId("Meditech");
-			contributor.getSendingSystem().add(meditech);
-
 		}
 		// *******************************************************
 		// Campbellford Memorial Hospital
@@ -1549,6 +1542,7 @@ public class ContributorConfig {
 			contributor.setName("Campbellford Memorial Hospital");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.14");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.178", contributor.getName() + " MRNs"));
 			contributor.setHospitalFacilityNumber("0624");
 
 		}
@@ -1564,6 +1558,7 @@ public class ContributorConfig {
 			contributor.setName("Centre for Addiction and Mental Health");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.15");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.156", contributor.getName() + " MRNs"));
 			contributor.setHospitalFacilityNumber("0948");
 		}
 		// *******************************************************
@@ -1578,7 +1573,10 @@ public class ContributorConfig {
 			contributor.setName("Halton Healthcare Services Corporation");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.16");
-			contributor.setHospitalFacilityNumber("0950");
+            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.45", "Halton Georgetown"));
+            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.47", "Halton Oakville-Trafalgar"));
+            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.46", "Halton Milton District"));
+            contributor.setHospitalFacilityNumber("0950");
 
 		}
 		// *******************************************************
@@ -1593,6 +1591,7 @@ public class ContributorConfig {
 			contributor.setName("Headwaters Health Care Centre");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.17");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.52", contributor.getName() + " MRNs"));
 			contributor.setHospitalFacilityNumber("0916");
 
 		}
@@ -1720,6 +1719,7 @@ public class ContributorConfig {
 			contributor.setName("Northumberland Hills Hospital");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.20");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.116", contributor.getName() + " MRNs"));
 			contributor.setHospitalFacilityNumber("0940");
 
 		}
@@ -1735,6 +1735,7 @@ public class ContributorConfig {
 			contributor.setName("Peterborough Regional Health Centre");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.21");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.124", contributor.getName() + " MRNs"));
 			contributor.setHospitalFacilityNumber("0771");
 		}
 		// *******************************************************
@@ -1831,11 +1832,11 @@ public class ContributorConfig {
 			contributor.setName("Toronto East General Hospital");
 			contributor.setDevSecurityToken("24591738492ppp");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.25");
-                        contributor.setManagementConsoleOrgId("TEGH");
+            contributor.setManagementConsoleOrgId("TEGH");
 			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.145", contributor.getName() + " MRNs"));
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.25.100.1", "Toronto East General Hospital"));
 			contributor.setHospitalFacilityNumber("0858");
-                        contributor.setHrmSendingFacility("4209");
+            contributor.setHrmSendingFacility("4209");
 			
 			// Cerner
 			SendingSystem cerner = new SendingSystem();
@@ -1869,8 +1870,26 @@ public class ContributorConfig {
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.26");
 			contributor.setHospitalFacilityNumber("0701");
 		}
+		
+		
                 
-                // *******************************************************
+        // *******************************************************
+		// Bridgepoint Hospital
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			// contributor.getDevListenPort().add(14014);
+
+			contributor.setName("Bridgepoint Hospital");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.32");
+
+		}
+
+		
+        // *******************************************************
 		// West Park Health Centre
 		// *******************************************************
 		{
@@ -1884,6 +1903,21 @@ public class ContributorConfig {
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.58");
 			contributor.setHospitalFacilityNumber("0613");
 
+		}
+
+		
+		// *******************************************************
+		// Collingwood General Hospital
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+
+			contributor.setName("Collingwood General Hospital");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.240");
+            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.25", contributor.getName() + " MRNs"));
 		}
 		
 		
@@ -1962,6 +1996,22 @@ public class ContributorConfig {
             contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.133", contributor.getName() + " MRNs"));
 			contributor.setHospitalFacilityNumber("0606");
 		}
+		
+        // *******************************************************
+		// Ontario Shores
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			// contributor.getDevListenPort().add(14014);
+
+			contributor.setName("Ontario Shores");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.400");
+
+		}
+		
 
 		
 		StringWriter w = new StringWriter();

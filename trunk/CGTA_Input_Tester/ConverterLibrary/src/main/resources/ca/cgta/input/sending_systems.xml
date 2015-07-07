@@ -597,42 +597,44 @@
     </contributor>
     <contributor hospital_facility_number="0736" name="Southlake Regional Health Centre">
         <dev_security_token></dev_security_token>
-        <hsp_id_9004>2.16.840.1.113883.3.239.23.59</hsp_id_9004>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.59.1" description="Southlake Regional Health Centre Provider IDs"/>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.59.2" description="Southlake Regional Health Centre Visit/Encounter Number/IDs"/>
+        <hsp_id_9004>2.16.840.1.113883.3.239.23.231</hsp_id_9004>
+        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.138" description="Southlake Regional Health Centre MRNs"/>
+        <provider_pool_oid code="2.16.840.1.113883.3.239.23.231.1" description="Southlake Regional Health Centre Provider IDs"/>
+        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.231.2" description="Southlake Regional Health Centre Visit/Encounter Number/IDs"/>
     </contributor>
     <contributor hospital_facility_number="0827" name="Baycrest Centre for Geriatric Care">
         <dev_security_token></dev_security_token>
-        <hsp_facility_9005 code="2.16.840.1.113883.3.239.23.13.100.1" description="Baycrest Centre for Geriatric Care"/>
-        <hsp_id_9004>2.16.840.1.113883.3.239.23.13</hsp_id_9004>
-        <provider_pool_oid code="2.16.840.1.113883.3.239.23.13.1" description="Baycrest Centre for Geriatric Care Provider IDs"/>
-        <hsp_sending_system_9008 code="2.16.840.1.113883.3.239.23.13.101.1" description="Meditech">
-            <management_console_org_id>Baycrest</management_console_org_id>
-            <management_console_system_id>Meditech</management_console_system_id>
-        </hsp_sending_system_9008>
-        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.13.2" description="Baycrest Centre for Geriatric Care Visit/Encounter Number/IDs"/>
+        <hsp_id_9004>2.16.840.1.113883.3.239.23.89</hsp_id_9004>
+        <provider_pool_oid code="2.16.840.1.113883.3.239.23.89.1" description="Baycrest Centre for Geriatric Care Provider IDs"/>
+        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.89.2" description="Baycrest Centre for Geriatric Care Visit/Encounter Number/IDs"/>
     </contributor>
     <contributor hospital_facility_number="0624" name="Campbellford Memorial Hospital">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.14</hsp_id_9004>
+        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.178" description="Campbellford Memorial Hospital MRNs"/>
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.14.1" description="Campbellford Memorial Hospital Provider IDs"/>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.14.2" description="Campbellford Memorial Hospital Visit/Encounter Number/IDs"/>
     </contributor>
     <contributor hospital_facility_number="0948" name="Centre for Addiction and Mental Health">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.15</hsp_id_9004>
+        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.156" description="Centre for Addiction and Mental Health MRNs"/>
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.15.1" description="Centre for Addiction and Mental Health Provider IDs"/>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.15.2" description="Centre for Addiction and Mental Health Visit/Encounter Number/IDs"/>
     </contributor>
     <contributor hospital_facility_number="0950" name="Halton Healthcare Services Corporation">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.16</hsp_id_9004>
+        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.45" description="Halton Georgetown"/>
+        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.47" description="Halton Oakville-Trafalgar"/>
+        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.46" description="Halton Milton District"/>
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.16.1" description="Halton Healthcare Services Corporation Provider IDs"/>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.16.2" description="Halton Healthcare Services Corporation Visit/Encounter Number/IDs"/>
     </contributor>
     <contributor hospital_facility_number="0916" name="Headwaters Health Care Centre">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.17</hsp_id_9004>
+        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.52" description="Headwaters Health Care Centre MRNs"/>
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.17.1" description="Headwaters Health Care Centre Provider IDs"/>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.17.2" description="Headwaters Health Care Centre Visit/Encounter Number/IDs"/>
     </contributor>
@@ -698,12 +700,14 @@
     <contributor hospital_facility_number="0940" name="Northumberland Hills Hospital">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.20</hsp_id_9004>
+        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.116" description="Northumberland Hills Hospital MRNs"/>
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.20.1" description="Northumberland Hills Hospital Provider IDs"/>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.20.2" description="Northumberland Hills Hospital Visit/Encounter Number/IDs"/>
     </contributor>
     <contributor hospital_facility_number="0771" name="Peterborough Regional Health Centre">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.21</hsp_id_9004>
+        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.124" description="Peterborough Regional Health Centre MRNs"/>
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.21.1" description="Peterborough Regional Health Centre Provider IDs"/>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.21.2" description="Peterborough Regional Health Centre Visit/Encounter Number/IDs"/>
     </contributor>
@@ -760,11 +764,24 @@
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.26.1" description="Mackenzie Health Hospital Provider IDs"/>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.26.2" description="Mackenzie Health Hospital Visit/Encounter Number/IDs"/>
     </contributor>
+    <contributor name="Bridgepoint Hospital">
+        <dev_security_token></dev_security_token>
+        <hsp_id_9004>2.16.840.1.113883.3.239.23.32</hsp_id_9004>
+        <provider_pool_oid code="2.16.840.1.113883.3.239.23.32.1" description="Bridgepoint Hospital Provider IDs"/>
+        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.32.2" description="Bridgepoint Hospital Visit/Encounter Number/IDs"/>
+    </contributor>
     <contributor hospital_facility_number="0613" name="West Park Healthcare Centre">
         <dev_security_token></dev_security_token>
         <hsp_id_9004>2.16.840.1.113883.3.239.23.58</hsp_id_9004>
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.58.1" description="West Park Healthcare Centre Provider IDs"/>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.58.2" description="West Park Healthcare Centre Visit/Encounter Number/IDs"/>
+    </contributor>
+    <contributor name="Collingwood General Hospital">
+        <dev_security_token></dev_security_token>
+        <hsp_id_9004>2.16.840.1.113883.3.239.23.240</hsp_id_9004>
+        <mrn_pool_oid code="2.16.840.1.113883.3.239.18.25" description="Collingwood General Hospital MRNs"/>
+        <provider_pool_oid code="2.16.840.1.113883.3.239.23.240.1" description="Collingwood General Hospital Provider IDs"/>
+        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.240.2" description="Collingwood General Hospital Visit/Encounter Number/IDs"/>
     </contributor>
     <contributor hospital_facility_number="0726" name="Georgian Bay General Hospital">
         <dev_security_token></dev_security_token>
@@ -800,6 +817,12 @@
         <mrn_pool_oid code="2.16.840.1.113883.3.239.18.133" description="Royal Victoria Hospital MRNs"/>
         <provider_pool_oid code="2.16.840.1.113883.3.239.23.46.1" description="Royal Victoria Hospital Provider IDs"/>
         <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.46.2" description="Royal Victoria Hospital Visit/Encounter Number/IDs"/>
+    </contributor>
+    <contributor name="Ontario Shores">
+        <dev_security_token></dev_security_token>
+        <hsp_id_9004>2.16.840.1.113883.3.239.23.400</hsp_id_9004>
+        <provider_pool_oid code="2.16.840.1.113883.3.239.23.400.1" description="Ontario Shores Provider IDs"/>
+        <visit_number_pool_oid code="2.16.840.1.113883.3.239.23.400.2" description="Ontario Shores Visit/Encounter Number/IDs"/>
     </contributor>
     <other_oid code="2.16.840.1.113883.3.239.22.1" description="ConnectingGTA HIAL (System) - Also Root OID for HIAL derived OIDs"/>
     <other_oid code="2.16.840.1.113883.3.239.22.2" description="ConnectingGTA CDR (System)"/>

@@ -360,52 +360,62 @@ public class ContributorConfig {
 	public static void main(String[] args) throws JAXBException, ValidationException, FileNotFoundException, IOException {
 
 		ContributorConfig cfg = new ContributorConfig();
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22", "ConnectingGTA (HINP)"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.1", "ConnectingGTA HIAL (System) - Also Root OID for HIAL derived OIDs"));
-		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.2", "ConnectingGTA CDR (System)"));
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.1.1", "HIAL THIP"));
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.1.2", "HIAL LDAP"));
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.1.3.1", "FE Portal"));
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.1.3.1.1", "FE Portal HSIP"));
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.1.3.1.2", "FE Portal UI Layer"));
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.1.5", "Layer 7"));
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.1.5.1", "Layer 7 GET"));
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.1.5.2", "Layer 7 PUT"));
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.2", "ConnectingGTA CDR (System) - Also Root OID for CDR derived OIDs"));
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.2.1", "CDR GET"));
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.2.2", "CDR PUT"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.3", "UHN eMPI eCID (Client ID Namespace)"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.4", "UHN Provider Registry ePID (Provider ID Namespace)"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.5", "(Reserved)")); // This was labelled "Unafiiliated".. What was it for?
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.6", "Base OID for CDR Input Specification HL7 v2 Tables"));
 		//cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.7", "UHN CR"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.8", "UHN PR"));
-		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.1.2", "HIAL LDAP"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.9", "HRM"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.10", "CGTA_CONSENT_MANAGEMENT_REGISTRY"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.11", "HIPAAT"));
+		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.11.1", "HIPAAT Engine"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.12", "Admin Portal (System)"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22.13", "ConnectingGTA ID ROOT"));
-		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.22", "ConnectingGTA (HINP)"));
 		cfg.getOtherOids().add(new Code("2.16.840.1.113883.3.239.35.3.1", "eHealth Ontario ONE ID Identity Provider"));
 		
-		addProviderType(cfg, "1.3.6.1.4.1.12201.1.2.1.5", "Site Specific Provider ID (Deprocated)");
+		addProviderType(cfg, "1.3.6.1.4.1.12201.1.2.1.5", "Site Specific Provider ID (Deprecated)");
+		addProviderType(cfg, "2.16.840.1.113883.3.239.13.4", "Board of Regents, Board of Directors of Drugless Therapy-Naturopathy Licence Number");
 		addProviderType(cfg, "2.16.840.1.113883.3.239.13.6", "College of Audiologist and Speech-Language Pathologists of Ontario Licence Number");
-		addProviderType(cfg, "2.16.840.1.113883.3.239.13.17", "College of Chiropodists of Ontario Licence Number");
-		addProviderType(cfg, "2.16.840.1.113883.4.394", "College of Chiropractors of Ontario Licence Number");
 		addProviderType(cfg, "2.16.840.1.113883.3.239.13.7", "College of Dental Hygienists of Ontario Licence Number");
-		addProviderType(cfg, "2.16.840.1.113883.3.239.13.52", "Royal College of Dental Surgeons of Ontario Licence Number");
-		addProviderType(cfg, "2.16.840.1.113883.3.239.13.10", "College of Dental Technologists of Ontario Licence Number");
 		addProviderType(cfg, "2.16.840.1.113883.3.239.13.8", "College of Denturists of Ontario Licence Number");
 		addProviderType(cfg, "2.16.840.1.113883.3.239.13.9", "College of Dieticians of Ontario Licence Number");
-		addProviderType(cfg, "2.16.840.1.113883.3.239.13.14", "College of Massage Therapist of Ontario Licence Number");
+		addProviderType(cfg, "2.16.840.1.113883.3.239.13.10", "College of Dental Technologists of Ontario Licence Number");
 		addProviderType(cfg, "2.16.840.1.113883.3.239.13.11", "College of Medical Laboratory Technologists of Ontario");
-		addProviderType(cfg, "2.16.840.1.113883.3.239.13.13", "College of Radiation Technologists of Ontario Licence Number");
 		addProviderType(cfg, "2.16.840.1.113883.3.239.13.12", "College of Midwives of Ontario Licence Number");
-		addProviderType(cfg, "2.16.840.1.113883.3.239.13.4", "Board of Regents, Board of Directors of Drugless Therapy-Naturopathy Licence Number");
+		addProviderType(cfg, "2.16.840.1.113883.3.239.13.13", "College of Radiation Technologists of Ontario Licence Number");
+		addProviderType(cfg, "2.16.840.1.113883.3.239.13.14", "College of Massage Therapist of Ontario Licence Number");
 		addProviderType(cfg, "2.16.840.1.113883.3.239.13.15", "College of Nurses of Ontario Licence Number");
+		addProviderType(cfg, "2.16.840.1.113883.3.239.13.17", "College of Chiropodists of Ontario Licence Number");
 		addProviderType(cfg, "2.16.840.1.113883.3.239.13.18", "College of Occupational Therapists of Ontario Licence Number");
-		addProviderType(cfg, "2.16.840.1.113883.4.390", "College of Opticians of Ontario Licence Number");
-		addProviderType(cfg, "2.16.840.1.113883.4.395", "College of Optometrists of Ontario Licence Number");
-		addProviderType(cfg, "2.16.840.1.113883.3.239.13.43", "Ontario College of Pharmacists Licence Number");
-		addProviderType(cfg, "2.16.840.1.113883.4.347", "College of Physicians and Surgeons of Ontario Licence Number");
-		addProviderType(cfg, "2.16.840.1.113883.4.388", "College of Physiotherapists of Ontario Licence Number");
-		addProviderType(cfg, "2.16.840.1.113883.3.239.13.71", "College of Psychologists of Ontario Licence Number");
 		addProviderType(cfg, "2.16.840.1.113883.3.239.13.19", "College of Respiratory Therapists in Ontario Licence Number");
-		addProviderType(cfg, "2.16.840.1.113883.3.239.13.44", "Ontario College of Social Workers and Social Service Workers  Licence Number");
 		addProviderType(cfg, "2.16.840.1.113883.3.239.13.20", "College of Traditional Chinese Medicine Practitioners and Acupuncturists of Ontario Licence Number");
+		addProviderType(cfg, "2.16.840.1.113883.3.239.13.43", "Ontario College of Pharmacists Licence Number");
+		addProviderType(cfg, "2.16.840.1.113883.3.239.13.44", "Ontario College of Social Workers and Social Service Workers  Licence Number");
+		addProviderType(cfg, "2.16.840.1.113883.3.239.13.52", "Royal College of Dental Surgeons of Ontario Licence Number");
 		addProviderType(cfg, "2.16.840.1.113883.3.239.13.54", "Unregulated - Transitional Council of the College of Homeopaths Licence Number");
 		addProviderType(cfg, "2.16.840.1.113883.3.239.13.55", "Unregulated - Transitional council for the College of Kinesiologists of Ontario Licence Number");
 		addProviderType(cfg, "2.16.840.1.113883.3.239.13.56", "Unregulated - Transitional Council of the College of Psychotherapists Licence Number");
-
+		addProviderType(cfg, "2.16.840.1.113883.3.239.13.71", "College of Psychologists of Ontario Licence Number");
+		addProviderType(cfg, "2.16.840.1.113883.4.347", "College of Physicians and Surgeons of Ontario Licence Number");
+		addProviderType(cfg, "2.16.840.1.113883.4.388", "College of Physiotherapists of Ontario Licence Number");
+		addProviderType(cfg, "2.16.840.1.113883.4.390", "College of Opticians of Ontario Licence Number");
+		addProviderType(cfg, "2.16.840.1.113883.4.394", "College of Chiropractors of Ontario Licence Number");
+		addProviderType(cfg, "2.16.840.1.113883.4.395", "College of Optometrists of Ontario Licence Number");
+		
 		// .1 - Provider ID pool
 		// .2 - Visit/Encounter number pool
 		// .100.x - Facilities
@@ -520,119 +530,36 @@ public class ContributorConfig {
 			contributor.getSendingSystem().add(centricity);
 			
 		}
-
 		// *******************************************************
-		// Women's College Hospital
-		// *******************************************************
-		{
-			Contributor contributor = new Contributor();
-			cfg.getContributors().add(contributor);
-
-			contributor.setName("Women's College Hospital");
-			contributor.setDevSecurityToken("323452erwettw");
-			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.57");
-			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.157", contributor.getName() + " MRNs"));
-			contributor.setHospitalFacilityNumber("0862");
-			contributor.getDevListenPort().add(14048);
-			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.57.100.1", "Women's College Hospital"));
-
-			SendingSystem epic = new SendingSystem();
-			epic.setCode("2.16.840.1.113883.3.239.23.57.101.1");
-			epic.setDescription("EPIC");
-			epic.setManagementConsoleOrgId("WCH");
-			epic.setManagementConsoleSystemId("EPIC");
-			contributor.getSendingSystem().add(epic);
-		}
-		// *******************************************************
-		// NYGH
+		// OACCAC-QA
 		// *******************************************************
 		{
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
 
-			contributor.setName("North York General Hospital");
-			contributor.setDevSecurityToken("38272347521144bbb");
-			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.8");
-			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.115", contributor.getName() + " MRNs"));
-			contributor.setHospitalFacilityNumber("0632");
-			contributor.getDevListenPort().add(14010);
-			contributor.setManagementConsoleOrgId("NYGH");
+			contributor.getDevListenPort().add(14039);
+			contributor.getDevListenPort().add(14040);
+			contributor.getDevListenPort().add(14041);
 
-			// Should be the value from table 9004 with ".100.x" at the end
-			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.8.100.1", "North York General Hospital"));
+			contributor.setName("Ontario Association of Community Care Access Centres (OACCAC) - QA");
+			contributor.setDevSecurityToken("2385472197mmm");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.22.7");
+			contributor.setManagementConsoleOrgId("OACCAC_QA");
 
-			// Cerner
-			SendingSystem cerner = new SendingSystem();
-
-			// Should be the value from table 9004 with ".101.x" at the end
-			cerner.setCode("2.16.840.1.113883.3.239.23.8.101.1");
-			cerner.setDescription("Cerner HIS");
-			cerner.setManagementConsoleSystemId("Cerner");
-
-			// Should be the value from table 9004 with ".102.x" at the end
-			cerner.getAllergenCodeSystemIam3().add("2.16.840.1.113883.3.239.23.8.102.1");
-			cerner.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.8.102.2");
-			cerner.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.8.102.3");
-			cerner.getDrugAdministrationCodeSystemRxa5().add("2.16.840.1.113883.3.239.23.8.102.6");
-			cerner.getDrugComponentCodeSystemRxc2().add("2.16.840.1.113883.3.239.23.8.102.7");
-			cerner.getDrugGiveCodeSystemRxe2().add("2.16.840.1.113883.3.239.23.8.102.8");
-
-			contributor.getSendingSystem().add(cerner);
-
-			// Dictaphone
-			SendingSystem dictaphone = new SendingSystem();
-
-			// Should be the value from table 9004 with ".101.x" at the end
-			dictaphone.setCode("2.16.840.1.113883.3.239.23.8.101.2");
-			dictaphone.setDescription("Dictaphone");
-			dictaphone.setManagementConsoleSystemId("Dictaphone");
-
-			// Should be the value from table 9004 with ".102.x" at the end
-			dictaphone.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.8.102.4");
-			dictaphone.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.8.102.5");
-
-			contributor.getSendingSystem().add(dictaphone);
-
+			// CHRIS-QA testing environment
+			SendingSystem chris = new SendingSystem();
+			// Should be the value from table 9008 with ".101.x" at the end
+			chris.setCode("2.16.840.1.113883.3.239.22.7.101.1");
+			chris.setDescription("CHRIS");
+			chris.setManagementConsoleSystemId("CHRIS");
+			// Should be the value from table 9007 with ".102.x" at the end
+			chris.getAllergenCodeSystemIam3().add("2.16.840.1.113883.3.239.22.7.102.1");
+			chris.getDrugAdministrationCodeSystemRxa5().add("2.16.840.1.113883.3.239.22.7.102.2");
+			chris.getDrugComponentCodeSystemRxc2().add("2.16.840.1.113883.3.239.22.7.102.3");
+			chris.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.22.7.102.4");
+			chris.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.22.7.102.5");
+			contributor.getSendingSystem().add(chris);
 		}
-
-		// Individual CCACs
-		{
-			Contributor contributor = new Contributor();
-			cfg.getContributors().add(contributor);
-			contributor.setName("Central West CCAC");
-			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1.100.1");
-		}
-		{
-			Contributor contributor = new Contributor();
-			cfg.getContributors().add(contributor);
-			contributor.setName("Mississauga Halton CCAC");
-			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1.100.2");
-		}
-		{
-			Contributor contributor = new Contributor();
-			cfg.getContributors().add(contributor);
-			contributor.setName("Toronto Central CCAC");
-			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1.100.3");
-		}
-		{
-			Contributor contributor = new Contributor();
-			cfg.getContributors().add(contributor);
-			contributor.setName("Central CCAC");
-			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1.100.4");
-		}
-		{
-			Contributor contributor = new Contributor();
-			cfg.getContributors().add(contributor);
-			contributor.setName("Central East CCAC");
-			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1.100.5");
-		}
-		{
-			Contributor contributor = new Contributor();
-			cfg.getContributors().add(contributor);
-			contributor.setName("North Simcoe Muskoka");
-			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1.100.6");
-		}
-		
 		// *******************************************************
 		// OACCAC
 		// *******************************************************
@@ -651,13 +578,15 @@ public class ContributorConfig {
 			contributor.setDevSecurityToken("3498749864ccc");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1");
 			contributor.setManagementConsoleOrgId("OACCAC");
-            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.180", "Central West CCAC"));
-            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.181", "Mississauga Halton CCAC"));
-            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.182", "Toronto Central CCAC"));
-            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.183", "Central CCAC"));
-            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.184", "Central East CCAC"));
-            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.185", "North Simcoe Muskoka"));
-
+                        
+			// Should be the value from table 9005 with ".100.x" at the end
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.1.100.1", "Central West CCAC"));
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.1.100.2", "Mississauga Halton CCAC"));
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.1.100.3", "Toronto Central CCAC"));
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.1.100.4", "Central CCAC"));
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.1.100.5", "Central East CCAC"));
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.1.100.6", "North Simcoe Muskoka"));
+                        
 			// CHRIS - DEV testing environment
 			SendingSystem chris = new SendingSystem();
 			// Should be the value from table 9008 with ".101.x" at the end
@@ -695,45 +624,50 @@ public class ContributorConfig {
 			contributor.getSendingSystem().add(strata);
 
 		}
-		// *******************************************************
-		// OACCAC-QA
-		// *******************************************************
+		// Individual CCACs
 		{
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
-
-			contributor.getDevListenPort().add(14039);
-			contributor.getDevListenPort().add(14040);
-			contributor.getDevListenPort().add(14041);
-
-			contributor.setName("Ontario Association of Community Care Access Centres (OACCAC) - QA");
-			contributor.setDevSecurityToken("2385472197mmm");
-			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.22.7");
-			contributor.setManagementConsoleOrgId("OACCAC_QA");
-
-			// Should be the value from table 9005 with ".100.x" at the end
-			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.22.7.100.1", "Central West CCAC"));
-			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.22.7.100.2", "Mississauga Halton CCAC"));
-			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.22.7.100.3", "Toronto Central CCAC"));
-			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.22.7.100.4", "Central CCAC"));
-			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.22.7.100.5", "Central East CCAC"));
-			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.22.7.100.6", "North Simcoe Muskoka"));
-			
-			// CHRIS-QA testing environment
-			SendingSystem chris = new SendingSystem();
-			// Should be the value from table 9008 with ".101.x" at the end
-			chris.setCode("2.16.840.1.113883.3.239.22.7.101.1");
-			chris.setDescription("CHRIS");
-			chris.setManagementConsoleSystemId("CHRIS");
-			// Should be the value from table 9007 with ".102.x" at the end
-			chris.getAllergenCodeSystemIam3().add("2.16.840.1.113883.3.239.22.7.102.1");
-			chris.getDrugAdministrationCodeSystemRxa5().add("2.16.840.1.113883.3.239.22.7.102.2");
-			chris.getDrugComponentCodeSystemRxc2().add("2.16.840.1.113883.3.239.22.7.102.3");
-			chris.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.22.7.102.4");
-			chris.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.22.7.102.5");
-			contributor.getSendingSystem().add(chris);
+			contributor.setName("Central West CCAC");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1.100.1");
+                        contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.180", "Central West CCAC"));
 		}
-
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+			contributor.setName("Mississauga Halton CCAC");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1.100.2");
+                        contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.181", "Mississauga Halton CCAC"));
+		}
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+			contributor.setName("Toronto Central CCAC");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1.100.3");
+                        contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.182", "Toronto Central CCAC"));
+		}
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+			contributor.setName("Central CCAC");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1.100.4");
+                        contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.183", "Central CCAC"));
+		}
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+			contributor.setName("Central East CCAC");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1.100.5");
+                        contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.184", "Central East CCAC"));
+		}
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+			contributor.setName("North Simcoe Muskoka");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.1.100.6");
+                        contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.185", "North Simcoe Muskoka"));
+		}
+		
 		// *******************************************************
 		// Lakeridge
 		// *******************************************************
@@ -747,9 +681,9 @@ public class ContributorConfig {
 			contributor.setDevSecurityToken("3498742963125ddd");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.2");
 			contributor.setHospitalFacilityNumber("0952");
-			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.90", "Lakeridge Health Port Perry MRNs"));
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.90", "Lakeridge Health Port Perry MRNs\r"));
 			//contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.91", "Lakeridge Health Whitby MRNs"));
-			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.92", "Lakeridge Health Bowmanville MRNs"));
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.92", "Lakeridge Health Bowmanville MRNs\r"));
 			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.93", "Lakeridge Health Whitby/Oshawa MRNs"));
 
 			contributor.setManagementConsoleOrgId("LHC");
@@ -873,7 +807,7 @@ public class ContributorConfig {
 			contributor.setName("Rouge Valley Health System");
 			contributor.setDevSecurityToken("32986342953eee");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.4");
-			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.131", "Rouge Valley Ajax MRNs"));
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.131", "Rouge Valley Ajax MRNs\r"));
 			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.132", "Rouge Valley Centenary MRNs"));
 
 			contributor.setHospitalFacilityNumber("0954");
@@ -1057,7 +991,7 @@ public class ContributorConfig {
 			contributor.setDevSecurityToken("35364554ggg");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.6");
 			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.97", contributor.getName() + " MRNs"));
-			contributor.setHospitalFacilityNumber("0842");
+			contributor.setHospitalFacilityNumber("0976");
 			contributor.setManagementConsoleOrgId("MSH");
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.6.100.1", "Mount Sinai Hospital"));
 
@@ -1276,6 +1210,59 @@ public class ContributorConfig {
 			contributor.getSendingSystem().add(vmax);
 
 		}
+
+		// *******************************************************
+		// NYGH
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("North York General Hospital");
+			contributor.setDevSecurityToken("38272347521144bbb");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.8");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.115", contributor.getName() + " MRNs"));
+			contributor.setHospitalFacilityNumber("0632");
+			contributor.getDevListenPort().add(14010);
+			contributor.setManagementConsoleOrgId("NYGH");
+
+			// Should be the value from table 9004 with ".100.x" at the end
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.8.100.1", "North York General Hospital"));
+
+			// Cerner
+			SendingSystem cerner = new SendingSystem();
+
+			// Should be the value from table 9004 with ".101.x" at the end
+			cerner.setCode("2.16.840.1.113883.3.239.23.8.101.1");
+			cerner.setDescription("Cerner HIS");
+			cerner.setManagementConsoleSystemId("Cerner");
+
+			// Should be the value from table 9004 with ".102.x" at the end
+			cerner.getAllergenCodeSystemIam3().add("2.16.840.1.113883.3.239.23.8.102.1");
+			cerner.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.8.102.2");
+			cerner.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.8.102.3");
+			cerner.getDrugAdministrationCodeSystemRxa5().add("2.16.840.1.113883.3.239.23.8.102.6");
+			cerner.getDrugComponentCodeSystemRxc2().add("2.16.840.1.113883.3.239.23.8.102.7");
+			cerner.getDrugGiveCodeSystemRxe2().add("2.16.840.1.113883.3.239.23.8.102.8");
+
+			contributor.getSendingSystem().add(cerner);
+
+			// Dictaphone
+			SendingSystem dictaphone = new SendingSystem();
+
+			// Should be the value from table 9004 with ".101.x" at the end
+			dictaphone.setCode("2.16.840.1.113883.3.239.23.8.101.2");
+			dictaphone.setDescription("Dictaphone");
+			dictaphone.setManagementConsoleSystemId("Dictaphone");
+
+			// Should be the value from table 9004 with ".102.x" at the end
+			dictaphone.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.8.102.4");
+			dictaphone.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.8.102.5");
+
+			contributor.getSendingSystem().add(dictaphone);
+
+		}
+
 		// *******************************************************
 		// Credit Valley Hospital
 		// *******************************************************
@@ -1454,7 +1441,7 @@ public class ContributorConfig {
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.11");
 			contributor.setHospitalFacilityNumber("0951");
 			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.150", contributor.getName() + " MRNs"));
-            contributor.setHrmSendingFacility("4052");
+                        contributor.setHrmSendingFacility("4052");
 
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.11.100.1", "William Osler Health System - Etobicoke General Hospital"));
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.11.100.2", "William Osler Health System - Peel Memorial Centre"));
@@ -1501,43 +1488,13 @@ public class ContributorConfig {
 
 		}
 		// *******************************************************
-		// Southlake Regional Health Centre
-		// *******************************************************
-		{
-			Contributor contributor = new Contributor();
-			cfg.getContributors().add(contributor);
-
-			// contributor.getDevListenPort().add(14014);
-
-			contributor.setName("Southlake Regional Health Centre");
-			contributor.setDevSecurityToken("");
-			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.231");
-			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.138", contributor.getName() + " MRNs"));
-			contributor.setHospitalFacilityNumber("0736");
-		}
-		// *******************************************************
-		// Baycrest Centre for Geriatric Care
-		// *******************************************************
-		{
-			Contributor contributor = new Contributor();
-			cfg.getContributors().add(contributor);
-
-			// contributor.getDevListenPort().add(14014);
-
-			contributor.setName("Baycrest Centre for Geriatric Care");
-			contributor.setDevSecurityToken("");
-			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.89");
-			contributor.setHospitalFacilityNumber("0827");
-                        
-		}
-		// *******************************************************
 		// Campbellford Memorial Hospital
 		// *******************************************************
 		{
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
 
-			// contributor.getDevListenPort().add(14014);
+			// contributor.getDevListenPort().add();
 
 			contributor.setName("Campbellford Memorial Hospital");
 			contributor.setDevSecurityToken("");
@@ -1553,7 +1510,7 @@ public class ContributorConfig {
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
 
-			// contributor.getDevListenPort().add(14014);
+			// contributor.getDevListenPort().add();
 
 			contributor.setName("Centre for Addiction and Mental Health");
 			contributor.setDevSecurityToken("");
@@ -1568,15 +1525,15 @@ public class ContributorConfig {
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
 
-			// contributor.getDevListenPort().add(14014);
+			contributor.getDevListenPort().add(14050);
 
 			contributor.setName("Halton Healthcare Services Corporation");
-			contributor.setDevSecurityToken("");
+			contributor.setDevSecurityToken("688568668411rrr");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.16");
-            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.45", "Halton Georgetown"));
-            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.47", "Halton Oakville-Trafalgar"));
-            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.46", "Halton Milton District"));
-            contributor.setHospitalFacilityNumber("0950");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.45", "Halton Georgetown"));
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.47", "Halton Oakville-Trafalgar"));
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.46", "Halton Milton District"));
+			contributor.setHospitalFacilityNumber("0950");
 
 		}
 		// *******************************************************
@@ -1586,7 +1543,7 @@ public class ContributorConfig {
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
 
-			// contributor.getDevListenPort().add(14014);
+			// contributor.getDevListenPort().add();
 
 			contributor.setName("Headwaters Health Care Centre");
 			contributor.setDevSecurityToken("");
@@ -1602,12 +1559,12 @@ public class ContributorConfig {
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
 
-			// contributor.getDevListenPort().add(14014);
+			// contributor.getDevListenPort().add();
 
 			contributor.setName("Hospital for Sick Children");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.18");
-                        contributor.setHrmSendingFacility("3969");
+			contributor.setHrmSendingFacility("3969");
 			contributor.setHospitalFacilityNumber("0837");
 
 		}
@@ -1625,7 +1582,7 @@ public class ContributorConfig {
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.19");
 			contributor.setHospitalFacilityNumber("0941");
 			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.54", contributor.getName() + " MRNs"));
-            contributor.setManagementConsoleOrgId("HRRH");
+			contributor.setManagementConsoleOrgId("HRRH");
 
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.19.100.1", "Humber River Regional Hospital - Keele Site"));
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.19.100.2", "Humber River Regional Hospital - Church Site"));
@@ -1714,7 +1671,7 @@ public class ContributorConfig {
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
 
-			// contributor.getDevListenPort().add(14014);
+			// contributor.getDevListenPort().add();
 
 			contributor.setName("Northumberland Hills Hospital");
 			contributor.setDevSecurityToken("");
@@ -1730,7 +1687,7 @@ public class ContributorConfig {
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
 
-			// contributor.getDevListenPort().add(14014);
+			// contributor.getDevListenPort().add();
 
 			contributor.setName("Peterborough Regional Health Centre");
 			contributor.setDevSecurityToken("");
@@ -1745,7 +1702,7 @@ public class ContributorConfig {
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
 
-			// contributor.getDevListenPort().add(14014);
+			// contributor.getDevListenPort().add();
 
 			contributor.setName("Ross Memorial Hospital");
 			contributor.setDevSecurityToken("");
@@ -1759,7 +1716,7 @@ public class ContributorConfig {
                         Contributor contributor = new Contributor();
                         cfg.getContributors().add(contributor);
 
-                        // Anthony, is the last port number 14044 (for TEGH?)
+        		// Anthony, is the last port number 14044 (for TEGH?)
                         contributor.getDevListenPort().add(14045);
                         contributor.getDevListenPort().add(14046);
                         contributor.getDevListenPort().add(14047);
@@ -1767,42 +1724,42 @@ public class ContributorConfig {
                         contributor.setName("St Joseph's Health Centre (Toronto)");
                         contributor.setDevSecurityToken("1957395332368kkk");
                         contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.23");
-                        // what is this?
+        		// what is this?
                         contributor.setManagementConsoleOrgId("SJHC");
-                        // what is this? the MOHLTC number?
+        		// what is this? the MOHLTC number?
                         contributor.setHospitalFacilityNumber("0898");
                         contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.140", contributor.getName() + " MRNs"));
                         contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.23.100.1", "St Joseph's Health Centre"));
                         contributor.setHrmSendingFacility("4056");
 
 
-                        // Crescendo
+        		// Crescendo
                         SendingSystem crescendo = new SendingSystem();
-                        // Should be the value from table 9004 with ".101.x" at the end
+        		// Should be the value from table 9004 with ".101.x" at the end
                         crescendo.setCode("2.16.840.1.113883.3.239.23.23.101.1");
                         crescendo.setDescription("Crescendo");
                         crescendo.setManagementConsoleSystemId("Crescendo");
-                                    contributor.getSendingSystem().add(crescendo);
+                        contributor.getSendingSystem().add(crescendo);
 
-                        // Should be the value from table 9004 with ".102.x" at the end
-                        // HRM does not currently do terminology mapping, these are here as placeholders
-                        // crescendo.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.23.102.1");
-                        // crescendo.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.23.102.2");
-                        // contributor.getSendingSystem().add(crescendo);
+        		// Should be the value from table 9004 with ".102.x" at the end
+        		// HRM does not currently do terminology mapping, these are here as placeholders
+        		// crescendo.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.23.102.1");
+        		// crescendo.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.23.102.2");
+        		// contributor.getSendingSystem().add(crescendo);
 
-                        // Sectra
+        		// Sectra
                         SendingSystem sectra = new SendingSystem();
-                        // Should be the value from table 9004 with ".101.x" at the end
+        		// Should be the value from table 9004 with ".101.x" at the end
                         sectra.setCode("2.16.840.1.113883.3.239.23.23.101.2");
                         sectra.setDescription("Sectra");
                         sectra.setManagementConsoleSystemId("Sectra");
-                                    contributor.getSendingSystem().add(sectra);
+                        contributor.getSendingSystem().add(sectra);
 
-                        // Should be the value from table 9004 with ".102.x" at the end
-                        // HRM does not currently do terminology mapping, these are here as placeholders
-                        // sectra.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.23.102.3");
-                        // sectra.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.23.102.4");
-                        // contributor.getSendingSystem().add(sectra);
+        		// Should be the value from table 9004 with ".102.x" at the end
+        		// HRM does not currently do terminology mapping, these are here as placeholders
+        		// sectra.getRequestCodeSystemSystemObr4().add("2.16.840.1.113883.3.239.23.23.102.3");
+        		// sectra.getResultCodeSystemSystemObx3().add("2.16.840.1.113883.3.239.23.23.102.4");
+        		// contributor.getSendingSystem().add(sectra);
 		}
 		// *******************************************************
 		// The Stevenson Memorial Hospital
@@ -1811,11 +1768,12 @@ public class ContributorConfig {
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
 
-			// contributor.getDevListenPort().add(14014);
+			// contributor.getDevListenPort().add();
 
 			contributor.setName("Stevenson Memorial Hospital");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.24");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.143", contributor.getName() + " MRNs"));
 			contributor.setHospitalFacilityNumber("0596");
 		}
 		// *******************************************************
@@ -1832,11 +1790,11 @@ public class ContributorConfig {
 			contributor.setName("Toronto East General Hospital");
 			contributor.setDevSecurityToken("24591738492ppp");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.25");
-            contributor.setManagementConsoleOrgId("TEGH");
+                        contributor.setManagementConsoleOrgId("TEGH");
 			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.145", contributor.getName() + " MRNs"));
 			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.25.100.1", "Toronto East General Hospital"));
 			contributor.setHospitalFacilityNumber("0858");
-            contributor.setHrmSendingFacility("4209");
+                        contributor.setHrmSendingFacility("4209");
 			
 			// Cerner
 			SendingSystem cerner = new SendingSystem();
@@ -1863,58 +1821,72 @@ public class ContributorConfig {
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
 
-			// contributor.getDevListenPort().add(14014);
+			// contributor.getDevListenPort().add();
 
 			contributor.setName("Mackenzie Health Hospital");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.26");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.155", contributor.getName() + " MRNs"));
 			contributor.setHospitalFacilityNumber("0701");
 		}
-		
-		
-                
-        // *******************************************************
-		// Bridgepoint Hospital
+
+		// *******************************************************
+		// Royal Victoria Hospital
 		// *******************************************************
 		{
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
 
-			// contributor.getDevListenPort().add(14014);
-
-			contributor.setName("Bridgepoint Hospital");
+        		// contributor.getDevListenPort().add();
+                        
+			contributor.setName("Royal Victoria Hospital");
 			contributor.setDevSecurityToken("");
-			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.32");
-
-		}
-
-		
-        // *******************************************************
-		// West Park Health Centre
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.46");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.133", contributor.getName() + " MRNs"));
+			contributor.setHospitalFacilityNumber("0606");
+		}		
+	
+		// *******************************************************
+		// Markham Stouffville Hospital
 		// *******************************************************
 		{
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
 
-			// contributor.getDevListenPort().add(14014);
+			// contributor.getDevListenPort().add();
 
-			contributor.setName("West Park Healthcare Centre");
+			contributor.setName("Markham Stouffville Hospital");
 			contributor.setDevSecurityToken("");
-			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.58");
-			contributor.setHospitalFacilityNumber("0613");
-
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.222");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.96", contributor.getName() + " MRNs"));
+			contributor.setHospitalFacilityNumber("0905");
 		}
-
-		
 		// *******************************************************
-		// Collingwood General Hospital
+		// Southlake Regional Health Centre
 		// *******************************************************
 		{
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
 
+			// contributor.getDevListenPort().add();
 
-			contributor.setName("Collingwood General Hospital");
+			contributor.setName("Southlake Regional Health Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.231");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.138", contributor.getName() + " MRNs"));
+			contributor.setHospitalFacilityNumber("0736");
+		}
+		
+		// *******************************************************
+		// Collingwood General and Marine Hospital
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+        	// contributor.getDevListenPort().add();
+
+			contributor.setName("Collingwood General and Marine Hospital");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.240");
             contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.25", contributor.getName() + " MRNs"));
@@ -1928,30 +1900,14 @@ public class ContributorConfig {
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
 
+			// contributor.getDevListenPort().add();
 
 			contributor.setName("Georgian Bay General Hospital");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.241");
-            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.163", contributor.getName() + " MRNs"));
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.163", contributor.getName() + " MRNs"));
 			contributor.setHospitalFacilityNumber("0726");
 		}
-
-		
-		// *******************************************************
-		// Markham Stouffville Hospital
-		// *******************************************************
-		{
-			Contributor contributor = new Contributor();
-			cfg.getContributors().add(contributor);
-
-
-			contributor.setName("Markham Stouffville Hospital");
-			contributor.setDevSecurityToken("");
-			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.222");
-            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.96", contributor.getName() + " MRNs"));
-			contributor.setHospitalFacilityNumber("0905");
-		}
-
 		// *******************************************************
 		// Muskoka Algonquin Healthcare
 		// *******************************************************
@@ -1959,11 +1915,12 @@ public class ContributorConfig {
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
 
+        	// contributor.getDevListenPort().add();
 
 			contributor.setName("Muskoka Algonquin Healthcare");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.250");
-            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.98", contributor.getName() + " MRNs"));
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.98", contributor.getName() + " MRNs"));
 			contributor.setHospitalFacilityNumber("0968");
 		}
 
@@ -1974,45 +1931,787 @@ public class ContributorConfig {
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
 
+        	// contributor.getDevListenPort().add();
 
 			contributor.setName("Orillia Soldier's Memorial Hospital");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.251");
-            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.121", contributor.getName() + " MRNs"));
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.121", contributor.getName() + " MRNs"));
 			contributor.setHospitalFacilityNumber("0745");
+		}
+		// *******************************************************
+		// Four Villages Community Health Centre
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Four Villages Community Health Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.27");
+		}
+		// *******************************************************
+		// Access Alliance Community Health Centre
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Access Alliance Community Health Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.28");
+		}                
+
+		// *******************************************************
+		// Anishnawbe Health  Community Health Centre
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Anishnawbe Health Community Health Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.30");
+		}
+		// *******************************************************
+		// Anne Johnston Community Health Centre
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Anne Johnston Community Health Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.31");
+		}
+		// *******************************************************
+		// Bridgepoint Hospital
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			// contributor.getDevListenPort().add();
+
+			contributor.setName("Bridgepoint Hospital");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.32");
+
+		}
+		// *******************************************************
+		// East End Community Health Centre
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("East End Community Health Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.37");
+		}
+		// *******************************************************
+		// Planned Parenthood of Toronto
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Planned Parenthood of Toronto");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.42");
+		}
+		// *******************************************************
+		// Providence Healthcare
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Providence Healthcare");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.43");
 		}
 
 		// *******************************************************
-		// Royal Victoria Hospital
+		// Regent Park Community Health Centre
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Regent Park Community Health Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.45");
+		}
+		// *******************************************************
+		// Sherbourne Health Centre Corporation
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Sherbourne Health Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.48");
+		}
+
+		// *******************************************************
+		// South Riverdale Community Health Centre
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("South Riverdale Community Health Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.50");
+		}
+
+		// *******************************************************
+		// Stonegate Community Health Centre
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Stonegate Community Health Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.53");
+		}
+		// *******************************************************
+		// Women's College Hospital
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Women's College Hospital");
+			contributor.setDevSecurityToken("323452erwettw");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.57");
+			contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.157", contributor.getName() + " MRNs"));
+			contributor.setHospitalFacilityNumber("0862");
+			contributor.getDevListenPort().add(14048);
+			contributor.getHspFacility().add(new Code("2.16.840.1.113883.3.239.23.57.100.1", "Women's College Hospital"));
+
+			SendingSystem epic = new SendingSystem();
+			epic.setCode("2.16.840.1.113883.3.239.23.57.101.1");
+			epic.setDescription("EPIC");
+			epic.setManagementConsoleOrgId("WCH");
+			epic.setManagementConsoleSystemId("EPIC");
+			contributor.getSendingSystem().add(epic);
+		}
+		
+		// *******************************************************
+		// West Park Health Centre
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			// contributor.getDevListenPort().add();
+
+			contributor.setName("West Park Healthcare Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.58");
+			contributor.setHospitalFacilityNumber("0613");
+
+		}
+		// *******************************************************
+		// Women's Health in Women's Hands Community Health Centre
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Women's Health in Women's Hands Community Health Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.59");
+		}
+		// *******************************************************
+		// Baycrest Centre for Geriatric Care
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Baycrest Centre for Geriatric Care");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.89");
+			contributor.setHospitalFacilityNumber("0827");
+                        
+		}
+		// *******************************************************
+		// Runnymede Healthcare Centre
 		// *******************************************************
 		{
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
 
 
-			contributor.setName("Royal Victoria Hospital");
+			contributor.setName("Runnymede Healthcare Centre");
 			contributor.setDevSecurityToken("");
-			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.46");
-            contributor.getMrnPoolOid().add(new Code("2.16.840.1.113883.3.239.18.133", contributor.getName() + " MRNs"));
-			contributor.setHospitalFacilityNumber("0606");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.91");
+			contributor.setHospitalFacilityNumber("0827");
+                        
 		}
-		
-        // *******************************************************
+		// *******************************************************
+		// Toronto Grace Hospital
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Toronto Grace Hospital");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.92");
+			contributor.setHospitalFacilityNumber("0827");
+                        
+		}
+                
+		// *******************************************************
+		// Queen Square Family Health Team
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Queen Square Family Health Team");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.268");
+		}
+		// *******************************************************
+		// Vermont Square
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Vermont Square");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.276");
+		}
+		// *******************************************************
+		// City of Toronto Long Term Care Homes
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("City of Toronto Long Term Care Homes");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.277");
+		}
+		// *******************************************************
+		// Copernicus Lodge
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Copernicus Lodge");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.278");
+		}
+
+		// *******************************************************
+		// 	Elm Grove Living Centre
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Elm Grove Living Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.279");
+		}
+		// *******************************************************
+		// Hellenic Home
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Hellenic Home");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.280");
+		}
+		// *******************************************************
+		// Lakeside Long Term Care Home
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Lakeside Long Term Care Home");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.281");
+		}
+		// *******************************************************
+		// Maynard Nursing Home
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Maynard Nursing Home");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.282");
+		}
+		// *******************************************************
+		// Rose of Sharon
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Rose of Sharon");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.283");
+		}
+		// *******************************************************
+		// St. Hilda's
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("St. Hilda's");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.284");
+		}
+		// *******************************************************
+		// O'Neill Centre
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("O'Neill Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.285");
+		}
+		// *******************************************************
+		// The Rekai Centre 
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("The Rekai Centres");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.286");
+		}
+		// *******************************************************
+		// The Rekai Centre at Sherbourne Place (Drs Paul and John Rekai)
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("The Rekai Centre at Sherbourne Place (Drs Paul and John Rekai)");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.286.1");
+		}
+		// *******************************************************
+		// The Rekai Centre at Wellesley Central Place
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("The Rekai Centre at Wellesley Central Place");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.286.2");
+		}
+		// *******************************************************
+		// Suomi-Koti (Toronto Finnish Canadian Seniors Centre)
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Suomi-Koti (Toronto Finnish Canadian Seniors Centre)");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.287");
+		}
+		// *******************************************************
+		// Fairview Nursing Home
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Fairview Nursing Home");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.288");
+		}
+		// *******************************************************
+		// Mon Sheong Home for the Aged
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Mon Sheong Home for the Aged");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.289");
+		}
+		// *******************************************************
+		// Chester Village (Broadview Foundation)
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Chester Village (Broadview Foundation)");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.290");
+		}
+		// *******************************************************
+		// Barrie and Community Family Health Team
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Barrie and Community Family Health Team");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.291");
+		}
+		// *******************************************************
+		// CANES Family Health Team
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("CANES Family Health Team");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.292");
+		}
+		// *******************************************************
+		// South Georgian Bay Family Health Team
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("South Georgian Bay Family Health Team");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.293");
+		}
+		// *******************************************************
+		// West Durham Family Health Team
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("West Durham Family Health Team");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.294");
+		}
+		// *******************************************************
+		// Wise Elephant Family Health Team
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Wise Elephant Family Health Team");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.295");
+		}
+
+		// *******************************************************
 		// Ontario Shores
 		// *******************************************************
 		{
 			Contributor contributor = new Contributor();
 			cfg.getContributors().add(contributor);
 
-			// contributor.getDevListenPort().add(14014);
+			// contributor.getDevListenPort().add();
 
-			contributor.setName("Ontario Shores");
+			contributor.setName("Ontario Shores Centre for Mental Health Sciences");
 			contributor.setDevSecurityToken("");
 			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.400");
-
 		}
-		
+		// *******************************************************
+		// Brock Community Health Centre
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
 
+			contributor.setName("Brock Community Health Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.401");
+		}		
+		// *******************************************************
+		// Taibu Community Health Centre
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Taibu Community Health Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.402");
+		}
+
+		// *******************************************************
+		// Rexdale Community Health Centre
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Rexdale Community Health Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.403");
+		}
+		// *******************************************************
+		// Davenport-Perth Community Health Centre
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Davenport-Perth Community Health Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.404");
+		}
+		// *******************************************************
+		// Flemingdon Community Health Centre
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Flemingdon Community Health Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.405");
+		}                
+		// *******************************************************
+		// Port Hope Community Health Centre
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Port Hope Community Health Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.406");
+		}                
+		// *******************************************************
+		// Jean Tweed Treatment Centre
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Jean Tweed Treatment Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.407");
+		}                
+		// *******************************************************
+		// Progress Place
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Progress Place");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.408");
+		}                
+		// *******************************************************
+		// Bramalea Health Centre ("WellFort")
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Bramalea Health Centre (WellFort)");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.409");
+		}                
+		// *******************************************************
+		// CANES Community Care
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("CANES Community Care");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.410");
+		}                
+		// *******************************************************
+		// Region of Peel
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Region of Peel");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.411");
+		}                
+		// *******************************************************
+		// Leisureworld - Tullamore
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Leisureworld - Tullamore");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.412");
+		}                
+		// *******************************************************
+		// Leisureworld - Vaughan
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Leisureworld - Vaughan");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.413");
+		}                
+		// *******************************************************
+		// Punjabi Community Health Services
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Punjabi Community Health Services");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.414");
+		}                
+		// *******************************************************
+		// CMHA Peel
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("CMHA Peel");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.415");
+		}                
+		// *******************************************************
+		// Acclaim Health
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Acclaim Health");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.416");
+		}                
+		// *******************************************************
+		// Leisureworld – Streetsville
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Leisureworld – Streetsville");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.417");
+		}                
+		// *******************************************************
+		// Nucleus Independent Living
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Nucleus Independent Living");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.418");
+		}                
+		// *******************************************************
+		// Specialty Care Mississauga
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Specialty Care Mississauga");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.419");
+		}                
+		// *******************************************************
+		// Victoria Village Manor
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Victoria Village Manor");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.420");
+		}                
+		// *******************************************************
+		// Waypoint Centre for Mental Health
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Waypoint Centre for Mental Health");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.421");
+		}                
+		// *******************************************************
+		// LOFT Community Services
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("LOFT Community Services");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.422");
+		}                
+		// *******************************************************
+		// St. Demetrius Supportive Care Services
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("St. Demetrius Supportive Care Services");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.423");
+		}                
+		// *******************************************************
+		// Ukrainian Canadian Care Centre
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("Ukrainian Canadian Care Centre");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.424");
+		}
+		// *******************************************************
+		// York Support Services Network
+		// *******************************************************
+		{
+			Contributor contributor = new Contributor();
+			cfg.getContributors().add(contributor);
+
+			contributor.setName("York Support Services Network");
+			contributor.setDevSecurityToken("");
+			contributor.setHspId9004AndSubIds("2.16.840.1.113883.3.239.23.425");
+		}                
 		
 		StringWriter w = new StringWriter();
 		Marshaller marshaller = JAXBContext.newInstance(ContributorConfig.class).createMarshaller();
@@ -2026,11 +2725,11 @@ public class ContributorConfig {
 
 		//removed ConverterLibrary folder from file path for use with Netbeans.
                 
-                //use this with Eclipse
+		//use this with Eclipse
                 File cfgFile = new File("C:/Users/t32317uhn/workspace/CGTA_Input_Tester/ConverterLibrary/src/main/resources/ca/cgta/input/sending_systems.xml");
                 
-                //use this with Netbeans
-                //File cfgFile = new File("src/main/resources/ca/cgta/input/sending_systems.xml");
+		//use this with Netbeans
+		//File cfgFile = new File("src/main/resources/ca/cgta/input/sending_systems.xml");
 		if (!cfgFile.exists()) {
 			throw new ValidationException("Could not find file " + cfgFile.getAbsolutePath());
 		}
